@@ -24,15 +24,21 @@ class OAuthContoller extends Controller
     protected function _gotoRegisterWithCredentialOrLogin($data){
         $user = User::where('email', $data->email)->first();
         if(!$user){
-            session(["temp_name", $data->name]);
-            session(["temp_email", $data->email]);
+            session(["temp_first_name" => $data->user["given_name"]]);
+            session(["temp_last_name" => $data->user["family_name"]]);
+            session(["temp_email" => $data->email]);
+            session(["temp_avatar" => $data->avatar]);
 
-            return redirect()->intended(RouteServiceProvider::REGISTER);
+            redirect()->intended(RouteServiceProvider::REGISTER)->send();
         } else {
-            session()->delete("temp_name");
+            session()->forget("temp_first_name");
+            session()->forget("temp_last_name");
+            session()->forget("temp_email");
+            session()->forget("temp_avatar");
+
             Auth::login($user);
 
-            return redirect()->intended(RouteServiceProvider::HOME);
+            return redirect()->intended(RouteServiceProvider::HOME)->send();
         }
     }
 
@@ -68,6 +74,18 @@ class OAuthContoller extends Controller
     // Instagram callback
     public function handleInstagramCallback() {
         $user = Socialite::driver('instagram')->user();
+
+        $this->_gotoRegisterWithCredentialOrLogin($user);
+    }
+
+    // Twitter
+    public function redirectToTwitter() {
+        return Socialite::driver('twitter-oauth-2')->redirect();
+    }
+
+    // Twitter callback
+    public function handleTwitterCallback() {
+        $user = Socialite::driver('twitter-oauth-2')->user();
 
         $this->_gotoRegisterWithCredentialOrLogin($user);
     }

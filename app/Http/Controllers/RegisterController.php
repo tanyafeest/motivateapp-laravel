@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Sport;
 
 class RegisterController extends Controller
 {
+    public $sports = [];
     /**
      * Display the registration view.
      *
@@ -19,6 +21,7 @@ class RegisterController extends Controller
             return redirect("/oauth");
         }
         
-        return view('auth.register');
+        $this->sports = Sport::all();
+        return view('auth.register', ['sports' => $this->sports]);
     }
 }

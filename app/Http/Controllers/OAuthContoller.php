@@ -101,4 +101,24 @@ class OAuthContoller extends Controller
 
         $this->_gotoRegisterWithCredentialOrLogin($user);
     }
+
+    // Spotify
+    public function redirectToSpotify() {
+        return Socialite::driver('spotify')->scopes(['user-top-read'])->redirect();
+    }
+
+    // Spotify callback
+    public function handleSpotifyCallback() {
+        try {
+            $user = Socialite::driver('spotify')->user();
+
+            session(['temp_spotify_id' => $user->id]);
+            session(['temp_spotify_access_token' => $user->token]);
+
+            return redirect()->intended(RouteServiceProvider::HOME)->send();
+        } catch (\Throwable $th) {
+            dd($th);
+            return redirect()->intended(RouteServiceProvider::HOME)->send();
+        }
+    }
 }

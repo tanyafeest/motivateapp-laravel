@@ -3,8 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    // dashboard
-    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    // check share link exist in session
+    Route::middleware('sharelink.confirm')->group(function() {
+        // dashboard
+        Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    });
 
     // social auth
     // --- spotify

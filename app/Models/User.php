@@ -36,7 +36,8 @@ class User extends Authenticatable
         'gender',
         'age',
         'grade_year',
-        'sport_id'
+        'sport_id',
+        'share_link'
     ];
 
     /**

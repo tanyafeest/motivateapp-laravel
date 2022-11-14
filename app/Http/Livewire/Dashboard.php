@@ -59,12 +59,6 @@ class Dashboard extends Component
         }
     }
 
-    public function test() {
-        $id = 5;
-
-        
-    }
-
     public function render()
     {
         return view('livewire.dashboard');

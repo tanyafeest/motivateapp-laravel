@@ -2,6 +2,18 @@
     <div class="container h-screen max-w-2xl mx-auto">
         <div class="flex flex-col gap-5 pt-20">
             <span class="text-4xl font-bold text-center text-cyan-500">MotiveMob</span>
+
+            @if ($user_requested_inspire)
+            <div class="flex flex-col items-center justify-center text-center">
+                <span class="text-2xl">Ready to inspire</span>
+                <span class="">{{ $user_requested_inspire->name }}</span>
+
+                <img src="/img/636e426c80302.svg" class="w-[90px] h-[90px] my-5" />
+
+                <span>Authenticate your identify so <b>{{ $user_requested_inspire->name }}</b> knows it Came From You!</span>
+            </div>
+            @endif
+
             <a href="{{ route('oauth.google') }}" class="px-4 py-2 font-bold text-center text-white transition bg-red-500 rounded hover:bg-red-700">
                 Create with Google
             </a>

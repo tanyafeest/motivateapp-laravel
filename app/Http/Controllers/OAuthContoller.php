@@ -17,7 +17,13 @@ class OAuthContoller extends Controller
      */
     public function create()
     {
-        return view('auth.oauth');
+        $user_requested_inspire = null;
+
+        if(session()->has("temp_inspiration_share_link")) {
+            $user_requested_inspire = User::where('share_link', session('temp_inspiration_share_link'))->get()->first();
+        }
+        
+        return view('auth.oauth', compact('user_requested_inspire'));
     }
 
     // go to Register and process registeration

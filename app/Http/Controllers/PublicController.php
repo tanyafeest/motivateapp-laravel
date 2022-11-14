@@ -12,6 +12,6 @@ class PublicController extends Controller
         session(["temp_inspiration_share_link" => $share_link]);
         session(["temp_inspiration_full_name" => $fullname]);
 
-        return redirect()->intended(RouteServiceProvider::ONBOARDING);
+        return redirect()->intended(RouteServiceProvider::REGISTER);
     }
 }

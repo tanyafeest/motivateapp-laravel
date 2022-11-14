@@ -86,8 +86,64 @@
                         </div>
                     </aside>
 
-                    <section aria-labelledby="message-heading" class="flex h-full min-w-0 flex-1 flex-col overflow-hidden bg-purple-500">
-                        Motive Mob
+                    <section aria-labelledby="message-heading" class="h-full min-w-0 flex-1 overflow-hidden">
+                        <div id="step-1" class="hidden grid overflow-hidden grid-cols-2 grid-rows-3 gap-0 h-screen">
+                            <div class="bg-red-100 col-start-1 col-span-2">
+                                 Motive Mob
+                            </div>
+                            <div class="bg-yellow-300 relative flex justify-center">
+                                <img class="absolute bottom-0 w-80" src="images/woman1.png" alt="">
+                            </div>
+                            <div class="bg-green-300 relative flex justify-center">
+                                <img class="absolute bottom-0 w-80" src="images/woman2.png" alt="">
+                            </div>
+                            <div class="bg-yellow-400 p-4 text-white text-sm"> 
+                                <p class="text-justify">Let your team, friends, and family support your sports success. Have them join your "Mob" to provide you with inspiration through song and word! Use this free app to get motivation from people that care about you. Here's how it works:</p>
+                                <div class="absolute bottom-4">Skip</div>
+                            </div>
+                            <div class="bg-green-400 p-4 text-white text-sm">
+                                <p class="text-justify">Select your types of motivation - music-based and inspiring quotes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. </p>
+                                <div class="absolute bottom-4">Next</div>
+                            </div>
+                        </div>
+                        <div id="step-2" class="grid overflow-hidden grid-cols-2 grid-rows-3 gap-0 h-screen">
+                            <div class="bg-red-100 col-start-1 col-span-2">
+                                 Motive Mob
+                            </div>
+                            <div class="bg-green-300 relative flex justify-center">
+                                <img class="absolute bottom-0 w-80" src="images/woman2.png" alt="">
+                            </div>
+                            <div class="bg-blue-300 relative flex justify-center">
+                                <img class="absolute bottom-0 w-80" src="images/woman3.png" alt="">
+                            </div>
+                            <div class="bg-green-400 p-4 text-white text-sm"> 
+                               <p class="text-justify">Select your types of motivation - music-based and inspiring quotes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. </p>
+                                <div class="absolute bottom-4">Next</div>
+                            </div>
+                            <div class="bg-blue-400 p-4 text-white text-sm">
+                                <p class="text-justify">Receive weekly text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. Nulla lacus libero, varius et eros sed, convallis viverra enim. </p>
+                                <div class="absolute bottom-4">Next</div>
+                            </div>
+                        </div>
+                        <div id="step-2" class="hidden grid overflow-hidden grid-cols-2 grid-rows-3 gap-0 h-screen">
+                            <div class="bg-red-100 col-start-1 col-span-2">
+                                 Motive Mob
+                            </div>
+                            <div class="bg-red-300 relative flex justify-center">
+                                <img class="absolute bottom-0 w-80" src="images/woman2.png" alt="">
+                            </div>
+                            <div class="bg-green-300 relative flex justify-center">
+                                <img class="absolute bottom-0 w-80" src="images/woman2.png" alt="">
+                            </div>
+                            <div class="bg-red-400 p-4 text-white text-sm"> 
+                               p class="text-justify">Select your types of motivation - music-based and inspiring quotes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. </p>
+                                <div class="absolute bottom-4">Next</div>
+                            </div>
+                            <div class="bg-green-400 p-4 text-white text-sm">
+                                <p class="text-justify">Select your types of motivation - music-based and inspiring quotes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. </p>
+                                <div class="absolute bottom-4">Next</div>
+                            </div>
+                        </div>
                     </section>
                 </main>
             </div>

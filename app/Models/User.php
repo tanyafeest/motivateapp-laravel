@@ -11,6 +11,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Dyrynda\Database\Support\NullableFields;
 use App\Models\Inspiration;
+use App\Models\Todolist;
 
 class User extends Authenticatable
 {
@@ -86,5 +87,9 @@ class User extends Authenticatable
 
     public function numberOfSongs() {
         return $this->hasMany(Inspiration::class)->where('album_name', '!=', null)->count();
+    }
+
+    public function todolist() {
+        return $this->hasOne(Todolist::class);
     }
 }

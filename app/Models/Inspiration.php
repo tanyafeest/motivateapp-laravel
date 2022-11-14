@@ -16,7 +16,10 @@ class Inspiration extends Model
      */
     protected $fillable = [
         'user_id',
-        'sharedby_user_id'
+        'sharedby_user_id',
+        'album_name',
+        'album_href',
+        'quotes_id'
     ];
 
     /**

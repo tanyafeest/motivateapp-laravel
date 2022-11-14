@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-gray-100">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,63 +17,63 @@
         <div class="flex h-full flex-col">
             <div class="flex min-h-0 flex-1 overflow-hidden">
                 <!-- Sidebar-->
-                <nav aria-label="Sidebar" class="hidden lg:pt-8 lg:block lg:flex-shrink-0 lg:overflow-y-auto lg:bg-gradient-to-r lg:from-purple-500 lg:to-violet-500">
+                <div aria-label="Sidebar" class="hidden lg:pt-8 lg:block lg:flex-shrink-0 lg:overflow-y-auto lg:bg-gradient-to-r lg:from-purple-500 lg:to-violet-500">
                     <div class="w-24 flex min-h-0 flex-1 flex-col">
                         <div class="text-white flex flex-1 flex-col overflow-y-auto">
                             <img class="w-12 mx-auto" src="images/MotiveMobLogo.svg" />
                             <img class="w-20" src="images/Divide.svg" />
                         </div>
                         
-                        <div class="grid flex-grow space-y-8">
-                            <a href="#" class="text-white flex-shrink-0 inline-flex items-center justify-center rounded-lg">
+                        <nav class=" flex-1 space-y-8">
+                            <a href="#" class="text-white group flex items-center justify-center rounded-lg">
                                 <span class="sr-only">Menu</span>
                                 <img class="w-6" src="images/menu.svg" />
                             </a>
 
-                            <a href="#" class="text-white flex-shrink-0 inline-flex items-center justify-center rounded-lg">
+                            <a href="#" class="text-white group flex items-center justify-center rounded-lg">
                                 <span class="sr-only">Send</span>
                                 <img class="w-6" src="images/Send.svg" />
                             </a>
 
-                            <a href="#" class="text-white flex-shrink-0 inline-flex items-center justify-center rounded-lg">
+                            <a href="#" class="text-white group flex items-center justify-center rounded-lg">
                                 <span class="sr-only">Heart</span>
                                 <img class="w-6" src="images/heart.svg" />
                             </a>
 
-                            <a href="#" class="text-white flex-shrink-0 inline-flex items-center justify-center rounded-lg">
+                            <a href="#" class="text-white group flex items-center justify-center rounded-lg">
                                 <span class="sr-only">Gallery</span>
                                 <img class="w-6" src="images/Gallery.svg" />
                             </a>
 
-                            <a href="#" class="text-white flex-shrink-0 inline-flex items-center justify-center rounded-lg">
+                            <a href="#" class="text-white group flex items-center justify-center rounded-lg">
                                 <span class="sr-only">Note-3</span>
                                 <img class="w-6" src="images/Note-3.svg" />
                             </a>
 
-                            <a href="#" class="text-white flex-shrink-0 inline-flex items-center justify-center rounded-lg">
+                            <a href="#" class="text-white group flex items-center justify-center rounded-lg">
                                 <span class="sr-only">Headphone</span>
                                 <img class="w-6" src="images/Headphone.svg" />
                             </a>
 
-                            <a href="#" class="text-white flex-shrink-0 inline-flex items-center justify-center rounded-lg">
+                            <a href="#" class="text-white group flex items-center justify-center rounded-lg">
                                 <span class="sr-only">Dollar</span>
                                 <img class="w-6" src="images/dollar.svg" />
                             </a>
 
-                            <a href="#" class="text-white flex-shrink-0 inline-flex items-center justify-center rounded-lg">
+                            <a href="#" class="text-white group flex items-center justify-center rounded-lg">
                                 <span class="sr-only">Setting</span>
                                 <img class="w-6" src="images/Setting.svg" />
                             </a>
-                        </div>
+                        </nav>
 
                         <div class="flex flex-shrink-0">
-                            <a href="#" class="text-white inline-flex items-center justify-center rounded-lg">
+                            <a href="#" class="text-white group flex items-center justify-center rounded-lg">
                                 <span class="sr-only">User</span>
                                 <img class="w-20" src="images/User.svg" />
                             </a>
                         </div>
                     </div>
-                </nav>
+                </div>
 
                 <!-- Main area -->
                 <main class="min-w-0 flex-1 xl:flex">

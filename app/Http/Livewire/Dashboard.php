@@ -73,7 +73,7 @@ class Dashboard extends Component
         }
     }
 
-    public function checkTodo($type)
+    public function checkTodo($type, $action)
     {
         $todolist = Todolist::where('user_id', Auth::user()->id)->first();
 
@@ -83,18 +83,20 @@ class Dashboard extends Component
             $todolist->user_id = Auth::user()->id;
         }
         
+        // If action is a toggle, the state should be the opposite of the current value.
+        // If action is a check, the state should be true 
         switch($type) {
             case 'message': 
-                $todolist->message = !$todolist->message;
+                $todolist->message = $action == 'toggle' ? !$todolist->message : true;
                 break;
             case 'chat': 
-                $todolist->chat = !$todolist->chat;
+                $this->todolist[1] = $todolist->chat = $action == 'toggle' ? !$todolist->chat : true;
                 break;
             case 'social': 
-                $todolist->social = !$todolist->social;
+                $this->todolist[2] = $todolist->social = $action == 'toggle' ? !$todolist->social : true;
                 break;
             case 'email': 
-                $todolist->email = !$todolist->email;
+                $todolist->email = $action == 'toggle' ? !$todolist->email : true;
                 break;
         }
 

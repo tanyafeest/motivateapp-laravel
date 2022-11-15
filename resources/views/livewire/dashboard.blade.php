@@ -91,7 +91,7 @@
             <div class="flex flex-col w-2/5 gap-5 p-5">
                 <div class="flex flex-col gap-5">
                     <div class="flex items-center mb-4">
-                        <input id="text-message" type="checkbox" wire:model="todolist.0" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:change="checkTodo('message')">
+                        <input id="text-message" type="checkbox" wire:model="todolist.0" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:change="checkTodo('message', 'toggle')">
                         <label for="text-message" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Text a message to Friends & Family</label>
                     </div>
 
@@ -101,21 +101,29 @@
                 </div>
                 <div class="flex flex-col gap-5">
                     <div class="flex items-center mb-4">
-                        <input id="share-chatapp" type="checkbox" wire:model="todolist.1" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:change="checkTodo('chat')">
+                        <input id="share-chatapp" type="checkbox" wire:model="todolist.1" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:change="checkTodo('chat', 'toggle')">
                         <label for="share-chatapp" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Share in Chat App</label>
                     </div>
 
                     <div class="flex justify-between">
-                        <img src="/img/whatsapp.svg" width="40" height="40" class="w-10 h-10" />
-                        <img src="/img/chat.svg" width="40" height="40" class="w-10 h-10" />
-                        <img src="/img/slack.svg" width="40" height="40" class="w-10 h-10" />
-                        <img src="/img/twitch.svg" width="40" height="40" class="w-10 h-10" />
+                        <a href="{{ env('PUBLIC_EXACTSPORTS_WHATSAPP_URL') }}" target="_blank" wire:click="checkTodo('chat', 'check')">
+                            <img src="/img/whatsapp.svg" width="40" height="40" class="w-10 h-10" />
+                        </a>
+                        <a href="{{ env('PUBLIC_EXACTSPORTS_SLACK_URL') }}" target="_blank">
+                            <img src="/img/slack.svg" width="40" height="40" class="w-10 h-10" />
+                        </a>
+                        <a href="{{ env('PUBLIC_EXACTSPORTS_GROUPME_URL') }}" target="_blank">
+                            <img src="/img/chat.svg" width="40" height="40" class="w-10 h-10" />
+                        </a>
+                        <a href="{{ env('PUBLIC_EXACTSPORTS_DISCORD_URL') }}" target="_blank">
+                            <img src="/img/twitch.svg" width="40" height="40" class="w-10 h-10" />
+                        </a>
                     </div>
                 </div>
 
                 <div class="flex flex-col gap-5">
                     <div class="flex items-center mb-4">
-                        <input id="share-socials" type="checkbox" wire:model="todolist.2" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:change="checkTodo('social')">
+                        <input id="share-socials" type="checkbox" wire:model="todolist.2" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:change="checkTodo('social', 'toggle')">
                         <label for="share-socials" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Share Socially in Each App</label>
                     </div>
 
@@ -129,7 +137,7 @@
 
                 <div class="flex flex-col gap-5">
                     <div class="flex items-center mb-4">
-                        <input id="send-email" type="checkbox" wire:model="todolist.3" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:change="checkTodo('email')">
+                        <input id="send-email" type="checkbox" wire:model="todolist.3" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:change="checkTodo('email', 'toggle')">
                         <label for="send-email" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Share Socially in Each App</label>
                     </div>
 

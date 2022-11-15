@@ -156,13 +156,36 @@
                                 <div class="absolute bottom-4 right-8">Next</div>
                             </div>
                         </div>
-                        <div id="step-4" class=" grid overflow-hidden grid-cols-1 grid-rows-4 gap-0 h-screen">
+                        <div id="step-4" class=" grid overflow-hidden grid-cols-1 grid-rows-4 gap-4 h-screen bg-purple-500">
                             <div class="col-start-1 col-span-1" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
-                                 Motive Mob
+                                <img class="w-12 h-12 mx-auto mt-8" src="images/mm-logo1.png" alt="">
                             </div>
-                            <div class="bg-purple-300 row-span-2 relative flex justify-center">
+                            <div class="bg-purple-600 row-span-2">
+                                <div class="flex flex-col items-center -mt-12">
+                                    <img class="w-24 h-24" src="images/adamdriver.png" alt="">
+                                    <p>Adam Driver</p>
+                                    <p>(Teammate) shared with you:</p>
+                                </div>
+                                <div class="bg-purple-700 text-center py-4 my-4">
+                                    <p class="text-4xl bold">“You have to fight to reach your dream”</p>
+                                    <p>- Lionel Messi - </p>
+                                </div>                                
+                                <div class="bg-purple-600 grid grid-cols-2">
+                                    <div class="flex justify-center">
+                                        <img class="w-44 h-44 -mt-10" src="images/stronger.png" alt="">
+                                    </div>
+                                    <div>
+                                        <p class="text-md font-extralight">And they thought you might enjoy listening to: </p>
+                                        <p class="text-lg">Stronger (Kanye West)</p>
+                                        <div class="flex space-x-4 mt-4">
+                                            <img class="w-12 h-12" src="images/add.png" alt="">
+                                            <img class="w-12 h-12" src="images/play.png" alt="">
+                                            <img class="w-12 h-12" src="images/spotify.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="bg-purple-600 py-4 px-8 relative text-sm"> 
+                            <div class="bg-purple-800 py-4 px-8 relative text-sm"> 
                                 <div class="grid grid-cols-2 gap-8">
                                     <div>
                                         <p class="text-justify">View your <strong>private inspiration page</strong> like this one. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -174,7 +197,9 @@
                                 </div>
                                 
                                 <div class="absolute bottom-4 left-8">Skip</div>
-                                <div class="absolute bottom-4 right-8">Back</div>
+                                <div class="absolute bottom-4 right-8">
+                                    Next
+                                </div>
                             </div>
                         </div>
                     </section>

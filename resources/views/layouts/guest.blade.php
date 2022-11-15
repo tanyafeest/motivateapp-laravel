@@ -17,15 +17,15 @@
         <div class="flex h-full flex-col">
             <div class="flex min-h-0 flex-1 overflow-hidden">
                 <!-- Sidebar-->
-                <div aria-label="Sidebar" class="hidden lg:pt-8 lg:block lg:flex-shrink-0 lg:overflow-y-auto lg:bg-gradient-to-r lg:from-purple-500 lg:to-violet-500 text-white">
-                    <div class="w-24 flex min-h-0 flex-1 flex-col">
-                        <div class=" flex flex-1 flex-col overflow-y-auto">
+                <div aria-label="Sidebar" class="hidden lg:pt-8 lg:block lg:flex lg:flex-col lg:h-screen lg:bg-gradient-to-r lg:from-purple-500 lg:to-violet-500 text-white">
+                    
+                        <div class="flex flex-col space-y-4">
                             <img class="w-12 mx-auto" src="images/MotiveMobLogo.svg" />
-                            <img class="w-20" src="images/Divide.svg" />
+                            <img class="w-18" src="images/Divide.svg" />
                         </div>
                         
-                        <nav class=" flex-1 space-y-8">
-                            <a href="#" class=" group flex items-center justify-center rounded-lg">
+                        <nav class="flex-grow flex flex-col justify-center space-y-4">
+                            <a href="#" class="group flex items-center justify-center rounded-lg">
                                 <span class="sr-only">Menu</span>
                                 <img class="w-6" src="images/menu.svg" />
                             </a>
@@ -66,13 +66,13 @@
                             </a>
                         </nav>
 
-                        <div class="flex flex-shrink-0">
+                        <div class="">
                             <a href="#" class=" group flex items-center justify-center rounded-lg">
                                 <span class="sr-only">User</span>
                                 <img class="w-20" src="images/User.svg" />
                             </a>
                         </div>
-                    </div>
+                  
                 </div>
 
                 <!-- Main area -->

@@ -1,15 +1,34 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome />
+    <div class="grid grid-cols-2 gap-8 p-8">
+        <div>
+            <div class="flex justify-between">
+                <div class="flex space-x-4">
+                    <img src="images/quotes.svg" alt="">
+                    <p>Quotes</p>
+                    <p>Received</p>
+                </div>
+                <div>
+                    <p>3</p>
+                </div>
             </div>
+            
+            <x-button>Request More</x-button>
+        </div>
+        <div>
+            <div class="flex justify-between">
+                <div class="flex space-x-4">
+                    <img src="images/songs.svg" alt="">
+                    <p>Recommended</p>
+                    <p>Songs</p>
+                </div>
+                <div>
+                    <p>5</p>
+                </div>
+            </div>
+            
+            <x-button>Request More</x-button>
+
+            <p>Note: Average user has 85 quotes and 107 songs submitted</p>
         </div>
     </div>
 </x-app-layout>

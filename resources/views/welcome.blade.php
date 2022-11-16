@@ -105,14 +105,14 @@
                     <p class="text-justify">View your <strong>private inspiration page</strong> like this one. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
                 <div class="flex flex-col justify-center">
-                    <x-button isFilled>Register Free Account</x-button>
+                    <x-button.primary filled>Register Free Account</x-button.primary>
                     <p class="text-xs text-center mt-2">Your account is free (forever). You can upgrade for $20/year for additional premium features.
                 </div>
             </div>
             
             <div class="absolute bottom-4 left-8">Skip</div>
             <div class="absolute bottom-4 right-8">
-                Next
+                <x-button.primary>Next</x-button.primary>
             </div>
         </div>
     </div>

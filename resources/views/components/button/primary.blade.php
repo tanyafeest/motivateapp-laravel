@@ -1,4 +1,4 @@
-<!-- yellow buttons -->
+<!-- white buttons -->
 @props(['filled' => 'false'])
 
 @if ($filled === true)

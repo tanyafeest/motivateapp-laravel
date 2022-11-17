@@ -14,8 +14,8 @@
         @livewireStyles
     </head>
     <body class="">
-         <div class="grid overflow-hidden grid-lines auto-cols-fr grid-rows-12 gap-0 h-screen">
-            <div class="row-start-1 row-end-5 col-start-1 col-end-5 grid overflow-hidden grid-lines auto-cols-fr grid-rows-1 gap-0 h-screen">
+         <div class="grid overflow-hidden auto-cols-fr grid-rows-6 gap-0 h-screen">
+            <div class="row-start-1 row-end-7 col-start-1 col-end-5 grid overflow-hidden grid-lines auto-cols-fr grid-rows-1 gap-0 h-screen">
                 <!-- Sidebar-->
                 <div class="col-start-1 col-end-3 lg:bg-gradient-to-r lg:from-purple-500 lg:to-violet-500 hidden lg:pt-8 lg:block lg:flex lg:flex-col lg:h-screen text-white">                 
                     <div class="flex flex-col space-y-4">
@@ -80,7 +80,7 @@
             </div>
                  
             <!-- Main area -->
-            <div class="row-start-1 row-end-2 col-start-5 col-end-12 bg-sky-50 relative">
+            <div class="row-start-1 row-end-1 col-start-5 col-end-12 bg-sky-50 relative">
                 <div><img class="w-11 h-11 absolute top-8 left-8" src="images/back.svg" alt=""></div>
                 <div>Account Information: Lisa Smith</div>
                 <div class="">
@@ -95,8 +95,8 @@
                 {{$slot}}
             </div>
 
-            <div class="row-start-4 row-end-12 col-start-5 col-end-12 bg-sky-300">
-                
+            <div class="row-start-4 row-end-7 col-start-5 col-end-12 bg-sky-300 relative">
+                <img src="images/dashboard.png" class="absolute bottom-0 right-0 max-w-xl" alt="">
                 Motivate to be your best
             </div>
                 

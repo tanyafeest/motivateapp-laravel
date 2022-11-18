@@ -73,8 +73,13 @@
             </div>
 
             <!-- Intro -->
-            <div class="relative" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #83DBEE;">
+            <div class="relative flex justify-center items-center" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #83DBEE;">
                 <img class="absolute right-0" src="images/ribbon.svg" alt="">
+                <div class="rounded-lg text-white p-4 bg-red-500/40 z-20 m-8 space-y-2">
+                    <h2 class="font-semibold text-xl mb-4">Congratulations!</h2>
+                    <p>You just created your program to begin getting motivated! We`ll shortly send you a confirmation text to receive your personalized motivation. </p>
+                    <p>To get started now, review your dashboard below and invite others to give a quote and song to help inspire! </p>
+                </div>
             </div>
                  
             <!-- Main area -->

@@ -80,11 +80,16 @@
             </div>
                  
             <!-- Main area -->
-            <div class="row-start-1 row-end-1 col-start-5 col-end-12 bg-sky-50 relative">
-                <div><img class="w-11 h-11 absolute top-8 left-8" src="images/back.svg" alt=""></div>
-                <div>Account Information: Lisa Smith</div>
+            <div class="row-start-1 row-end-1 col-start-5 col-end-12 bg-sky-50 relative flex justify-between items-center">
+                <div>
+                    <img class="w-11 h-11 absolute top-8 left-8" src="images/back-arrow.png" alt="">
+                </div>
+                <div class="text-center">
+                    <p>Account Information:</p>
+                    <p class="font-semibold">Lisa Smith</p>
+                </div>
                 <div class="">
-                    <a href="#" class=" group flex items-center justify-center rounded-lg">
+                    <a href="#" class="group flex items-center justify-center rounded-lg">
                         <span class="sr-only">User</span>
                         <img class="w-20" src="images/User.svg" />
                     </a>

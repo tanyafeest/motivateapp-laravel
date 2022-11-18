@@ -78,7 +78,7 @@
                     <aside class="bg-sky-300 w-2/5">
                         <div class="relative flex h-full flex-col">
                             <img src="images/topbg.png" alt="" class="absolute top-0 left-0">
-                            <div class=" absolute top-48 left-4 text-5xl z-20"><strong>Motivate</strong><br /> to <strong>Be Your <br />Best</strong></div>
+                            <div class=" absolute top-48 left-4 text-5xl z-20"><span class="font-semibold">Motivate</span><br /> to <span class="font-semibold">Be Your <br />Best</span></div>
                             <img src="images/womanblur.png" alt="" class="absolute bottom-0 right-0 w-[420px]"> 
                         </div>
                     </aside>

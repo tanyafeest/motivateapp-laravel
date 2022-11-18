@@ -77,11 +77,11 @@
         <div class="bg-purple-600 row-span-2">
             <div class="flex flex-col items-center -mt-12">
                 <img class="w-24 h-24" src="images/adamdriver.png" alt="">
-                <p>Adam Driver</p>
+                <p class="font-semibold text-4xl">Adam Driver</p>
                 <p>(Teammate) shared with you:</p>
             </div>
             <div class="bg-purple-700 text-center py-4 my-4">
-                <p class="text-4xl bold">“You have to fight to reach your dream”</p>
+                <p class="text-4xl font-semibold">“You have to fight to reach your dream”</p>
                 <p>- Lionel Messi - </p>
             </div>                                
             <div class="bg-purple-600 grid grid-cols-2">

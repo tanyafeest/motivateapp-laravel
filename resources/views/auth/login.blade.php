@@ -8,7 +8,7 @@
         <x-jet-authentication-card>
             <div class="text-zinc-800">
                 <p class="text-lg">Let’s Sign You In</p>
-                <p class="font-bold text-2xl">You have been Missed!</p>
+                <p class="font-semibold text-2xl">You have been Missed!</p>
             </div>
 
             <div class="max-w-md mx-auto mt-20">

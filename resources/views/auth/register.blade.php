@@ -8,7 +8,7 @@
         <x-jet-authentication-card>
             <div class="text-zinc-800">
                 <p class="text-lg">Create Your Account</p>
-                <p class="font-bold text-2xl">to Get Inspired!</p>
+                <p class="font-semibold text-2xl">to Get Inspired!</p>
             </div>
 
             <div class="max-w-3xl mx-auto mt-2">

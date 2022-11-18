@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Dyrynda\Database\Support\NullableFields;
 use App\Models\Inspiration;
 use App\Models\Todolist;
-
+use Laravel\Cashier\Billable;
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -21,6 +21,7 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use NullableFields;
+    use Billable;
 
     /**
      * The attributes that are mass assignable.

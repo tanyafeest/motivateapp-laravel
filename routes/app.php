@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Cashier\Http\Controllers\PaymentController;
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     // check share link exist in session
@@ -16,4 +17,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     // inspiration
     Route::get('/inspiration/onboarding', [App\Http\Controllers\InspirationController::class, 'onboarding'])->name('inspiration.onboarding');
+
+    // stripe
+    Route::get('/upgrade', [App\Http\Controllers\PaymentController::class, 'create'])->name('upgrade');
+    Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'payment'])->name('payment');
+    Route::post('/payment/subscription', [App\Http\Controllers\PaymentController::class, 'subscription'])->name('payment.subscription');
 });

@@ -73,13 +73,13 @@
             </div>
 
             <!-- Intro -->
-            <div class="" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #83DBEE;">
-                
+            <div class="relative" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #83DBEE;">
+                <img class="absolute right-0" src="images/ribbon.svg" alt="">
             </div>
                  
             <!-- Main area -->
-            <div class="bg-sky-50 grid overflow-hidden grid-cols-1 grid-rows-6 gap-0 h-screen">
-                <div class="row-start-1 row-end-2 relative flex justify-between items-center">
+            <div class="grid overflow-hidden grid-cols-1 grid-rows-6 gap-0 h-screen">
+                <div class="bg-sky-50 row-start-1 row-end-2 relative flex justify-between items-center">
                     <div>
                         <img class="w-11 h-11 absolute top-8 left-8" src="images/back-arrow.png" alt="">
                     </div>
@@ -95,13 +95,15 @@
                     </div>
                 </div>
 
-                <div class="row-start-2 row-end-4">
+                <div class="bg-white row-start-2 row-end-4">
                     {{$slot}}
                 </div>
 
-                <div class="row-start-4 row-end-7 bg-sky-300 relative">
+                <div class="row-start-4 row-end-7 bg-sky-300 relative text-white">
                     <img src="images/dashboard.png" class="absolute bottom-0 right-0 max-w-xl" alt="">
-                    Motivate to be your best
+                    <p class="text-6xl absolute left-8 top-16">
+                        <span class="font-semibold">Motivate</span><br /> to Be <span class="font-semibold">Your<br /> Best</span>
+                    </p>
                 </div>
             </div>
         </div>

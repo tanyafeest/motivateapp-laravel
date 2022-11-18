@@ -13,7 +13,7 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased h-screen">
         <div class="grid overflow-hidden gap-0 h-screen" style="grid-template-columns: 80px 500px 1fr;">
             <!-- Sidebar-->
             <div class="hidden lg:bg-gradient-to-r lg:from-purple-500 lg:to-violet-500 hidden lg:pt-8 lg:block lg:flex lg:flex-col lg:h-screen text-white">                 
@@ -83,10 +83,10 @@
             </div>
                  
             <!-- Main area -->
-            <div class="grid overflow-hidden grid-cols-1 grid-rows-6 gap-0 h-screen">
+            <div class="grid overflow-hidden grid-cols-1 grid-rows-8 gap-0">
                 <div class="bg-sky-50 row-start-1 row-end-2 relative flex justify-between items-center">
                     <div>
-                        <img class="w-11 h-11 absolute top-8 left-8" src="images/back-arrow.png" alt="">
+                        <img class="w-11 h-11 absolute top-4 left-4" src="images/back-arrow.png" alt="">
                     </div>
                     <div class="text-center">
                         <p>Account Information:</p>
@@ -100,16 +100,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white row-start-2 row-end-4">
-                    {{$slot}}
-                </div>
-
-                <div class="row-start-4 row-end-7 bg-sky-300 relative text-white">
-                    <img src="images/dashboard.png" class="absolute bottom-0 right-0 max-w-xl" alt="">
-                    <p class="text-6xl absolute left-8 top-16">
-                        <span class="font-semibold">Motivate</span><br /> to Be <span class="font-semibold">Your<br /> Best</span>
-                    </p>
-                </div>
+                {{$slot}}
             </div>
         </div>
 

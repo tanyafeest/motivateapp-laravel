@@ -33,10 +33,13 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/settings', function () {
-        return view('settings');
-    })->name('settings');
+    Route::get('/inspiration', function () {
+        return view('inspiration');
+    })->name('inspiration');
     Route::get('/upgrade', function () {
         return view('upgrade');
     })->name('upgrade');
+    Route::get('/settings', function () {
+        return view('settings');
+    })->name('settings');
 });

@@ -33,7 +33,7 @@
                         <img class="w-6" src="images/Send.svg" />
                     </a>
 
-                    <a href="#" class=" group flex items-center justify-center rounded-lg">
+                    <a href="/inspiration" class=" group flex items-center justify-center rounded-lg">
                         <span class="sr-only">Heart</span>
                         <img class="w-6" src="images/heart.svg" />
                     </a>

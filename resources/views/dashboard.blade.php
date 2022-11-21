@@ -38,14 +38,14 @@
     </div>
 
     <div class="row-start-4 row-end-9">
-        <div id="step1" class="bg-sky-300 relative text-white">
+        <div id="step1" class="hidden bg-sky-300 relative text-white min-h-[440px]">
             <img src="images/dashboard.png" class="absolute bottom-0 right-0 max-w-xl" alt="">
             <p class="text-6xl absolute left-8 top-16">
                 <span class="font-semibold">Motivate</span><br /> to Be <span class="font-semibold">Your<br /> Best</span>
             </p>
         </div>
 
-        <div id="step2" class="hidden bg-white flex justify-between">
+        <div id="step2" class=" bg-white flex justify-between">
             <div class="w-[72rem] p-8 h-screen" style="box-shadow: 0px 7.93548px 51.0996px rgba(230, 234, 238, 0.6);">
                 <p>Receiving Motivational</p>
                 <p class="font-semibold text-2xl mb-8">Quotes & Songs:</p>

@@ -23,7 +23,7 @@
                 </div>
                 
                 <nav class="flex-grow flex flex-col justify-center space-y-4">
-                    <a href="#" class="group flex items-center justify-center rounded-lg">
+                    <a href="/dashboard" class="group flex items-center justify-center rounded-lg">
                         <span class="sr-only">Menu</span>
                         <img class="w-6" src="images/menu.svg" />
                     </a>
@@ -58,7 +58,7 @@
                         <img class="w-6" src="images/dollar.svg" />
                     </a>
 
-                    <a href="#" class=" group flex items-center justify-center rounded-lg">
+                    <a href="/settings" class=" group flex items-center justify-center rounded-lg">
                         <span class="sr-only">Setting</span>
                         <img class="w-6" src="images/Setting.svg" />
                     </a>

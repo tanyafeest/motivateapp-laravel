@@ -93,4 +93,16 @@ class User extends Authenticatable
     public function todolist() {
         return $this->hasOne(Todolist::class);
     }
+
+    public function isSubscribed() {
+        return $this->subscribed(env('STRIPE_SUBSCRIPTION_PLAN'));
+    }
+
+    public function isOnGracePeriod() {
+        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->onGracePeriod();
+    }
+
+    public function isEnded() {
+        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->ended();
+    }
 }

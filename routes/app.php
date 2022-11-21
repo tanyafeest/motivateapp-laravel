@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Laravel\Cashier\Http\Controllers\PaymentController;
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     // check share link exist in session
@@ -22,4 +21,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/upgrade', [App\Http\Controllers\PaymentController::class, 'create'])->name('upgrade');
     Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'payment'])->name('payment');
     Route::post('/payment/subscription', [App\Http\Controllers\PaymentController::class, 'subscription'])->name('payment.subscription');
+
+    // webhook endpoint
+    Route::post('/stripe-webhook', [App\Http\Controllers\StripeWebhookController::class, 'handleWebHook'])->name('stripe.handle.webhook');
+
+    // TODO: some features might need to restrict by EnsureUserIsSubscribed middleware
+    Route::middleware('subscribed')->group(function() {
+        Route::get('/test-subscribed', function() {
+            return view('welcome');
+        });
+    });
 });

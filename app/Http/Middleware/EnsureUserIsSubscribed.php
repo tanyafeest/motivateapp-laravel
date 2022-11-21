@@ -17,10 +17,10 @@ class EnsureUserIsSubscribed
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->user() && !$request->user()->subscribed(env('STRIPE_SUBSCRIPTION_PLAN'))) {
+        if($request->user() && !$request->user()->isSubscribed()) {
             return redirect()->intended(RouteServiceProvider::UPGRADE)->send();
         }
-        
+    
         return $next($request);
     }
 }

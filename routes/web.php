@@ -36,4 +36,7 @@ Route::middleware([
     Route::get('/settings', function () {
         return view('settings');
     })->name('settings');
+    Route::get('/upgrade', function () {
+        return view('upgrade');
+    })->name('upgrade');
 });

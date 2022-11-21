@@ -53,7 +53,7 @@
                         <img class="w-6" src="images/Headphone.svg" />
                     </a>
 
-                    <a href="#" class=" group flex items-center justify-center rounded-lg">
+                    <a href="/upgrade" class=" group flex items-center justify-center rounded-lg">
                         <span class="sr-only">Dollar</span>
                         <img class="w-6" src="images/dollar.svg" />
                     </a>

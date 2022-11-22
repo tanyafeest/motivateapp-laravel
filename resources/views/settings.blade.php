@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="row-start-2 row-end-9">
+    <div class="row-span-11">
         <div id="step2" class=" bg-white">
             <div class="p-8 h-screen divide-y divide-slate-100 space-y-6" style="box-shadow: 0px 7.93548px 51.0996px rgba(230, 234, 238, 0.6);">
                 <div>

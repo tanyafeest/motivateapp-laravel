@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div id="step1" class="hidden">
-        <div class="row-start-2 row-end-4 bg-sky-50 px-8 grid grid-cols-2 flex items-end pb-8">
+    <div id="step1" class="">
+        <div class="row-span-2 bg-sky-50 px-8 grid grid-cols-2 flex items-end pb-8">
             <div class="">
                 <h1 class="text-6xl font-bold">Stronger</h1>
                 <p class="text-4xl font-light">Kanye West</p>
@@ -68,8 +68,8 @@
         </div>
     </div>
 
-    <div id="step2">
-        <div class="row-start-2 row-end-9 px-8">
+    <div id="step2" class="hidden">
+        <div class="row-span-7 px-8">
             <p class="font-bold text-2xl mt-4">Past Motivation:</p>
 
             <div class="grid grid-cols-2 gap-8 mt-8">

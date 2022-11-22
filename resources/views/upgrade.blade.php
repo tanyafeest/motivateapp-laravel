@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="row-start-2 row-end-9 text-white">
+    <div class="row-span-11 text-white">
         <div id="step1" class="h-screen p-8 flex flex-col justify-center" style="background: linear-gradient(146.67deg, #805CDC 1.12%, #A941D9 122.75%);">
             <div class="rounded-lg p-4" style="background: rgba(0, 0, 0, 0.32); box-shadow: 0px 1px 24px rgba(0, 0, 0, 0.13); backdrop-filter: blur(17.5px);">
                 <table class="table-auto w-full">

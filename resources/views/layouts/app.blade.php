@@ -83,7 +83,7 @@
             </div>
                  
             <!-- Main area -->
-            <div class="grid overflow-hidden grid-cols-1 grid-rows-8 gap-0">
+            <div class="grid overflow-hidden grid-cols-1 grid-rows-[12] gap-0">
                 <div class="bg-sky-50 row-start-1 row-end-2 relative flex justify-between items-center">
                     <div>
                         <img class="w-11 h-11 absolute top-4 left-4" src="images/back-arrow.png" alt="">

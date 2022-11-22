@@ -23,14 +23,15 @@
                 <img class="absolute right-0" src="images/ribbon.svg" alt="">
                 <!-- Desktop only -->
                 <img class="w-44 h-44 mt-24" src="images/m-logo.png" alt="">
+                @if(Request::is('dashboard'))
                 <div class="-mt-12">
-                        <x-account-creation-msg></x-account-creation-msg>
-                    </div>
-                
+                    <x-account-creation-msg></x-account-creation-msg>
+                </div>
+                @endif
             </div>
                  
             <!-- Main area -->
-            <div id="main" class="flex flex-col lg:overflow-auto lg:grid lg:grid-cols-1 lg:grid-rows-[12] lg:gap-0">
+            <div id="main" class="flex flex-col lg:overflow-auto lg:grid lg:grid-cols-1 lg:grid-rows-[12] lg:gap-0 pb-20 bg-white lg:pb-0">
                 <div class="lg:bg-sky-50 lg:row-span-1 lg:relative flex justify-between items-center">
                     <div>
                         <img class="lg:hidden w-11 h-11 m-2 lg:m-0" src="images/mobile-menu.png" alt="">
@@ -47,25 +48,27 @@
                         </a>
                     </div>
                 </div>
+
                 <!-- Mobile only -->
                 <div class="lg:hidden flex flex-col items-center">
                     <img class="w-44 h-44 mb-12" src="images/m-logo.png" alt="">
+                    @if(Request::is('dashboard'))
                     <div class="-mt-20">
                         <x-account-creation-msg></x-account-creation-msg>
                     </div>
-                    
+                    @endif
                 </div>
                 
                 {{$slot}}
 
-                <!-- Footer: hide on lg+ -->
+                <!-- Mobile only -->
                 <div class="lg:hidden fixed bottom-0 left-0 w-full px-8 -py-4 mt-20 bg-gray-50 rounded-lg shadow-lg z-20">
                     <div class="flex justify-between text-2xl text-zinc-400 items-center">
                         <a href="/dashboard"><img src="images/menu-home.svg" alt=""></a>
                         <a href="/dashboard"><img src="images/menu-share.svg" alt=""></a>
                         <a href="/dashboard"><img src="images/menu-main.svg" alt=""></a>
                         <a href="/dashboard"><img src="images/menu-upgrade.svg" alt=""></a>
-                        <a href="/dashboard"><img src="images/menu-settings.svg" alt=""></a>
+                        <a href="/settings"><img src="images/menu-settings.svg" alt=""></a>
                     </div>
                 </div>
             </div>

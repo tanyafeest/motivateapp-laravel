@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media screen and (max-width: 1024px) {
+    #main {
+        background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #83DBEE;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    #intro {
+        background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #83DBEE;
+    }
+}

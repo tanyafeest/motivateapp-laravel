@@ -1,7 +1,7 @@
 <x-app-layout>
     @livewire('quotes-songs')
 
-    <div class="row-span-7">
+    <div class="lg:row-span-7">
         <div id="step1" class="hidden lg:bg-sky-300 lg:relative lg:text-white lg:min-h-[440px]">
             <img src="images/dashboard.png" class="absolute bottom-0 right-0 max-w-xl" alt="">
             <p class="text-6xl absolute left-8 top-16">
@@ -20,7 +20,7 @@
 
                 <p class="text-xs mt-4">you can receive from any friends, family, teammates, colleagues anyone! Here are the steps how. Once you`ve completed, check it off your “to do” list!
             </div>
-            <div class="h-screen p-8 text-sm" style="box-shadow: 0px 7.93548px 51.0996px rgba(230, 234, 238, 0.6);">
+            <div class="lg:h-screen p-8 text-sm" style="box-shadow: 0px 7.93548px 51.0996px rgba(230, 234, 238, 0.6);">
                 <div class="flex flex-col space-y-8 lg:block lg:space-y-2">
                     <div>
                         <div>

@@ -19,10 +19,12 @@
             @livewire('sidebar')
 
             <!-- Intro -->
-            <div id="intro" class="hidden lg:relative lg:flex lg:justify-center lg:items-center">
+            <div id="intro" class="hidden lg:relative lg:flex lg:flex-col lg:items-center">
                 <img class="absolute right-0" src="images/ribbon.svg" alt="">
                 <!-- Desktop only -->
-                @livewire('account-creation-msg')
+                <img class="w-40 h-40" src="images/m-logo.png" alt="">
+                <x-account-creation-msg></x-account-creation-msg>
+                
             </div>
                  
             <!-- Main area -->
@@ -45,7 +47,7 @@
                 </div>
                 <!-- Mobile only -->
                 <div class="lg:hidden">
-                    @livewire('account-creation-msg')
+                    <x-account-creation-msg></x-account-creation-msg>
                 </div>
                 
                 {{$slot}}

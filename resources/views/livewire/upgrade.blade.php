@@ -68,8 +68,22 @@
 
         {{-- actions --}}
         <div class="flex flex-col items-center justify-center w-full mt-10">
-            <a type="button" href="{{ route('payment') }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Upgrade to Get Full Access</a>
-            <span>20$ per Annual</span>
+            @if ($isSubscribed)
+                @if ($isCancelled)   
+                    <div class="flex flex-col gap-2">
+                        Your subscription has been cancelled, but You will be on grade period until {{ Auth::user()->getCurrentPeriodEnd() }}.
+                        <button wire:click="resume" type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Upgrade again</button>
+                    </div>                     
+                @else
+                    <div class="flex flex-col gap-2">
+                        Your subscription will renew on {{ Auth::user()->getCurrentPeriodEnd() }} (12 months after last payment)
+                        <button wire:click="cancel" type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Cancel Subscription</button>
+                    </div>
+                @endif
+            @else
+                <a type="button" href="{{ route('payment') }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Upgrade to Get Full Access</a>
+                <span>20$ per Annual</span>
+            @endif
         </div>
-    </div>
+    </div?>
 </div>

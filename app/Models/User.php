@@ -13,6 +13,7 @@ use Dyrynda\Database\Support\NullableFields;
 use App\Models\Inspiration;
 use App\Models\Todolist;
 use Laravel\Cashier\Billable;
+use Carbon\Carbon;
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -98,11 +99,21 @@ class User extends Authenticatable
         return $this->subscribed(env('STRIPE_SUBSCRIPTION_PLAN'));
     }
 
+    public function isCancelled() {
+        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->canceled();
+    }
+
     public function isOnGracePeriod() {
         return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->onGracePeriod();
     }
 
     public function isEnded() {
         return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->ended();
+    }
+
+    public function getCurrentPeriodEnd() {
+        $timestamp = $this->subscriptions[0]->asStripeSubscription()->current_period_end;
+
+        return Carbon::createFromTimeStamp($timestamp)->toFormattedDateString();
     }
 }

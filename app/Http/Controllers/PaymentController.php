@@ -53,4 +53,38 @@ class PaymentController extends Controller
 
         return redirect()->intended(RouteServiceProvider::UPGRADE)->send();
     }
+
+    /**
+     * Cancel the subscription
+     * 
+     * @return \Illuminate\View\View
+     */
+    public static function cancel()
+    {
+        $user = Auth::user();
+
+        try {
+            $user->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->cancel();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    /**
+     * Resume the subscription
+     * 
+     * @return \Illuminate\View\View
+     */
+    public static function resume()
+    {
+        $user = Auth::user();
+
+        if($user->isOnGracePeriod()) {
+            try {
+                $user->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->resume();
+            } catch (\Throwable $th) {
+                throw $th;
+            }
+        }
+    }
 }

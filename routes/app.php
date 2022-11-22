@@ -21,9 +21,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/upgrade', [App\Http\Controllers\PaymentController::class, 'create'])->name('upgrade');
     Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'payment'])->name('payment');
     Route::post('/payment/subscription', [App\Http\Controllers\PaymentController::class, 'subscription'])->name('payment.subscription');
-
-    // webhook endpoint
-    Route::post('/stripe-webhook', [App\Http\Controllers\StripeWebhookController::class, 'handleWebHook'])->name('stripe.handle.webhook');
+    Route::post('/payment/cancel', [App\Http\Controllers\PaymentController::class, 'cancel'])->name('payment.subscription.cancel');
 
     // TODO: some features might need to restrict by EnsureUserIsSubscribed middleware
     Route::middleware('subscribed')->group(function() {

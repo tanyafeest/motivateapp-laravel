@@ -10,6 +10,7 @@
         "dyrynda/laravel-nullable-fields": "^4.2",
         "guzzlehttp/guzzle": "^7.0",
         "iatstuti/laravel-nullable-fields": "^4.2",
+        "laravel/cashier": "^14.3",
         "laravel/framework": "^9.19",
         "laravel/jetstream": "^2.12",
         "laravel/sanctum": "^3.0",

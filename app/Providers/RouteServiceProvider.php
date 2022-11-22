@@ -21,6 +21,7 @@ class RouteServiceProvider extends ServiceProvider
     public const LOGIN = '/login';
     public const REGISTER = '/register';
     public const ONBOARDING = '/inspiration/onboarding';
+    public const UPGRADE = '/upgrade';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

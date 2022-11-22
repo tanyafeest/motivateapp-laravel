@@ -82,7 +82,7 @@
                 <div class="flex flex-col gap-1">
                     <span class="text-sm text-gray-400">Using your public share link</span>
 
-                    <span class="underline cursor-pointer underline-offset-4">{{ env("APP_URL") . Auth::user()->share_link . "/" . str_replace(" ", "",strtolower(Auth::user()->name)) }}</span>
+                    <span class="underline cursor-pointer underline-offset-4">{{ env("APP_URL") . 'share/' . Auth::user()->share_link . "/" . str_replace(" ", "",strtolower(Auth::user()->name)) }}</span>
                 
                     <span class="text-sm text-gray-400">you can receive from any friends, family, teammates, colleaguesm anyone! Here are the steps how. Once you`ve completed, check it off your “to do” list!</span>
                 </div>

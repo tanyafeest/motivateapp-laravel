@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div id="" class="overflow-hidden h-screen relative text-gray-800" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
-        <img class="w-11 h-11 absolute top-8 left-8" src="images/back.svg" alt="">
+        <img class="w-11 h-11 absolute top-4 lg:top-8 left-4 lg:left-8" src="images/back.svg" alt="">
         <div class="flex justify-end">
             <img class="max-h-40" src="images/top-swirl.svg" alt="">
         </div>
@@ -17,7 +17,7 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
-                    <div class="grid grid-rows-5 grid-flow-col gap-4">
+                    <div class="lg:grid lg:grid-rows-5 lg:grid-flow-col lg:gap-4">
                             <div>
                                 <x-jet-label for="name" value="{{ __('First Name') }}" />
                                 <x-jet-input id="name" class="block w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />

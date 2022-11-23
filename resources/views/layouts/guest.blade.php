@@ -35,10 +35,8 @@
             </div>
 
             <!-- Main area -->
-            <div class="">
-                <div class="text-white">
-                    {{$slot}}
-                </div>
+            <div class="text-white">
+                {{$slot}}
             </div>
         </div>
     </body>

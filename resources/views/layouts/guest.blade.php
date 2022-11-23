@@ -19,11 +19,11 @@
             @livewire('sidebar')
 
             <!-- Intro -->
-            <div class="bg-sky-300 h-screen relative">
+            <div class="bg-sky-300 h-screen relative hidden lg:block">
                 <!-- mobile only -->
                 <img class="z-10 lg:hidden" src="images/m-bg.png" alt=""> 
-                <img class="z-20 lg:hidden absolute top-40 w-[100px] left-[125px]" src="images/mm-logo.png" alt="">
-                <x-button.white class="lg:hidden z-20 absolute bottom-12 w-[200px] left-[75px]">How It Works</x-button.white>
+                <img class="z-20 lg:hidden absolute top-40 w-[100px] left-[145px]" src="images/mm-logo.png" alt="">
+                <x-button.white class="lg:hidden z-20 absolute bottom-12 w-[200px] left-[85px]">How It Works</x-button.white>
 
                 <!-- desktop only -->
                 <img class="hidden lg:block lg:absolute lg:top-0 lg:left-0" src="images/topbg.png" alt="">

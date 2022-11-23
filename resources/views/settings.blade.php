@@ -26,8 +26,11 @@
                     <div class="pt-2">
                         <p class="">Motivation Playlist:</p>
                         <div class="flex flex-col space-y-4 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-8">
-                            <div>
-                                <button class=" px-8 rounded-lg font-medium text-white flex justify-between items-center"  style="background: linear-gradient(0deg, #FD3A84 0%, #FFA68D 100%), #4277C1;">Request to Get 10+ Songs <img src="images/note.svg" alt=""></button>
+                            <div class="bg-white mt-2 w-1/4 min-w-[340px] relative">
+                                <div class="flex justify-between px-2 rounded-lg" style="background: linear-gradient(0deg, #FD3A84 0%, #FFA68D 100%), #D9D9D9;">
+                                    <div class="m-4 text-white">Request to <span class="font-bold">Get 10+ Songs</span></div>
+                                </div>
+                                <div class="absolute right-2 -top-4"><img src="images/note.svg" alt=""></div>
                             </div>
                             
                             <div>

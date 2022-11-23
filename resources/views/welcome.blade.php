@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div id="step-2" class="hidden grid overflow-hidden grid-cols-2 grid-rows-3 gap-0 h-screen">
+    <div id="step2" class="hidden lg:grid lg:overflow-hidden lg:grid-cols-2 lg:grid-rows-3 lg:gap-0 lg:h-screen lg:relative">
         <div class="bg-red-100 col-start-1 col-span-2">
                 Motive Mob
         </div>
@@ -23,7 +23,7 @@
             <div class="absolute bottom-4 right-8">Next</div>
         </div>
     </div>
-    <div id="step-2" class="hidden grid overflow-hidden grid-cols-2 grid-rows-3 gap-0 h-screen">
+    <div id="step3" class="hidden lg:grid lg:overflow-hidden lg:grid-cols-2 lg:grid-rows-3 lg:gap-0 lg:h-screen lg:relative">
         <div class="bg-red-100 col-start-1 col-span-2">
                 Motive Mob
         </div>
@@ -47,7 +47,7 @@
             <div class="absolute bottom-4 right-8">Next</div>
         </div>
     </div>
-    <div id="step-3" class="hidden grid overflow-hidden grid-cols-2 grid-rows-3 gap-0 h-screen">
+    <div id="step4" class="hidden lg:grid lg:overflow-hidden lg:grid-cols-2 lg:grid-rows-3 lg:gap-0 lg:h-screen lg:relative">
         <div class="bg-red-100 col-start-1 col-span-2">
                 Motive Mob
         </div>
@@ -70,7 +70,7 @@
             <div class="absolute bottom-4 right-8">Next</div>
         </div>
     </div>
-    <div id="step-4" class=" grid overflow-hidden grid-cols-1 grid-rows-4 gap-4 h-screen bg-purple-500">
+    <div id="step5" class="hidden lg:grid lg:overflow-hidden lg:grid-cols-1 lg:grid-rows-4 lg:gap-4 lg:h-screen lg:relative lg:bg-purple-500">
         <div class="col-start-1 col-span-1" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
             <img class="w-12 h-12 mx-auto mt-8" src="images/mm-logo1.png" alt="">
         </div>

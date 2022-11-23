@@ -19,11 +19,18 @@
             @livewire('sidebar')
 
             <!-- Intro -->
-            <div class="bg-sky-300">
-                <div class="relative flex h-full flex-col">
-                    <img src="images/topbg.png" alt="" class="absolute top-0 left-0">
-                    <div class=" absolute top-48 left-8 text-5xl z-20 text-white"><span class="font-semibold">Motivate</span><br /> to <span class="font-semibold">Be Your <br />Best</span></div>
-                    <img src="images/womanblur.png" alt="" class="absolute bottom-0 right-0 w-[360px]"> 
+            <div class="bg-sky-300 h-screen relative">
+                <!-- mobile only -->
+                <img class="z-10 lg:hidden" src="images/m-bg.png" alt=""> 
+                <img class="z-20 lg:hidden absolute top-40 w-[100px] left-[125px]" src="images/mm-logo.png" alt="">
+                <x-button.white class="lg:hidden z-20 absolute bottom-12 w-[200px] left-[75px]">How It Works</x-button.white>
+
+                <!-- desktop only -->
+                <img class="hidden lg:block lg:absolute lg:top-0 lg:left-0" src="images/topbg.png" alt="">
+                <img class="hidden lg:block lg:absolute lg:bottom-0 lg:right-0 lg:w-[360px] lg:z-30" src="images/womanblur.png" alt=""> 
+                
+                <div class="absolute top-[300px] lg:top-48 left-8 lg:left-8 text-5xl z-0 text-white">
+                    <span class="font-semibold">Motivate</span><br /> to <span class="font-semibold">Be Your <br />Best</span>
                 </div>
             </div>
 

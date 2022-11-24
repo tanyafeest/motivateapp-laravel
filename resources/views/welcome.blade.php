@@ -1,25 +1,33 @@
 <x-guest-layout>
-    <div id="step2" class="flex flex-col lg:grid lg:overflow-hidden lg:grid-cols-2 lg:grid-rows-3 lg:gap-0 lg:h-screen lg:relative">
-        <div class="bg-red-100 lg:col-start-1 lg:col-span-2">
+    <div id="step2" class="grid lg:overflow-hidden grid-rows-5 lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
+        <div class="bg-cyan-200 lg:bg-pink-100 row-span-1">
                 Motive Mob
         </div>
-        <div class="bg-pink-300 lg:relative lg:flex lg:justify-center">
-            <img class="absolute bottom-0 w-80" src="images/woman-pink.png" alt="">
-        </div>
-        <div class="bg-yellow-300 hidden lg:block lg:relative lg:flex lg:justify-center">
-            <img class="absolute bottom-0 w-80" src="images/woman1.png" alt="">
-        </div>
-        <div class="bg-pink-400 lg:relative lg:py-4 lg:px-8 lg:text-sm"> 
-            <div>
-                <p class="text-justify">Let your team, friends, and family support your sports success. Have them join your "Mob" to provide you with inspiration through song and word! Use this free app to get motivation from people that care about you. Here's how it works:</p>
+        <div class="row-span-4 lg:row-span-2 lg:grid lg:grid-cols-2 bg-blue-400">
+            <div id="step1a" class="hidden grid grid-rows-2 h-full">
+                <div class="bg-pink-300 relative">
+                    <img class="w-100 absolute bottom-0 left-[30px] lg:left-[0px]" src="images/woman-pink.png" alt="">
+                </div>
+                <div class="bg-pink-400 p-4"> 
+                    <div>
+                        <p class="text-justify">Let your team, friends, and family support your sports success. Have them join your "Mob" to provide you with inspiration through song and word! Use this free app to get motivation from people that care about you. Here's how it works:</p>
+                    </div>
+                    <div class="absolute bottom-8 lg:bottom-4 left-4">Skip</div>
+                    <div class="absolute bottom-8 right-8 lg:hidden"><x-button.white>Next</x-button.white></div>
+                </div>
             </div>
-            <div class="absolute bottom-4 left-8">Skip</div>
-        </div>
-        <div class="bg-yellow-400 hidden lg:block lg:relative lg:py-4 lg:px-8 lg:text-sm">
-            <div>
-                <p class="text-justify">Let your team, friends, and family support your sports success. Have them join your "Mob" to provide you with inspiration through song and word! Use this free app to get motivation from people that care about you. Here's how it works:</p>
+            <div id="step1b" class="grid grid-rows-2 h-full">
+                <div class="bg-yellow-300 relative">
+                    <img class="w-100 absolute bottom-0 left-[10px] lg:left-[0px]" src="images/woman1.png" alt="">
+                </div>
+                <div class="bg-yellow-400 p-4">
+                    <div>
+                        <p class="text-justify">Let your team, friends, and family support your sports success. Have them join your "Mob" to provide you with inspiration through song and word! Use this free app to get motivation from people that care about you. Here's how it works:</p>
+                    </div>
+                    <div class="absolute bottom-8 lg:bottom-4 left-4 lg:hidden">Skip</div>
+                    <div class="absolute bottom-4 right-8"><x-button.white>Next</x-button.white></div>
+                </div>
             </div>
-            <div class="absolute bottom-4 right-8"><x-button.white>Next</x-button.white></div>
         </div>
     </div>
     <div id="step3" class="hidden lg:grid lg:overflow-hidden lg:grid-cols-2 lg:grid-rows-3 lg:gap-0 lg:h-screen lg:relative">

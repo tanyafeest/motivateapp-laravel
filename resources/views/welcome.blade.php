@@ -1,10 +1,12 @@
 <x-guest-layout>
+    <img class="absolute top-12 left-[170px] lg:hidden z-10 w-[50px]" src="images/mm-logo-colour.svg" alt="">
+    <img class="absolute top-0 lg:hidden z-0" src="images/mobile-top-bg.png" alt="">
     <div id="step2" class="grid lg:overflow-hidden grid-rows-5 lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
         <div class="bg-cyan-200 lg:bg-pink-100 row-span-1">
                 Motive Mob
         </div>
         <div class="row-span-4 lg:row-span-2 lg:grid lg:grid-cols-2 bg-blue-400">
-            <div id="step1a" class="hidden grid grid-rows-2 h-full">
+            <div id="step1a" class=" grid grid-rows-2 h-full">
                 <div class="bg-pink-300 relative">
                     <img class="w-100 absolute bottom-0 left-[30px] lg:left-[0px]" src="images/woman-pink.png" alt="">
                 </div>
@@ -16,7 +18,7 @@
                     <div class="absolute bottom-8 right-8 lg:hidden"><x-button.white>Next</x-button.white></div>
                 </div>
             </div>
-            <div id="step1b" class="grid grid-rows-2 h-full">
+            <div id="step1b" class="hidden grid grid-rows-2 h-full">
                 <div class="bg-yellow-300 relative">
                     <img class="w-100 absolute bottom-0 left-[10px] lg:left-[0px]" src="images/woman1.png" alt="">
                 </div>

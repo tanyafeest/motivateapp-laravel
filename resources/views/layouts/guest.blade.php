@@ -36,6 +36,7 @@
 
             <!-- Main area -->
             <div class="text-white">
+                
                 {{$slot}}
             </div>
         </div>

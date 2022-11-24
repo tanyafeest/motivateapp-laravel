@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* mobile */
 @media screen and (max-width: 1024px) {
     #main {
         background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%);
+    }
+    #step2{
+        background:url('images/mobile-top-bg.png');
     }
 }
 

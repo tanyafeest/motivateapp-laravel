@@ -14,58 +14,58 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-       <div class="grid overflow-hidden gap-0 h-screen" style="grid-template-columns: 80px 460px 1fr;">
+        <div class="grid h-screen gap-0 overflow-hidden" style="grid-template-columns: 80px 460px 1fr;">
             <!-- Sidebar-->
-            <div class="lg:bg-gradient-to-r lg:from-purple-500 lg:to-violet-500 hidden lg:pt-8 lg:block lg:flex lg:flex-col lg:h-screen text-white">                 
+            <div class="hidden text-white lg:bg-gradient-to-r lg:from-purple-500 lg:to-violet-500 lg:pt-8 lg:flex lg:flex-col lg:h-screen">                 
                 <div class="flex flex-col space-y-4">
                     <img class="w-12 mx-auto" src="images/MotiveMobLogo.svg" />
                     <img class="w-18" src="images/Divide.svg" />
                 </div>
                 
-                <nav class="flex-grow flex flex-col justify-center space-y-4">
-                    <a href="/dashboard" class="group flex items-center justify-center rounded-lg">
+                <nav class="flex flex-col justify-center flex-grow space-y-14">
+                    <a href="/dashboard" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Menu</span>
-                        <img class="w-6" src="images/menu.svg" />
+                        <img class="w-6" src="images/Menu.svg" />
                     </a>
 
-                    <a href="#" class=" group flex items-center justify-center rounded-lg">
+                    <a href="#" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Send</span>
                         <img class="w-6" src="images/Send.svg" />
                     </a>
 
-                    <a href="/inspiration" class=" group flex items-center justify-center rounded-lg">
+                    <a href="/inspiration" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Heart</span>
-                        <img class="w-6" src="images/heart.svg" />
+                        <img class="w-6" src="images/Heart.svg" />
                     </a>
 
-                    <a href="#" class=" group flex items-center justify-center rounded-lg">
+                    <a href="#" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Gallery</span>
                         <img class="w-6" src="images/Gallery.svg" />
                     </a>
 
-                    <a href="#" class=" group flex items-center justify-center rounded-lg">
+                    <a href="#" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Note-3</span>
                         <img class="w-6" src="images/Note-3.svg" />
                     </a>
 
-                    <a href="#" class=" group flex items-center justify-center rounded-lg">
+                    <a href="#" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Headphone</span>
                         <img class="w-6" src="images/Headphone.svg" />
                     </a>
 
-                    <a href="/upgrade" class=" group flex items-center justify-center rounded-lg">
+                    <a href="/upgrade" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Dollar</span>
-                        <img class="w-6" src="images/dollar.svg" />
+                        <img class="w-6" src="images/Dollar.svg" />
                     </a>
 
-                    <a href="/settings" class=" group flex items-center justify-center rounded-lg">
+                    <a href="/settings" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Setting</span>
                         <img class="w-6" src="images/Setting.svg" />
                     </a>
                 </nav>
 
                 <div class="">
-                    <a href="#" class=" group flex items-center justify-center rounded-lg">
+                    <a href="#" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">User</span>
                         <img class="w-20" src="images/User.svg" />
                     </a>
@@ -74,9 +74,9 @@
 
             <!-- Intro -->
             <div class="bg-sky-300">
-                <div class="relative flex h-full flex-col">
+                <div class="relative flex flex-col h-full">
                     <img src="images/topbg.png" alt="" class="absolute top-0 left-0">
-                    <div class=" absolute top-48 left-8 text-5xl z-20 text-white"><span class="font-semibold">Motivate</span><br /> to <span class="font-semibold">Be Your <br />Best</span></div>
+                    <div class="absolute z-20 text-5xl text-white top-48 left-8"><span class="font-semibold">Motivate</span><br /> to <span class="font-semibold">Be Your <br />Best</span></div>
                     <img src="images/womanblur.png" alt="" class="absolute bottom-0 right-0 w-[360px]"> 
                 </div>
             </div>

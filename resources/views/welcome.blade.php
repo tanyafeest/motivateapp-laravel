@@ -1,7 +1,8 @@
 <x-guest-layout>
-    <img class="absolute top-12 left-[170px] lg:hidden z-10 w-[50px]" src="images/mm-logo-colour.svg" alt="">
-    <img class="absolute top-0 lg:hidden z-0" src="images/mobile-top-bg.png" alt="">
-    <div id="step2" class="grid lg:overflow-hidden grid-rows-5 lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
+    <img class="hidden absolute top-12 left-[170px] lg:hidden z-10 w-[50px]" src="images/mm-logo-colour.svg" alt="">
+    <img class="hidden absolute top-0 lg:hidden z-0" src="images/mobile-top-bg.png" alt="">
+    
+    <div id="step2" class="hidden grid lg:overflow-hidden grid-rows-5 lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
         <div class="bg-cyan-200 lg:bg-pink-100 row-span-1">
                 Motive Mob
         </div>

@@ -19,10 +19,10 @@
             @livewire('sidebar')
 
             <!-- Intro -->
-            <div id="intro" class="hidden bg-sky-300 h-screen relative lg:block">
+            <div id="intro" class="bg-sky-300 h-screen relative lg:block">
                 <!-- mobile only -->
                 <img class="z-10 lg:hidden" src="images/m-bg.png" alt=""> 
-                <img class="z-20 lg:hidden absolute top-32 w-[100px] left-[145px]" src="images/mm-logo.png" alt="">
+                <img class="z-20 lg:hidden absolute top-24 w-[120px] left-[145px]" src="images/mm-logo.png" alt="">
                 <x-button.white class="lg:hidden z-20 absolute bottom-12 w-[200px] left-[85px]" wire:click="step1">How It Works</x-button.white>
 
                 <!-- desktop only -->
@@ -36,7 +36,6 @@
 
             <!-- Main area -->
             <div class="text-white">
-                
                 {{$slot}}
             </div>
         </div>

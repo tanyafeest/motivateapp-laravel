@@ -7,9 +7,9 @@
     </div>
 
     <div id="step2" class="flex flex-col {{ $currentStep != 2 ? 'hidden lg:visible' : '' }} lg:grid lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
-        <img class="z-0 lg:hidden" src="images/mobile-top-bg.png" alt=""> 
+        {{-- <img class="z-0 lg:hidden" src="images/mobile-top-bg.png" alt=""> 
         <img class="absolute z-10 w-12 lg:hidden top-8 left-40 " src="images/MotiveMobLogo.svg" alt=""> 
-        <img class="absolute z-20 hidden lg:block top-4 left-4" src="images/back.svg" alt="">
+        <img class="absolute z-20 hidden lg:block top-4 left-4" src="images/back.svg" alt=""> --}}
 
         <div class="hidden row-span-1 lg:bg-pink-100 lg:block" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
             <img class='w-[210px] absolute top-6 left-[300px]' src="images/logo-white.svg" alt="">
@@ -18,9 +18,10 @@
          <div class="row-span-4 lg:row-span-2 lg:grid lg:grid-cols-2">
             <div id="step1a" class="grid grid-rows-2 lg:h-full lg:grid-span-1 lg:visible">
                 <div class="relative" style="background: #F390A2;">
-                    <img class="w-100 lg:w-80 absolute bottom-0 left-[30px] lg:left-[60px]" src="images/woman-pink.png" alt="">
+                    <img class="lg:hidden" src="images/step1a.png" alt="">
+                    <img class="hidden lg:block lg:w-100 lg:w-80 lg:absolute lg:bottom-0 lg:left-[80px]" src="images/woman-pink.png" alt="">
                 </div>
-                <div class="p-4" style="background: #F76A83;"> 
+                <div class="z-10 p-4 -mt-12 lg:z-0 lg:mt-0" style="background: #F76A83;"> 
                     <div>
                         <p class="text-justify">Let your team, friends, and family support your sports success. Have them join your "Mob" to provide you with inspiration through song and word! Use this free app to get motivation from people that care about you. Here's how it works:</p>
                     </div>
@@ -28,9 +29,10 @@
                     <div class="absolute bottom-8 right-8 lg:hidden"><x-button.white>Next</x-button.white></div>
                 </div>
             </div>
-            <div id="step1b" class="grid h-full grid-rows-2 lg:grid-span-1 lg:visible">
+            <div id="step1b" class="grid grid-rows-2 lg:h-full lg:grid-span-1 lg:visible">
                 <div class="relative" style="background: linear-gradient(145.74deg, #EFC03E 2.49%, #BD7308 122.43%);">
-                    <img class="w-100 lg:w-80 absolute bottom-0 left-[30px] lg:left-[70px]" src="images/woman1.png" alt="">
+                    <img class="lg:hidden" src="images/step1a.png" alt="">
+                    <img class="hidden lg:block lg:w-100 lg:w-80 lg:absolute lg:bottom-0 lg:left-[80px]" src="images/woman1.png" alt="">
                 </div>
                 <div class="p-4" style="background: #E1AA2F;">
                     <div>

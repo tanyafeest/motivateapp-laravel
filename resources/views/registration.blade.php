@@ -16,7 +16,7 @@
             <x-button.primary filled>Create with Apple</x-button.primary>
         </div>
         <div class="text-center"> 
-            <p class="text-sm font-bold">Already have Account? Sign In</p>
+            <p class="text-sm font-bold">Already have Account? <a href="{{ route('login') }}" class="cursor-pointer hover:underline">Sign In</a></p>
         </div>
     </div>
 </x-guest-layout>

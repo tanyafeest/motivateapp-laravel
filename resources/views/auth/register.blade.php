@@ -1,6 +1,6 @@
 <x-guest-layout>
-    <div id="" class="overflow-hidden h-screen relative text-gray-800" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
-        <img class="w-11 h-11 absolute top-8 left-8" src="images/back.svg" alt="">
+    <div x-data="{ age: 0 }" id="" class="relative h-screen overflow-hidden text-gray-800" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
+        <img class="absolute w-11 h-11 top-8 left-8" src="images/back.svg" alt="">
         <div class="flex justify-end">
             <img class="max-h-40" src="images/top-swirl.svg" alt="">
         </div>
@@ -8,7 +8,7 @@
         <x-jet-authentication-card>
             <div class="text-zinc-800">
                 <p class="text-lg">Create Your Account</p>
-                <p class="font-semibold text-2xl">to Get Inspired!</p>
+                <p class="text-2xl font-semibold">to Get Inspired!</p>
             </div>
 
             <div class="max-w-3xl mx-auto mt-2">
@@ -17,20 +17,51 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
-                    <div class="grid grid-rows-5 grid-flow-col gap-4">
+                    <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <x-jet-label for="name" value="{{ __('First Name') }}" />
-                                <x-jet-input id="name" class="block w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                                <x-jet-label for="first_name" value="{{ __('First Name') }}" />
+                                <x-jet-input id="first_name" class="block w-full" type="text" name="first_name"  value="{{ session('temp_first_name') }}" readonly required autofocus />
                             </div>
 
-                            <div class="text-sm">
-                                Male
-                                Female
+                            <div>
+                                <x-jet-label for="last_name" value="{{ __('Last Name') }}" />
+                                <x-jet-input id="last_name" class="block w-full" type="text" name="last_name" value="{{ session('temp_last_name') }}" readonly required autofocus />
+                            </div>
+
+                            <div class="flex justify-center py-4 pt-5">
+                                <div class="flex gap-5">
+                                    <div class="flex items-center gap-5">
+                                        <x-jet-label for="gender" value="{{ __('Male') }}" />
+                                        <input type="radio" id="gender_male" name="gender" value="0" checked />
+                                    </div>
+                                    <div class="flex items-center gap-5">
+                                        <x-jet-label for="gender" value="{{ __('Female') }}" />
+                                        <input type="radio" id="gender_female" name="gender" value="1" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <x-jet-label for="age" value="{{ __('Age') }}" />
+                                <select class="w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="age" name="age" x-model="age">
+                                    <option value="0">10-19</option>
+                                    <option value="1">20-29</option>
+                                    <option value="2">30-39</option>
+                                    <option value="3">40-49</option>
+                                    <option value="4">50-59</option>
+                                    <option value="5">60-69</option>
+                                    <option value="6">70-99</option>
+                                </select>
                             </div>
 
                             <div class="">
                                 <x-jet-label for="email" value="{{ __('Email') }}" />
-                                <x-jet-input id="email" class="block w-full" type="email" name="email" :value="old('email')" required />
+                                <x-jet-input id="email" class="block w-full" type="email" name="email" value="{{ session('temp_email') }}" readonly required />
+                            </div>
+
+                            <div>
+                                <x-jet-label for="phone" value="{{ __('Cell Phone') }}" />
+                                <x-jet-input id="phone" class="block w-full" type="text" name="phone" :value="old('phone')" required />
                             </div>
 
                             <div class="">
@@ -39,33 +70,36 @@
                             </div>
 
                             <div>
-                                <x-jet-label for="name" value="{{ __('Current Grade') }}" />
-                                <x-jet-input id="name" class="block w-full" type="text" name="grade" :value="old('grade')" required autofocus autocomplete="grade" />
-                            </div>
-                       
-                            <div>
-                                <x-jet-label for="name" value="{{ __('Last Name') }}" />
-                                <x-jet-input id="name" class="block w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-                            </div>
-
-                            <div>
-                               
-                            </div>
-
-                            <div>
-                                <x-jet-label for="email" value="{{ __('Cell Phone') }}" />
-                                <x-jet-input id="email" class="block  w-full" type="text" name="phone" :value="old('phone')" required />
-                            </div>
-
-                            <div>
                                 <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                                 <x-jet-input id="password_confirmation" class="block w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
                             </div>
 
-                            <div>
-                                <x-jet-label for="name" value="{{ __('Activities') }}" />
-                                <x-jet-input id="name" class="block  w-full" type="text" name="activities" :value="old('activities')" required autofocus autocomplete="activities" />
-                            </div>
+                            <template x-if="age == 0">
+                                <div>
+                                    <x-jet-label for="grade" value="{{ __('Current Grade') }}" />
+                                    <select class="w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="current_grade" name="current_grade">
+                                        <option value="6">6th</option>
+                                        <option value="7">7th</option>
+                                        <option value="8">8th</option>
+                                        <option value="9">9th</option>
+                                        <option value="10">10th</option>
+                                        <option value="11">11th</option>
+                                        <option value="12">12th</option>
+                                        <option value="15">College</option>
+                                    </select>
+                                </div>
+                            </template>
+
+                            <template x-if="age == 0">
+                                <div>
+                                    <x-jet-label for="activity" value="{{ __('Activities') }}" />
+                                    <select class="w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="sport" name="sport">
+                                        @foreach ($sports as $sport)
+                                            <option value="{{ $sport->id }}">{{ $sport->sport }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </template>
                         
                     </div>
 
@@ -77,8 +111,8 @@
 
                                     <div class="ml-2">
                                         {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                                'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Terms of Service').'</a>',
-                                                'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900">'.__('Privacy Policy').'</a>',
+                                                'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="text-sm text-gray-600 underline hover:text-gray-900">'.__('Terms of Service').'</a>',
+                                                'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="text-sm text-gray-600 underline hover:text-gray-900">'.__('Privacy Policy').'</a>',
                                         ]) !!}
                                     </div>
                                 </div>
@@ -87,7 +121,7 @@
                     @endif
 
                     <div class="flex items-center justify-center mt-4">
-                        {{-- <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                        {{-- <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('login') }}">
                             {{ __('Already registered?') }}
                         </a> --}}
 

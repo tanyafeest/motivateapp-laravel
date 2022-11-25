@@ -27,6 +27,24 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'first_name',
+        'last_name',
+        'phone',
+        'gender',
+        'age',
+        'grade_year',
+        'sport_id',
+        'share_link'
+    ];
+
+    /**
+     * The attributes that are nullable.
+     *
+     * @var string[]
+     */
+    protected $nullable = [
+        'grade_year',
+        'sport_id'
     ];
 
     /**

@@ -106,7 +106,9 @@
                         <p class="text-justify">View your <strong>private inspiration page</strong> like this one. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
                     <div class="flex flex-col justify-center">
-                        <x-button.primary filled>Register Free Account</x-button.primary>
+                        <x-button.primary filled>
+                            <a class="flex justify-center" href="{{ route('register') }}">Register Free Account</a>
+                        </x-button.primary>
                         <p class="mt-2 text-xs text-center">Your account is free (forever). You can upgrade for $20/year for additional premium features.
                     </div>
                 </div>

@@ -17,29 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/registration', function () {
-    return view('registration');
-});
-
 Route::get('/test', function () {
     return view('test');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-    Route::get('/inspiration', function () {
-        return view('inspiration');
-    })->name('inspiration');
-    Route::get('/upgrade', function () {
-        return view('upgrade');
-    })->name('upgrade');
-    Route::get('/settings', function () {
-        return view('settings');
-    })->name('settings');
-});
+require __DIR__ . '/auth.php';
+require __DIR__ . '/app.php';

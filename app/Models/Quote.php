@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sport extends Model
+class Quote extends Model
 {
     use HasFactory;
 
@@ -15,6 +15,8 @@ class Sport extends Model
      * @var string[]
      */
     protected $fillable = [
-        'sport',
+        'category',
+        'quote',
+        'author'
     ];
 }

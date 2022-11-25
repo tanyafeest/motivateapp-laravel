@@ -9,6 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Inspiration;
+use Illuminate\Foundation\Inspiring;
 
 class User extends Authenticatable
 {
@@ -76,4 +79,22 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    // get public share link
+    public function shareLink()
+    {
+        return env('APP_URL') . 'share/' . Auth::user()->share_link . "/" . str_replace(" ", "",strtolower(Auth::user()->name));
+    }
+
+    // get number of quotes
+    public function numberOfQuotes()
+    {
+        return $this->hasMany(Inspiration::class)->where('quotes_id', '!=', null)->count();
+    }
+
+    // get number of songs
+    public function numberOfSongs()
+    {
+        return $this->hasMany(Inspiration::class)->where('album_name', '!=', null)->count();
+    }
 }

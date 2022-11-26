@@ -13,6 +13,11 @@ class Onboarding extends Component
         $this->currentStep = 2;
     }
 
+    public function secondStepSubmit()
+    {
+        $this->currentStep = 3;
+    }
+
     public function back($step)
     {
         $this->currentStep = $step;

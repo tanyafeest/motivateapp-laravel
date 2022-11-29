@@ -73,15 +73,21 @@
             </div>
 
             <!-- Intro -->
+            @if (Cookie::get("isVisited") == null)
+                {{ Cookie::queue("isVisited", "true", 2628000); }}
+            @endif
+
             <div class="relative flex items-center justify-center" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #83DBEE;">
                 <img class="absolute right-0" src="images/ribbon.svg" alt="">
+                @if (!Cookie::get("isVisited"))
                 <div class="z-20 p-4 m-8 space-y-2 text-white rounded-lg bg-red-500/40">
                     <h2 class="mb-4 text-xl font-semibold">Congratulations!</h2>
                     <p>You just created your program to begin getting motivated! We`ll shortly send you a confirmation text to receive your personalized motivation. </p>
                     <p>To get started now, review your dashboard below and invite others to give a quote and song to help inspire! </p>
                 </div>
+                @endif
             </div>
-                 
+
             <!-- Main area -->
             <div class="grid grid-cols-1 gap-0 overflow-hidden grid-rows-8">
                 <div class="relative flex items-center justify-between row-start-1 row-end-2 bg-sky-50">

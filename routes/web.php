@@ -25,9 +25,9 @@ Route::get('/registration', function () {
     return view('registration');
 });
 
-Route::get('/test', function () {
-    return view('test');
-});
+// Route::get('/test', function () {
+//     return view('test');
+// });
 
 Route::middleware([
     'auth:sanctum',

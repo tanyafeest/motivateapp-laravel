@@ -18,6 +18,21 @@ class Onboarding extends Component
         $this->currentStep = 3;
     }
 
+    public function thirdStepSubmit()
+    {
+        $this->currentStep = 4;
+    }
+
+    public function fourthStepSubmit()
+    {
+        $this->currentStep = 5;
+    }
+
+    public function fifthStepSubmit()
+    {
+        $this->currentStep = 6;
+    }
+
     public function back($step)
     {
         $this->currentStep = $step;

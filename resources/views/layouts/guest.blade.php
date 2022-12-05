@@ -13,12 +13,12 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
-        <div class="lg:grid lg:overflow-hidden lg:gap-0 h-screen" style="grid-template-columns: 80px 460px 1fr;">
+    <body class="h-screen font-sans antialiased">
+        <div class="h-screen lg:grid lg:overflow-hidden lg:gap-0" style="grid-template-columns: 80px 460px 1fr;">
             <!-- Sidebar-->
             @livewire('sidebar')
 
-            <div class="bg-sky-300 h-screen relative hidden lg:block">
+            <div class="relative hidden h-screen bg-sky-300 lg:block">
                 <!-- desktop only -->
                 <img class="lg:block lg:absolute lg:top-0 lg:left-0" src="images/topbg.png" alt="">
                 <img class="lg:block lg:absolute lg:bottom-0 lg:right-0 lg:w-[360px] lg:z-30" src="images/womanblur.png" alt=""> 

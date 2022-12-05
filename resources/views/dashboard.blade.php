@@ -2,7 +2,7 @@
     @livewire('quotes-songs')
 
     <div class="lg:row-span-7">
-        <div id="step1" class="  lg:bg-sky-300 lg:relative lg:text-white lg:min-h-[440px]">
+        <div id="step1" class="hidden lg:bg-sky-300 lg:relative lg:text-white lg:min-h-[440px]">
             <img src="images/dashboard.png" class="absolute bottom-0 right-0 max-w-xl" alt="">
             <p class="absolute text-6xl left-8 top-16">
                 <span class="font-semibold">Motivate</span><br /> to Be <span class="font-semibold">Your<br /> Best</span>

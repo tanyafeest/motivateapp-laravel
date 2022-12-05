@@ -32,6 +32,7 @@
                  
             <!-- Main area -->
             <div id="main" class="flex flex-col lg:overflow-auto lg:grid lg:grid-cols-1 lg:grid-rows-[12] lg:gap-0 pb-20 bg-white lg:pb-0">
+                <!-- Header/Title -->
                 <div class="flex items-center justify-between lg:bg-sky-50 lg:row-span-1 lg:relative">
                     <div>
                         <img class="m-2 lg:hidden w-11 h-11 lg:m-0" src="images/mobile-menu.png" alt="">

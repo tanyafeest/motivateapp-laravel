@@ -1,13 +1,13 @@
 <div>
     <!-- how it works mobile only -->
-    <div id="step1" class="lg:hidden bg-sky-300 h-screen relative {{ $currentStep != 1 ? 'hidden' : '' }}">
+    <div id="step1" class="hidden lg:hidden bg-sky-300 h-screen relative {{ $currentStep != 1 ? 'hidden' : '' }}">
         <img class="z-10 lg:hidden" src="images/howitworks.png" alt=""> 
         <img class="z-20 lg:hidden absolute top-24 w-[120px] left-[145px]" src="images/mm-logo.png" alt="">
         <x-button.white wire:click="firstStepSubmit" type="button" class="lg:hidden z-20 absolute bottom-12 w-[200px] left-[85px]">How It Works</x-button.white>
     </div>
 
     <!-- pink -->
-    <div id="step2" class="flex flex-col {{ $currentStep != 2 ? 'hidden' : '' }} lg:grid lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
+    <div id="step2" class="hidden lg:hidden flex flex-col {{ $currentStep != 2 ? 'hidden' : '' }} lg:grid lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
         {{-- <img class="z-0 lg:hidden" src="images/mobile-top-bg.png" alt=""> 
         <img class="absolute z-10 w-12 lg:hidden top-8 left-40 " src="images/MotiveMobLogo.svg" alt=""> 
         <img class="absolute z-20 hidden lg:block top-4 left-4" src="images/back.svg" alt=""> --}}
@@ -57,7 +57,7 @@
     </div>
 
     <!-- yellow -->
-    <div id="step3" class="flex flex-col {{ $currentStep != 3 ? 'hidden' : '' }} lg:grid lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
+    <div id="step3" class="hidden lg:hidden flex flex-col {{ $currentStep != 3 ? 'hidden' : '' }} lg:grid lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
         {{-- <img class="z-0 lg:hidden" src="images/mobile-top-bg.png" alt=""> 
         <img class="absolute z-10 w-12 lg:hidden top-8 left-40 " src="images/MotiveMobLogo.svg" alt=""> 
         <img class="absolute z-20 hidden lg:block top-4 left-4" src="images/back.svg" alt=""> --}}
@@ -108,7 +108,7 @@
     </div>
 
     <!-- green -->
-    <div id="step4" class="flex flex-col {{ $currentStep != 4 ? 'hidden' : '' }} lg:grid lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
+    <div id="step4" class="hidden lg:hidden flex flex-col {{ $currentStep != 4 ? 'hidden' : '' }} lg:grid lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
         {{-- <img class="z-0 lg:hidden" src="images/mobile-top-bg.png" alt=""> 
         <img class="absolute z-10 w-12 lg:hidden top-8 left-40 " src="images/MotiveMobLogo.svg" alt=""> 
         <img class="absolute z-20 hidden lg:block top-4 left-4" src="images/back.svg" alt=""> --}}
@@ -159,7 +159,7 @@
     </div>
 
     <!-- blue -->
-    <div id="step5" class="flex flex-col {{ $currentStep != 5 ? 'hidden' : '' }} lg:grid lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
+    <div id="step5" class="hidden lg:hidden flex flex-col {{ $currentStep != 5 ? 'hidden' : '' }} lg:grid lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
         {{-- <img class="z-0 lg:hidden" src="images/mobile-top-bg.png" alt=""> 
         <img class="absolute z-10 w-12 lg:hidden top-8 left-40 " src="images/MotiveMobLogo.svg" alt=""> 
         <img class="absolute z-20 hidden lg:block top-4 left-4" src="images/back.svg" alt=""> --}}
@@ -210,50 +210,39 @@
     </div>
 
     <!-- purple -->
-    <div id="step6" class="{{ $currentStep != 6 ? 'hidden' : '' }} lg:grid lg:overflow-hidden lg:grid-cols-1 lg:grid-rows-4 lg:gap-4 lg:h-screen lg:relative lg:bg-purple-500">
-        <div class="col-span-1 col-start-1" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
-            <img class="w-12 h-12 mx-auto mt-8" src="images/mm-logo1.png" alt="">
-        </div>
-        <div class="row-span-2 bg-purple-600">
-            <div class="flex flex-col items-center -mt-12">
-                <img class="w-24 h-24" src="images/adamdriver.png" alt="">
-                <p class="text-4xl font-semibold">Adam Driver</p>
-                <p>(Teammate) shared with you:</p>
-            </div>
-            <div class="py-4 my-4 text-center bg-purple-700">
-                <p class="text-4xl font-semibold">“You have to fight to reach your dream”</p>
-                <p>- Lionel Messi - </p>
-            </div>                                
-            <div class="grid grid-cols-2 bg-purple-600">
-                <div class="flex justify-center">
-                    <img class="-mt-10 w-44 h-44" src="images/stronger.png" alt="">
-                </div>
-                <div>
-                    <p class="text-md font-extralight">And they thought you might enjoy listening to: </p>
-                    <p class="text-lg">Stronger (Kanye West)</p>
-                    <div class="flex mt-4 space-x-4">
-                        <img class="w-12 h-12" src="images/add.png" alt="">
-                        <img class="w-12 h-12" src="images/play.png" alt="">
-                        <img class="w-12 h-12" src="images/spotify.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="relative px-8 py-4 text-sm bg-purple-800"> 
-            <div class="grid grid-cols-2 gap-8">
-                <div>
-                    <p class="text-justify">View your <strong>private inspiration page</strong> like this one. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-                <div class="flex flex-col justify-center">
-                    <x-button.primary filled>Register Free Account</x-button.primary>
-                    <p class="mt-2 text-xs text-center">Your account is free (forever). You can upgrade for $20/year for additional premium features.
-                </div>
-            </div>
+    <div id="step6" class="relative flex flex-col items-center h-screen" style="background: linear-gradient(146.67deg, #7A5CDC 1.12%, #AF55D8 122.75%);">
+        <img class="w-[48px] h-[46px] mt-10 mb-6" src="images/mm-logo1.png" alt="">
             
-            <div class="absolute bottom-4 left-8">Skip</div>
-            <div class="absolute bottom-4 right-8">
-                <x-button.primary>Next</x-button.primary>
+        <div class="flex flex-col items-center mb-6">
+            <img class="w-24 h-24" src="images/adamdriver.png" alt="">
+            <p class="text-4xl font-semibold">Adam Driver</p>
+            <p>(Teammate) shared with you:</p>
+        </div>
+
+        <div class="flex flex-col items-center w-full p-4 mb-6 bg-purple-500">
+            <p class="text-3xl font-semibold">“You have to fight to reach your dream”</p>
+            <p class="align-right">- Lionel Messi - </p>
+        </div> 
+            
+        <div class="flex -mt-12 ">       
+            <div class="flex justify-center">
+                <img class=" w-44 h-44" src="images/stronger.png" alt="">
             </div>
+            <div class="mt-10 ml-4">
+                <p class="text-md font-extralight">And they thought you might enjoy listening to: </p>
+                <p class="text-lg">Stronger (Kanye West)</p>
+                <div class="flex mt-4 space-x-4">
+                    <img class="w-12 h-12" src="images/add.png" alt="">
+                    <img class="w-12 h-12" src="images/play.png" alt="">
+                    <img class="w-12 h-12" src="images/spotify.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center w-full h-full p-4 mt-8 bg-purple-800">
+            <p class="mb-8 text-sm">View your <span class="font-bold">private inspiration page</span> like this one. Lorem ipsum dolor sit amet, consectetur adipiscing elit.  </p>
+            <x-button.primary filled>Register Free Account</x-button.primary>
+            <p class="mt-2 text-xs text-center text-purple-600">Your account is free (forever). You can upgrade for $20/year for additional premium features.</p>
         </div>
     </div>
 </div>

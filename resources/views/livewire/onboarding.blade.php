@@ -14,9 +14,7 @@
 
     <!-- pink -->
     <div id="step2" class="flex flex-col {{ $currentStep != 2 ? 'hidden' : '' }} lg:grid lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
-        {{-- <img class="z-0 lg:hidden" src="images/mobile-top-bg.png" alt=""> 
-        <img class="absolute z-10 w-12 lg:hidden top-8 left-40 " src="images/MotiveMobLogo.svg" alt=""> 
-        <img class="absolute z-20 hidden lg:block top-4 left-4" src="images/back.svg" alt=""> --}}
+        <img class="absolute z-10 w-12 lg:hidden top-12 left-[180px]" src="images/MotiveMobLogo.svg" alt=""> 
 
         <!-- top section - dk only -->
         <div class="hidden lg:row-span-1 lg:bg-pink-100 lg:block" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
@@ -64,11 +62,8 @@
 
     <!-- yellow -->
     <div id="step3" class="flex flex-col {{ $currentStep != 3 ? 'hidden' : '' }} lg:grid lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
-        {{-- <img class="z-0 lg:hidden" src="images/mobile-top-bg.png" alt=""> 
-        <img class="absolute z-10 w-12 lg:hidden top-8 left-40 " src="images/MotiveMobLogo.svg" alt=""> 
-        <img class="absolute z-20 hidden lg:block top-4 left-4" src="images/back.svg" alt=""> --}}
+        <img class="absolute z-10 w-12 lg:hidden top-12 left-[180px]" src="images/MotiveMobLogo.svg" alt=""> 
         
-
         <!-- top section - dk only -->
         <div class="hidden lg:row-span-1 lg:bg-yellow-100 lg:block" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
             <img class='w-[210px] absolute top-6 left-[300px]' src="images/logo-white.svg" alt="">
@@ -115,10 +110,7 @@
 
     <!-- green -->
     <div id="step4" class="flex flex-col {{ $currentStep != 4 ? 'hidden' : '' }} lg:grid lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
-        {{-- <img class="z-0 lg:hidden" src="images/mobile-top-bg.png" alt=""> 
-        <img class="absolute z-10 w-12 lg:hidden top-8 left-40 " src="images/MotiveMobLogo.svg" alt=""> 
-        <img class="absolute z-20 hidden lg:block top-4 left-4" src="images/back.svg" alt=""> --}}
-        
+        <img class="absolute z-10 w-12 lg:hidden top-12 left-[180px]" src="images/MotiveMobLogo.svg" alt=""> 
 
         <!-- top section - dk only -->
         <div class="hidden lg:row-span-1 lg:bg-yellow-100 lg:block" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
@@ -166,6 +158,8 @@
 
     <!-- blue -->
     <div id="step5" class="flex flex-col {{ $currentStep != 5 ? 'hidden' : '' }} lg:grid lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
+        <img class="absolute z-10 w-12 lg:hidden top-12 left-[180px]" src="images/MotiveMobLogo.svg" alt=""> 
+        
         <!-- top section - dk only -->
         <div class="hidden lg:row-span-1 lg:bg-yellow-100 lg:block" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
             <img class='w-[210px] absolute top-6 left-[300px]' src="images/logo-white.svg" alt="">

@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="text-white row-span-11">
-        <div id="step1" class="flex flex-col items-center justify-center h-full p-8" style="background: linear-gradient(146.67deg, #805CDC 1.12%, #A941D9 122.75%);">
+        <div id="step1" class="flex flex-col items-center justify-center hidden h-full p-8 " style="background: linear-gradient(146.67deg, #805CDC 1.12%, #A941D9 122.75%);">
             <div class="w-full px-8 py-4 rounded-lg" style="background: rgba(0, 0, 0, 0.32); box-shadow: 0px 1px 24px rgba(0, 0, 0, 0.13); backdrop-filter: blur(17.5px);">
                 <table class="w-full table-auto">
                     <thead class="text-sm">
@@ -49,7 +49,7 @@
             <p class="text-center"><span class="font-bold">20$</span> Annual Pass</p>
         </div>
 
-        <div id="step2" class="flex flex-col justify-center hidden h-full p-8">
+        <div id="step2" class="flex flex-col justify-center h-full p-8">
             <x-jet-validation-errors class="mb-4" />
 
             <form method="POST" action="" class="">

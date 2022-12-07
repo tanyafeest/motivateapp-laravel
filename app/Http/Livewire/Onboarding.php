@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Onboarding extends Component
 {
-    public $currentStep = 6;
+    public $currentStep = 1;
 
     public function firstStepSubmit()
     {

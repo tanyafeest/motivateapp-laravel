@@ -17,7 +17,7 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid gap-2 lg:gap-4 lg:grid-cols-2">
                             <div>
                                 <x-jet-label for="first_name" value="{{ __('First Name') }}" />
                                 <x-jet-input id="first_name" class="block w-full" type="text" name="first_name"  value="{{ session('temp_first_name') }}" readonly required autofocus />

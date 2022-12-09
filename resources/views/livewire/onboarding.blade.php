@@ -239,7 +239,7 @@
         <div class="flex flex-col items-center w-full h-full px-8 pt-4 mt-8 lg:flex-row lg:space-x-8" style="background: #7d52d9;">
             <p class="mb-8 text-sm text-center text-justify">View your <span class="font-bold">private inspiration page</span> like this one. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             <div class="flex flex-col items-center">
-                <x-button.primary filled>Register Free Account</x-button.primary>
+                <a class="px-8 py-2 font-medium text-blue-500 transition duration-150 ease-in-out bg-white rounded-3xl" href="/registration">Register Free Account</a>
                 <p class="mt-4 text-xs text-center text-purple-100 lg:mt-2">Your account is free (forever). You can upgrade for $20/year for additional premium features.</p>
             </div>
         </div>

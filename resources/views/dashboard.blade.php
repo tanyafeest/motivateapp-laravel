@@ -9,7 +9,7 @@
             </p>
         </div>
 
-        <div id="step2" class="hidden bg-white lg:flex lg:justify-between">
+        <div id="step2" class="bg-white lg:flex lg:justify-between">
             <div class="lg:w-[72rem] p-8 lg:h-screen" style="box-shadow: 0px 7.93548px 51.0996px rgba(230, 234, 238, 0.6);">
                 <p>Receiving Motivational</p>
                 <p class="mb-8 text-2xl font-semibold">Quotes & Songs:</p>

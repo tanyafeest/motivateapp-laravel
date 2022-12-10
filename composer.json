@@ -6,13 +6,16 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "dougsisk/laravel-country-state": "^4.1",
         "guzzlehttp/guzzle": "^7.2",
+        "laravel/cashier": "^14.4",
         "laravel/framework": "^9.19",
         "laravel/jetstream": "^2.12",
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.5",
+        "psr/simple-cache": "^3.0",
         "socialiteproviders/spotify": "^4.1"
     },
     "require-dev": {

@@ -11,7 +11,10 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Inspiration;
+use App\Models\Todolist;
 use Illuminate\Foundation\Inspiring;
+use Laravel\Cashier\Billable;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -20,6 +23,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -96,5 +100,37 @@ class User extends Authenticatable
     public function numberOfSongs()
     {
         return $this->hasMany(Inspiration::class)->where('album_name', '!=', null)->count();
+    }
+
+    // get todolist of user
+    public function todolist() {
+        return $this->hasOne(Todolist::class);
+    }
+
+    // check subscription is  done
+    public function isSubscribed() {
+        return $this->subscribed(env('STRIPE_SUBSCRIPTION_PLAN'));
+    }
+
+    // check subscription is cancelled
+    public function isCancelled() {
+        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->canceled();
+    }
+
+    // check the user is on grade period
+    public function isOnGracePeriod() {
+        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->onGracePeriod();
+    }
+
+    // check subscription is ended
+    public function isEnded() {
+        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->ended();
+    }
+
+    // get current period end
+    public function getCurrentPeriodEnd() {
+        $timestamp = $this->subscriptions[0]->asStripeSubscription()->current_period_end;
+
+        return Carbon::createFromTimeStamp($timestamp)->toFormattedDateString();
     }
 }

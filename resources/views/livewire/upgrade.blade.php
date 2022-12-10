@@ -43,12 +43,34 @@
                 </tbody>
             </table>
         </div>
-        
-        <div class="flex justify-center w-full">
-            <x-button.white class="max-w-[300px] mt-12">
-                <a href="{{ route('payment') }}">Upgrade to Get Full Access</a>
-            </x-button.white>
-        </div>
-        <p class="text-center"><span class="font-bold">20$</span> Annual Pass</p>
+
+        @if ($isSubscribed)
+            @if ($isCancelled)
+                <div class="flex justify-center w-full">
+                    <x-button.white class="max-w-[300px] mt-12" wire:click="resume">
+                        Upgrade again?
+                    </x-button.white>
+                </div>
+                <p class="text-center">
+                    Your subscription has been cancelled, but You will be on grade period until <span class="font-bold">{{ Auth::user()->getCurrentPeriodEnd() }}</span>.
+                </p>
+            @else
+                <div class="flex justify-center w-full">
+                    <x-button.white class="max-w-[300px] mt-12" wire:click="cancel">
+                        Cancel Subscription
+                    </x-button.white>
+                </div>
+                <p class="text-center">
+                    Your subscription will renew on <span class="font-bold">{{ Auth::user()->getCurrentPeriodEnd() }}</span> (12 months after last payment).
+                </p>
+            @endif
+        @else
+            <div class="flex justify-center w-full">
+                <x-button.white class="max-w-[300px] mt-12">
+                    <a href="{{ route('payment') }}">Upgrade to Get Full Access</a>
+                </x-button.white>
+            </div>
+            <p class="text-center"><span class="font-bold">20$</span> Annual Pass</p>
+        @endif
     </div>
 </div>

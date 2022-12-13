@@ -10,22 +10,25 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    // dashboard
-    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    // check share link exist in session
+    Route::middleware('sharelink.confirm')->group(function() {
+        // dashboard
+        Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+        // inspiration
+        Route::get('/inspiration', [App\Http\Controllers\InspirationController::class, 'index'])->name('inspiration');
+        // payment
+        Route::get('/upgrade', [App\Http\Controllers\PaymentController::class, 'create'])->name('upgrade');
+        Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'payment'])->name('payment');
+        // settings
+        Route::get('/settings', function () {
+            return view('settings');
+        })->name('settings');
+    });
 
-    // inspiration
-    Route::get('/inspiration', function () {
-        return view('inspiration');
-    })->name('inspiration');
+    // inspiration onboarding
+    Route::get('/inspiration/onboarding', [App\Http\Controllers\InspirationController::class, 'onboarding'])->name('inspiration.onboarding');
 
-    // payment
-    Route::get('/upgrade', [App\Http\Controllers\PaymentController::class, 'create'])->name('upgrade');
-    Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'payment'])->name('payment');
+    // payment apis
     Route::post('/payment/subscription', [App\Http\Controllers\PaymentController::class, 'subscription'])->name('payment.subscription');
     Route::post('/payment/cancel', [App\Http\Controllers\PaymentController::class, 'cancel'])->name('payment.subscription.cancel');
-
-    // settings
-    Route::get('/settings', function () {
-        return view('settings');
-    })->name('settings');
 });

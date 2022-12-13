@@ -9,7 +9,7 @@ use App\Http\Controllers\PaymentController;
 class Upgrade extends Component
 {
     public $isSubscribed;
-    public $isCancelled;
+    public $isCanceled;
     public $isEnded;
 
     // initialzie state
@@ -37,7 +37,7 @@ class Upgrade extends Component
         $user = Auth::user();
 
         $this->isSubscribed = $user->isSubscribed();
-        $this->isCancelled = $user->isCancelled();
+        $this->isCanceled = $user->isCanceled();
         $this->isEnded = $user->isEnded();
     }
 

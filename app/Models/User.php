@@ -113,18 +113,18 @@ class User extends Authenticatable
     }
 
     // check subscription is cancelled
-    public function isCancelled() {
-        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->canceled();
+    public function isCanceled() {
+        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN')) !== null && $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->canceled();
     }
 
     // check the user is on grade period
     public function isOnGracePeriod() {
-        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->onGracePeriod();
+        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN')) !== null && $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->onGracePeriod();
     }
 
     // check subscription is ended
     public function isEnded() {
-        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->ended();
+        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN')) !== null && $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->ended();
     }
 
     // get current period end

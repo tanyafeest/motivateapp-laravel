@@ -45,7 +45,7 @@
         </div>
 
         @if ($isSubscribed)
-            @if ($isCancelled)
+            @if ($isCanceled)
                 <div class="flex justify-center w-full">
                     <x-button.white class="max-w-[300px] mt-12" wire:click="resume">
                         Upgrade again?

@@ -9,7 +9,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <script src="https://js.stripe.com/v3/"></script>
+        <script src="{{ asset('https://js.stripe.com/v3/') }}"></script>
 
         <!-- Styles -->
         @livewireStyles
@@ -19,56 +19,56 @@
             <!-- Sidebar-->
             <div class="hidden text-white lg:bg-gradient-to-r lg:from-purple-500 lg:to-violet-500 lg:pt-8 lg:flex lg:flex-col lg:h-screen">                 
                 <div class="flex flex-col space-y-4">
-                    <img class="w-12 mx-auto" src="images/MotiveMobLogo.svg" />
-                    <img class="w-18" src="images/Divide.svg" />
+                    <img class="w-12 mx-auto" src="{{ asset('images/MotiveMobLogo.svg') }}" />
+                    <img class="w-18" src="{{ asset('images/Divide.svg') }}" />
                 </div>
                 
                 <nav class="flex flex-col justify-center flex-grow space-y-14">
                     <a href="/dashboard" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Menu</span>
-                        <img class="w-6" src="images/Menu.svg" />
+                        <img class="w-6" src="{{ asset('images/Menu.svg') }}" />
                     </a>
 
                     <a href="#" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Send</span>
-                        <img class="w-6" src="images/Send.svg" />
+                        <img class="w-6" src="{{ asset('images/Send.svg') }}" />
                     </a>
 
                     <a href="/inspiration" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Heart</span>
-                        <img class="w-6" src="images/Heart.svg" />
+                        <img class="w-6" src="{{ asset('images/Heart.svg') }}" />
                     </a>
 
                     <a href="#" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Gallery</span>
-                        <img class="w-6" src="images/Gallery.svg" />
+                        <img class="w-6" src="{{ asset('images/Gallery.svg') }}" />
                     </a>
 
                     <a href="#" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Note-3</span>
-                        <img class="w-6" src="images/Note-3.svg" />
+                        <img class="w-6" src="{{ asset('images/Note-3') }}.svg" />
                     </a>
 
                     <a href="#" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Headphone</span>
-                        <img class="w-6" src="images/Headphone.svg" />
+                        <img class="w-6" src="{{ asset('images/Headphone.svg') }}" />
                     </a>
 
                     <a href="/upgrade" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Dollar</span>
-                        <img class="w-6" src="images/Dollar.svg" />
+                        <img class="w-6" src="{{ asset('images/Dollar.svg') }}" />
                     </a>
 
                     <a href="/settings" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Setting</span>
-                        <img class="w-6" src="images/Setting.svg" />
+                        <img class="w-6" src="{{ asset('images/Setting.svg') }}" />
                     </a>
                 </nav>
 
                 <div class="">
                     <a href="#" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">User</span>
-                        <img class="w-20" src="images/User.svg" />
+                        <img class="w-20" src="{{ asset('images/User.svg') }}" />
                     </a>
                 </div>
             </div>
@@ -79,7 +79,7 @@
             @endif
 
             <div class="relative flex items-center justify-center" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #83DBEE;">
-                <img class="absolute right-0" src="images/ribbon.svg" alt="">
+                <img class="absolute right-0" src="{{ asset('images/ribbon.svg') }}" alt="">
                 @if (!Cookie::get("isVisited"))
                 <div class="z-20 p-4 m-8 space-y-2 text-white rounded-lg bg-red-500/40">
                     <h2 class="mb-4 text-xl font-semibold">Congratulations!</h2>
@@ -93,7 +93,7 @@
             <div class="grid grid-cols-1 gap-0 overflow-hidden grid-rows-8">
                 <div class="relative flex items-center justify-between row-start-1 row-end-2 bg-sky-50">
                     <div>
-                        <img class="absolute w-11 h-11 top-4 left-4" src="images/back-arrow.png" alt="">
+                        <img class="absolute w-11 h-11 top-4 left-4" src="{{ asset('images/back-arrow') }}.png" alt="">
                     </div>
                     <div class="text-center">
                         <p>Account Information:</p>
@@ -102,7 +102,7 @@
                     <div class="">
                         <a href="#" class="flex items-center justify-center rounded-lg group">
                             <span class="sr-only">User</span>
-                            <img class="w-20" src="images/User.svg" />
+                            <img class="w-20" src="{{ asset('images/User.svg') }}" />
                         </a>
                     </div>
                 </div>

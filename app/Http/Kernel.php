@@ -64,5 +64,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'sharelink.confirm' => \App\Http\Middleware\EnsureShareLinkExistOnSession::class,
+        'inspiration.onboarding.guard' => \App\Http\Middleware\RedirectToHomeIfShareLinkNotExistOnSession::class,
     ];
 }

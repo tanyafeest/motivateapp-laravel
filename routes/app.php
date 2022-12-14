@@ -26,7 +26,9 @@ Route::middleware([
     });
 
     // inspiration onboarding
-    Route::get('/inspiration/onboarding', [App\Http\Controllers\InspirationController::class, 'onboarding'])->name('inspiration.onboarding');
+    Route::middleware('inspiration.onboarding.guard')->group(function() {
+        Route::get('/inspiration/onboarding', [App\Http\Controllers\InspirationController::class, 'onboarding'])->name('inspiration.onboarding');
+    });
 
     // payment apis
     Route::post('/payment/subscription', [App\Http\Controllers\PaymentController::class, 'subscription'])->name('payment.subscription');

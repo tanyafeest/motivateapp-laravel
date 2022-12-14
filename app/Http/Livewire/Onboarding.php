@@ -6,12 +6,9 @@ use Livewire\Component;
 
 class Onboarding extends Component
 {
-    public $currentStep = 1;
+    public $currentMStep = 6;
+    public $currentStep = 6;
 
-    public function firstStepSubmit()
-    {
-        $this->currentStep = 2;
-    }
 
     public function secondStepSubmit()
     {
@@ -25,12 +22,33 @@ class Onboarding extends Component
 
     public function fourthStepSubmit()
     {
-        $this->currentStep = 5;
+        $this->currentStep = 6;
     }
 
-    public function fifthStepSubmit()
+
+    public function firstMStepSubmit()
     {
-        $this->currentStep = 6;
+        $this->currentMStep = 2;
+    }
+
+    public function secondMStepSubmit()
+    {
+        $this->currentMStep = 3;
+    }
+
+    public function thirdMStepSubmit()
+    {
+        $this->currentMStep = 4;
+    }
+
+    public function fourthMStepSubmit()
+    {
+        $this->currentMStep = 5;
+    }
+
+    public function fifthMStepSubmit()
+    {
+        $this->currentMStep = 6;
     }
 
     public function back($step)

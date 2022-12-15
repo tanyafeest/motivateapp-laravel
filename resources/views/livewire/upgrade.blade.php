@@ -70,7 +70,7 @@
                     <a href="{{ route('payment') }}">Upgrade to Get Full Access</a>
                 </x-button.white>
             </div>
-            <p class="text-center"><span class="font-bold">20$</span> Annual Pass</p>
+            <p class="text-center"><span class="font-bold">{{ config('services.stripe.subscription_price') }}$</span> Annual Pass</p>
         @endif
     </div>
 </div>

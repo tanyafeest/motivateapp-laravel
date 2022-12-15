@@ -48,7 +48,7 @@ class PaymentController extends Controller
         $user->addPaymentMethod($paymentMethod);
 
         try {
-            $user->newSubscription(env('STRIPE_SUBSCRIPTION_PLAN'), env('STRIPE_SUBSCRIPTION_PLAN_ID'))->create($paymentMethod);
+            $user->newSubscription(config('services.stripe.subscription_plan'), config('services.stripe.subscription_plan_id'))->create($paymentMethod);
         } catch (\Exception $e) {
             return back()->withErrors(['message' => 'Error creating subscription. ' . $e->getMessage()]);
         }
@@ -66,7 +66,7 @@ class PaymentController extends Controller
         $user = Auth::user();
 
         try {
-            $user->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->cancel();
+            $user->subscription(config('services.stripe.subscription_plan'))->cancel();
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -83,7 +83,7 @@ class PaymentController extends Controller
 
         if($user->isOnGracePeriod()) {
             try {
-                $user->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->resume();
+                $user->subscription(config('services.stripe.subscription_plan'))->resume();
             } catch (\Throwable $th) {
                 throw $th;
             }

@@ -25,10 +25,13 @@ Route::middleware([
         })->name('settings');
     });
 
-    // inspiration onboarding
     Route::middleware('inspiration.onboarding.guard')->group(function() {
         Route::get('/inspiration/onboarding', [App\Http\Controllers\InspirationController::class, 'onboarding'])->name('inspiration.onboarding');
     });
+
+    // --- Spotify
+    Route::get('/oauth/spotify', [App\Http\Controllers\AuthController::class, 'redirectToSpotify'])->name('oauth.spotify');
+    Route::get('/oauth/spotify/callback', [App\Http\Controllers\AuthController::class, 'handleSpotifyCallback']);
 
     // payment apis
     Route::post('/payment/subscription', [App\Http\Controllers\PaymentController::class, 'subscription'])->name('payment.subscription');

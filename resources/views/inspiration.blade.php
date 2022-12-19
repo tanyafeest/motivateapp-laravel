@@ -1,12 +1,12 @@
 <x-app-layout>
-    <div id="step1" class="flex flex-col items-center h-screen" style="background: linear-gradient(146.67deg, #7A5CDC 1.12%, #AF55D8 122.75%);"> 
+    <div id="step1" class="flex flex-col items-center h-screen" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), linear-gradient(146.67deg, #7A5CDC 1.12%, #AF55D8 122.75%);"> 
         <div class="flex flex-col items-center mb-6">
             <img class="w-[75px]" src="images/adamdriver.png" alt="">
             <p class="text-xl font-semibold">Adam Driver</p>
             <p class="text-xs"><span class="font-light">(Teammate)</span> shared with you:</p>
         </div>
 
-         <div class="flex flex-col w-full p-4 mb-6" style="background: rgb(120,84,202); background: linear-gradient(95deg, rgba(120,84,202,1) 0%, rgba(142,81,200,1) 100%);">
+         <div class="flex flex-col w-full p-4 mb-6" style="">
             <div class="px-4 mx-auto lg:max-w-3xl">
                 <p class="text-2xl font-semibold text-center">“You have to fight to reach your dream”</p>
                 <p class="text-right">- Lionel Messi - </p>
@@ -28,12 +28,9 @@
             </div>
         </div>
 
-        <div class="flex flex-col items-center w-full h-full px-8 pt-4 mt-8 lg:flex-row lg:space-x-8" style="background: #7d52d9;">
-            <p class="mb-8 text-sm text-center text-justify">View your <span class="font-bold">private inspiration page</span> like this one. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <div class="flex flex-col items-center">
-                <a class="px-8 py-2 font-medium text-blue-500 transition duration-150 ease-in-out bg-white rounded-3xl" href="/registration">Register Free Account</a>
-                <p class="mt-4 text-xs text-center text-purple-100 lg:mt-2">Your account is free (forever). You can upgrade for $20/year for additional premium features.</p>
-            </div>
+        <div class="flex flex-col items-center w-full h-full px-8 pt-4 mt-8 lg:flex-row lg:space-x-8">
+            <p class="mb-8 text-sm text-center text-justify">Download this inspirational graphic to share on twitter, instagram, facebook or anywhere. </p>
+            <x-button.white>Download &amp; Share</x-button.white>
         </div>
     </div>
     

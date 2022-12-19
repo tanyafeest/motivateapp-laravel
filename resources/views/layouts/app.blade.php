@@ -19,19 +19,11 @@
             @livewire('sidebar')
 
             <!-- Intro -->
-            <div id="intro" class="hidden lg:relative lg:flex lg:flex-col lg:items-center">
-                <img class="absolute right-0" src="images/ribbon.svg" alt="">
-                <!-- Desktop only -->
-                <img class="mt-24 w-44 h-44" src="images/m-logo.png" alt="">
-                @if(Request::is('dashboard'))
-                <div class="-mt-12">
-                    <x-account-creation-msg></x-account-creation-msg>
-                </div>
-                @endif
-            </div>
+            @livewire('intro', ['layout' => 'app'])
                  
             <!-- Main area -->
             <div id="main" class="flex flex-col lg:overflow-auto lg:grid lg:grid-cols-1 lg:grid-rows-[12] lg:gap-0 pb-20 bg-white lg:pb-0">
+                @if(!Request::is('inspiration'))
                 <!-- Header/Title -->
                 <div class="flex items-center justify-between lg:bg-sky-50 lg:row-span-1 lg:relative">
                     <div>
@@ -49,6 +41,7 @@
                         </a>
                     </div>
                 </div>
+                @endif
 
                 <!-- Mobile only -->
                 <div class="flex flex-col items-center lg:hidden">
@@ -66,8 +59,8 @@
                 <div class="fixed bottom-0 left-0 z-20 w-full px-8 mt-20 rounded-lg shadow-lg lg:hidden -py-4 bg-gray-50">
                     <div class="flex items-center justify-between text-2xl text-zinc-400">
                         <a href="/dashboard"><img src="images/menu-home.svg" alt=""></a>
-                        <a href="/inspiration"><img src="images/menu-share.svg" alt=""></a>
-                        <a href="/dashboard"><img src="images/menu-main.svg" alt=""></a>
+                        <a href="/"><img src="images/menu-share.svg" alt=""></a>
+                        <a href="/inspiration"><img src="images/menu-main.svg" alt=""></a>
                         <a href="/upgrade"><img src="images/menu-upgrade.svg" alt=""></a>
                         <a href="/settings"><img src="images/menu-settings.svg" alt=""></a>
                     </div>

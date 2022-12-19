@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Onboarding extends Component
 {
-    public $currentMStep = 6;
+    public $currentMStep = 1;
     public $currentStep = 6;
 
 

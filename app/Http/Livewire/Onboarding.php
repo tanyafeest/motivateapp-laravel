@@ -3,10 +3,13 @@
 namespace App\Http\Livewire;
 
 use Exception;
+use Illuminate\Support\Facades\Auth;
+use GuzzleHttp\Client;
 use Livewire\Component;
 use App\Models\Quote;
 use App\Models\User;
-use GuzzleHttp\Client;
+use App\Models\Inspiration;
+use App\Providers\RouteServiceProvider;
 
 class Onboarding extends Component
 {
@@ -26,6 +29,7 @@ class Onboarding extends Component
     // temporarily quote values
     public $tempQuoteId = null;
     public $tempNewQuote = "";
+    public $isNewQuote = false;
     public $tempSong = null;
 
     // spotify
@@ -68,6 +72,11 @@ class Onboarding extends Component
                     $this->spotifyUserTopSongs = json_decode($stream->read($size), true);
                 }
             } catch (Exception $e) {
+                // refresh token
+                if($e->getCode() == 401) {
+                    session()->flash('temp_spotify_status', 'TOKEN_EXPIRED');
+                }
+
                 if($e->getCode() == 403) {
                     session()->flash('temp_spotify_status', 'USER_NOT_REGISTERED');
                 }
@@ -125,7 +134,54 @@ class Onboarding extends Component
     // select song
     public function selectSong($key)
     {
-        $this->tempSong = $this->tracks[$key];
-        $this->search = $this->tempSong['name'];
+        $this->tempSong = $this->tracks[$key]['id'];
+        $this->search = $this->tracks[$key]['name'];
+    }
+
+    // set isNew true
+    public function handleIsNew()
+    {
+        $this->isNewQuote = true;
+    }
+
+    // select top song and submit
+    public function selectTopSongAndSubmit($songId)
+    {
+        $this->tempSong = $songId;
+        $this->submit();
+    }
+
+    // submit
+    public function submit()
+    {
+        $inspiration = new Inspiration;
+
+        if($this->isNewQuote) {
+            // create new quote by the auth
+            $quote = new Quote;
+            $quote->category = "Custom";
+            $quote->quote = $this->tempNewQuote;
+            $quote->author = Auth::user()->name;
+
+            $quote->save();
+            $this->tempQuoteId = $quote->id;
+        }
+
+        $inspiration->user_id = Auth::user()->id;
+        $inspiration->quote_id = $this->tempQuoteId;
+        $inspiration->sharedby_user_id = $this->requester->id;
+        $inspiration->track_id = $this->tempSong;
+
+        $inspiration->save();
+
+        // clear session of inspiration onboarding.
+        session()->forget('temp_inspiration_share_link');
+        session()->forget('temp_inspiration_full_name');
+    }
+
+    // goto dashboard
+    public function gotoDashboard()
+    {
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 }

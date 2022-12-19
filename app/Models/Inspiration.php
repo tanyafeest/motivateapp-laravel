@@ -17,9 +17,8 @@ class Inspiration extends Model
     protected $fillable = [
         'user_id',
         'sharedby_user_id',
-        'album_name',
-        'album_href',
-        'quotes_id'
+        'quotes_id',
+        'track_id'
     ];
 
     /**
@@ -28,8 +27,6 @@ class Inspiration extends Model
      * @var string[]
      */
     protected $nullable = [
-        'album_name',
-        'album_href',
         'quotes_id'
     ];
 }

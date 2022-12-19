@@ -1,8 +1,8 @@
-<div x-data="{ step: 1 }">
+<div x-data="{ step: 0 }">
     <div id="step-1" :class="{'flex': step == 0, 'hidden': step != 0}" class="flex-col h-screen row-start-2 gap-10 text-black row-end-9">
         <div class="flex flex-col gap-8 p-14">
             <textarea wire:model="tempNewQuote"></textarea>
-            <x-button.red class="w-full" x-on:click="step = 1">Submit</x-button.red>
+            <x-button.red class="w-full" x-on:click="step = 1" wire:click="handleIsNew()">Submit</x-button.red>
         </div>
         
         <div class="flex flex-col gap-4 p-10">
@@ -48,6 +48,10 @@
     </div>
 
     <div id="step-2" :class="{'flex': step == 1, 'hidden': step != 1}" class="relative flex flex-col h-screen gap-12 p-10">
+        <div class="absolute top-0 left-0 p-1">
+            <x-button.red class="w-full" x-on:click="step = 0">Back</x-button.red>
+        </div>
+        
         <div class="flex flex-col">
             <span>{{ Auth::user()->name }}</span>
             <h1 class="text-3xl font-bold">Now the Music!</h1>
@@ -113,7 +117,7 @@
                 <span class="text-2xl font-bold">Search it below:</span>
                 <div class="text-sm italic">
                     @if ($tempSong)
-                        selected song: <span class="text-red-500">{{ $tempSong['name'] }}</span>    
+                        selected song: <span class="text-red-500">{{ $search }}</span>    
                     @else
                         There is no selected song. Please search your specific song below.
                     @endif
@@ -139,12 +143,16 @@
                     </div>
                 </div>
 
-                <x-button.red class="w-full">Submit</x-button.red>
+                <x-button.red class="w-full" wire:click="submit" x-on:click="step = 3">Submit</x-button.red>
             </div>
         </div>
     </div>
 
     <div id="step-3" :class="{'flex': step == 2, 'hidden': step != 2}" class="relative flex flex-col h-screen gap-12 p-10">
+        <div class="absolute top-0 left-0 p-1">
+            <x-button.red class="w-full" x-on:click="step = 1">Back</x-button.red>
+        </div>
+
         <div class="flex justify-between p-10">
             <div class="flex flex-col">
                 <span class="text-sm">Below are your</span>
@@ -167,11 +175,29 @@
                         </div>
                     </div>
 
-                    <x-button.red>Select</x-button.red>
+                    <x-button.red wire:click="selectTopSongAndSubmit('{{ $track['id'] }}')" x-on:click="step = 3">Select</x-button.red>
                 </div>
             @empty
                 <span class="italic text-center">There is no data.</span>
             @endforelse
+        </div>
+    </div>
+
+    <div id="step-4" :class="{'flex': step == 3, 'hidden': step != 3}" class="relative flex flex-col h-screen gap-12 p-10">
+        <div class="flex flex-col gap-10 p-20">
+            <div class="flex flex-col">
+                <span class="text-sm">{{ Auth::user()->name }}</span>
+                <span class="text-3xl font-bold">Well Done</span>
+            </div>
+
+            <p>
+                Your motivational messaging will be shared with <b>{{ $requester->name }}</b> shortly. 
+
+                Would you like them to return the favor? 
+                Click here to request they do the same for you!
+            </p>
+
+            <x-button.red wire:click="gotoDashboard()">Request from Adam Driver</x-button.red>
         </div>
     </div>
 </div>

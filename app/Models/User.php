@@ -93,13 +93,13 @@ class User extends Authenticatable
     // get number of quotes
     public function numberOfQuotes()
     {
-        return $this->hasMany(Inspiration::class)->where('quotes_id', '!=', null)->count();
+        return $this->hasMany(Inspiration::class)->where('quote_id', '!=', null)->count();
     }
 
     // get number of songs
     public function numberOfSongs()
     {
-        return $this->hasMany(Inspiration::class)->where('album_name', '!=', null)->count();
+        return $this->hasMany(Inspiration::class)->where('track_id', '!=', null)->count();
     }
 
     // get todolist of user

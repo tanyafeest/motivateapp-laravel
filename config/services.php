@@ -66,4 +66,13 @@ return [
         'client_secret' => env('SPOTIFY_CLIENT_SECRET'),
         'redirect' => env('SPOTIFY_REDIRECT_URI')
     ],
+
+    'stripe' => [
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+        'subscription_plan' => env('STRIPE_SUBSCRIPTION_PLAN'),
+        'subscription_price' => env('STRIPE_SUBSCRIPTION_PRICE'),
+        'subscription_plan_id' => env('STRIPE_SUBSCRIPTION_PLAN_ID'),
+    ]
 ];

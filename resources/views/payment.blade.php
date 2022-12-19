@@ -70,7 +70,7 @@
 
     <script>
         const clientSecret = '{{ $intent->client_secret }}';
-        const STRIPE_KEY = '{{ env('STRIPE_KEY') }}';
+        const STRIPE_KEY = '{{ config("services.stripe.key") }}';
 
         const style = {
             base: {

@@ -29,14 +29,14 @@ class Onboarding extends Component
     public $tempSong = null;
 
     // spotify
-    public $spotifyIsTokenExpired = false;
     public $spotifyId = null;
     public $spotifyAccessToken = null;
-    public $spotifyUserTopSongs = null; 
+    public $spotifyUserTopSongs = [
+        'items' => []
+    ];
 
     // serach query for 
     public $search = "";
-    public $openDropdown = false;
     public $tracks = [];
 
     // constructor
@@ -47,12 +47,11 @@ class Onboarding extends Component
 
     // mount
     public function mount()
-    {   
+    {
         // get spotify id and access token if spotify connected
         if(session()->has("temp_spotify_id")) {
             $this->spotifyId = session("temp_spotify_id");
             $this->spotifyAccessToken = session("temp_spotify_access_token");
-            $this->spotifyIsTokenExpired = false;
 
             $this->headers = [
                 'Authorization' => 'Bearer ' . $this->spotifyAccessToken,
@@ -61,11 +60,17 @@ class Onboarding extends Component
             ];
 
             // get top 10 items of user - limit = 10, offset = 0, time_range = medium_term(last 6 months)
-            $response = $this->client->get("v1/me/top/tracks?limit=10", ['headers' => $this->headers]);
+            try {
+                $response = $this->client->get("v1/me/top/tracks?limit=10", ['headers' => $this->headers]);
 
-            if($stream = $response->getBody()) {
-                $size = $stream->getSize();
-                $this->spotifyUserTopSongs = json_decode($stream->read($size), true);
+                if($stream = $response->getBody()) {
+                    $size = $stream->getSize();
+                    $this->spotifyUserTopSongs = json_decode($stream->read($size), true);
+                }
+            } catch (Exception $e) {
+                if($e->getCode() == 403) {
+                    session()->flash('temp_spotify_status', 'USER_NOT_REGISTERED');
+                }
             }
         }
 
@@ -91,7 +96,6 @@ class Onboarding extends Component
     {
         if(!$this->search) {
             $this->tracks = [];
-            $this->openDropdown = false;
             return;
         }
 
@@ -104,17 +108,12 @@ class Onboarding extends Component
                 $res = json_decode($stream->read($size), true);
 
                 $this->tracks = $res['tracks']['items'];
-                $this->openDropdown = true;
             }
         } catch (Exception $e) {
-            $this->spotifyIsTokenExpired = true;
+            if($e->getCode() == 401) {
+                session()->flash('temp_spotify_status', 'TOKEN_EXPIRED');
+            }
         }
-    }
-
-    // handle serach focus
-    public function handleSearchFocus()
-    {
-        $this->openDropdown = true;
     }
 
     // select quote
@@ -128,6 +127,5 @@ class Onboarding extends Component
     {
         $this->tempSong = $this->tracks[$key];
         $this->search = $this->tempSong['name'];
-        $this->openDropdown = false;
     }
 }

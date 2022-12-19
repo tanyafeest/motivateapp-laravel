@@ -53,12 +53,26 @@
             <h1 class="text-3xl font-bold">Now the Music!</h1>
         </div>
 
-        {{-- spotify token expired status --}}
-        @if($spotifyIsTokenExpired)
+        {{-- spotify status --}}
+        @if(session('temp_spotify_status') == 'TOKEN_EXPIRED')
             <div class="absolute top-0 right-0 p-1 text-sm italic text-red-500">
                 Token is expired! Please reconnect spotify!
             </div>
         @endif
+        
+        <div class="absolute top-0 right-0 p-1 text-sm italic">
+            @switch(session('temp_spotify_status'))
+                @case('TOKEN_EXPIRED')
+                    <span class="text-red-500">Token is expired! Please reconnect spotify!</span>
+                    @break
+                @case('USER_NOT_REGISTERED')
+                    <span class="text-red-500">This user is not registered! Please try with another account!</span>
+                    @break
+                @case('CONNECTED')
+                    <span class="text-green-500">Spotify connected!</span>
+                    @break
+            @endswitch
+        </div>
 
         <div>
             <span class="text-red-500">{{ $requester->name }}</span> is also looking for songs of inspiration. Feel free to share a favorite song or a recommendation of something that motivates you:
@@ -72,8 +86,8 @@
                 </div>
 
                 <div>
-                    @if ($spotifyId && !$spotifyIsTokenExpired)
-                        <span class="text-green-500">Spotify Connected!</span>
+                    @if ($spotifyId && session('temp_spotify_status') == 'CONNECTED')
+                        {{-- <span class="text-green-500">Spotify Connected!</span> --}}
                     @else
                         <form method="GET" action="{{ route('oauth.spotify') }}">
                             <x-button.red class="w-full" wire>Connect Spotify</x-button.red>
@@ -82,16 +96,15 @@
                 </div>
             </div>
 
-            <x-button.red class="w-full" wire>
-                Open Spotify
+            @if (isset($spotifyUserTopSongs['total']) && $spotifyUserTopSongs['total'] > 0)
+                <x-button.red class="w-full" x-on:click="step = 2">
+                    Browse {{ $spotifyUserTopSongs['total'] }} available songs
+                </x-button.red>
+            @else
                 <span class="ml-2 text-sm italic">
-                    @if (isset($spotifyUserTopSongs->total) && $spotifyUserTopSongs->total > 0)
-                        {{ $spotifyUserTopSongs->total }} songs available
-                    @else
-                        You don't have any songs. You shoud search specific song below.
-                    @endif
+                    You don't have any songs. You shoud search specific song below. Or you should connect spotify.
                 </span>
-            </x-button.red>
+            @endif
         </div>
 
         <div class="flex flex-col gap-8">
@@ -107,16 +120,19 @@
                 </div>
             </div>
 
-            <div class="flex flex-col gap-5">
+            <div class="flex flex-col gap-5" x-data="{ open: false }" x-on:click.outside="open = false">
                 <div class="relative flex w-full">
-                    <x-jet-input id="search" class="block w-full" type="text" name="search" placeholder="search your sepcific songs" wire:model.debounce.750ms="search" wire:focus="handleSearchFocus()" />
+                    <x-jet-input id="search" class="block w-full" type="text" name="search" placeholder="search your sepcific songs" wire:model.debounce.750ms="search" x-on:focus="open = true" />
 
                     {{-- search result --}}
-                    <div class="absolute left-0 w-full p-2 mt-1 bg-white top-full" :class="{'block': $wire.search, 'hidden': !$wire.search}">
+                    <div x-show="open" class="absolute left-0 w-full p-2 mt-1 bg-white top-full" :class="{'block': $wire.search, 'hidden': !$wire.search}">
                         <div class="flex flex-col gap-1">
-                            @if ($tracks && $openDropdown)
+                            @if ($tracks)
                                 @foreach ($tracks as $key => $track)
-                                    <div class="p-2 cursor-pointer hover:bg-gray-100" wire:key="track-{{ $key }}" wire:click="selectSong({{ $key }})">{{ $track['name'] }}</div>
+                                    <div class="flex justify-between p-2 cursor-pointer hover:bg-gray-100" wire:key="track-{{ $key }}" wire:click="selectSong({{ $key }})" x-on:click="open = false">
+                                        <span>{{ $track['name'] }}</span>
+                                        <span class="text-sm italic">{{ $track['artists'][0]['name'] }}</span>
+                                    </div>
                                 @endforeach
                             @endif
                         </div>
@@ -125,6 +141,37 @@
 
                 <x-button.red class="w-full">Submit</x-button.red>
             </div>
+        </div>
+    </div>
+
+    <div id="step-3" :class="{'flex': step == 2, 'hidden': step != 2}" class="relative flex flex-col h-screen gap-12 p-10">
+        <div class="flex justify-between p-10">
+            <div class="flex flex-col">
+                <span class="text-sm">Below are your</span>
+                <span class="text-3xl font-bold">Top 10 Songs you enjoy</span>
+            </div>
+
+            <div class="text-sm">Pick one to share with <span class="text-red-500">{{ $requester->name }}</span></div>
+        </div>
+
+        {{-- song list --}}
+        <div class="flex flex-col gap-1 p-10 bg-white">
+            @forelse ($spotifyUserTopSongs['items'] as $key => $track)
+                <div class="flex items-center justify-between" wire:key="top-track-{{ $key }}">
+                    <div class="flex items-center gap-5">
+                        <img src="{{ $track['album']['images'][2]['url'] }}" class="w-11 h-100" />
+
+                        <div class="flex flex-col">
+                            <span class="text-xl font-medium">{{ $track['name'] }}</span>
+                            <span class="text-sm text-gray-500">{{ $track['artists'][0]['name'] }}</span>
+                        </div>
+                    </div>
+
+                    <x-button.red>Select</x-button.red>
+                </div>
+            @empty
+                <span class="italic text-center">There is no data.</span>
+            @endforelse
         </div>
     </div>
 </div>

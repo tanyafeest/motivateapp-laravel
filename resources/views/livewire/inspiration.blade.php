@@ -89,7 +89,7 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><p><a href="#">{{ $inspiration->track_name }}</a></p></td>
+                                <td><p><a href="{{ route('player') }}" wire:click="handleSetCurrentTrack({{ $inspiration->track_id }})">{{ $inspiration->track_name }}</a></p></td>
                             </tr>
                             <tr>
                                 <td><img src="images/send.png" alt=""></td>

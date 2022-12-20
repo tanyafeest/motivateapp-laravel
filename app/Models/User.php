@@ -93,13 +93,17 @@ class User extends Authenticatable
     // get number of quotes
     public function numberOfQuotes()
     {
-        return $this->hasMany(Inspiration::class)->where('quote_id', '!=', null)->count();
+        return $this->hasMany(Inspiration::class)
+            ->where('quote_id', '!=', null)
+            ->count();
     }
 
     // get number of songs
     public function numberOfSongs()
     {
-        return $this->hasMany(Inspiration::class)->where('track_id', '!=', null)->count();
+        return $this->hasMany(Inspiration::class)
+            ->where('track_id', '!=', null)
+            ->count();
     }
 
     // get todolist of user
@@ -114,24 +118,30 @@ class User extends Authenticatable
 
     // check subscription is cancelled
     public function isCanceled() {
-        return $this->subscription(config('services.stripe.subscription_plan')) !== null && $this->subscription(config('services.stripe.subscription_plan'))->canceled();
+        return $this->subscription(config('services.stripe.subscription_plan')) !== null && $this->subscription(config('services.stripe.subscription_plan'))
+            ->canceled();
     }
 
     // check the user is on grade period
     public function isOnGracePeriod() {
-        return $this->subscription(config('services.stripe.subscription_plan')) !== null && $this->subscription(config('services.stripe.subscription_plan'))->onGracePeriod();
+        return $this->subscription(config('services.stripe.subscription_plan')) !== null && $this->subscription(config('services.stripe.subscription_plan'))
+            ->onGracePeriod();
     }
 
     // check subscription is ended
     public function isEnded() {
-        return $this->subscription(config('services.stripe.subscription_plan')) !== null && $this->subscription(config('services.stripe.subscription_plan'))->ended();
+        return $this->subscription(config('services.stripe.subscription_plan')) !== null && $this->subscription(config('services.stripe.subscription_plan'))
+            ->ended();
     }
 
     // get current period end
     public function getCurrentPeriodEnd() {
-        $timestamp = $this->subscriptions[0]->asStripeSubscription()->current_period_end;
+        $timestamp = $this->subscriptions[0]
+            ->asStripeSubscription()
+            ->current_period_end;
 
-        return Carbon::createFromTimeStamp($timestamp)->toFormattedDateString();
+        return Carbon::createFromTimeStamp($timestamp)
+            ->toFormattedDateString();
     }
 
     // get all inspirations of this user
@@ -141,5 +151,12 @@ class User extends Authenticatable
             ->join('tracks', 'tracks.id', '=', 'track_id')
             ->join('users', 'users.id', '=', 'sharedby_user_id')
             ->get(['inspirations.*', 'quotes.quote as quote', 'tracks.name as track_name', 'users.name as sharedby_user_name']);
+    }
+
+    // get all inspiration songs
+    public function tracks() {
+        return $this->hasMany(Inspiration::class)
+            ->join('tracks', 'tracks.id', '=', 'track_id')
+            ->get();
     }
 }

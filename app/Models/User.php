@@ -133,4 +133,13 @@ class User extends Authenticatable
 
         return Carbon::createFromTimeStamp($timestamp)->toFormattedDateString();
     }
+
+    // get all inspirations of this user
+    public function inspirations() {
+        return $this->hasMany(Inspiration::class)
+            ->join('quotes', 'quotes.id', '=', 'quote_id')
+            ->join('tracks', 'tracks.id', '=', 'track_id')
+            ->join('users', 'users.id', '=', 'sharedby_user_id')
+            ->get(['inspirations.*', 'quotes.quote as quote', 'tracks.name as track_name', 'users.name as sharedby_user_name']);
+    }
 }

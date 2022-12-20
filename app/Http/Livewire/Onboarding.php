@@ -167,9 +167,9 @@ class Onboarding extends Component
             $this->tempQuoteId = $quote->id;
         }
 
-        $inspiration->user_id = Auth::user()->id;
+        $inspiration->user_id = $this->requester->id;
         $inspiration->quote_id = $this->tempQuoteId;
-        $inspiration->sharedby_user_id = $this->requester->id;
+        $inspiration->sharedby_user_id = Auth::user()->id;
         $inspiration->track_id = $this->tempSong;
 
         $inspiration->save();

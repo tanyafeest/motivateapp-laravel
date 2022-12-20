@@ -4,12 +4,13 @@ namespace App\Http\Livewire;
 
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
 use GuzzleHttp\Client;
 use Livewire\Component;
 use App\Models\Quote;
 use App\Models\User;
 use App\Models\Inspiration;
-use App\Providers\RouteServiceProvider;
+use App\Models\Track;
 
 class Onboarding extends Component
 {
@@ -72,7 +73,6 @@ class Onboarding extends Component
                     $this->spotifyUserTopSongs = json_decode($stream->read($size), true);
                 }
             } catch (Exception $e) {
-                // refresh token
                 if($e->getCode() == 401) {
                     session()->flash('temp_spotify_status', 'TOKEN_EXPIRED');
                 }
@@ -154,29 +154,51 @@ class Onboarding extends Component
     // submit
     public function submit()
     {
-        $inspiration = new Inspiration;
+        // get track detail from Spotify API
+        try {
+            $track = new Track;
+            $inspiration = new Inspiration;
 
-        if($this->isNewQuote) {
-            // create new quote by the auth
-            $quote = new Quote;
-            $quote->category = "Custom";
-            $quote->quote = $this->tempNewQuote;
-            $quote->author = Auth::user()->name;
+            $response = $this->client->get('v1/tracks/' . $this->tempSong, ['headers' => $this->headers]);
 
-            $quote->save();
-            $this->tempQuoteId = $quote->id;
+            if($stream = $response->getBody()) {
+                $size = $stream->getSize();
+                $res = json_decode($stream->read($size), true);
+
+                $track->sid = $this->tempSong;
+                $track->name = $res['name'];
+                $track->uri = $res['external_urls']['spotify'];
+                $track->artist = $res['artists'][0]['name'];
+
+                $track->save();
+
+                if($this->isNewQuote) {
+                    // create new quote by the auth
+                    $quote = new Quote;
+                    $quote->category = "Custom";
+                    $quote->quote = $this->tempNewQuote;
+                    $quote->author = Auth::user()->name;
+
+                    $quote->save();
+                    $this->tempQuoteId = $quote->id;
+                }
+
+                $inspiration->user_id = $this->requester->id;
+                $inspiration->quote_id = $this->tempQuoteId;
+                $inspiration->sharedby_user_id = Auth::user()->id;
+                $inspiration->track_id = $track->id;
+
+                $inspiration->save();
+
+                // clear session of inspiration onboarding.
+                session()->forget('temp_inspiration_share_link');
+                session()->forget('temp_inspiration_full_name');
+            }
+        } catch (Exception $e) {
+            if($e->getCode() == 401) {
+                session()->flash('temp_spotify_status', 'TOKEN_EXPIRED');
+            }
         }
-
-        $inspiration->user_id = $this->requester->id;
-        $inspiration->quote_id = $this->tempQuoteId;
-        $inspiration->sharedby_user_id = Auth::user()->id;
-        $inspiration->track_id = $this->tempSong;
-
-        $inspiration->save();
-
-        // clear session of inspiration onboarding.
-        session()->forget('temp_inspiration_share_link');
-        session()->forget('temp_inspiration_full_name');
     }
 
     // goto dashboard

@@ -82,6 +82,6 @@
                 });
         }
 
-        load('https://open.spotify.com/track/40fyNnuZPQGm3cu4BmBO2D');
+        load('{{ $currentTrack["uri"] }}');
     </script>
 </div>

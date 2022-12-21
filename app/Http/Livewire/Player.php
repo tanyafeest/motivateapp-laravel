@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Track;
-use GuzzleHttp\Client;
 
 class Player extends Component
 {
@@ -17,11 +16,16 @@ class Player extends Component
         if(session()->has('temp_current_track')) {
             // if selected song is exist, the player will handle the song
             // get current track's embedable widget
-            try {
-
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
+            $track = Track::find(session('temp_current_track'));
+            // dd($track);
+            $this->currentTrack = [
+                "album_img" => $track['album_img'],
+                "artist_img" => $track['artist_img'],
+                "artist_name" => $track['artist'],
+                "name" => $track['name'],
+                "duration" => date("H:i:s", $track['duration'] / 1000),
+                "uri" => $track['uri']
+            ];
         } else {
             // if the user did not select any song, the player will handle the first song.
             if(count(Auth::user()->tracks())) {
@@ -31,7 +35,8 @@ class Player extends Component
                     "artist_img" => $firstTrack['artist_img'],
                     "artist_name" => $firstTrack['artist'],
                     "name" => $firstTrack['name'],
-                    "duration" => date("H:i:s", $firstTrack['duration'] / 1000)
+                    "duration" => date("H:i:s", $firstTrack['duration'] / 1000),
+                    "uri" => $firstTrack['uri']
                 ];
             } else {
                 $this->currentTrack = null;
@@ -48,7 +53,8 @@ class Player extends Component
             "artist_img" => $track['artist_img'],
             "artist_name" => $track['artist'],
             "name" => $track['name'],
-            "duration" => date("H:i:s", $track['duration'] / 1000)
+            "duration" => date("H:i:s", $track['duration'] / 1000),
+            "uri" => $track['uri']
         ];
     }
 

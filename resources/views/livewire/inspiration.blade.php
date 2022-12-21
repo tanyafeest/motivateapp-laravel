@@ -71,9 +71,9 @@
     <div id="step2" class="h-screen">
         <div class="row-start-2 px-8 row-end-9">
             <p class="mt-4 text-2xl font-bold">Past Motivation:</p>
-            @foreach (Auth::user()->inspirations() as $key => $inspiration)
-                <div class="grid grid-cols-2 gap-8 mt-8" wire:key="inspiration-{{ $key }}">
-                    <div class="p-4 bg-white shadow round-lg">
+            <div class="grid grid-cols-2 gap-8 mt-8">
+                @foreach (Auth::user()->inspirations() as $key => $inspiration)
+                    <div class="p-4 bg-white shadow round-lg" wire:key="inspiration-{{ $key }}">
                         <table class="table">
                             <tr>
                                 <td><img src="images/Message3.png" alt=""></td>
@@ -89,7 +89,7 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><p><a href="{{ route('player') }}" wire:click="handleSetCurrentTrack({{ $inspiration->track_id }})">{{ $inspiration->track_name }}</a></p></td>
+                                <td><p><a href="#" wire:click="handleSetCurrentTrack({{ $inspiration->track_id }})">{{ $inspiration->track_name }}</a></p></td>
                             </tr>
                             <tr>
                                 <td><img src="images/send.png" alt=""></td>
@@ -101,8 +101,8 @@
                             </tr>
                         </table>    
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </div>
 </div>

@@ -18,6 +18,8 @@ class Track extends Model
         'sid',
         'name',
         'uri',
-        'artist'
+        'artist',
+        'album_img',
+        'artist_img'
     ];
 }

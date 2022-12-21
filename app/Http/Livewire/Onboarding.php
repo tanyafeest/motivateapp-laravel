@@ -166,9 +166,19 @@ class Onboarding extends Component
                 $res = json_decode($stream->read($size), true);
 
                 $track->sid = $this->tempSong;
-                $track->name = $res['name'];
-                $track->uri = $res['external_urls']['spotify'];
-                $track->artist = $res['artists'][0]['name'];
+                $track->name = $res['name']; // track name
+                $track->uri = $res['external_urls']['spotify']; // spotify url
+                $track->artist = $res['artists'][0]['name']; // artist name
+                $track->album_img = $res['album']['images'][0]['url']; // the widest one
+
+                // get artist image
+                $responseA = $this->client->get('v1/artists/' . $res['artists'][0]['id'], ['headers' => $this->headers]);
+                if($streamA = $responseA->getBody()) {
+                    $sizeA = $streamA->getSize();
+                    $resA = json_decode($streamA->read($sizeA), true);
+
+                    $track->artist_img = $resA['images'][2]['url']; // the smallest one
+                }
 
                 $track->save();
 

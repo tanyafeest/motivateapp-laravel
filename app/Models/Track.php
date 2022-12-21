@@ -20,6 +20,7 @@ class Track extends Model
         'uri',
         'artist',
         'album_img',
-        'artist_img'
+        'artist_img',
+        'duration'
     ];
 }

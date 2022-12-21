@@ -170,6 +170,7 @@ class Onboarding extends Component
                 $track->uri = $res['external_urls']['spotify']; // spotify url
                 $track->artist = $res['artists'][0]['name']; // artist name
                 $track->album_img = $res['album']['images'][0]['url']; // the widest one
+                $track->duration = $res['duration_ms']; // the track length in milliseconds.
 
                 // get artist image
                 $responseA = $this->client->get('v1/artists/' . $res['artists'][0]['id'], ['headers' => $this->headers]);

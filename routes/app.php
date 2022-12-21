@@ -19,6 +19,8 @@ Route::middleware([
         // payment
         Route::get('/upgrade', [App\Http\Controllers\PaymentController::class, 'create'])->name('upgrade');
         Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'payment'])->name('payment');
+        // player
+        Route::get('/player', [App\Http\Controllers\PlayerController::class, 'index'])->name('player');
         // settings
         Route::get('/settings', function () {
             return view('settings');
@@ -30,7 +32,7 @@ Route::middleware([
     });
 
     // --- Spotify
-    Route::get('/oauth/spotify', [App\Http\Controllers\AuthController::class, 'redirectToSpotify'])->name('oauth.spotify');
+    Route::get('/oauth/spotify/redirect/{redirect_url}', [App\Http\Controllers\AuthController::class, 'redirectToSpotify'])->name('oauth.spotify');
     Route::get('/oauth/spotify/callback', [App\Http\Controllers\AuthController::class, 'handleSpotifyCallback']);
 
     // payment apis

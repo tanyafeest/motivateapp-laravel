@@ -53,7 +53,7 @@ class AuthController extends Controller
         
         return view('registration', compact('user_requested_inspire'));
     }
-
+    
     /**
      * Go to register page with oauth credential or login
      *
@@ -141,7 +141,8 @@ class AuthController extends Controller
     }
 
     // Spotify
-    public function redirectToSpotify() {
+    public function redirectToSpotify($redirect_url) {
+        session()->flash('temp_redirect_url', $redirect_url);
         return Socialite::driver('spotify')->scopes(['user-top-read'])->redirect();
     }
 
@@ -155,13 +156,13 @@ class AuthController extends Controller
             session(['temp_spotify_refresh_token' => $user->refreshToken]);
             session(['temp_spotify_status' => 'CONNECTED']);
 
-            return redirect()->intended(RouteServiceProvider::ONBOARDING)->send();
+            return redirect()->intended(route(session('temp_redirect_url')))->send();
         } catch (Exception $e) {
             if($e->getCode() == 403) {
                 session(['temp_spotify_status' => 'USER_NOT_REGISTERED']);
             }
 
-            return redirect()->intended(RouteServiceProvider::ONBOARDING)->send();
+            return redirect()->intended(route(session('temp_redirect_url')))->send();
         }
     }
 }

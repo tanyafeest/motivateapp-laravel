@@ -93,7 +93,7 @@
                     @if ($spotifyId && session('temp_spotify_status') == 'CONNECTED')
                         {{-- <span class="text-green-500">Spotify Connected!</span> --}}
                     @else
-                        <form method="GET" action="{{ route('oauth.spotify') }}">
+                        <form method="GET" action="{{ route('oauth.spotify', ['redirect_url' => 'inspiration.onboarding']) }}">
                             <x-button.red class="w-full" wire>Connect Spotify</x-button.red>
                         </form>
                     @endif

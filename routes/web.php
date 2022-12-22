@@ -49,3 +49,4 @@ Route::middleware([
             return view('settings');
         })->name('settings');
 });
+

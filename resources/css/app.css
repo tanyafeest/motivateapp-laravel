@@ -13,4 +13,7 @@
     #intro {
         background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #83DBEE;
     }
+    #intro-blue {
+        background:  #83DBEE;
+    }
 }

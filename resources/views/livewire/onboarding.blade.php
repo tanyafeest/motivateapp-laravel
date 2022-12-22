@@ -203,7 +203,7 @@
 
     <!-- purple -->
     <div id="step6" class="flex flex-col {{ $currentMStep != 6 ? 'hidden' : '' }} {{ $currentStep != 6 ? 'lg:hidden' : 'lg:block' }} items-center h-screen relative lg:grid lg:grid-rows-3" style="background: linear-gradient(146.67deg, #7A5CDC 1.12%, #AF55D8 122.75%); ">
-        <img class="w-[48px] h-[46px] absolute top-4 left-4" src="images/back.svg" alt="">
+        <img class="w-[48px] h-[46px] absolute top-4 left-4 cursor-pointer" src="images/back.svg" alt="" wire:click="back(4)">
         <img class="w-[48px] h-[46px] mt-10 mb-6 lg:hidden" src="images/mm-logo1.png" alt="">
             
         <div class="flex flex-col items-center mb-6 lg:pt-20">

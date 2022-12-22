@@ -1,4 +1,4 @@
-<div class="hidden text-white lg:bg-gradient-to-r lg:from-purple-500 lg:to-violet-500 lg:pt-8 lg:block lg:flex lg:flex-col lg:h-screen">                 
+<div id="sidebar" class="hidden text-white lg:bg-gradient-to-r lg:from-purple-500 lg:to-violet-500 lg:pt-8 lg:block lg:flex lg:flex-col lg:h-screen">                 
     <div class="flex flex-col space-y-4">
         <img class="w-12 mx-auto" src="images/MotiveMobLogo.svg" />
         <img class="w-18" src="images/Divide.svg" />
@@ -47,7 +47,7 @@
     </nav>
 
     <div class="">
-        <a href="#" class="flex items-center justify-center rounded-lg  group">
+        <a href="{{ route('profile.show') }}" class="flex items-center justify-center rounded-lg  group">
             <span class="sr-only">User</span>
             <img class="w-20" src="images/User.svg" />
         </a>

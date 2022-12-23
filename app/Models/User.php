@@ -6,15 +6,15 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Inspiration;
-use App\Models\Todolist;
-use Illuminate\Foundation\Inspiring;
 use Laravel\Cashier\Billable;
 use Carbon\Carbon;
+use App\Models\Inspiration;
+use App\Models\Todolist;
+use App\Models\Setting;
 
 class User extends Authenticatable
 {
@@ -158,5 +158,17 @@ class User extends Authenticatable
         return $this->hasMany(Inspiration::class)
             ->join('tracks', 'tracks.id', '=', 'track_id')
             ->get();
+    }
+
+    // get user's default quote
+    public function defaultQuote() {
+        return $this->hasOne(Setting::class)
+            ->join('quotes', 'quotes.id', '=', 'quote_id');
+    }
+
+    // get user's default song
+    public function defaultSong() {
+        return $this->hasOne(Setting::class)
+            ->join('tracks', 'tracks.id', '=', 'track_id');
     }
 }

@@ -149,13 +149,6 @@ class User extends Authenticatable
         return $this->hasMany(Inspiration::class);
     }
 
-    // get all inspiration songs
-    public function tracks() {
-        return $this->hasMany(Inspiration::class)
-            ->join('tracks', 'tracks.id', '=', 'track_id')
-            ->get();
-    }
-
     // get user's default quote
     public function defaultQuote() {
         return $this->hasOne(Setting::class)

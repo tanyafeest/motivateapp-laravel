@@ -28,15 +28,15 @@ class Player extends Component
             ];
         } else {
             // if the user did not select any song, the player will handle the first song.
-            if(count(Auth::user()->tracks())) {
-                $firstTrack = Auth::user()->tracks()[0];
+            if(Auth::user()->inspirations->count()) {
+                $firstTrack = Auth::user()->inspirations[0]->track;
                 $this->currentTrack = [
-                    "album_img" => $firstTrack['album_img'],
-                    "artist_img" => $firstTrack['artist_img'],
-                    "artist_name" => $firstTrack['artist'],
-                    "name" => $firstTrack['name'],
-                    "duration" => date("H:i:s", $firstTrack['duration'] / 1000),
-                    "uri" => $firstTrack['uri']
+                    "album_img" => $firstTrack->album_img,
+                    "artist_img" => $firstTrack->artisit_img,
+                    "artist_name" => $firstTrack->artist,
+                    "name" => $firstTrack->name,
+                    "duration" => date("H:i:s", $firstTrack->duration / 1000),
+                    "uri" => $firstTrack->uri
                 ];
             } else {
                 $this->currentTrack = null;

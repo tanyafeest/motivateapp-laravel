@@ -106,11 +106,6 @@ class User extends Authenticatable
             ->count();
     }
 
-    // get todolist of user
-    public function todolist() {
-        return $this->hasOne(Todolist::class);
-    }
-
     // check subscription is  done
     public function isSubscribed() {
         return $this->subscribed(config('services.stripe.subscription_plan'));
@@ -144,20 +139,18 @@ class User extends Authenticatable
             ->toFormattedDateString();
     }
 
+    // get todolist of user
+    public function todolist() {
+        return $this->hasOne(Todolist::class);
+    }
+
     // get all inspirations of this user
     public function inspirations() {
         return $this->hasMany(Inspiration::class);
     }
 
-    // get user's default quote
-    public function defaultQuote() {
-        return $this->hasOne(Setting::class)
-            ->join('quotes', 'quotes.id', '=', 'quote_id');
-    }
-
-    // get user's default song
-    public function defaultSong() {
-        return $this->hasOne(Setting::class)
-            ->join('tracks', 'tracks.id', '=', 'track_id');
+    // get user's setting
+    public function setting() {
+        return $this->hasOne(Setting::class);
     }
 }

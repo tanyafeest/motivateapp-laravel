@@ -165,23 +165,27 @@ class Onboarding extends Component
                 $size = $stream->getSize();
                 $res = json_decode($stream->read($size), true);
 
-                $track->sid = $this->tempSong;
-                $track->name = $res['name']; // track name
-                $track->uri = $res['external_urls']['spotify']; // spotify url
-                $track->artist = $res['artists'][0]['name']; // artist name
-                $track->album_img = $res['album']['images'][0]['url']; // the widest one
-                $track->duration = $res['duration_ms']; // the track length in milliseconds.
+                if(Track::where('sid', $this->tempSong)->exists()) {
+                    $track = Track::where('sid', $this->tempSong)->first();
+                } else {
+                    $track->sid = $this->tempSong;
+                    $track->name = $res['name']; // track name
+                    $track->uri = $res['external_urls']['spotify']; // spotify url
+                    $track->artist = $res['artists'][0]['name']; // artist name
+                    $track->album_img = $res['album']['images'][0]['url']; // the widest one
+                    $track->duration = $res['duration_ms']; // the track length in milliseconds.
 
-                // get artist image
-                $responseA = $this->client->get('v1/artists/' . $res['artists'][0]['id'], ['headers' => $this->headers]);
-                if($streamA = $responseA->getBody()) {
-                    $sizeA = $streamA->getSize();
-                    $resA = json_decode($streamA->read($sizeA), true);
+                    // get artist image
+                    $responseA = $this->client->get('v1/artists/' . $res['artists'][0]['id'], ['headers' => $this->headers]);
+                    if($streamA = $responseA->getBody()) {
+                        $sizeA = $streamA->getSize();
+                        $resA = json_decode($streamA->read($sizeA), true);
 
-                    $track->artist_img = $resA['images'][2]['url']; // the smallest one
+                        $track->artist_img = $resA['images'][2]['url']; // the smallest one
+                    }
+
+                    $track->save();
                 }
-
-                $track->save();
 
                 if($this->isNewQuote) {
                     // create new quote by the auth

@@ -17,7 +17,7 @@
                         <p class="text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-red-600">{{ Auth::user()->numberOfQuotes() }}</p>
                     </div>
                 </div>
-                <x-button.red class="w-full">Request More</x-button.red>
+                <x-button.red onclick="handleRequestMore()" class="w-full">Request More</x-button.red>
             </div>
             <div>
                 <div class="flex justify-between mb-4">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
     
-                <x-button.red class="w-full">Request More</x-button.red>
+                <x-button.red onclick="handleRequestMore()" class="w-full">Request More</x-button.red>
                 
                 <p class="mt-4 text-xs text-stone-300"><strong>Note:</strong> Average user has 85 quotes and 107 songs submitted</p>
             </div>
@@ -118,4 +118,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function coptyToClipboard() {
+            document.getElementById('link').select();
+            document.execCommand('copy');
+        }
+
+        function handleRequestMore() {
+            alert('Link has been copied. Please share with your friends and family.');
+            coptyToClipboard();
+        }
+    </script>
 </div>

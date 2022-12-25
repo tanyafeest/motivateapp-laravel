@@ -114,7 +114,9 @@
                     </div>
                 </div>
     
-                <x-button.red class="w-full mt-2">Send Email</x-button.red>
+                <x-button.red class="w-full mt-2">
+                    <a href="{{ Auth::user()->encodedMail() }}">Send Email</a>
+                </x-button.red>
             </div>
         </div>
     </div>

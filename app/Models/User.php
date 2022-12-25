@@ -11,6 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Cashier\Billable;
+use App\Actions\Util\EncodeURIComponent;
 use Carbon\Carbon;
 use App\Models\Inspiration;
 use App\Models\Todolist;
@@ -88,6 +89,14 @@ class User extends Authenticatable
     public function shareLink()
     {
         return env('APP_URL') . 'share/' . Auth::user()->share_link . "/" . str_replace(" ", "",strtolower(Auth::user()->name));
+    }
+
+    // get encoded URI of mail
+    public function encodedMail()
+    {
+        $encodeURIComponent = new EncodeURIComponent();
+
+        return 'mailto:?subject=' . $encodeURIComponent->encode('Share a song or quote with me, please!') . '&body=' . $encodeURIComponent->encode('Check out <a href="' . $this->shareLink() . '">' . $this->shareLink() . '<a/>, where you can recommend a motivational song or inspiring quote for me.');
     }
 
     // get number of quotes

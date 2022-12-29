@@ -62,6 +62,7 @@ class AuthController extends Controller
     protected function _gotoRegisterWithCredentialOrLogin($data){
         $user = User::where('email', $data->email)->first();
         if(!$user){
+            session(["temp_id" => $data->id]);
             session(["temp_first_name" => $data->user["given_name"]]);
             session(["temp_last_name" => $data->user["family_name"]]);
             session(["temp_email" => $data->email]);
@@ -69,10 +70,12 @@ class AuthController extends Controller
 
             redirect()->intended(RouteServiceProvider::REGISTER)->send();
         } else {
+            session()->forget("temp_id");
             session()->forget("temp_first_name");
             session()->forget("temp_last_name");
             session()->forget("temp_email");
             session()->forget("temp_avatar");
+            session()->forget("temp_social_app");
 
             Auth::login($user);
 
@@ -88,6 +91,7 @@ class AuthController extends Controller
     // Google callback  
     public function handleGoogleCallback() {
         $user = Socialite::driver('google')->user();
+        session(["temp_social_app" => 'Google']);
     
         $this->_gotoRegisterWithCredentialOrLogin($user);
     }
@@ -100,6 +104,7 @@ class AuthController extends Controller
     //Facebook callback  
     public function handleFacebookCallback() {
         $user = Socialite::driver('facebook')->user();
+        session(["temp_social_app" => 'Facebook']);
     
         $this->_gotoRegisterWithCredentialOrLogin($user);
     }
@@ -112,6 +117,7 @@ class AuthController extends Controller
     // Instagram callback
     public function handleInstagramCallback() {
         $user = Socialite::driver('instagram')->user();
+        session(["temp_social_app" => 'Instagram']);
 
         $this->_gotoRegisterWithCredentialOrLogin($user);
     }
@@ -124,6 +130,7 @@ class AuthController extends Controller
     // Twitter callback
     public function handleTwitterCallback() {
         $user = Socialite::driver('twitter-oauth-2')->user();
+        session(["temp_social_app" => 'Twitter']);
 
         $this->_gotoRegisterWithCredentialOrLogin($user);
     }
@@ -136,6 +143,7 @@ class AuthController extends Controller
     // Apple callback
     public function handleAppleCallback() {
         $user = Socialite::driver('apple')->user();
+        session(["temp_social_app" => 'Apple']);
 
         $this->_gotoRegisterWithCredentialOrLogin($user);
     }

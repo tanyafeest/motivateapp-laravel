@@ -42,7 +42,8 @@ class User extends Authenticatable
         'age',
         'grade_year',
         'sport_id',
-        'share_link'
+        'share_link',
+        'profile_photo_path'
     ];
 
     /**

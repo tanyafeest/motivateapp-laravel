@@ -9,6 +9,7 @@ use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 use App\Actions\Util\CalculateGradYear;
 use App\Actions\Util\IpBase;
+use App\Rules\PhoneValidationRule;
 use App\Models\User;
 use App\Models\Setting;
 use Revolution\Google\Sheets\Facades\Sheets;
@@ -33,7 +34,7 @@ class CreateNewUser implements CreatesNewUsers
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'string', 'regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/i'],
+            'phone' => ['required', 'string', 'unique:users', new PhoneValidationRule()],
             'gender' => ['required', 'integer'],
             'age' => ['required', 'integer', 'max:200'],
             'password' => $this->passwordRules(),

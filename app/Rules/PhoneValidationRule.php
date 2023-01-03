@@ -3,12 +3,12 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Twilio\Rest\Client;
-use Exception;
+
+use App\Actions\Util\Twilio;
 
 class PhoneValidationRule implements Rule
 {
-    public $client = null;
+    public $twilio = null; 
     /**
      * Create a new rule instance.
      *
@@ -16,7 +16,7 @@ class PhoneValidationRule implements Rule
      */
     public function __construct()
     {
-        $this->client = new Client(config('twilio.api_key'), config('twilio.api_secret'), config('twilio.account_sid'));
+        $this->twilio = new Twilio();
     }
 
     /**
@@ -28,15 +28,7 @@ class PhoneValidationRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        try {
-            $phone = $this->client->lookups->v1->phoneNumbers($value)->fetch();
-
-            return true;
-        } catch (Exception $e) {
-            if($e->getCode() == 404) {
-                return false;
-            }
-        }
+        return $this->twilio->validate($value);
     }
 
     /**

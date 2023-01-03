@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "coconutcraig/laravel-postmark": "^3.0",
         "doctrine/dbal": "^3.5",
         "dougsisk/laravel-country-state": "^4.1",
         "guzzlehttp/guzzle": "^7.2",
@@ -19,6 +20,8 @@
         "psr/simple-cache": "^3.0",
         "revolution/laravel-google-sheets": "^6.0",
         "socialiteproviders/spotify": "^4.1",
+        "symfony/http-client": "^6.2",
+        "symfony/postmark-mailer": "^6.2",
         "twilio/sdk": "^6.44"
     },
     "require-dev": {

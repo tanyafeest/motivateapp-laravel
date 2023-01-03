@@ -215,4 +215,5 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'phone' => env('APP_PHONE_NUMBER'),
 ];

@@ -40,10 +40,20 @@ Route::middleware([
         Route::get('/inspiration', function () {
             return view('inspiration');
         })->name('inspiration');
+        Route::get('/inspiration-playlist', function () {
+            return view('inspiration-playlist');
+        })->name('playlist');
+        Route::get('/inspiration-past', function () {
+            return view('inspiration-past');
+        })->name('motivation');
 
-        Route::get('/upgrade', function () {
-            return view('upgrade');
-        })->name('upgrade');
+        Route::get('/upgrade-plan', function () {
+            return view('upgrade-plan');
+        })->name('upgrade-plan');
+
+        Route::get('/upgrade-form', function () {
+            return view('upgrade-form');
+        })->name('upgrade-form');
 
         Route::get('/settings', function () {
             return view('settings');

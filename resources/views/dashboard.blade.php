@@ -1,7 +1,11 @@
 <x-app-layout>
-    @livewire('quotes-songs')
-
-    <div class="lg:row-span-7">
+    <div class="flex flex-col">
+        <div class="lg:bg-sky-50">
+            @livewire('header-profile')
+        </div>
+    
+        @livewire('quotes-songs')
+    
         <div id="step1" class="hidden lg:bg-sky-300 lg:relative lg:text-white lg:min-h-[440px]">
             <img src="images/dashboard.png" class="absolute bottom-0 right-0 max-w-xl" alt="">
             <p class="absolute text-6xl left-8 top-16">
@@ -10,7 +14,7 @@
         </div>
 
         <div id="step2" class="bg-white lg:flex lg:justify-between">
-            <div class="lg:w-[72rem] p-8 lg:h-screen" style="box-shadow: 0px 7.93548px 51.0996px rgba(230, 234, 238, 0.6);">
+            <div class="" style="box-shadow: 0px 7.93548px 51.0996px rgba(230, 234, 238, 0.6);">
                 <p>Receiving Motivational</p>
                 <p class="mb-8 text-2xl font-semibold">Quotes & Songs:</p>
 

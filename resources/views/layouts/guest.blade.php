@@ -19,7 +19,7 @@
             @livewire('sidebar')
 
             <!-- Intro -->
-            @livewire('intro', ['layout' => 'guest'])
+           <x-intro-blue/>
 
             <!-- Main area -->
             <div class="text-white">

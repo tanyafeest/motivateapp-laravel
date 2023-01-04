@@ -9,11 +9,14 @@ use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 use App\Actions\Util\CalculateGradYear;
 use App\Actions\Util\IpBase;
+use App\Actions\Util\Twilio;
 use App\Rules\PhoneValidationRule;
 use App\Models\User;
 use App\Models\Setting;
 use Revolution\Google\Sheets\Facades\Sheets;
 use Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Welcome;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -28,6 +31,7 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         $ipbase = new IpBase();
+        $twilio = new Twilio();
         $calculateGradeYear = new CalculateGradYear();
 
         Validator::make($input, [
@@ -46,7 +50,7 @@ class CreateNewUser implements CreatesNewUsers
         $user->last_name = $input['last_name'];
         $user->name = $input['first_name'] . " " . $input['last_name'];
         $user->email = $input['email'];
-        $user->phone = $input['phone'];
+        $user->phone = str_replace(' ', '', $input['phone']);
         $user->gender = $input['gender'];
         $user->age = $input['age'];
         $user->grade_year = isset($input['current_grade']) ? $calculateGradeYear->calc($input['current_grade']) : null;
@@ -78,6 +82,17 @@ class CreateNewUser implements CreatesNewUsers
         Sheets::spreadsheet(config('sheets.post_spreadsheet_id'))
             ->sheetById(config('sheets.post_account_sheet_id'))
             ->append([$append]);
+
+        // send welcome email to the user
+        $welcomeMailData = new \stdClass();
+
+        $welcomeMailData->email = $input['email'];
+        $welcomeMailData->oauthType = session('temp_social_app');
+
+        Mail::to('hello@motivemob.com')->send(new Welcome($welcomeMailData));
+
+        // send two step authentication to the user's phone
+        $twilio->sendSMS('Reply "YES" to continue receiving inspiration from MotiveMob and all your friends & family! Or reply "UNSUB" to be removed.', config('app.phone'), str_replace(' ', '', $input['phone']));
 
         return $user;
     }

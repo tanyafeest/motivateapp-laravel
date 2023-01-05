@@ -9,7 +9,6 @@ use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
 use App\Actions\Util\CalculateGradYear;
 use App\Actions\Util\IpBase;
-use App\Actions\Util\Twilio;
 use App\Rules\PhoneValidationRule;
 use App\Models\User;
 use App\Models\Setting;
@@ -31,7 +30,6 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         $ipbase = new IpBase();
-        $twilio = new Twilio();
         $calculateGradeYear = new CalculateGradYear();
 
         Validator::make($input, [
@@ -90,9 +88,6 @@ class CreateNewUser implements CreatesNewUsers
         $welcomeMailData->oauthType = session('temp_social_app');
 
         Mail::to('hello@motivemob.com')->send(new Welcome($welcomeMailData));
-
-        // send two step authentication to the user's phone
-        $twilio->sendSMS('Reply "YES" to continue receiving inspiration from MotiveMob and all your friends & family! Or reply "UNSUB" to be removed.', config('app.phone'), str_replace(' ', '', $input['phone']));
 
         return $user;
     }

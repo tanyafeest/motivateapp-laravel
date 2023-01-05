@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="flex items-center justify-center lg:justify-end mt-8">
                 <x-button.red filled class="">
                     {{ __('Subscribe') }}
                 </x-button.red>

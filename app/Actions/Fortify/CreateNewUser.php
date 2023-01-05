@@ -87,7 +87,7 @@ class CreateNewUser implements CreatesNewUsers
         $welcomeMailData->email = $input['email'];
         $welcomeMailData->oauthType = session('temp_social_app');
 
-        Mail::to('hello@motivemob.com')->send(new Welcome($welcomeMailData));
+        Mail::to($user)->send(new Welcome($welcomeMailData));
 
         return $user;
     }

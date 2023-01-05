@@ -35,17 +35,13 @@ class TwoStepAuthentication extends Command
         $date = new DateTime(date('Y-m-d H:i:s'));
         $date = $date->sub(new DateInterval('PT30M'));
 
-        
         $users = User::whereTime('created_at', '<=', $date->format('H:i:s'))->where('isSentTwoStepAuth', false)->get();
 
-        if ($users->count() > 0) {
-            foreach ($users as $user) {
-                // send two step authentication to the user's phone
-                $twilio->sendSMS('Reply "YES" to continue receiving inspiration from MotiveMob and all your friends & family! Or reply "UNSUB" to be removed.', config('app.phone'), $user->phone);
-                
-                $user->isSentTwoStepAuth = true;
-                $user->save();
-            }
+        foreach ($users as $user) {
+            // send two step authentication to the user's phone
+            $twilio->sendSMS('Reply "YES" to continue receiving inspiration from MotiveMob and all your friends & family! Or reply "UNSUB" to be removed.', config('app.phone'), $user->phone);
+            $user->isSentTwoStepAuth = true;
+            $user->save();
         }
 
         return Command::SUCCESS;

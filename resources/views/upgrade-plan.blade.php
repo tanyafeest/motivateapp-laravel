@@ -1,8 +1,8 @@
 <x-app-layout>
-    <div class="flex flex-col h-full px-8" style="background: linear-gradient(146.67deg, #805CDC 1.12%, #A941D9 122.75%);">
-        @livewire('header-profile')
+    <div class="h-full px-4 lg:px-8" style="background: linear-gradient(146.67deg, #805CDC 1.12%, #A941D9 122.75%);">
+        @livewire('header-profile', ['text' => 'white'])
         
-        <div class="w-full px-8 py-4 rounded-lg" style="background: rgba(0, 0, 0, 0.32); box-shadow: 0px 1px 24px rgba(0, 0, 0, 0.13); backdrop-filter: blur(17.5px);">
+        <div class="w-full mt-12 px-8 py-4 rounded-lg" style="background: rgba(0, 0, 0, 0.32); box-shadow: 0px 1px 24px rgba(0, 0, 0, 0.13); backdrop-filter: blur(17.5px);">
             <table class="w-full table-auto text-white">
                 <thead class="text-sm">
                     <tr>
@@ -46,7 +46,10 @@
             </table>
         </div>
         
-        <x-button.white class="max-w-[300px] mt-12">Upgrade to Get Full Access</x-button.white>
-        <p class="text-center"><span class="font-bold">20$</span> Annual Pass</p>
+        <div class="flex justify-center">
+            <x-button.white class="w-auto mt-12">Upgrade to Get Full Access</x-button.white>
+        </div>
+        
+        <p class="text-center text-white mt-4"><span class="font-bold">20$</span> Annual Pass</p>
     </div>
 </x-app-layout>

@@ -14,7 +14,7 @@
         @livewireStyles
     </head>
     <body class="h-screen font-sans antialiased">
-        <div class="lg:grid lg:overflow-hidden lg:gap-0 lg:h-screen" style="grid-template-columns: 80px 500px 1fr;">
+        <div class="lg:grid lg:overflow-hidden lg:gap-0 h-screen" style="grid-template-columns: 80px 500px 1fr;">
             <!-- Sidebar: hidden on mb -->
             @livewire('sidebar')
 
@@ -22,7 +22,7 @@
             @livewire('intro')
                  
             <!-- Main area -->
-            <div id="main" class="flex flex-col">                
+            <div id="main" class="flex flex-col h-screen">                
                 <!-- Mobile only -->
                 {{-- <div class="flex flex-col items-center lg:hidden">
                     <img class="mb-12 w-44 h-44" src="images/m-logo.png" alt="">

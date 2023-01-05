@@ -1,4 +1,3 @@
-
 <div id="intro" class="hidden lg:relative lg:flex lg:flex-col lg:items-center">
     <img class="absolute right-0" src="images/ribbon.svg" alt="">
     <!-- Desktop only -->

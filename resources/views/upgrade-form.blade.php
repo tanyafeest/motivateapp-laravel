@@ -1,22 +1,22 @@
 <x-app-layout>
-    <div class="flex flex-col">
-        <div class="bg-sky-50">
+    <div class="h-full ">
+        <div class="lg:bg-sky-50">
             @livewire('header-profile')
         </div>
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="" class="">
+        <form method="POST" action="" class="mt-12 px-4 lg:px-8">
             @csrf
 
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-8">
                 <div>
                     <div class="">
                         <x-jet-label for="email" value="{{ __('Email') }}" />
                         <x-jet-input id="email" class="block w-full" type="email" name="email" :value="old('email')" required />
                     </div>
 
-                    <div class="space-y-4">
+                    <div class="space-y-8">
                         <div>
                             <x-jet-label for="card" value="{{ __('Card information') }}" />
                             <x-jet-input id="card" class="block w-full" type="text" name="card" :value="old('card')" required autofocus autocomplete="card" inputmode="numeric" pattern="[0-9\s]{13,19}" maxlength="19" placeholder="xxxx xxxx xxxx xxxx" />
@@ -51,13 +51,6 @@
                         </div>
                     </div>
                 </div>
-                
-
-                
-                
-                
-            
-                
             </div>
 
             <div class="flex items-center justify-end mt-4">

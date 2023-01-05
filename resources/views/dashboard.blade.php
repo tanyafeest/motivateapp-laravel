@@ -6,15 +6,15 @@
     
         @livewire('quotes-songs')
     
-        <div id="step1" class="hidden lg:bg-sky-300 lg:relative lg:text-white lg:min-h-[440px]">
+        <div id="step1" class="hidden lg:relative lg:bg-sky-300 lg:text-white">
             <img src="images/dashboard.png" class="absolute bottom-0 right-0 max-w-xl" alt="">
-            <p class="absolute text-6xl left-8 top-16">
+            <p class="hidden lg:absolute text-6xl left-8 top-16">
                 <span class="font-semibold">Motivate</span><br /> to Be <span class="font-semibold">Your<br /> Best</span>
             </p>
         </div>
 
-        <div id="step2" class="bg-white lg:flex lg:justify-between">
-            <div class="" style="box-shadow: 0px 7.93548px 51.0996px rgba(230, 234, 238, 0.6);">
+        <div id="step2" class=" bg-white lg:flex lg:justify-between">
+            <div class="p-8" style="box-shadow: 0px 7.93548px 51.0996px rgba(230, 234, 238, 0.6);">
                 <p>Receiving Motivational</p>
                 <p class="mb-8 text-2xl font-semibold">Quotes & Songs:</p>
 

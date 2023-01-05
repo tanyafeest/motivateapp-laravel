@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="flex flex-col" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), linear-gradient(146.67deg, #7A5CDC 1.12%, #AF55D8 122.75%);">
-        @livewire('header-profile')
+        @livewire('header-profile', ['text' => 'white'])
 
         <div class="grid grid-rows-3 items-center h-screen text-white"> 
             <div class="flex flex-col items-center mb-6">

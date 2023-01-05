@@ -89,7 +89,7 @@ class User extends Authenticatable
     // get public share link
     public function shareLink()
     {
-        return env('APP_URL') . 'share/' . Auth::user()->share_link . "/" . str_replace(" ", "",strtolower(Auth::user()->name));
+        return env('APP_URL') . 'share/' . $this->share_link . "/" . str_replace(" ", "",strtolower($this->name));
     }
 
     // get encoded URI of mail

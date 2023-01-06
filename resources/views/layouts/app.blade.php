@@ -19,7 +19,11 @@
             @livewire('sidebar')
 
             <!-- Intro: hidden on mb -->
-            @livewire('intro')
+            @if(Request::is('inspiration'))
+                <x-intro-blue />
+            @else
+                @livewire('intro')
+            @endif
                  
             <!-- Main area -->
             <div id="main" class="flex flex-col h-screen">                

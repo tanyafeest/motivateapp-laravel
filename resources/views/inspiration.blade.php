@@ -1,9 +1,9 @@
 <x-app-layout>
-    <div class="flex flex-col" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), linear-gradient(146.67deg, #7A5CDC 1.12%, #AF55D8 122.75%);">
+    <div class="flex flex-col h-screen" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), linear-gradient(146.67deg, #7A5CDC 1.12%, #AF55D8 122.75%);">
         @livewire('header-profile', ['text' => 'white'])
 
-        <div class="grid grid-rows-3 items-center h-screen text-white"> 
-            <div class="flex flex-col items-center mb-6">
+        <div class="items-center text-white"> 
+            <div class="flex flex-col items-center mt-12 mb-4">
                 <img class="w-[75px]" src="images/adamdriver.png" alt="">
                 <p class="text-xl font-semibold">Adam Driver</p>
                 <p class="text-xs"><span class="font-light">(Teammate)</span> shared with you:</p>
@@ -33,9 +33,9 @@
                 </div>
             </div>
 
-            <div class="flex flex-col items-center w-full h-full px-8 pt-4 mt-8 lg:flex-row lg:space-x-8">
-                <p class="mb-8 text-sm text-center text-justify w-1/2">Download this inspirational graphic to share on twitter, instagram, facebook or anywhere. </p>
-                <div class="w-1/2 flex justify-center"><x-button.white>Download &amp; Share</x-button.white></div>
+            <div class="lg:grid lg:grid-cols-2 px-8 mt-12 lg:mt-16 lg:gap-4 text-center">
+                <p class="mb-8 text-sm lg:text-left">Download this inspirational graphic to share on twitter, instagram, facebook or anywhere. </p>
+                <div class=""><x-button.white>Download &amp; Share</x-button.white></div>
             </div>
         </div>
     </div>

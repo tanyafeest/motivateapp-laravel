@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('command:twostepauth')->everyMinute();
         $schedule->command('command:sharingguidance')->everyMinute();
+        $schedule->command('command:smssubscription')->hourly();
     }
 
     /**

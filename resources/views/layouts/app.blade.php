@@ -21,6 +21,8 @@
             <!-- Intro: hidden on mb -->
             @if(Request::is('inspiration'))
                 <x-intro-blue />
+            @elseif(Request::is('inspiration-playlist'))
+                @livewire('album')
             @else
                 @livewire('intro')
             @endif

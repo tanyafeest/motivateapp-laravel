@@ -5,7 +5,7 @@
         </div>
         
         <div class="lg:row-span-11">
-            <div id="step2" class="bg-white">
+            <div class="bg-gray-50">
                 <div class="p-8 h-screen " style="box-shadow: 0px 7.93548px 51.0996px rgba(230, 234, 238, 0.6);">
                     <p class="font-semibold text-2xl mb-8">Update Preferences</p>
                     <div class="divide-y divide-slate-100 space-y-6">
@@ -74,8 +74,8 @@
                                             <img class="h-10 w-10" src="images/search.png" alt="">
                                         </div>
                                     </div>
-                                    <x-jet-input id="link" class="block mt-1 w-full border-green-500 focus-within:border-green-600" type="text" name="link" :value="old('link')" required autofocus />
-                                    <p class="mt-2 text-gray-300 text-sm">-  Spock</p>
+                                    <x-jet-input id="link" class="block mt-1 w-full border-gray-500 focus-within:border-green-600" type="text" name="link" :value="old('link')" required autofocus />
+                                    <p class="mt-2 text-gray-300 text-sm text-right">-  Spock</p>
                                 </div>
                                 <div>
                                     <div class="flex justify-between mb-4">
@@ -90,8 +90,8 @@
                                             <img class="h-10 w-10" src="images/spotify.png" alt="">
                                         </div>
                                     </div>
-                                    <x-jet-input id="link" class="block mt-1 w-full border-green-500 focus-within:border-green-600" type="text" name="link" :value="old('link')" required autofocus />
-                                    <p class="mt-2 text-gray-300 text-sm">-  Survivor</p>
+                                    <x-jet-input id="link" class="block mt-1 w-full border-gray-500 focus-within:border-green-600" type="text" name="link" :value="old('link')" required autofocus />
+                                    <p class="mt-2 text-gray-300 text-sm text-right">-  Survivor</p>
                                 </div>
                             </div>
                         </div>

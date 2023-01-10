@@ -46,7 +46,7 @@
                     <div class="space-y-4">
                         <div>
                             <x-jet-label for="card-country" value="{{ __('Country or region') }}" />
-                            <select class="w-full h-[38px] border-none rounded-md shadow-sm focus:ring-0" id="card-country" name="card-country">
+                            <select id="card-country" class="w-full h-[38px] border-none rounded-md shadow-sm focus:ring-0" id="card-country" name="card-country">
                                 @foreach ($countries as $country)
                                     <option>{{ $country }}</option>
                                 @endforeach
@@ -54,7 +54,7 @@
                         </div>
                         <div>
                             <x-jet-label for="card-zip" value="{{ __('Zip') }}" />
-                            <x-jet-input id="card-zip" class="block w-full" type="text" name="card-zip" :value="old('card-zip')" required autofocus autocomplete="card-zip" />
+                            <x-jet-input id="card-zip" class="block w-full" type="text" name="card-zip" required autofocus />
                         </div>
                     </div>
                 </div>
@@ -71,6 +71,7 @@
     <script>
         const clientSecret = '{{ $intent->client_secret }}';
         const STRIPE_KEY = '{{ config("services.stripe.key") }}';
+        const email = document.getElementById('card-email').value;
 
         const style = {
             base: {
@@ -130,13 +131,24 @@
 
         subscribeBtn.addEventListener('click', async (e) => {
             console.log("attempting");
+            
+            const country = document.getElementById('card-country').value;
+            const postal_code = document.getElementById('card-zip').value;
+
             e.preventDefault();
             const { setupIntent, error } = await stripe.confirmCardSetup(
                 clientSecret, 
                 {
                     payment_method: {
                         card: cardNumberElement,
-                        billing_details: { name: cardHolderName.value }
+                        billing_details: { 
+                            name: cardHolderName.value,
+                            email: email
+                            // address: {
+                            //     country: country,
+                            //     postal_code: postal_code
+                            // }
+                        }
                     }
                 }
             );

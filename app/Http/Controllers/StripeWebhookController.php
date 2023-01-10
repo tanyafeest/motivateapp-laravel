@@ -35,12 +35,12 @@ class StripeWebhookController extends CashierController
     public function handleInvoicePaymentFailed(array $payload)
     {
         // downgrade user
-        // $customer = $payload['customer'];
-        $customer = 'cus_MqFFWawhu6Iknw';
+        $email = $payload['data']['object']['customer_email'];
+        $user = User::firstWhere('email', $email);
 
-        $user = User::where('stripe_id', '=', $customer)->first();
-
-        $user->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->cancelNow();
+        if($user) {
+            $user->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->cancelNow();
+        }
     }
 
     /**
@@ -62,21 +62,7 @@ class StripeWebhookController extends CashierController
      */
     protected function handleCustomerSubscriptionUpdated(array $payload)
     {
-        try {
-            $email = "albertlee44917@gmail.com";
-            $user = User::firstWhere('email', $email);
-            
-            $upgradeConfirmationData = new \stdClass();
-                
-            $upgradeConfirmationData->email = $email;
-            $upgradeConfirmationData->oauthType = $user->oauth_type;
-            $upgradeConfirmationData->charged_at = Carbon::now()->format('m/d/y');
-            $upgradeConfirmationData->renew_at = Carbon::now()->addYear()->format('m/d/y');
 
-            Mail::to($user)->send(new UpgradeConfirmation($upgradeConfirmationData));
-        } catch (Exception $e) {
-            error_log($e);
-        }
     }
 
     /**
@@ -87,13 +73,11 @@ class StripeWebhookController extends CashierController
      */
     protected function handleInvoicePaid(array $payload)
     {
-        error_log(json_encode($payload));
         // send mail(upgrade confirmation)
         $email = $payload['data']['object']['customer_email'];
         $user = User::firstWhere('email', $email);
 
         if($user) {
-            error_log($user);
             $upgradeConfirmationData = new \stdClass();
             
             $upgradeConfirmationData->email = $email;
@@ -102,7 +86,6 @@ class StripeWebhookController extends CashierController
             $upgradeConfirmationData->renew_at = Carbon::now()->addYear()->format('m/d/y');
 
             Mail::to($user)->send(new UpgradeConfirmation($upgradeConfirmationData));
-            error_log("sdf");
         }
     }
 

@@ -36,7 +36,7 @@ class SharingGuidance extends Command
         $date = new DateTime(date('Y-m-d H:i:s'));
         $date = $date->sub(new DateInterval('P1D'));
 
-        $users = User::whereTime('created_at', '<=', $date->format('H:i:s'))->where('isSharingGuidance', false)->get();
+        $users = User::whereTime('created_at', '<=', $date->format('H:i:s'))->where('is_sharing_guidance', false)->get();
         $allUsers = User::all();
 
         foreach ($users as $user) {
@@ -58,7 +58,7 @@ class SharingGuidance extends Command
                 Mail::to($other)->send(new SharingGuidanceAll($sharingGuidanceAllMailData));
             }
 
-            $user->isSharingGuidance = true;
+            $user->is_sharing_guidance = true;
             $user->save();
         }
 

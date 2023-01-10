@@ -55,6 +55,7 @@ class CreateNewUser implements CreatesNewUsers
         $user->sport_id = isset($input['sport']) ? $input['sport'] : null;
         $user->password = Hash::make($input['password']);
         $user->share_link = uniqid();
+        $user->oauth_type = session('temp_social_app');
         $user->profile_photo_path = session('temp_avatar');
         $user->save();
 
@@ -67,10 +68,10 @@ class CreateNewUser implements CreatesNewUsers
         $ipinfo = $ipbase->info(Request::ip());
         $append = [
             Carbon::now()->format('m/d/y'),
-            session('temp_social_app'),
+            $user->oauth_type,
             session('temp_id'),
-            $input['first_name'] . " " . $input['last_name'],
-            $input['email'],
+            $user->name,
+            $user->email,
             $ipinfo['location']['city']['name'],
             $ipinfo['location']['region']['name'],
             $ipinfo['location']['zip'],
@@ -84,8 +85,8 @@ class CreateNewUser implements CreatesNewUsers
         // send welcome email to the user
         $welcomeMailData = new \stdClass();
 
-        $welcomeMailData->email = $input['email'];
-        $welcomeMailData->oauthType = session('temp_social_app');
+        $welcomeMailData->email = $user->email;
+        $welcomeMailData->oauthType = $user->oauth_type;
 
         Mail::to($user)->send(new Welcome($welcomeMailData));
 

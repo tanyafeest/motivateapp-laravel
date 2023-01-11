@@ -43,7 +43,7 @@ class SMSSubscription extends Command
                 $quote = $latestInspiration->quote->quote;
                 $sharedByUserName = $latestInspiration->sharedByUser->name;
                 
-                $sms = $sharedByUserName . ':' . '"' . (strlen($quote) > 30 ? substr($quote, 0, 29) . '...' : $quote) . '" View at ' . config('app.url') . 'inspiration. Reply UNSUB to be removed';
+                $sms = $sharedByUserName . ':' . '"' . (strlen($quote) > 30 ? substr($quote, 0, 29) . '...' : $quote) . '" View at ' . config('app.url') . 'inspiration/card/' . $latestInspiration->id . '. Reply UNSUB to be removed';
 
                 switch($user->setting->sms_frequency) {
                     case 0: // Monday morning

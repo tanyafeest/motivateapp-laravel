@@ -3,18 +3,16 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Auth;
-use Exception;
-use GuzzleHttp\Client;
 use Livewire\Component;
 use App\Models\Quote;
 use App\Models\Setting;
 use App\Models\Track;
+use App\Actions\Util\Spotify;
 
 class Settings extends Component
 {
-    // http
-    private $client;
-    public $headers;
+    private $spotify = null;
+    public $spotifyStatus = 'DISCONNECTED';
 
     // search
     public $quoteList = [];
@@ -23,8 +21,6 @@ class Settings extends Component
     public $searchSong = "";
 
     // spotify
-    public $spotifyId = null;
-    public $spotifyAccessToken = null;
     public $spotifyUserTopSongs = [
         'items' => []
     ];
@@ -67,7 +63,8 @@ class Settings extends Component
     // constructor
     public function __construct()
     {
-        $this->client = new Client(['base_uri' => 'https://api.spotify.com']);
+        $this->spotify = new Spotify();
+        $this->spotifyStatus = $this->spotify->status();
     }
 
     // mount
@@ -80,34 +77,8 @@ class Settings extends Component
 
         $this->currentSMSFrequency = Auth::user()->setting->sms_frequency;
 
-        // get spotify id and access token if spotify connected
-        if(session()->has("temp_spotify_id")) {
-            $this->spotifyId = session("temp_spotify_id");
-            $this->spotifyAccessToken = session("temp_spotify_access_token");
-
-            $this->headers = [
-                'Authorization' => 'Bearer ' . $this->spotifyAccessToken,
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json'
-            ];
-
-            // get top 10 items of user - limit = 10, offset = 0, time_range = medium_term(last 6 months)
-            try {
-                $response = $this->client->get("v1/me/top/tracks?limit=10", ['headers' => $this->headers]);
-
-                if($stream = $response->getBody()) {
-                    $size = $stream->getSize();
-                    $this->spotifyUserTopSongs = json_decode($stream->read($size), true);
-                }
-            } catch (Exception $e) {
-                if($e->getCode() == 401) {
-                    session()->flash('temp_spotify_status', 'TOKEN_EXPIRED');
-                }
-
-                if($e->getCode() == 403) {
-                    session()->flash('temp_spotify_status', 'USER_NOT_REGISTERED');
-                }
-            }
+        if($this->spotify->status() == 'CONNECTED') {
+            $this->spotifyUserTopSongs = $this->spotify->getTopItems();
         }
     }
 
@@ -127,24 +98,14 @@ class Settings extends Component
     // watch search song
     public function updatedSearchSong()
     {
+        $this->spotifyStatus = $this->spotify->status();
         // search song
         if(count($this->spotifyUserTopSongs) >= 10) {
 
         } else {            
             // search track
-            try {
-                $response = $this->client->get('v1/search?query=' . $this->searchSong . '&type=track&limit=10&include_external=audio', ['headers' => $this->headers]);
-
-                if($stream = $response->getBody()) {
-                    $size = $stream->getSize();
-                    $res = json_decode($stream->read($size), true);
-
-                    $this->songList = $res['tracks']['items'];
-                }
-            } catch (Exception $e) {
-                if($e->getCode() == 401) {
-                    session()->flash('temp_spotify_status', 'TOKEN_EXPIRED');
-                }
+            if($this->spotify->status() == 'CONNECTED') {
+                $this->songList = $this->spotify->search($this->searchSong);
             }
         }
     }
@@ -163,7 +124,9 @@ class Settings extends Component
     // select song as default song
     public function selectSong($key)
     {
-        try {
+        $this->spotifyStatus = $this->spotify->status();
+
+        if($this->spotify->status() == 'CONNECTED') {
             $this->searchSong = $this->songList[$key]['name'];
 
             // update setting
@@ -183,25 +146,15 @@ class Settings extends Component
                 $track->album_img = $this->songList[$key]['album']['images'][0]['url']; // the widest one
                 $track->duration = $this->songList[$key]['duration_ms']; // the track length in milliseconds.
 
-                // get artist image
-                $responseA = $this->client->get('v1/artists/' .$this->songList[$key]['artists'][0]['id'], ['headers' => $this->headers]);
-                if($streamA = $responseA->getBody()) {
-                    $sizeA = $streamA->getSize();
-                    $resA = json_decode($streamA->read($sizeA), true);
-
-                    $track->artist_img = $resA['images'][2]['url']; // the smallest one
-                }
+                // get artist detail
+                $artist = $this->spotify->artist($this->songList[$key]['artists'][0]['id']);
+                $track->artist_img = $artist['images'][2]['url'];
 
                 $track->save();
-
                 $setting->track_id = $track->id;
             }
 
             $setting->save();
-        } catch (Exception $e) {
-            if($e->getCode() == 401) {
-                session()->flash('temp_spotify_status', 'TOKEN_EXPIRED');
-            }
         }
     }
 

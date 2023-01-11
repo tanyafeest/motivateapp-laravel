@@ -162,7 +162,6 @@ class AuthController extends Controller
             session(['temp_spotify_id' => $user->id]);
             session(['temp_spotify_access_token' => $user->token]);
             session(['temp_spotify_refresh_token' => $user->refreshToken]);
-            session(['temp_spotify_status' => 'CONNECTED']);
 
             return redirect()->intended(route(session('temp_redirect_url')))->send();
         } catch (Exception $e) {

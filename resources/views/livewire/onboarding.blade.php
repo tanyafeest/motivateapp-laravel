@@ -58,19 +58,22 @@
         </div>
 
         {{-- spotify status --}}
-        @if(session('temp_spotify_status') == 'TOKEN_EXPIRED')
+        @if($spotifyStatus == 'TOKEN_EXPIRED')
             <div class="absolute top-0 right-0 p-1 text-sm italic text-red-500">
                 Token is expired! Please reconnect spotify!
             </div>
         @endif
         
         <div class="absolute top-0 right-0 p-1 text-sm italic">
-            @switch(session('temp_spotify_status'))
+            @switch($spotifyStatus)
                 @case('TOKEN_EXPIRED')
                     <span class="text-red-500">Token is expired! Please reconnect spotify!</span>
                     @break
                 @case('USER_NOT_REGISTERED')
                     <span class="text-red-500">This user is not registered! Please try with another account!</span>
+                    @break
+                @case('DISCONNECTED')
+                    <span class="text-red-500">Spotify disconnected! Please connect spotify!</span>
                     @break
                 @case('CONNECTED')
                     <span class="text-green-500">Spotify connected!</span>
@@ -90,7 +93,7 @@
                 </div>
 
                 <div>
-                    @if ($spotifyId && session('temp_spotify_status') == 'CONNECTED')
+                    @if ($spotifyStatus == 'CONNECTED')
                         {{-- <span class="text-green-500">Spotify Connected!</span> --}}
                     @else
                         <form method="GET" action="{{ route('oauth.spotify', ['redirect_url' => 'inspiration.onboarding']) }}">

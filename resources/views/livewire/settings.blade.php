@@ -156,7 +156,7 @@
                                 </div>
                             </div>
                             <div>
-                                @if ($spotifyId && session('temp_spotify_status') == 'CONNECTED')
+                                @if ($spotifyStatus == 'CONNECTED')
                                     <img x-on:click="{{ Auth::user()->isSubscribed() ? 'songModalOpen = true' : 'upgradeModalOpen = true' }}" class="w-10 h-10 cursor-pointer" src="images/spotify.png" alt="">
                                 @else
                                     <form method="GET" action="{{ route('oauth.spotify', ['redirect_url' => 'settings']) }}">

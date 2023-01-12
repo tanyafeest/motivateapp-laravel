@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->renameColumn('isSentTwoStepAuth', 'is_sent_two_step_auth');
             $table->renameColumn('isSharingGuidance', 'is_sharing_guidance');
-
-            // add oauth_type
             $table->string('oauth_type');
         });
     }
@@ -32,9 +30,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->renameColumn('is_sent_two_step_auth', 'isSentTwoStepAuth');
             $table->renameColumn('is_sharing_guidance', 'isSharingGuidance');
-
-            // add oauth_type
-            $table->removeColumn('oauth_type');
+            $table->dropColumn('oauth_type');
         });
     }
 };

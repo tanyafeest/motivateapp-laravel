@@ -23,6 +23,15 @@ class Setting extends Model
         'track_id'
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_auto_add_songs' => 'boolean'
+    ];
+
     // get quote
     public function quote() {
         return $this->belongsTo(Quote::class);

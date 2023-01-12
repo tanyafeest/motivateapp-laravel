@@ -216,4 +216,14 @@ class Settings extends Component
             $this->isMonthly = false;
         }
     }
+
+    /**
+     * Set auto add songs
+     */
+    public function setAutoAddSongs()
+    {
+        $setting = Auth::user()->setting;
+        $setting->is_auto_add_songs = true;
+        $setting->save();
+    }
 }

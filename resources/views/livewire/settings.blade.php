@@ -96,9 +96,23 @@
                 <p class="">Motivation Playlist:</p>
                 <div class="grid grid-cols-2 gap-8">
                     <div>
-                        <button class="px-8 font-medium text-white rounded-lg "  style="background: linear-gradient(0deg, #FD3A84 0%, #FFA68D 100%), #4277C1;">
+                        <button class="flex items-center justify-between px-8 font-medium text-white rounded-lg "  style="background: linear-gradient(0deg, #FD3A84 0%, #FFA68D 100%), #4277C1;">
                             @if (Auth::user()->isSubscribed())
-                                <a class="flex items-center justify-between" href="{{ route('upgrade') }}">Request to Get 10+ Songs <img src="images/note.svg" alt=""></a>
+                                    @if (Auth::user()->numberOfSongs() < 1)
+                                        <a class="" href="#" onclick="handleRequestMore()">
+                                            Request to Get 10+ Songs
+                                        </a>
+                                    @elseif (Auth::user()->setting->is_auto_add_songs)
+                                        <a class="" href="#" onclick="alert('Songs Received From Friends & Family Will Be Added to Your Playlist.')">
+                                            Songs Received From Friends & Family Will Be Added to Your Playlist.
+                                        </a>
+                                    @else
+                                        <a class="" href="#" wire:click="setAutoAddSongs()">
+                                            Auto Add Songs to Your Playlist from Friends & Family
+                                        </a>
+                                    @endif
+                                    <img src="images/note.svg" alt="">
+                                </a>
                             @else
                                 <a class="flex items-center justify-between" href="#" x-on:click="upgradeModalOpen = true">Request to Get 10+ Songs <img src="images/note.svg" alt=""></a>
                             @endif
@@ -172,4 +186,11 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function handleRequestMore() {
+            navigator.clipboard.writeText("{{ Auth::user()->shareLink() }}");
+            alert('Link has been copied. Please share with your friends and family.');
+        }
+    </script>
 </div>

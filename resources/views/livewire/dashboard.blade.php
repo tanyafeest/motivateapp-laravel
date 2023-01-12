@@ -122,14 +122,9 @@
     </div>
 
     <script>
-        function coptyToClipboard() {
-            document.getElementById('link').select();
-            document.execCommand('copy');
-        }
-
         function handleRequestMore() {
+            navigator.clipboard.writeText("{{ Auth::user()->shareLink() }}");
             alert('Link has been copied. Please share with your friends and family.');
-            coptyToClipboard();
         }
     </script>
 </div>

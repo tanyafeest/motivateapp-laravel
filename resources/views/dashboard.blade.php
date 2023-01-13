@@ -4,14 +4,14 @@
             @livewire('header-profile')
         </div>
     
-        <div class="pb-12 bg-white">
+        <div class="pb-12 bg-white h-screen lg:h-auto">
             @livewire('quotes-songs')
         </div>
         
-        <div id="step1">
-            <img src="images/dashboard.png" class="hidden lg:block lg:absolute bottom-0 right-0 max-w-xl" alt="">
+        <div id="step1" class="hidden lg:block">
+            <img src="images/dashboard.png" class="lg:absolute bottom-0 right-0 max-w-xl" alt="">
 
-            <div class="hidden lg:block relative">
+            <div class="relative">
                 <p class="absolute text-6xl left-8 top-16 text-white">
                     <span class="font-semibold">Motivate</span><br /> to Be <span class="font-semibold">Your<br /> Best</span>
                 </p>

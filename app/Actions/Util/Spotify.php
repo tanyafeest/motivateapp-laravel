@@ -3,11 +3,13 @@
 namespace App\Actions\Util;
 
 use GuzzleHttp\Client;
+use Exception;
 
 class Spotify {
     private $client;
     private $headers;
     private $status;
+    private $id;
 
     public function __construct()
     {
@@ -21,6 +23,7 @@ class Spotify {
                 'Content-Type' => 'application/json'
             ];
 
+            $this->id = session("temp_spotify_id");
             $this->status = 'CONNECTED';
         } else {
             $this->status = 'DISCONNECTED';
@@ -148,7 +151,77 @@ class Spotify {
                 $size = $stream->getSize();
                 return json_decode($stream->read($size), true);
             }
-        } catch (\Throwable $th) {
+        } catch (Exception $e) {
+            if($e->getCode() == 401) {
+                $this->status = 'TOKEN_EXPIRED';
+            }
+            
+            return null;
+        }
+    }
+
+    /**
+     * Create new playlist
+     * 
+     * @param String $name = "New Playlist"
+     * @param String $description = "New Playlist Description"
+     * @param Boolean $public = true
+     * @param Boolean $collaborative = false
+     * 
+     * @return JSON
+     */
+    public function createNewPlaylist($name = "New Playlist", $description = "New Playlist Description", $public = true, $collaborative = false)
+    {
+        $endpoint = "v1/users/" . $this->id . "/playlists";
+        $body = [
+            "name" => $name,
+            "public" => $public,
+            "collaborative" => $collaborative,
+            "description" => $description
+        ];
+
+        try {
+            $response = $this->client->post($endpoint, ['headers' => $this->headers, 'body' => json_encode($body)]);
+
+            if($stream = $response->getBody()) {
+                $size = $stream->getSize();
+                return json_decode($stream->read($size), true);
+            }
+        } catch (Exception $e) {
+            if($e->getCode() == 401) {
+                $this->status = 'TOKEN_EXPIRED';
+            }
+            
+            return null;
+        }
+    }
+
+    /**
+     * Add track to specific playlist
+     * 
+     * @param String $playlist_id
+     * @param Array $uris
+     * @param Integer $position = 0
+     * 
+     * @return JSON
+     */
+    public function addTracksToPlaylist($playlist_id, $uris, $position = 0)
+    {
+        $endpoint = "v1/playlists/" . $playlist_id . "/tracks";
+        $body = [
+            "uris" => $uris,
+            "position" => $position
+        ];
+
+        try {
+            $response = $this->client->post($endpoint, ['headers' => $this->headers, 'body' => json_encode($body)]);
+
+            if($stream = $response->getBody()) {
+                $size = $stream->getSize();
+                return json_decode($stream->read($size), true);
+            }
+        } catch (Exception $e) {
+            dd($e);
             if($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
             }

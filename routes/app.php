@@ -16,6 +16,7 @@ Route::middleware([
         Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
         // inspiration
         Route::get('/inspiration', [App\Http\Controllers\InspirationController::class, 'index'])->name('inspiration');
+        Route::get('/inspiration/card/{id}', [App\Http\Controllers\InspirationController::class, 'view'])->name('inspiration.card');
         // payment
         Route::get('/upgrade', [App\Http\Controllers\PaymentController::class, 'create'])->name('upgrade');
         Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'payment'])->name('payment');

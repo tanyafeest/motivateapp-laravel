@@ -104,7 +104,7 @@ class Settings extends Component
 
         } else {            
             // search track
-            if($this->spotify->status() == 'CONNECTED') {
+            if($this->spotifyStatus == 'CONNECTED') {
                 $this->songList = $this->spotify->search($this->searchSong);
             }
             $this->spotifyStatus = $this->spotify->status();
@@ -125,7 +125,7 @@ class Settings extends Component
     // select song as default song
     public function selectSong($key)
     {
-        if($this->spotify->status() == 'CONNECTED') {
+        if($this->spotifyStatus == 'CONNECTED') {
             $this->searchSong = $this->songList[$key]['name'];
 
             // update setting
@@ -228,7 +228,7 @@ class Settings extends Component
     public function setAutoAddSongs()
     {
         // We need to add songs to the playlist
-        if($this->spotify->status() == 'CONNECTED') {
+        if($this->spotifyStatus == 'CONNECTED') {
             $user = Auth::user();
 
             // If user does not have a playlist, we need to add them to custom playlist(name = "Friends & Family (MotiveMob)", description="The F&F MotiveMob playlist is a group of recommended songs by your own "mob" to help motivate you!")

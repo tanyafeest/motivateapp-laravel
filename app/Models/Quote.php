@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Quote extends Model
 {
@@ -62,5 +63,15 @@ class Quote extends Model
     public function scopeResilience($query)
     {
         $query->where('category', 'Resilience');
+    }
+
+    /**
+     * Truncate the quote
+     * 
+     * @return string
+     */
+    public function truncate()
+    {
+        return Str::limit($this->quote, 30, "...");
     }
 }

@@ -68,7 +68,7 @@
                 <div class="">
                     <a href="#" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">User</span>
-                        <img class="w-20" src="{{ asset('images/User.svg') }}" />
+                        <img class="w-20 p-5 rounded-full" src="{{ Auth::user()->profile_photo_path }}" />
                     </a>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                     <div class="">
                         <a href="#" class="flex items-center justify-center rounded-lg group">
                             <span class="sr-only">User</span>
-                            <img class="w-20" src="{{ asset('images/User.svg') }}" />
+                            <img class="w-20 p-5 rounded-full" src="{{ Auth::user()->profile_photo_path }}" />
                         </a>
                     </div>
                 </div>

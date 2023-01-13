@@ -80,6 +80,7 @@ class Settings extends Component
         if($this->spotify->status() == 'CONNECTED') {
             $this->spotifyUserTopSongs = $this->spotify->getTopItems();
         }
+        $this->spotifyStatus = $this->spotify->status();
     }
 
     // render
@@ -98,7 +99,6 @@ class Settings extends Component
     // watch search song
     public function updatedSearchSong()
     {
-        $this->spotifyStatus = $this->spotify->status();
         // search song
         if(count($this->spotifyUserTopSongs) >= 10) {
 
@@ -107,6 +107,7 @@ class Settings extends Component
             if($this->spotify->status() == 'CONNECTED') {
                 $this->songList = $this->spotify->search($this->searchSong);
             }
+            $this->spotifyStatus = $this->spotify->status();
         }
     }
 
@@ -124,8 +125,6 @@ class Settings extends Component
     // select song as default song
     public function selectSong($key)
     {
-        $this->spotifyStatus = $this->spotify->status();
-
         if($this->spotify->status() == 'CONNECTED') {
             $this->searchSong = $this->songList[$key]['name'];
 
@@ -141,10 +140,11 @@ class Settings extends Component
 
                 $track->sid = $this->songList[$key]['id'];
                 $track->name = $this->songList[$key]['name']; // track name
-                $track->uri = $this->songList[$key]['external_urls']['spotify']; // spotify url
+                $track->external_url = $this->songList[$key]['external_urls']['spotify']; // spotify url
                 $track->artist = $this->songList[$key]['artists'][0]['name']; // artist name
                 $track->album_img = $this->songList[$key]['album']['images'][0]['url']; // the widest one
                 $track->duration = $this->songList[$key]['duration_ms']; // the track length in milliseconds.
+                $track->uri = $this->songList[$key]['uri']; // spotify uri
 
                 // get artist detail
                 $artist = $this->spotify->artist($this->songList[$key]['artists'][0]['id']);
@@ -156,6 +156,8 @@ class Settings extends Component
 
             $setting->save();
         }
+
+        $this->spotifyStatus = $this->spotify->status();
     }
 
     // select duration
@@ -219,11 +221,63 @@ class Settings extends Component
 
     /**
      * Set auto add songs
+     * 
+     * @param
+     * @return
      */
     public function setAutoAddSongs()
     {
-        $setting = Auth::user()->setting;
-        $setting->is_auto_add_songs = true;
-        $setting->save();
+        // We need to add songs to the playlist
+        if($this->spotify->status() == 'CONNECTED') {
+            $user = Auth::user();
+
+            // If user does not have a playlist, we need to add them to custom playlist(name = "Friends & Family (MotiveMob)", description="The F&F MotiveMob playlist is a group of recommended songs by your own "mob" to help motivate you!")
+            if(!$user->playlist_id) {
+                // TODO: notification(New playlist named Motivemob will be created on your spotify account.)
+                $playlist = $this->spotify->createNewPlaylist("Friends & Family (MotiveMob)", "The F&F MotiveMob playlist is a group of recommended songs by your own 'mob' to help motivate you!");
+                
+                $user->playlist_id = $playlist['id'];
+                $user->save();
+            }
+
+            // add songs
+            $inspiration_groups = $user->inspirations
+                ->where('is_added_to_playlist', false)
+                ->groupBy('track_id');
+            $uris = [];
+            
+            // --- get uris of songs
+            foreach ($inspiration_groups as $key => $group) {
+                $uris[] = $group[0]->track->uri;
+            }
+
+            if(!count($uris)) {
+                return;
+            }
+
+            $res = $this->spotify->addTracksToPlaylist(Auth::user()->playlist_id, $uris);
+
+            // --- if success, set the is_added_to_playlist to TRUE
+            if($res) {
+                foreach ($inspiration_groups as $key1 => $group) {
+                    foreach($group as $key2 => $inspiration) {
+                        $inspiration->is_added_to_playlist = true;
+                        $inspiration->save();
+                    }
+                }
+
+                // set is_auto_add_songs to TRUE
+                $setting = Auth::user()->setting;
+                $setting->is_auto_add_songs = true;
+                $setting->save();
+            } else {
+                // TODO: notification
+            }
+            
+        } else {
+            // TODO: notification
+        }
+
+        $this->spotifyStatus = $this->spotify->status();
     }
 }

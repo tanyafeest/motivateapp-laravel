@@ -24,7 +24,8 @@ class Player extends Component
                 "artist_name" => $track['artist'],
                 "name" => $track['name'],
                 "duration" => date("H:i:s", $track['duration'] / 1000),
-                "uri" => $track['uri']
+                "uri" => $track['uri'],
+                "external_link" => $track['external_link']
             ];
         } else {
             // if the user did not select any song, the player will handle the first song.
@@ -36,7 +37,8 @@ class Player extends Component
                     "artist_name" => $firstTrack->artist,
                     "name" => $firstTrack->name,
                     "duration" => date("H:i:s", $firstTrack->duration / 1000),
-                    "uri" => $firstTrack->uri
+                    "uri" => $firstTrack->uri,
+                    "external_link" => $firstTrack->external_link
                 ];
             } else {
                 $this->currentTrack = null;
@@ -54,7 +56,8 @@ class Player extends Component
             "artist_name" => $track['artist'],
             "name" => $track['name'],
             "duration" => date("H:i:s", $track['duration'] / 1000),
-            "uri" => $track['uri']
+            "uri" => $track['uri'],
+            "external_link" => $track['external_link']
         ];
     }
 

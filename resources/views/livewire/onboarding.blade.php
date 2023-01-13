@@ -1,4 +1,9 @@
-<div x-data="{ step: 0 }">
+<div x-data="{ step: 0 }" class="relative">
+    {{-- spotify status --}}
+    <div class="absolute top-0 right-0 p-1 text-sm italic text-red-500">
+        {{ $spotifyStatus }}
+    </div>
+
     <div id="step-1" :class="{'flex': step == 0, 'hidden': step != 0}" class="flex-col h-screen row-start-2 gap-10 text-black row-end-9">
         <div class="flex flex-col gap-8 p-14">
             <textarea wire:model="tempNewQuote"></textarea>
@@ -47,7 +52,7 @@
         </div>
     </div>
 
-    <div id="step-2" :class="{'flex': step == 1, 'hidden': step != 1}" class="relative flex flex-col h-screen gap-12 p-10">
+    <div id="step-2" :class="{'flex': step == 1, 'hidden': step != 1}" class="flex flex-col h-screen gap-12 p-10">
         <div class="absolute top-0 left-0 p-1">
             <x-button.red class="w-full" x-on:click="step = 0">Back</x-button.red>
         </div>
@@ -55,30 +60,6 @@
         <div class="flex flex-col">
             <span>{{ Auth::user()->name }}</span>
             <h1 class="text-3xl font-bold">Now the Music!</h1>
-        </div>
-
-        {{-- spotify status --}}
-        @if($spotifyStatus == 'TOKEN_EXPIRED')
-            <div class="absolute top-0 right-0 p-1 text-sm italic text-red-500">
-                Token is expired! Please reconnect spotify!
-            </div>
-        @endif
-        
-        <div class="absolute top-0 right-0 p-1 text-sm italic">
-            @switch($spotifyStatus)
-                @case('TOKEN_EXPIRED')
-                    <span class="text-red-500">Token is expired! Please reconnect spotify!</span>
-                    @break
-                @case('USER_NOT_REGISTERED')
-                    <span class="text-red-500">This user is not registered! Please try with another account!</span>
-                    @break
-                @case('DISCONNECTED')
-                    <span class="text-red-500">Spotify disconnected! Please connect spotify!</span>
-                    @break
-                @case('CONNECTED')
-                    <span class="text-green-500">Spotify connected!</span>
-                    @break
-            @endswitch
         </div>
 
         <div>

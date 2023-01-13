@@ -53,7 +53,11 @@
         </div>
     </div>
 
-    <div id="step2" class="bg-white ">
+    <div id="step2" class="relative bg-white">
+        {{-- spotify status --}}
+        <div class="absolute top-1 right-1">
+            <small class="text-orange-500">{{ $spotifyStatus }}</small>
+        </div>
         <div class="h-screen p-8 space-y-6 divide-y divide-slate-100" style="box-shadow: 0px 7.93548px 51.0996px rgba(230, 234, 238, 0.6);">
             <div>
                 <p class="mb-8 text-2xl font-semibold">Update Preferences</p>

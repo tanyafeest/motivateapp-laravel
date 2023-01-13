@@ -53,7 +53,8 @@ class User extends Authenticatable
      */
     protected $nullable = [
         'grade_year',
-        'sport_id'
+        'sport_id',
+        'playlist_id'
     ];
 
     /**

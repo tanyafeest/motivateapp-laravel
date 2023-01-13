@@ -136,10 +136,11 @@ class Onboarding extends Component
 
                 $track->sid = $this->tempSong;
                 $track->name = $t['name']; // track name
-                $track->uri = $t['external_urls']['spotify']; // spotify url
+                $track->external_url = $t['external_urls']['spotify']; // spotify url
                 $track->artist = $t['artists'][0]['name']; // artist name
                 $track->album_img = $t['album']['images'][0]['url']; // the widest one
                 $track->duration = $t['duration_ms']; // the track length in milliseconds.
+                $track->uri = $t['uri']; // spotify uri
                 $track->artist_img = $artist['images'][2]['url'];
 
                 $track->save();

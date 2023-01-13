@@ -33,6 +33,15 @@ class Inspiration extends Model
         'quotes_id'
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_added_to_playlist' => 'boolean'
+    ];
+
     // get quote
     public function quote() {
         return $this->belongsTo(Quote::class);
@@ -46,5 +55,27 @@ class Inspiration extends Model
     // get sharedby user
     public function sharedbyUser() {
         return $this->belongsTo(User::class, 'sharedby_user_id');
+    }
+
+    /**
+     * Scope a query to only include added to playlist.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return void
+     */
+    public function scopeIsAddedToPlaylist($query)
+    {
+        $query->where('is_added_to_playlist', true);
+    }
+
+    /**
+     * Scope a query to only include not added to playlist.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return void
+     */
+    public function scopeIsNotAddedToPlaylist($query)
+    {
+        $query->where('is_added_to_playlist', false);
     }
 }

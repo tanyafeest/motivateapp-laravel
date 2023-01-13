@@ -151,7 +151,7 @@ class AuthController extends Controller
     // Spotify
     public function redirectToSpotify($redirect_url) {
         session()->flash('temp_redirect_url', $redirect_url);
-        return Socialite::driver('spotify')->scopes(['user-top-read'])->redirect();
+        return Socialite::driver('spotify')->scopes(['user-top-read', 'playlist-modify-public', 'playlist-modify-private'])->redirect();
     }
 
     // Spotify callback

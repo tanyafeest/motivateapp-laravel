@@ -32,7 +32,7 @@
                 <table class="table w-full gap-5 my-4">
                     @forelse (Auth::user()->inspirations as $key => $inspiration)
                         <tr wire:key="track-{{ $key }}">
-                            <td><img onclick="load('{{ $inspiration->track->uri }}')" wire:click="handleSetCurrentTrack({{ $inspiration->track->id }})" class="w-8 h-8 cursor-pointer" src="images/play-list.png" alt=""></td>
+                            <td><img onclick="load('{{ $inspiration->track->external_url }}')" wire:click="handleSetCurrentTrack({{ $inspiration->track->id }})" class="w-8 h-8 cursor-pointer" src="images/play-list.png" alt=""></td>
                             <td><span class="text-xl font-bold">{{ $inspiration->track->name }}</span><br /><span class="text-sm font-light">{{ $inspiration->track->artist }}</span></td>
                             <td><img class="w-4 h-4" src="images/favorite.png" alt=""></td>
                             <td>{{ date("H:i:s", $inspiration->track->duration / 1000) }}</td>

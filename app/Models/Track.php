@@ -21,6 +21,7 @@ class Track extends Model
         'artist',
         'album_img',
         'artist_img',
-        'duration'
+        'duration',
+        'external_url'
     ];
 }

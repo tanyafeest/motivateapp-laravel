@@ -49,4 +49,16 @@ class InspirationController extends Controller
     {
         return view("onboarding");
     }
+
+    /**
+     * Display the screenshot view.
+     *
+     * @param Integer $id
+     * @return \Illuminate\View\View
+     */
+    public function screenshot($id)
+    {
+        $inspiration = Inspiration::find($id);
+        return view("screenshot", compact("inspiration"));
+    }
 }

@@ -4,7 +4,7 @@
         <small class="text-white">{{ $spotifyStatus }}</small>
     </div>
     
-    <div class="items-center text-white">
+    <div id="screenshot" class="items-center text-white">
         <div class="flex flex-col items-center mt-12 mb-4">
             <img class="w-[75px]" src={{ asset('images/AdamDriver.png') }} alt="">
             <p class="text-xl font-semibold">{{ $inspiration->sharedbyUser->name }}</p>
@@ -43,7 +43,7 @@
 
         <div class="px-8 mt-12 text-center lg:grid lg:grid-cols-2 lg:mt-16 lg:gap-4">
             <p class="mb-8 text-sm lg:text-left">Download this inspirational graphic to share on twitter, instagram, facebook or anywhere. </p>
-            <div class=""><x-button.white>Download &amp; Share</x-button.white></div>
+            <div class=""><x-button.white wire:click="screenshot({{ $inspiration->id }})">Download &amp; Share</x-button.white></div>
         </div>
-    </div>    
+    </div>
 </div>

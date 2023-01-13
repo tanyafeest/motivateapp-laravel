@@ -22,6 +22,8 @@ Route::middleware([
         Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'payment'])->name('payment');
         // player
         Route::get('/player', [App\Http\Controllers\PlayerController::class, 'index'])->name('player');
+        // screnshot
+        Route::get('/screenshot/{id}', [App\Http\Controllers\InspirationController::class, 'screenshot'])->name('screenshot');
         // settings
         Route::get('/settings', function () {
             return view('settings');

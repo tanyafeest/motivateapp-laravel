@@ -5,7 +5,8 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Inspiration;
 use App\Actions\Util\Spotify;
-
+use Spatie\Browsershot\Browsershot;
+use Illuminate\Support\Facades\Storage;
 class InspirationCard extends Component
 {
     private $spotify = null;
@@ -84,5 +85,22 @@ class InspirationCard extends Component
         }
 
         $this->spotifyStatus = $this->spotify->status();
+    }
+
+    /**
+     * Screenshot
+     * 
+     * @param Integer $id
+     */
+    public function screenshot($id)
+    {
+        $filename = Auth::user()->name . '.png';
+
+        Browsershot::url(config('app.url') . 'screenshot/' . $id)
+            ->windowSize(1080, 1080)
+            ->save(storage_path('app/public') . $filename);
+
+        // download
+        return Storage::disk('public')->download($filename);
     }
 }

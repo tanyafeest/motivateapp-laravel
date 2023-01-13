@@ -41,7 +41,7 @@ class SMSSubscription extends Command
                 $latestInspiration = $user->inspirations->last();
 
                 $quote = $latestInspiration->quote->quote;
-                $sharedByUserName = $latestInspiration->sharedByUser->name;
+                $sharedByUserName = $latestInspiration->sharedbyUser->name;
                 
                 $sms = $sharedByUserName . ':' . '"' . $latestInspiration->quote->truncate() . '" View at ' . config('app.url') . 'inspiration/card/' . $latestInspiration->id . '. Reply UNSUB to be removed';
 

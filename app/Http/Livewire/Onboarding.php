@@ -7,7 +7,7 @@ use Livewire\Component;
 class Onboarding extends Component
 {
     public $currentMStep = 1;
-    public $currentStep = 6;
+    public $currentStep = 2;
 
 
     public function secondStepSubmit()

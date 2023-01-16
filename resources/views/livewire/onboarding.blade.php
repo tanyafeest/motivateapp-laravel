@@ -71,6 +71,7 @@
         <!-- end -->
 
         <div class="h-full lg:row-span-2 lg:grid lg:grid-cols-2" style="background: #F390A2;">
+            <img class="w-[48px] h-[46px] absolute top-4 left-4 cursor-pointer" src="images/back.svg" alt="" wire:click="back(2)">
             <!-- mobile only -->
             <div class="lg:hidden">
                 <img class="absolute top-0 left-0 z-0" src="images/yellow.png" alt="">
@@ -100,7 +101,6 @@
                     <div>
                         <p class="text-justify">Invite colleagues, friends & family to privately share some inspiration. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. </p>
                     </div>
-                    <div class="absolute bottom-8 lg:bottom-4 left-4"><a href="/">Back</a></div>
                     <div class="absolute bottom-4 right-8"><x-button.white wire:click="thirdStepSubmit">Next</x-button.white></div>
                 </div>
             </div>
@@ -109,6 +109,7 @@
 
     <!-- green (green & blue)-->
     <div id="step4" class="flex flex-col {{ $currentMStep != 4 ? 'hidden' : '' }} {{ $currentStep != 4 ? 'lg:hidden' : '' }} lg:grid lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
+        <img class="w-[48px] h-[46px] absolute top-4 left-4 cursor-pointer" src="images/back.svg" alt="" wire:click="back(3)">
         <img class="absolute z-10 w-12 lg:hidden top-12 left-[180px]" src="images/MotiveMobLogo.svg" alt=""> 
 
         <!-- top section - dk only -->

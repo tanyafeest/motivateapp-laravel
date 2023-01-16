@@ -4,22 +4,22 @@
             @livewire('header-profile')
         </div>
     
-        <div x-data="{ openStep: 1 }">
-            <div class="pb-12 bg-white h-screen lg:h-auto">
+        <div x-data="{ openStep: 1 }" class="overflow-scroll">
+            <div class="pb-8 bg-white h-screen lg:h-auto">
                 @livewire('quotes-songs')
             </div>
                 
-            <div id="step1" x-show="openStep === 1" class="lg:block">
+            <div id="step1" x-show="openStep === 1" class="hidden lg:block">
                 <img src="images/dashboard.png" class="lg:absolute bottom-0 right-0 max-w-xl" alt="">
 
-                <div class="relative">
-                    <p class="absolute text-6xl left-8 top-16 text-white">
+                <div class="">
+                    <p class=" text-6xl pt-4 pl-4 text-white">
                         <span class="font-semibold">Motivate</span><br /> to Be <span class="font-semibold">Your<br /> Best</span>
                     </p>
                 </div>
             </div>
 
-            <div id="step2" x-show="openStep === 2" class="overflow-scroll bg-white lg:flex lg:justify-between">
+            <div id="step2" x-show="openStep === 2" class="bg-white lg:flex lg:justify-between">
                 <div class="p-8" style="box-shadow: 0px 7.93548px 51.0996px rgba(230, 234, 238, 0.6);">
                     <p>Receiving Motivational</p>
                     <p class="mb-8 text-2xl font-semibold">Quotes &amp; Songs:</p>

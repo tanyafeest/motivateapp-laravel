@@ -1,4 +1,4 @@
-<div class="bg-white lg:row-span-2">
+<div class="bg-white">
     <div class="lg:grid lg:grid-cols-2 lg:gap-8 lg:p-8">
         <div class="bg-white rounded-t-lg p-4 lg:p-0">
             <div class="flex justify-between mb-4">

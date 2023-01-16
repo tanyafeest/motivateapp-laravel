@@ -47,7 +47,9 @@
         </div>
         
         <div class="flex justify-center">
-            <x-button.white class="w-auto mt-12">Upgrade to Get Full Access</x-button.white>
+            <form action="/upgrade-form">
+                <x-button.white class="w-auto mt-12">Upgrade to Get Full Access</x-button.white>
+            </form>
         </div>
         
         <p class="text-center text-white mt-4"><span class="font-bold">20$</span> Annual Pass</p>

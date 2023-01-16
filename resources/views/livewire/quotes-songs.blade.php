@@ -13,7 +13,7 @@
                     <p class="font-semibold text-4xl text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-red-600">3</p>
                 </div>
             </div>
-            <x-button.red class="w-full">Request More</x-button.red>
+            <x-button.red class="w-full" @click="openStep = 2">Request More</x-button.red>
         </div>
         <div class="bg-white rounded-t-lg p-4 lg:p-0">
             <div class="flex justify-between mb-4">
@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <x-button.red class="w-full">Request More</x-button.red>
+            <x-button.red class="w-full" @click="openStep = 2">Request More</x-button.red>
             
             <p class="text-xs text-stone-300 mt-4"><strong>Note:</strong> Average user has 85 quotes and 107 songs submitted</p>
         </div>

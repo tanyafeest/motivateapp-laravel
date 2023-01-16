@@ -10,3 +10,8 @@
 .iti {
     @apply w-full
 }
+
+/* select */
+select {
+    @apply !pr-10 !pl-3 !py-2
+}

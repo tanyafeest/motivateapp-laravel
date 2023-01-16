@@ -19,6 +19,7 @@
 
         <!-- Styles -->
         @livewireStyles
+        @notifyCss
     </head>
     <body class="font-sans antialiased">
         <div class="grid h-screen gap-0 overflow-hidden" style="grid-template-columns: 80px 460px 1fr;">
@@ -95,6 +96,9 @@
                 </div>
             </div>
         </div>
+
+        <x:notify-messages />
         @livewireScripts
+        @notifyJs
     </body>
 </html>

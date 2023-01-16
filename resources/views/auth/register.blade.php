@@ -14,7 +14,7 @@
             <div class="max-w-3xl mx-auto mt-2">
                 <x-jet-validation-errors class="mb-4" />
 
-                <form method="POST" action="{{ route('register') }}">
+                <form id="register_form" method="POST" action="{{ route('register') }}">
                     @csrf
 
                     <div class="grid grid-cols-2 gap-4">
@@ -100,7 +100,6 @@
                                     </select>
                                 </div>
                             </template>
-                        
                     </div>
 
                     @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -125,7 +124,7 @@
                             {{ __('Already registered?') }}
                         </a> --}}
 
-                        <x-button.secondary filled class="">
+                        <x-button.secondary id="submit" filled>
                             {{ __('Submit') }}
                         </x-button.secondary>
                     </div>
@@ -170,8 +169,20 @@
                 console.log($(this).attr('placeholder'));
             });
 
-            // // initialize the mask
+            // initialize the mask
             inputMasking('#phone');
+
+            // password validation
+            $('#submit').on('click', function(e) {
+                const password = $('#password').val();
+                const password_confirmation = $('#password_confirmation').val();
+
+                if(password != password_confirmation) {
+                    alert('Password is not match!');
+                    e.preventDefault();
+                    return;
+                }
+            })
         });
     </script>
 </x-guest-layout>

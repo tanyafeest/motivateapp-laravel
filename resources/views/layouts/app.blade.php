@@ -13,6 +13,7 @@
 
         <!-- Styles -->
         @livewireStyles
+        @notifyCss
     </head>
     <body class="h-screen font-sans antialiased bg-neutral-100">
         <div class="grid h-screen gap-0 overflow-hidden" style="grid-template-columns: 80px 500px 1fr;">
@@ -115,6 +116,8 @@
 
         @stack('modals')
 
+        <x:notify-messages />
         @livewireScripts
+        @notifyJs
     </body>
 </html>

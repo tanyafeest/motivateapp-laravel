@@ -5,3 +5,8 @@
 [x-cloak] { 
     @apply !hidden
 }
+
+/* intl */
+.iti {
+    @apply w-full
+}

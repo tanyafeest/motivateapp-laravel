@@ -9,7 +9,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <script src="{{ asset('https://js.stripe.com/v3/') }}"></script>
+        <script src="https://js.stripe.com/v3/"></script>
 
         <!-- Styles -->
         @livewireStyles
@@ -49,7 +49,7 @@
                         <img class="w-6" src="{{ asset('images/Note-3') }}.svg" />
                     </a>
 
-                    <a href="#" class="flex items-center justify-center rounded-lg group">
+                    <a href="/player" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Headphone</span>
                         <img class="w-6" src="{{ asset('images/Headphone.svg') }}" />
                     </a>
@@ -100,10 +100,12 @@
                         <p class="font-semibold">{{ Auth::user()->name }}</p>
                     </div>
                     <div class="">
-                        <a href="#" class="flex items-center justify-center rounded-lg group">
-                            <span class="sr-only">User</span>
-                            <img class="w-20 p-5 rounded-full" src="{{ Auth::user()->profile_photo_path }}" />
-                        </a>
+                        <form id="logout" action="{{ url('/logout') }}" method="post">
+                            <button type="submit" class="flex items-center justify-center rounded-lg group">
+                                <span class="sr-only">User</span>
+                                <img class="w-20 p-5 rounded-full" src="{{ Auth::user()->profile_photo_path }}" />
+                            </button>
+                        </form>
                     </div>
                 </div>
 

@@ -12,6 +12,13 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        {{-- Intl tele --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
+        <!-- Styles -->
+        @livewireStyles
     </head>
     <body class="font-sans antialiased">
         <div class="grid h-screen gap-0 overflow-hidden" style="grid-template-columns: 80px 460px 1fr;">
@@ -88,5 +95,6 @@
                 </div>
             </div>
         </div>
+        @livewireScripts
     </body>
 </html>

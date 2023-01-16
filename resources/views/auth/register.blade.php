@@ -61,7 +61,7 @@
 
                             <div>
                                 <x-jet-label for="phone" value="{{ __('Cell Phone') }}" />
-                                <x-jet-input id="phone" class="block w-full" type="text" name="phone" :value="old('phone')" required />
+                                <x-jet-input id="phone" class="block w-full" type="tel" name="phone" :value="old('phone')" pattern="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}" required />
                             </div>
 
                             <div class="">
@@ -133,4 +133,45 @@
             </div>
         </x-jet-authentication-card>
     </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+    <script>
+        $(document).ready(function(){
+            // register validation
+            // initialize the phone number filed with Intl Tele
+            const phone = document.getElementById("phone");
+
+            phone.setAttribute('readonly', true);
+            const intlPhone = window.intlTelInput(phone, {
+                initialCountry: "us",
+                autoPlaceholder: "aggressive",
+                utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+            });
+            intlPhone.promise.then(function() {
+                phone.removeAttribute('readonly');
+            });
+
+            function inputMasking(formatterInput) {
+                // get the format fromt intl-tel-input placeholder
+                let format = $(formatterInput).attr('placeholder');
+
+                if(!format) {
+                    format = '201 555 0123';
+                }
+                // replace all digits to zero and use is as the mask
+                $(formatterInput).mask(format.replace(/[1-9]/g, 0));
+            }
+
+            $('#phone').on('countrychange', function(e, countryData) {
+                $(this).val('');
+                inputMasking(this);
+                console.log($(this).attr('placeholder'));
+            });
+
+            // // initialize the mask
+            inputMasking('#phone');
+        });
+    </script>
 </x-guest-layout>

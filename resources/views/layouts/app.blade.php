@@ -28,17 +28,7 @@
             @endif
                  
             <!-- Main area -->
-            <div id="main" class="flex flex-col h-screen">                
-                <!-- Mobile only -->
-                {{-- <div class="flex flex-col items-center lg:hidden">
-                    <img class="mb-12 w-44 h-44" src="images/m-logo.png" alt="">
-                    @if(Request::is('dashboard'))
-                    <div class="-mt-20">
-                        <x-account-creation-msg></x-account-creation-msg>
-                    </div>
-                    @endif
-                </div> --}}
-                
+            <div id="main" class="flex flex-col h-screen">     
                 {{$slot}}
 
                 <!-- Footer menu: mb only -->

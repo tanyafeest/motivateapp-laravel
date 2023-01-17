@@ -1,246 +1,41 @@
 <x-app-layout>
-    <div id="step1" class="hidden">
-        <div class="row-start-2 row-end-4 bg-sky-50 px-8 grid grid-cols-2 flex items-end pb-8">
-            <div class="">
-                <h1 class="text-6xl font-bold">Stronger</h1>
-                <p class="text-4xl font-light">Kanye West</p>
-            </div>
-            <div class="flex space-x-8 justify-end">
-                <img class="w-4 h-4" src="images/favorite-filled.png" alt="">
-                <img class="w-4 h-4" src="images/shuffle.png" alt="">
-                <img class="w-4 h-4" src="images/repeat.png" alt="">
-                <img class="w-4 h-4" src="images/share.png" alt="">
-            </div>
-        </div>
+    <div class="flex flex-col h-screen" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), linear-gradient(146.67deg, #7A5CDC 1.12%, #AF55D8 122.75%);">
+        @livewire('header-profile', ['text' => 'white'])
 
-        <div class="row-start-4 row-end-9 px-8">
-            <table class="my-4 table w-full">
-                <tr>
-                    <td><img class="h-8 w-8" src="images/played.png" alt=""></td>
-                    <td><span class="font-bold text-xl">Stronger</span><br /><span class="font-light text-sm">Kanye West</span></td>
-                    <td><img class="h-4 w-4" src="images/favorite.png" alt=""></td>
-                    <td>4:07</td>
-                </tr>
-                <tr>
-                    <td><img class="h-8 w-8" src="images/play-list.png" alt=""></td>
-                    <td><span class="font-bold text-xl">Rockstar</span><br /><span class="font-light text-sm">Post Malone featuring 21 Savage</span></td>
-                    <td><img class="h-4 w-4" src="images/favorite.png" alt=""></td>
-                    <td>4:07</td>
-                </tr>
-                <tr>
-                    <td><img class="h-8 w-8" src="images/play-list.png" alt=""></td>
-                    <td><span class="font-bold text-xl">Stronger</span><br /><span class="font-light text-sm">Kanye West</span></td>
-                    <td><img class="h-4 w-4" src="images/favorite.png" alt=""></td>
-                    <td>4:07</td>
-                </tr>
-                <tr>
-                    <td><img class="h-8 w-8" src="images/play-list.png" alt=""></td>
-                    <td><span class="font-bold text-xl">Rockstar</span><br /><span class="font-light text-sm">Post Malone featuring 21 Savage</span></td>
-                    <td><img class="h-4 w-4" src="images/favorite.png" alt=""></td>
-                    <td>4:07</td>
-                </tr>
-                <tr>
-                    <td><img class="h-8 w-8" src="images/play-list.png" alt=""></td>
-                    <td><span class="font-bold text-xl">Stronger</span><br /><span class="font-light text-sm">Kanye West</span></td>
-                    <td><img class="h-4 w-4" src="images/favorite.png" alt=""></td>
-                    <td>4:07</td>
-                </tr>
-            </table>
+        <div class="items-center text-white"> 
+            <div class="flex flex-col items-center mt-12 mb-4">
+                <img class="w-[75px]" src="images/adamdriver.png" alt="">
+                <p class="text-xl font-semibold">Adam Driver</p>
+                <p class="text-xs"><span class="font-light">(Teammate)</span> shared with you:</p>
+            </div>
 
-            <div class="flex flex-col items-center">
-                <div class="w-full">
-                    <div class="my-4"><hr /></div>
-                    <div class="flex justify-between text-gray-400 text-xs font-medium">
-                        <div>
-                            1:43
-                        </div>
-                        <div>
-                            3:58
+            <div> 
+                <div class="flex flex-col w-full p-4 mb-6" style="background: linear-gradient(146.67deg, #be616e 1.12%, #af5495 122.75%), linear-gradient(146.67deg, #be616e 1.12%, #af5495 122.75%);">
+                    <div class="px-4 mx-auto lg:max-w-3xl">
+                        <p class="text-2xl font-semibold text-center">“You have to fight to reach your dream”</p>
+                        <p class="text-right">- Lionel Messi - </p>
+                    </div>
+                </div> 
+                    
+                <div class="flex justify-center px-4 mb-8 -mt-12 lg:mb-2">       
+                    <div class="flex justify-center">
+                        <img class="w-[200px]" src="images/stronger.png" alt="">
+                    </div>
+                    <div class="mt-10 ml-4">
+                        <p class="text-md font-extralight">And they thought you might enjoy listening to: </p>
+                        <p class="text-lg">Stronger (Kanye West)</p>
+                        <div class="flex mt-4 space-x-4">
+                            <img class="w-12 h-12" src="images/add.png" alt="">
+                            <img class="w-12 h-12" src="images/play.png" alt="">
+                            <img class="w-12 h-12" src="images/spotify1.png" alt="">
                         </div>
                     </div>
                 </div>
-                <div class="flex space-x-4 items-center">
-                    <div><img class="w-5 h-5" src="images/previous.png" alt=""></div>
-                    <div><img src="images/play_arrow.png" alt=""></div>
-                    <div><img class="w-5 h-5" src="images/next.png" alt=""></div>
-                </div>
             </div>
-        </div>
-    </div>
 
-    <div id="step2">
-        <div class="row-start-2 row-end-9 px-8">
-            <p class="font-bold text-2xl mt-4">Past Motivation:</p>
-
-            <div class="grid grid-cols-2 gap-8 mt-8">
-                <div class="round-lg bg-white shadow p-4">
-                    <table class="table">
-                        <tr>
-                            <td><img src="images/Message3.png" alt=""></td>
-                            <td><p class="text-red-500">Quote:</p></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><p>"I can't erase what you done to me."</p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/song.png" alt=""></td>
-                            <td><p class="text-red-500">Song:</p></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><p><a href="#">First Time</a></p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/send.png" alt=""></td>
-                            <td><p class="text-red-500">Shared by::</p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/danielsmith.png" alt=""></td>
-                            <td><p><a href="#">Daniel Smith</a></p></td>
-                        </tr>
-                    </table>    
-                </div>
-                <div class="round-lg bg-white shadow p-4">
-                    <table class="table">
-                        <tr>
-                            <td><img src="images/Message3.png" alt=""></td>
-                            <td><p class="text-red-500">Quote:</p></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><p>"I can't erase what you done to me."</p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/song.png" alt=""></td>
-                            <td><p class="text-red-500">Song:</p></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><p><a href="#">First Time</a></p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/send.png" alt=""></td>
-                            <td><p class="text-red-500">Shared by::</p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/danielsmith.png" alt=""></td>
-                            <td><p><a href="#">Daniel Smith</a></p></td>
-                        </tr>
-                    </table>    
-                </div>
-                <div class="round-lg bg-white shadow p-4">
-                    <table class="table">
-                        <tr>
-                            <td><img src="images/Message3.png" alt=""></td>
-                            <td><p class="text-red-500">Quote:</p></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><p>"I can't erase what you done to me."</p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/song.png" alt=""></td>
-                            <td><p class="text-red-500">Song:</p></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><p><a href="#">First Time</a></p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/send.png" alt=""></td>
-                            <td><p class="text-red-500">Shared by::</p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/danielsmith.png" alt=""></td>
-                            <td><p><a href="#">Daniel Smith</a></p></td>
-                        </tr>
-                    </table>    
-                </div>
-                <div class="round-lg bg-white shadow p-4">
-                    <table class="table">
-                        <tr>
-                            <td><img src="images/Message3.png" alt=""></td>
-                            <td><p class="text-red-500">Quote:</p></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><p>"I can't erase what you done to me."</p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/song.png" alt=""></td>
-                            <td><p class="text-red-500">Song:</p></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><p><a href="#">First Time</a></p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/send.png" alt=""></td>
-                            <td><p class="text-red-500">Shared by::</p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/danielsmith.png" alt=""></td>
-                            <td><p><a href="#">Daniel Smith</a></p></td>
-                        </tr>
-                    </table>    
-                </div>
-                <div class="round-lg bg-white shadow p-4">
-                    <table class="table">
-                        <tr>
-                            <td><img src="images/Message3.png" alt=""></td>
-                            <td><p class="text-red-500">Quote:</p></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><p>"I can't erase what you done to me."</p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/song.png" alt=""></td>
-                            <td><p class="text-red-500">Song:</p></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><p><a href="#">First Time</a></p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/send.png" alt=""></td>
-                            <td><p class="text-red-500">Shared by::</p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/danielsmith.png" alt=""></td>
-                            <td><p><a href="#">Daniel Smith</a></p></td>
-                        </tr>
-                    </table>    
-                </div>
-                <div class="round-lg bg-white shadow p-4">
-                    <table class="table">
-                        <tr>
-                            <td><img src="images/Message3.png" alt=""></td>
-                            <td><p class="text-red-500">Quote:</p></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><p>"I can't erase what you done to me."</p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/song.png" alt=""></td>
-                            <td><p class="text-red-500">Song:</p></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><p><a href="#">First Time</a></p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/send.png" alt=""></td>
-                            <td><p class="text-red-500">Shared by::</p></td>
-                        </tr>
-                        <tr>
-                            <td><img src="images/danielsmith.png" alt=""></td>
-                            <td><p><a href="#">Daniel Smith</a></p></td>
-                        </tr>
-                    </table>    
-                </div>
+            <div class="lg:grid lg:grid-cols-2 px-8 mt-12 lg:mt-16 lg:gap-4 text-center">
+                <p class="mb-8 text-sm lg:text-left">Download this inspirational graphic to share on twitter, instagram, facebook or anywhere. </p>
+                <div class=""><x-button.white>Download &amp; Share</x-button.white></div>
             </div>
         </div>
     </div>

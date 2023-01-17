@@ -1,29 +1,39 @@
 <x-guest-layout>
-    <div id="step-2" class="hidden grid overflow-hidden grid-cols-2 grid-rows-3 gap-0 h-screen">
-        <div class="bg-red-100 col-start-1 col-span-2">
+    {{-- <img class="hidden absolute top-12 left-[170px] lg:hidden z-10 w-[50px]" src="images/mm-logo-colour.svg" alt="">
+    <img class="hidden absolute top-0 lg:hidden z-0" src="images/mobile-top-bg.png" alt="">
+    
+    <div id="step2" class="hidden grid lg:overflow-hidden grid-rows-5 lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
+        <div class="bg-cyan-200 lg:bg-pink-100 row-span-1">
                 Motive Mob
         </div>
-        <div class="bg-pink-300 relative flex justify-center">
-            <img class="absolute bottom-0 w-80" src="images/woman4.png" alt="">
-        </div>
-        <div class="bg-yellow-300 relative flex justify-center">
-            <img class="absolute bottom-0 w-80" src="images/woman1.png" alt="">
-        </div>
-        <div class="bg-pink-400 relative py-4 px-8 text-sm"> 
-            <div>
-                <p class="text-justify">Let your team, friends, and family support your sports success. Have them join your "Mob" to provide you with inspiration through song and word! Use this free app to get motivation from people that care about you. Here's how it works:</p>
+        <div class="row-span-4 lg:row-span-2 lg:grid lg:grid-cols-2 bg-blue-400">
+            <div id="step1a" class=" grid grid-rows-2 h-full">
+                <div class="bg-pink-300 relative">
+                    <img class="w-100 absolute bottom-0 left-[30px] lg:left-[0px]" src="images/woman-pink.png" alt="">
+                </div>
+                <div class="bg-pink-400 p-4"> 
+                    <div>
+                        <p class="text-justify">Let your team, friends, and family support your sports success. Have them join your "Mob" to provide you with inspiration through song and word! Use this free app to get motivation from people that care about you. Here's how it works:</p>
+                    </div>
+                    <div class="absolute bottom-8 lg:bottom-4 left-4">Skip</div>
+                    <div class="absolute bottom-8 right-8 lg:hidden"><x-button.white>Next</x-button.white></div>
+                </div>
             </div>
-            <div class="absolute bottom-4 left-8">Skip</div>
-        </div>
-        <div class="bg-yellow-400 relative py-4 px-8 text-sm">
-            <div>
-                <p class="text-justify">Let your team, friends, and family support your sports success. Have them join your "Mob" to provide you with inspiration through song and word! Use this free app to get motivation from people that care about you. Here's how it works:</p>
+            <div id="step1b" class="hidden grid grid-rows-2 h-full">
+                <div class="bg-yellow-300 relative">
+                    <img class="w-100 absolute bottom-0 left-[10px] lg:left-[0px]" src="images/woman1.png" alt="">
+                </div>
+                <div class="bg-yellow-400 p-4">
+                    <div>
+                        <p class="text-justify">Let your team, friends, and family support your sports success. Have them join your "Mob" to provide you with inspiration through song and word! Use this free app to get motivation from people that care about you. Here's how it works:</p>
+                    </div>
+                    <div class="absolute bottom-8 lg:bottom-4 left-4 lg:hidden">Skip</div>
+                    <div class="absolute bottom-4 right-8"><x-button.white>Next</x-button.white></div>
+                </div>
             </div>
-            <div class="absolute bottom-4 right-20">Back</div>
-            <div class="absolute bottom-4 right-8">Next</div>
         </div>
     </div>
-    <div id="step-2" class="hidden grid overflow-hidden grid-cols-2 grid-rows-3 gap-0 h-screen">
+    <div id="step3" class="hidden lg:grid lg:overflow-hidden lg:grid-cols-2 lg:grid-rows-3 lg:gap-0 lg:h-screen lg:relative">
         <div class="bg-red-100 col-start-1 col-span-2">
                 Motive Mob
         </div>
@@ -44,10 +54,10 @@
                 <p class="text-justify">Select your types of motivation - music-based and inspiring quotes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. </p>
             </div>
             <div class="absolute bottom-4 right-20">Back</div>
-            <div class="absolute bottom-4 right-8">Next</div>
+            <div class="absolute bottom-4 right-8"><x-button.white>Next</x-button.white></div>
         </div>
     </div>
-    <div id="step-3" class="hidden grid overflow-hidden grid-cols-2 grid-rows-3 gap-0 h-screen">
+    <div id="step4" class="hidden lg:grid lg:overflow-hidden lg:grid-cols-2 lg:grid-rows-3 lg:gap-0 lg:h-screen lg:relative">
         <div class="bg-red-100 col-start-1 col-span-2">
                 Motive Mob
         </div>
@@ -67,10 +77,10 @@
             <div>
                 <p class="text-justify">Receive weekly text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. Nulla lacus libero, varius et eros sed, convallis viverra enim. </p>
             </div>
-            <div class="absolute bottom-4 right-8">Next</div>
+            <div class="absolute bottom-4 right-8"><x-button.white>Next</x-button.white></div>
         </div>
     </div>
-    <div id="step-4" class=" grid overflow-hidden grid-cols-1 grid-rows-4 gap-4 h-screen bg-purple-500">
+    <div id="step5" class="hidden lg:grid lg:overflow-hidden lg:grid-cols-1 lg:grid-rows-4 lg:gap-4 lg:h-screen lg:relative lg:bg-purple-500">
         <div class="col-start-1 col-span-1" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
             <img class="w-12 h-12 mx-auto mt-8" src="images/mm-logo1.png" alt="">
         </div>
@@ -115,5 +125,5 @@
                 <x-button.primary>Next</x-button.primary>
             </div>
         </div>
-    </div>
+    </div> --}}
 </x-guest-layout>

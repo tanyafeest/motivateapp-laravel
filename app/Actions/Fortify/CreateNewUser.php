@@ -90,6 +90,9 @@ class CreateNewUser implements CreatesNewUsers
 
         Mail::to($user)->send(new Welcome($welcomeMailData));
 
+        // welcome notify
+        notify()->success('Welcome to motivemob. ⚡️', 'Welcome to motivemob');
+
         return $user;
     }
 }

@@ -61,7 +61,7 @@
 
                             <div>
                                 <x-jet-label for="phone" value="{{ __('Cell Phone') }}" />
-                                <x-jet-input id="phone" class="block w-full" type="tel" name="phone" :value="old('phone')" pattern="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}" required />
+                                <x-jet-input id="phone" class="block w-full" type="tel" name="phone" :value="old('phone')" required />
                             </div>
 
                             <div class="">
@@ -140,16 +140,19 @@
         $(document).ready(function(){
             // register validation
             // initialize the phone number filed with Intl Tele
-            const phone = document.getElementById("phone");
+            const phoneDom = document.getElementById("phone");
+            const password = $('#password').val();
+            const password_confirmation = $('#password_confirmation').val();
+            const term = $('#terms');
 
-            phone.setAttribute('readonly', true);
-            const intlPhone = window.intlTelInput(phone, {
+            phoneDom.setAttribute('readonly', true);
+            const intlPhone = window.intlTelInput(phoneDom, {
                 initialCountry: "us",
                 autoPlaceholder: "aggressive",
                 utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
             });
             intlPhone.promise.then(function() {
-                phone.removeAttribute('readonly');
+                phoneDom.removeAttribute('readonly');
             });
 
             function inputMasking(formatterInput) {
@@ -171,17 +174,27 @@
 
             // initialize the mask
             inputMasking('#phone');
-
             // password validation
             $('#submit').on('click', function(e) {
-                const password = $('#password').val();
-                const password_confirmation = $('#password_confirmation').val();
+                console.log(phoneDom, phoneDom.value);
+                if(
+                    password == "" || 
+                    password_confirmation == "" ||
+                    phoneDom.value == "" ||
+                    !term.is(':checked')
+                ) {
+                    return;
+                }
 
                 if(password != password_confirmation) {
                     alert('Password is not match!');
                     e.preventDefault();
                     return;
                 }
+
+
+                $(this).addClass("cursor-not-allowed bg-indigo-500/50");
+                $(this).attr('disabled');
             })
         });
     </script>

@@ -102,6 +102,7 @@
                     </div>
                     <div class="">
                         <form id="logout" action="{{ url('/logout') }}" method="post">
+                            @csrf
                             <button type="submit" class="flex items-center justify-center rounded-lg group">
                                 <span class="sr-only">User</span>
                                 <img class="w-20 p-5 rounded-full" src="{{ Auth::user()->profile_photo_path }}" />

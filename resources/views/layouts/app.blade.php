@@ -7,15 +7,16 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        @toastScripts
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="https://js.stripe.com/v3/"></script>
 
         <!-- Styles -->
         @livewireStyles
-        @notifyCss
     </head>
     <body class="h-screen font-sans antialiased bg-neutral-100">
+        <livewire:toasts />
         <div class="grid h-screen gap-0 overflow-hidden" style="grid-template-columns: 80px 500px 1fr;">
             <!-- Sidebar-->
             <div class="hidden text-white lg:bg-gradient-to-r lg:from-purple-500 lg:to-violet-500 lg:pt-8 lg:flex lg:flex-col lg:h-screen">                 
@@ -117,8 +118,6 @@
 
         @stack('modals')
 
-        <x:notify-messages />
         @livewireScripts
-        @notifyJs
     </body>
 </html>

@@ -10,6 +10,7 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
+        @toastScripts
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -19,9 +20,10 @@
 
         <!-- Styles -->
         @livewireStyles
-        @notifyCss
     </head>
     <body class="font-sans antialiased">
+        <livewire:toasts />
+        
         <div class="grid h-screen gap-0 overflow-hidden" style="grid-template-columns: 80px 460px 1fr;">
             <!-- Sidebar-->
             <div class="hidden text-white lg:bg-gradient-to-r lg:from-purple-500 lg:to-violet-500 lg:pt-8 lg:flex lg:flex-col lg:h-screen">                 
@@ -97,8 +99,6 @@
             </div>
         </div>
 
-        <x:notify-messages />
         @livewireScripts
-        @notifyJs
     </body>
 </html>

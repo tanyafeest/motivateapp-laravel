@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63b145ac08e0522d1a8cab9188e132b2",
+    "content-hash": "03c9ec78119c49a472be79c3138791b3",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -3144,78 +3144,6 @@
             "time": "2022-08-08T13:52:53+00:00"
         },
         {
-            "name": "mckenziearts/laravel-notify",
-            "version": "v2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mckenziearts/laravel-notify.git",
-                "reference": "a75449fcc1a3e50ac8d1d41a026142461017b4ca"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mckenziearts/laravel-notify/zipball/a75449fcc1a3e50ac8d1d41a026142461017b4ca",
-                "reference": "a75449fcc1a3e50ac8d1d41a026142461017b4ca",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~7.0|~8.0|~9.0",
-                "php": ">=7.4"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "^8.0|^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Mckenziearts\\Notify\\LaravelNotifyServiceProvider"
-                    ],
-                    "aliases": {
-                        "Notify": "Mckenziearts\\Notify\\Facades\\LaravelNotify"
-                    }
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Mckenziearts\\Notify\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Arthur Monney",
-                    "email": "monneylobe@gmail.com",
-                    "homepage": "https://twitter.com/MonneyArthur",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Flexible flash notifications for Laravel",
-            "homepage": "https://github.com/mckenziearts/laravel-notify",
-            "keywords": [
-                "laravel",
-                "laravel-notify",
-                "notification"
-            ],
-            "support": {
-                "issues": "https://github.com/mckenziearts/laravel-notify/issues",
-                "source": "https://github.com/mckenziearts/laravel-notify/tree/v2.3"
-            },
-            "funding": [
-                {
-                    "url": "https://paypal.me/jvquilichini?locale.x=fr_FR",
-                    "type": "custom"
-                }
-            ],
-            "time": "2022-03-30T02:13:10+00:00"
-        },
-        {
             "name": "mobiledetect/mobiledetectlib",
             "version": "2.8.41",
             "source": {
@@ -5422,6 +5350,66 @@
                 "source": "https://github.com/spatie/image-optimizer/tree/1.6.2"
             },
             "time": "2021-12-21T10:08:05+00:00"
+        },
+        {
+            "name": "spatie/laravel-package-tools",
+            "version": "1.14.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-package-tools.git",
+                "reference": "9964e65c318c30577ca1b91469f739d2b381359b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/9964e65c318c30577ca1b91469f739d2b381359b",
+                "reference": "9964e65c318c30577ca1b91469f739d2b381359b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.28|^10.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^7.7|^8.0",
+                "pestphp/pest": "^1.22",
+                "phpunit/phpunit": "^9.5.24",
+                "spatie/pest-plugin-test-time": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelPackageTools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tools for creating Laravel packages",
+            "homepage": "https://github.com/spatie/laravel-package-tools",
+            "keywords": [
+                "laravel-package-tools",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-package-tools/issues",
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.14.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-01-10T14:09:55+00:00"
         },
         {
             "name": "spatie/temporary-directory",
@@ -8224,6 +8212,96 @@
                 "twilio"
             ],
             "time": "2022-12-14T22:22:57+00:00"
+        },
+        {
+            "name": "usernotnull/tall-toasts",
+            "version": "v1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/usernotnull/tall-toasts.git",
+                "reference": "9f1436ad615804f7c6762f004948187e7379cf82"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/usernotnull/tall-toasts/zipball/9f1436ad615804f7c6762f004948187e7379cf82",
+                "reference": "9f1436ad615804f7c6762f004948187e7379cf82",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^v8.61|^9.0",
+                "livewire/livewire": "^v2.10",
+                "php": "^8.0.2",
+                "spatie/laravel-package-tools": "^1.12"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^v3.8",
+                "laravel/pint": "^1.1",
+                "nunomaduro/collision": "^6.2.1",
+                "nunomaduro/larastan": "^2.1",
+                "orchestra/testbench": "^7.6.1",
+                "pestphp/pest": "^v1.21",
+                "pestphp/pest-plugin-laravel": "^v1.2",
+                "pestphp/pest-plugin-parallel": "^1.2",
+                "phpmd/phpmd": "^2.12",
+                "squizlabs/php_codesniffer": "^3.7",
+                "vimeo/psalm": "^4.26"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Usernotnull\\Toast\\ToastServiceProvider"
+                    ],
+                    "aliases": {
+                        "Toast": "ToastManager"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Usernotnull\\Toast\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "John F (@usernotnull)",
+                    "email": "15612814+usernotnull@users.noreply.github.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Toast notification library for the Laravel TALL stack. You can push notifications from the backend or frontend to render customizable toasts with almost zero footprint on the published CSS/JS!",
+            "homepage": "https://github.com/usernotnull/tall-toasts",
+            "keywords": [
+                "ToastManager",
+                "alpinejs",
+                "laravel",
+                "laravel-package",
+                "livewire",
+                "tailwindcss",
+                "tall-stack",
+                "tall-toasts",
+                "toast-notifications",
+                "ui-components",
+                "usernotnull"
+            ],
+            "support": {
+                "issues": "https://github.com/usernotnull/tall-toasts/issues",
+                "source": "https://github.com/usernotnull/tall-toasts/tree/v1.5.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/usernotnull",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-08-11T11:47:49+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

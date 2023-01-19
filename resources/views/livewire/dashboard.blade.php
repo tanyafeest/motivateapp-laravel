@@ -127,11 +127,12 @@
 
         function handleRequestMore() {
             navigator.clipboard.writeText("{{ Auth::user()->shareLink() }}");
-            alert('Link has been copied. Please share with your friends and family.');
+            Toast.info('Link has been copied. Please share with your friends and family.', `Hey, ${auth.name}`);
         }
         
         window.onload = () => {
             const msg = `Hey, ${auth.name}! Welcome to Motivemob world!`;
+
             if(!localStorage.getItem("isLoggedIn")) {
                 Toast.success(msg, 'Welcome');
                 localStorage.setItem("isLoggedIn", true);

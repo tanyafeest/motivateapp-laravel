@@ -101,7 +101,7 @@
                         <p>Account Information:</p>
                         <p class="font-semibold">{{ Auth::user()->name }}</p>
                     </div>
-                    <div class="">
+                    <div class="" onclick="localStorage.clear()">
                         <form id="logout" action="{{ url('/logout') }}" method="post">
                             @csrf
                             <button type="submit" class="flex items-center justify-center rounded-lg group">
@@ -115,8 +115,6 @@
                 {{$slot}}
             </div>
         </div>
-
-        @stack('modals')
 
         @livewireScripts
         @stack('custom-script')

@@ -121,10 +121,22 @@
         </div>
     </div>
 
+    @push('custom-script')
     <script>
+        const auth = @js(Auth::user());
+
         function handleRequestMore() {
             navigator.clipboard.writeText("{{ Auth::user()->shareLink() }}");
             alert('Link has been copied. Please share with your friends and family.');
         }
+        
+        window.onload = () => {
+            const msg = `Hey, ${auth.name}! Welcome to Motivemob world!`;
+            if(!localStorage.getItem("isLoggedIn")) {
+                Toast.success(msg, 'Welcome');
+                localStorage.setItem("isLoggedIn", true);
+            }
+        }
     </script>
+    @endpush
 </div>

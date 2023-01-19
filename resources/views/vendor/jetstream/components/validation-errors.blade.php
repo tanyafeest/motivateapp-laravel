@@ -1,7 +1,9 @@
 @if ($errors->any())
     @foreach ($errors->all() as $error)
         @php
-            notify()->error($error);
+            toast()
+                ->danger($error)
+                ->push();
         @endphp
     @endforeach
 @endif

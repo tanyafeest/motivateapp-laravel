@@ -7,8 +7,8 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        @toastScripts
         <!-- Scripts -->
+        @toastScripts
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="https://js.stripe.com/v3/"></script>
 
@@ -39,7 +39,7 @@
                     <a href="/inspiration" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Heart</span>
                         <img class="w-6" src="{{ asset('images/Heart.svg') }}" />
-                    </a>
+                        </a>
 
                     <a href="#" class="flex items-center justify-center rounded-lg group">
                         <span class="sr-only">Gallery</span>
@@ -119,5 +119,6 @@
         @stack('modals')
 
         @livewireScripts
+        @stack('custom-script')
     </body>
 </html>

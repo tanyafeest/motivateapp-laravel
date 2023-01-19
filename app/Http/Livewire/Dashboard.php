@@ -5,9 +5,11 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Todolist;
 use Illuminate\Support\Facades\Auth;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class Dashboard extends Component
 {
+    use WireToast;
     public $todolist = [false, false, false, false];
 
     public function mount()

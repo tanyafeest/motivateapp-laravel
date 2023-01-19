@@ -38,7 +38,7 @@
                             <td>{{ date("H:i:s", $inspiration->track->duration / 1000) }}</td>
                         </tr>
                     @empty
-                        
+                    
                     @endforelse
                 </table>
     
@@ -72,6 +72,8 @@
     @endif
 
     <script type="text/javascript">
+        const currentTrack = @js($currentTrack);
+        
         const embedableWidget = document.getElementById("embed-iframe");
 
         function load(url) {
@@ -82,6 +84,8 @@
                 });
         }
 
-        load('{{ $currentTrack["uri"] }}');
+        if(currentTrack) {
+            load(currentTrack["uri"]);
+        }
     </script>
 </div>

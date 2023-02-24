@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-class DashboardController extends Controller
+class DashboardController
 {
-    public function index()
+    public function __invoke()
     {
         return view("dashboard");
     }

@@ -7,14 +7,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
-class AuthController extends Controller
+class AuthController
 {
     /**
      * Display the login view.
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function __invoke()
     {
         return view('auth.login');
     }

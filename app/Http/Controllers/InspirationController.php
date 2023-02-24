@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class InspirationController extends Controller
+class InspirationController
 {
-    public function onboarding()
+    public function __invoke()
     {
         return view("onboarding");
     }

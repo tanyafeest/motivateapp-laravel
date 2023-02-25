@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Onboarding::class);
 
+
 Route::get('/registration', function () {
     return view('registration');
 });
@@ -24,9 +25,15 @@ Route::get('/success', function () {
     return view('success');
 });
 
+
 Route::get('/test', function () {
     return view('test');
 });
+
+
+require __DIR__ . '/auth.php';
+require __DIR__ . '/app.php';
+require __DIR__ . '/public.php';
 
 Route::middleware([
         'auth:sanctum',

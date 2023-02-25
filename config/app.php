@@ -196,6 +196,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+        DougSisk\CountryState\CountryStateServiceProvider::class,
 
     ],
 
@@ -214,4 +215,5 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'phone' => env('APP_PHONE_NUMBER'),
 ];

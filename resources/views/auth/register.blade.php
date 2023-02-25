@@ -1,23 +1,23 @@
 <x-guest-layout>
-    <div x-data="{ age: 0 }" id="" class="relative h-screen overflow-hidden text-gray-800" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
-        <img class="absolute w-11 h-11 top-8 left-8" src="images/back.svg" alt="">
+    <div x-data="{ age: 0 }" id="" class="relative h-screen overflow-scroll text-gray-800" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
+        <img class="absolute w-11 h-11 top-6 left-6" src="images/back.svg" alt="">
         <div class="flex justify-end">
-            <img class="max-h-40" src="images/top-swirl.svg" alt="">
+            <img class="h-24" src="images/top-swirl.svg" alt="">
         </div>
 
         <x-jet-authentication-card>
             <div class="text-zinc-800">
-                <p class="text-lg">Create Your Account</p>
+                <p class="">Create Your Account</p>
                 <p class="text-2xl font-semibold">to Get Inspired!</p>
             </div>
 
-            <div class="max-w-3xl mx-auto mt-2">
+            <div class="max-w-3xl mx-auto mt-8">
                 <x-jet-validation-errors class="mb-4" />
 
-                <form id="register_form" method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('register') }}">
                     @csrf
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid gap-2 lg:gap-4 lg:grid-cols-2">
                             <div>
                                 <x-jet-label for="first_name" value="{{ __('First Name') }}" />
                                 <x-jet-input id="first_name" class="block w-full" type="text" name="first_name"  value="{{ session('temp_first_name') }}" readonly required autofocus />
@@ -28,8 +28,22 @@
                                 <x-jet-input id="last_name" class="block w-full" type="text" name="last_name" value="{{ session('temp_last_name') }}" readonly required autofocus />
                             </div>
 
-                            <div class="flex justify-center py-4 pt-5">
-                                <div class="flex gap-5">
+                            <div class="flex py-4 pt-5">
+                                <fieldset class="mt-2">
+                                    <legend class="sr-only">Choose a memory option</legend>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        
+                                    <label class="flex items-center justify-center px-3 py-2 text-sm font-medium text-black bg-white border border-transparent rounded-md cursor-pointer sm:flex-1 focus:outline-none hover:ring-1 hover:ring-offset-2 hover:ring-blue-500 hover:bg-white">
+                                        <input type="radio" name="memory-option" value="4 GB" class="sr-only" aria-labelledby="memory-option-0-label">
+                                        <span id="memory-option-0-label" class="">Male</span>
+                                    </label>
+                                    <label class="flex items-center justify-center px-3 py-2 text-sm font-medium text-black bg-white border border-transparent rounded-md cursor-pointer sm:flex-1 focus:outline-none hover:ring-1 hover:ring-offset-2 hover:ring-blue-500 hover:bg-white">
+                                        <input type="radio" name="memory-option" value="8 GB" class="sr-only" aria-labelledby="memory-option-1-label">
+                                        <span id="memory-option-1-label">Female</span>
+                                    </label>
+                                    </div>
+                                </fieldset>
+                                {{-- <div class="flex gap-5">
                                     <div class="flex items-center gap-5">
                                         <x-jet-label for="gender" value="{{ __('Male') }}" />
                                         <input type="radio" id="gender_male" name="gender" value="0" checked />
@@ -38,7 +52,7 @@
                                         <x-jet-label for="gender" value="{{ __('Female') }}" />
                                         <input type="radio" id="gender_female" name="gender" value="1" />
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div>
@@ -61,7 +75,7 @@
 
                             <div>
                                 <x-jet-label for="phone" value="{{ __('Cell Phone') }}" />
-                                <x-jet-input id="phone" class="block w-full" type="tel" name="phone" :value="old('phone')" required />
+                                <x-jet-input id="phone" class="block w-full" type="text" name="phone" :value="old('phone')" required />
                             </div>
 
                             <div class="">
@@ -94,12 +108,13 @@
                                 <div>
                                     <x-jet-label for="activity" value="{{ __('Activities') }}" />
                                     <select class="w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="sport" name="sport">
-                                        @foreach ($sports as $sport)
+                                        {{-- @foreach ($sports as $sport)
                                             <option value="{{ $sport->id }}">{{ $sport->sport }}</option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
                                 </div>
                             </template>
+                        
                     </div>
 
                     @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -124,7 +139,7 @@
                             {{ __('Already registered?') }}
                         </a> --}}
 
-                        <x-button.secondary id="submit" filled>
+                        <x-button.secondary filled class="">
                             {{ __('Submit') }}
                         </x-button.secondary>
                     </div>
@@ -132,70 +147,4 @@
             </div>
         </x-jet-authentication-card>
     </div>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
-    <script>
-        $(document).ready(function(){
-            // register validation
-            // initialize the phone number filed with Intl Tele
-            const phoneDom = document.getElementById("phone");
-            const password = $('#password').val();
-            const password_confirmation = $('#password_confirmation').val();
-            const term = $('#terms');
-
-            phoneDom.setAttribute('readonly', true);
-            const intlPhone = window.intlTelInput(phoneDom, {
-                initialCountry: "us",
-                autoPlaceholder: "aggressive",
-                utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
-            });
-            intlPhone.promise.then(function() {
-                phoneDom.removeAttribute('readonly');
-            });
-
-            function inputMasking(formatterInput) {
-                // get the format fromt intl-tel-input placeholder
-                let format = $(formatterInput).attr('placeholder');
-
-                if(!format) {
-                    format = '201 555 0123';
-                }
-                // replace all digits to zero and use is as the mask
-                $(formatterInput).mask(format.replace(/[1-9]/g, 0));
-            }
-
-            $('#phone').on('countrychange', function(e, countryData) {
-                $(this).val('');
-                inputMasking(this);
-                console.log($(this).attr('placeholder'));
-            });
-
-            // initialize the mask
-            inputMasking('#phone');
-            // password validation
-            $('#submit').on('click', function(e) {
-                console.log(phoneDom, phoneDom.value);
-                if(
-                    password == "" || 
-                    password_confirmation == "" ||
-                    phoneDom.value == "" ||
-                    !term.is(':checked')
-                ) {
-                    return;
-                }
-
-                if(password != password_confirmation) {
-                    alert('Password is not match!');
-                    e.preventDefault();
-                    return;
-                }
-
-
-                $(this).addClass("cursor-not-allowed bg-indigo-500/50");
-                $(this).attr('disabled');
-            })
-        });
-    </script>
 </x-guest-layout>

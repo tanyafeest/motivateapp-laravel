@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use App\Providers\RouteServiceProvider;
-use Laravel\Socialite\Facades\Socialite;
 
 class OAuthContoller
 {
@@ -15,7 +12,7 @@ class OAuthContoller
      *
      * @return \Illuminate\View\View
      */
-    public function __invoke()
+    public function __invoke(Request $request)
     {
         $user_requested_inspire = null;
 

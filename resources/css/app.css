@@ -1,34 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-[x-cloak] {
-    @apply !hidden
-}
-
-/* intl */
-.iti {
-    @apply w-full
-}
-
-/* select */
-select {
-    @apply !pr-10 !pl-3 !py-2
-}
-
-/* mobile */
-@media screen and (max-width: 1024px) {
-    #main {
-        background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%);
-    }
-}
-
-@media screen and (min-width: 1024px) {
-    #intro {
-        background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #83DBEE;
-    }
-    #intro-blue {
-        background:  #83DBEE;
-    }
-}
-

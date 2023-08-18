@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
-use CountryState;
 
 class PaymentController extends Controller
 {
@@ -27,11 +26,10 @@ class PaymentController extends Controller
     public function payment()
     {
         $user = Auth::user();
-        $countries = CountryState::getCountries();
 
         $intent = $user->createSetupIntent();
 
-        return view('payment', compact('user', 'intent', 'countries'));
+        return view('payment', compact('user', 'intent'));
     }
 
     /**
@@ -48,7 +46,7 @@ class PaymentController extends Controller
         $user->addPaymentMethod($paymentMethod);
 
         try {
-            $user->newSubscription(config('services.stripe.subscription_plan'), config('services.stripe.subscription_plan_id'))->create($paymentMethod);
+            $user->newSubscription(env('STRIPE_SUBSCRIPTION_PLAN'), env('STRIPE_SUBSCRIPTION_PLAN_ID'))->create($paymentMethod);
         } catch (\Exception $e) {
             return back()->withErrors(['message' => 'Error creating subscription. ' . $e->getMessage()]);
         }
@@ -66,7 +64,7 @@ class PaymentController extends Controller
         $user = Auth::user();
 
         try {
-            $user->subscription(config('services.stripe.subscription_plan'))->cancel();
+            $user->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->cancel();
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -83,7 +81,7 @@ class PaymentController extends Controller
 
         if($user->isOnGracePeriod()) {
             try {
-                $user->subscription(config('services.stripe.subscription_plan'))->resume();
+                $user->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->resume();
             } catch (\Throwable $th) {
                 throw $th;
             }

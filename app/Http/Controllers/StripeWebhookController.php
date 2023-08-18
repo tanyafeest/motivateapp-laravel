@@ -7,14 +7,33 @@ use Illuminate\Support\Str;
 use Laravel\Cashier\Http\Controllers\WebhookController as CashierController;
 use Laravel\Cashier\Events\WebhookReceived;
 use Laravel\Cashier\Events\WebhookHandled;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\UpgradeConfirmation;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Exception;
 
 class StripeWebhookController extends CashierController
 {
+    /**
+     * Handle customer created
+     *
+     * @param  array  $payload
+     * @return void
+     */
+    public function handleCustomerCreated(array $payload)
+    {
+
+    }
+
+    /**
+     * Handle customer subscription created
+     *
+     * @param  array  $payload
+     * @return void
+     */
+    public function handleCustomerSubscriptionCreated(array $payload)
+    {
+
+    }
+
     /**
      * Handle customer subscription deleted
      *
@@ -35,12 +54,12 @@ class StripeWebhookController extends CashierController
     public function handleInvoicePaymentFailed(array $payload)
     {
         // downgrade user
-        $email = $payload['data']['object']['customer_email'];
-        $user = User::firstWhere('email', $email);
+        // $customer = $payload['customer'];
+        $customer = 'cus_MqFFWawhu6Iknw';
 
-        if($user) {
-            $user->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->cancelNow();
-        }
+        $user = User::where('stripe_id', '=', $customer)->first();
+
+        $user->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->cancelNow();
     }
 
     /**
@@ -51,7 +70,7 @@ class StripeWebhookController extends CashierController
      */
     protected function handleInvoicePaymentSucceeded(array $payload)
     {
-
+        error_log(json_encode($payload));
     }
 
     /**
@@ -62,47 +81,13 @@ class StripeWebhookController extends CashierController
      */
     protected function handleCustomerSubscriptionUpdated(array $payload)
     {
-
+        error_log(json_encode($payload));
     }
-
-    /**
-     * Handle invoice paid
-     *
-     * @param  array  $payload
-     * @return void
-     */
-    protected function handleInvoicePaid(array $payload)
-    {
-        // send mail(upgrade confirmation)
-        $email = $payload['data']['object']['customer_email'];
-        $user = User::firstWhere('email', $email);
-
-        if($user) {
-            $upgradeConfirmationData = new \stdClass();
-            
-            $upgradeConfirmationData->email = $email;
-            $upgradeConfirmationData->oauthType = $user->oauth_type;
-            $upgradeConfirmationData->charged_at = Carbon::now()->format('m/d/y');
-            $upgradeConfirmationData->renew_at = Carbon::now()->addYear()->format('m/d/y');
-
-            Mail::to($user)->send(new UpgradeConfirmation($upgradeConfirmationData));
-        }
-    }
-
-    /**
-     * Handle invoice payment failed
-     *
-     * @param  array  $payload
-     * @return void
-     */
-
 
     public function handleWebHook(Request $request)
     {
         $payload = json_decode($request->getContent(), true);
         $method = 'handle'.Str::studly(str_replace('.', '_', $payload['type']));
-
-        error_log($method);
 
         WebhookReceived::dispatch($payload);
 

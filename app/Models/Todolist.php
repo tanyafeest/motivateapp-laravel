@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Todolist extends Model
 {
-    use HasFactory;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -33,4 +31,6 @@ class Todolist extends Model
         'social' => 'boolean',
         'email' => 'boolean',
     ];
+
+    use HasFactory;
 }

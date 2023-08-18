@@ -3,29 +3,25 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PaymentController;
-
+use Illuminate\Support\Facades\Auth;
 class Upgrade extends Component
 {
     public $isSubscribed;
-    public $isCanceled;
+    public $isCancelled;
     public $isEnded;
 
-    // initialzie state
     public function mount()
     {
         $this->updateStatus();
     }
 
-    // cancel subscription
     public function cancel()
     {
         PaymentController::cancel();
         $this->updateStatus();
     }
 
-    // resume subscription
     public function resume()
     {
         PaymentController::resume();
@@ -37,7 +33,7 @@ class Upgrade extends Component
         $user = Auth::user();
 
         $this->isSubscribed = $user->isSubscribed();
-        $this->isCanceled = $user->isCanceled();
+        $this->isCancelled = $user->isCancelled();
         $this->isEnded = $user->isEnded();
     }
 

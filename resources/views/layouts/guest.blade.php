@@ -1,21 +1,34 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+        <title>{{ config('app.name', 'Motive Mob') }}</title>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- Styles -->
+        @livewireStyles
     </head>
-    <body>
-        <div class="font-sans text-gray-900 antialiased">
-            {{ $slot }}
+    <body class="h-screen font-sans antialiased">
+        <div class="h-screen lg:grid lg:overflow-hidden lg:gap-0" style="grid-template-columns: 80px 460px 1fr;">
+            <!-- Sidebar-->
+            @livewire('sidebar')
+
+            <!-- Intro -->
+           <x-intro-blue/>
+
+            <!-- Main area -->
+            <div class="text-white">
+                {{$slot}}
+            </div>
         </div>
+        
+        @stack('modals')
+
+        @livewireScripts
     </body>
 </html>

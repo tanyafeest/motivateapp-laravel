@@ -1,89 +1,76 @@
-<div class="py-12">
-    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-        {{-- top header --}}
-        <div class="flex items-center justify-between">
-            {{-- hamburger button --}}
-            <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"><-</button>
-        
-            {{-- title & name --}}
-            <div class="flex flex-col text-center">
-                <span>Account information</span>
-                <span class="font-bold">{{ Auth::user()->name }}</span>
-            </div>
-
-            {{-- avatar --}}
-            <img src="/img/avatar.svg" alt="{{ Auth::user()->name }}" width="48" height="48" class="w-12 h-12" />
-        </div>
-
-        {{-- upgarde plan --}}
-        <div class="flex w-full p-5 rounded-lg bg-gray-200/50">
-            <table class="w-full">
-                <thead>
-                    <tr class="text-xl">
-                        <td class="py-5">Upgrade Plan</td>
-                        <td class="text-center">Current Plan Basic</td>
-                        <td class="text-center">Upgrade Full Access</td>
+<div class="row-start-2 text-white row-end-9">
+    <div id="step1" class="flex flex-col justify-center h-screen p-8" style="background: linear-gradient(146.67deg, #805CDC 1.12%, #A941D9 122.75%);">
+        <div class="p-4 rounded-lg" style="background: rgba(0, 0, 0, 0.32); box-shadow: 0px 1px 24px rgba(0, 0, 0, 0.13); backdrop-filter: blur(17.5px);">
+            <table class="w-full table-auto">
+                <thead class="text-sm">
+                    <tr>
+                        <th class="text-2xl font-semibold text-left">Upgrade Plan</th>
+                        <th class="font-normal">Current Plan<br /><span class="font-bold">Basic</span></th>
+                        <th class="font-normal">Upgrade<br /><span class="font-bold">Full Access</span></th>
                     </tr>
                 </thead>
-
                 <tbody>
-                    <tr class="text-base">
-                        <td class="py-3">Unlimited Quotes</td>
-                        <td class="text-center">Yes</td>
-                        <td class="text-center">Yes</td>
+                    <tr class="">
+                        <td>Unlimited Quotes</td>
+                        <td class=""><img class="mx-auto" src="images/tick.png" alt=""></td>
+                        <td class=""><img class="mx-auto" src="images/tick.png" alt=""></td>
                     </tr>
-
-                    <tr class="text-base">
-                        <td class="py-3">Unlimited Songs</td>
-                        <td class="text-center">Yes</td>
-                        <td class="text-center">Yes</td>
+                    <tr>
+                        <td>Unlimited Songs</td>
+                        <td class=""><img class="mx-auto" src="images/tick.png" alt=""></td>
+                        <td class=""><img class="mx-auto" src="images/tick.png" alt=""></td>
                     </tr>
-
-                    <tr class="text-base">
-                        <td class="py-3">Secure Account</td>
-                        <td class="text-center">Yes</td>
-                        <td class="text-center">Yes</td>
+                    <tr>
+                        <td>Secure Account</td>
+                        <td class=""><img class="mx-auto" src="images/tick.png" alt=""></td>
+                        <td class=""><img class="mx-auto" src="images/tick.png" alt=""></td>
                     </tr>
-
-                    <tr class="text-base">
-                        <td class="py-3">Set Your Schedule</td>
-                        <td class="text-center">No</td>
-                        <td class="text-center">Yes</td>
+                    <tr>
+                        <td>Set Your Schedule</td>
+                        <td class=""></td>
+                        <td class=""><img class="mx-auto" src="images/tick.png" alt=""></td>
                     </tr>
-
-                    <tr class="text-base">
-                        <td class="py-3">Spotify Playlist</td>
-                        <td class="text-center">No</td>
-                        <td class="text-center">Yes</td>
+                    <tr>
+                        <td>Spotify Playlist</td>
+                        <td class=""></td>
+                        <td class=""><img class="mx-auto" src="images/tick.png" alt=""></td>
                     </tr>
-
-                    <tr class="text-base">
-                        <td class="py-3">Default Quote & Song Saver</td>
-                        <td class="text-center">No</td>
-                        <td class="text-center">Yes</td>
+                    <tr>
+                        <td>Default Quote &amp; Song Saver</td>
+                        <td class=""></td>
+                        <td class=""><img class="mx-auto" src="images/tick.png" alt=""></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        {{-- actions --}}
-        <div class="flex flex-col items-center justify-center w-full mt-10">
-            @if ($isSubscribed)
-                @if ($isCancelled)   
-                    <div class="flex flex-col gap-2">
-                        Your subscription has been cancelled, but You will be on grade period until {{ Auth::user()->getCurrentPeriodEnd() }}.
-                        <button wire:click="resume" type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Upgrade again</button>
-                    </div>                     
-                @else
-                    <div class="flex flex-col gap-2">
-                        Your subscription will renew on {{ Auth::user()->getCurrentPeriodEnd() }} (12 months after last payment)
-                        <button wire:click="cancel" type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Cancel Subscription</button>
-                    </div>
-                @endif
+        @if ($isSubscribed)
+            @if ($isCanceled)
+                <div class="flex justify-center w-full">
+                    <x-button.white class="max-w-[300px] mt-12" wire:click="resume">
+                        Upgrade again?
+                    </x-button.white>
+                </div>
+                <p class="text-center">
+                    Your subscription has been cancelled, but You will be on grade period until <span class="font-bold">{{ Auth::user()->getCurrentPeriodEnd() }}</span>.
+                </p>
             @else
-                <a type="button" href="{{ route('payment') }}" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Upgrade to Get Full Access</a>
-                <span>20$ per Annual</span>
+                <div class="flex justify-center w-full">
+                    <x-button.white class="max-w-[300px] mt-12" wire:click="cancel">
+                        Cancel Subscription
+                    </x-button.white>
+                </div>
+                <p class="text-center">
+                    Your subscription will renew on <span class="font-bold">{{ Auth::user()->getCurrentPeriodEnd() }}</span> (12 months after last payment).
+                </p>
             @endif
-        </div>
-    </div?>
+        @else
+            <div class="flex justify-center w-full">
+                <x-button.white class="max-w-[300px] mt-12">
+                    <a href="{{ route('payment') }}">Upgrade to Get Full Access</a>
+                </x-button.white>
+            </div>
+            <p class="text-center"><span class="font-bold">{{ config('services.stripe.subscription_price') }}$</span> Annual Pass</p>
+        @endif
+    </div>
 </div>

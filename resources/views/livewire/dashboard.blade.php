@@ -1,149 +1,143 @@
-<div class="py-12">
-    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-        {{-- top header --}}
-        <div class="flex items-center justify-between">
-            {{-- hamburger button --}}
-            <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"><-</button>
-        
-            {{-- title & name --}}
-            <div class="flex flex-col text-center">
-                <span>Account information</span>
-                <span class="font-bold">{{ Auth::user()->name }}</span>
-            </div>
-
-            {{-- avatar --}}
-            <img src="/img/avatar.svg" alt="{{ Auth::user()->name }}" width="48" height="48" class="w-12 h-12" />
-        </div>
-
-        {{-- Connect Spotify --}}
-        {{-- <div class="flex flex-col items-center justify-center max-w-xl mx-auto mt-10">
-            @if ($spotify_id)
-                <span class="text-2xl text-cyan-500">Spotify connected: <b>{{ $spotify_id }}</b></span>
-
-                <div class="flex flex-col p-5">
-                    <span class="text-xl font-medium text-teal-500">Below are your Top 10 songs you enjoy</span>
-                    <div class="flex justify-center mt-5">
-                        @forelse ($topItems as $topItem)
-                            <div class="w-full p-2 bg-gray-300 rounded cursor-pointer hover:bg-gray-200">{{ $topItem->name }}</div>
-                        @empty
-                            <span class="text-sm text-center text-red-500">There are no playlists.</span>
-                        @endforelse
+<div>
+    <div>
+        {{-- Stop trying to control. --}}
+    </div>
+    <div class="row-start-2 row-end-4 bg-red-100">
+        <div class="grid grid-cols-2 gap-8 p-8">
+            <div>
+                <div class="flex justify-between mb-4">
+                    <div class="flex space-x-4">
+                        <img src="images/quotes.svg" alt="">
+                        <div>
+                            <p class="text-2xl font-semibold">Quotes</p>
+                            <p>Received</p>
+                        </div>
                     </div>
-
-                    <span class="text-xl font-medium text-teal-500">Below are your playlists</span>
-
-                    <div class="flex justify-center mt-5">
-                        @forelse ($playLists as $playlist)
-                            <div class="w-full p-2 bg-gray-300 rounded cursor-pointer hover:bg-gray-200">{{ $playlist->id }}</div>
-                        @empty
-                            <span class="text-sm text-center text-red-500">There are no playlists.</span>
-                        @endforelse
+                    <div>
+                        <p class="text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-red-600">{{ Auth::user()->numberOfQuotes() }}</p>
                     </div>
                 </div>
-            @else
-                <form method="GET" action="{{ route('oauth.spotify') }}">
-                    <button type="submit" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Connect Spotify</button>
-                </form>
-            @endif
-        </div> --}}
-
-        {{-- Quotes and Songs --}}
-        <div class="flex w-full gap-5 mt-5">
-            {{-- Quotes Card --}}
-            <div class="flex flex-col w-full gap-5 p-5">
-                <div class="flex items-center justify-between">
-                    <span>Quotes Received</span>
-                    <span>{{ Auth::user()->numberOfQuotes() }}</span>
-                </div>
-
-                <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Request More</button>
+                <x-button.red onclick="handleRequestMore()" class="w-full">Request More</x-button.red>
             </div>
-
-            {{-- Songs Card --}}
-            <div class="flex flex-col w-full gap-5 p-5">
-                <div class="flex items-center justify-between">
-                    <span>Recommended Songs</span>
-                    <span>{{ Auth::user()->numberOfSongs() }}</span>
+            <div>
+                <div class="flex justify-between mb-4">
+                    <div class="flex space-x-4">
+                        <img src="images/songs.svg" alt="">
+                        <div>
+                            <p>Recommended</p>
+                            <p class="text-2xl font-semibold">Songs</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-red-600">{{ Auth::user()->numberOfSongs() }}</p>
+                    </div>
                 </div>
-
-                <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Request More</button>
-            </div>
-        </div>
-
-        {{-- Setting --}}
-        <div class="flex w-full mt-10">
-            <div class="flex flex-col w-3/5 gap-10 p-5">
-                <div class="flex flex-col gap-1">
-                    <span>Receiving Motivational</span>
-
-                    <span class="text-xl">Quotes & Songs</span>
-                </div>
-
-                <div class="flex flex-col gap-1">
-                    <span class="text-sm text-gray-400">Using your public share link</span>
-
-                    <span class="underline cursor-pointer underline-offset-4">{{ env("APP_URL") . 'share/' . Auth::user()->share_link . "/" . str_replace(" ", "",strtolower(Auth::user()->name)) }}</span>
+    
+                <x-button.red onclick="handleRequestMore()" class="w-full">Request More</x-button.red>
                 
-                    <span class="text-sm text-gray-400">you can receive from any friends, family, teammates, colleaguesm anyone! Here are the steps how. Once you`ve completed, check it off your “to do” list!</span>
-                </div>
-            </div>
-
-            <div class="flex flex-col w-2/5 gap-5 p-5">
-                <div class="flex flex-col gap-5">
-                    <div class="flex items-center mb-4">
-                        <input id="text-message" type="checkbox" wire:model="todolist.0" value="0" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:change="checkTodo('message', 'toggle')">
-                        <label for="text-message" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Text a message to Friends & Family</label>
-                    </div>
-
-                    <div class="p-2 border rounded-lg shadow-md">
-                        Check out <span class="text-red-500 underline cursor-pointer">https://sharelink.com/4as/asdjashdj</span> where you can recommend a motivational song or inspiring quote for me. 
-                    </div>
-                </div>
-                <div class="flex flex-col gap-5">
-                    <div class="flex items-center mb-4">
-                        <input id="share-chatapp" type="checkbox" wire:model="todolist.1" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:change="checkTodo('chat', 'toggle')">
-                        <label for="share-chatapp" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Share in Chat App</label>
-                    </div>
-
-                    <div class="flex justify-between">
-                        <a href="{{ env('PUBLIC_EXACTSPORTS_WHATSAPP_URL') }}" target="_blank" wire:click="checkTodo('chat', 'check')">
-                            <img src="/img/whatsapp.svg" width="40" height="40" class="w-10 h-10" />
-                        </a>
-                        <a href="{{ env('PUBLIC_EXACTSPORTS_SLACK_URL') }}" target="_blank">
-                            <img src="/img/slack.svg" width="40" height="40" class="w-10 h-10" />
-                        </a>
-                        <a href="{{ env('PUBLIC_EXACTSPORTS_GROUPME_URL') }}" target="_blank">
-                            <img src="/img/chat.svg" width="40" height="40" class="w-10 h-10" />
-                        </a>
-                        <a href="{{ env('PUBLIC_EXACTSPORTS_DISCORD_URL') }}" target="_blank">
-                            <img src="/img/twitch.svg" width="40" height="40" class="w-10 h-10" />
-                        </a>
-                    </div>
-                </div>
-
-                <div class="flex flex-col gap-5">
-                    <div class="flex items-center mb-4">
-                        <input id="share-socials" type="checkbox" wire:model="todolist.2" value="2" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:change="checkTodo('social', 'toggle')">
-                        <label for="share-socials" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Share Socially in Each App</label>
-                    </div>
-
-                    <div class="flex justify-between">
-                        <img src="/img/instagram.svg" width="40" height="40" class="w-10 h-10" />
-                        <img src="/img/facebook.svg" width="40" height="40" class="w-10 h-10" />
-                        <img src="/img/tik-tok.svg" width="40" height="40" class="w-10 h-10" />
-                        <img src="/img/twitter.svg" width="40" height="40" class="w-10 h-10" />
-                    </div>
-                </div>
-
-                <div class="flex flex-col gap-5">
-                    <div class="flex items-center mb-4">
-                        <input id="send-email" type="checkbox" wire:model="todolist.3" value="3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" wire:change="checkTodo('email', 'toggle')">
-                        <label for="send-email" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Share Socially in Each App</label>
-                    </div>
-
-                    <button type="button" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Send Email</button>
-                </div>
+                <p class="mt-4 text-xs text-stone-300"><strong>Note:</strong> Average user has 85 quotes and 107 songs submitted</p>
             </div>
         </div>
     </div>
+    
+    <div class="row-start-4 row-end-9">
+        <div id="step1" class="hidden bg-sky-300 relative text-white min-h-[440px]">
+            <img src="images/dashboard.png" class="absolute bottom-0 right-0 max-w-xl" alt="">
+            <p class="absolute text-6xl left-8 top-16">
+                <span class="font-semibold">Motivate</span><br /> to Be <span class="font-semibold">Your<br /> Best</span>
+            </p>
+        </div>
+    
+        <div id="step2" class="flex justify-between bg-white ">
+            <div class="w-[72rem] p-8 h-screen" style="box-shadow: 0px 7.93548px 51.0996px rgba(230, 234, 238, 0.6);">
+                <p>Receiving Motivational</p>
+                <p class="mb-8 text-2xl font-semibold">Quotes & Songs:</p>
+    
+                <p class="text-xs">Using your public share link:</p>
+    
+                <x-jet-input id="link" class="block w-full mt-1 border-green-500 focus-within:border-green-600" type="text" name="link" value="{{ Auth::user()->shareLink() }}" readonly required autofocus />
+    
+                <p class="mt-4 text-xs">you can receive from any friends, family, teammates, colleaguesm anyone! Here are the steps how. Once you`ve completed, check it off your “to do” list!
+            </div>
+            <div class="h-screen p-8 text-sm" style="box-shadow: 0px 7.93548px 51.0996px rgba(230, 234, 238, 0.6);">
+                <div>
+                    <div>
+                        <div>
+                            <x-jet-checkbox id="text-message" wire:model="todolist.0" value="0" wire:change="checkTodo('message', 'toggle')" class="text-gray-800" name="msg" autofocus />
+                            Text a message to Friends &amp; Family
+                        </div>
+                        <div class="flex justify-between px-4 space-x-2">
+                            <div class="">
+                                <a href="#" class="flex items-center justify-center rounded-lg group">
+                                    <span class="sr-only">User</span>
+                                    <img class="w-20" src="images/User.svg" />
+                                </a>
+                            </div>
+                            <div class="p-2 bg-white shadow rounded-xl">
+                                <p>Check out <span class="text-red-500 underline">{{ Auth::user()->shareLink() }}</span> where you can recommend a motivational song or inspiring quote for me. </p>
+                            </div>
+                            <img src="images/copy.svg" alt="">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div>
+                            <x-jet-checkbox id="share-chatapp" wire:model="todolist.1" value="1" wire:change="checkTodo('chat', 'toggle')" class="text-gray-800" name="msg" :value="old('msg')" autofocus />
+                            Share in Chat App
+                        </div>
+                        <div class="flex justify-between py-4 space-x-4">
+                            <img src="images/whatsapp.svg" alt="">
+                            <img src="images/slack.svg" alt="">
+                            <img src="images/chat.svg" alt="">
+                            <img src="images/twitch.svg" alt="">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div>
+                            <x-jet-checkbox id="share-socials" wire:model="todolist.2" value="2" wire:change="checkTodo('social', 'toggle')" class="text-gray-800" name="msg" :value="old('msg')" autofocus />
+                            Share Socially in Each App
+                        </div>
+                        <div class="flex justify-between py-4 space-x-4">
+                            <img src="images/instagram.svg" alt="">
+                            <img src="images/facebook.svg" alt="">
+                            <img src="images/tik-tok.svg" alt="">
+                            <img src="images/twitter.svg" alt="">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div>
+                            <x-jet-checkbox id="send-email" wire:model="todolist.3" value="3" wire:change="checkTodo('email', 'toggle')" class="text-gray-800" name="msg" :value="old('msg')" autofocus />
+                            Send Email to Friends &amp; Family
+                        </div>
+                    </div>
+                </div>
+    
+                <x-button.red class="w-full mt-2">
+                    <a href="{{ Auth::user()->encodedMail() }}">Send Email</a>
+                </x-button.red>
+            </div>
+        </div>
+    </div>
+
+    @push('custom-script')
+    <script>
+        const auth = @js(Auth::user());
+
+        function handleRequestMore() {
+            navigator.clipboard.writeText("{{ Auth::user()->shareLink() }}");
+            Toast.info('Link has been copied. Please share with your friends and family.', `Hey, ${auth.name}`);
+        }
+        
+        window.onload = () => {
+            const msg = `Hey, ${auth.name}! Welcome to Motivemob world!`;
+
+            if(!localStorage.getItem("isLoggedIn")) {
+                Toast.success(msg, 'Welcome');
+                localStorage.setItem("isLoggedIn", true);
+            }
+        }
+    </script>
+    @endpush
 </div>

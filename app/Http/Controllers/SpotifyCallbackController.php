@@ -11,20 +11,16 @@ class SpotifyCallbackController
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function __invoke(Request $request)
     {
         try {
             $user = Socialite::driver('spotify')->user();
-
-            session(['temp_spotify_id' => $user->id]);
+            session(['temp_spotify_id' => $user->getId()]);
             session(['temp_spotify_access_token' => $user->token]);
-
             return redirect()->intended(RouteServiceProvider::HOME)->send();
-        } catch (\Throwable $th) {
-            dd($th);
+        } catch (\Throwable) {
             return redirect()->intended(RouteServiceProvider::HOME)->send();
         }
     }

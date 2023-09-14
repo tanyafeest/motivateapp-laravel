@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Track;
 
 class Inspiration extends Model
 {
@@ -19,7 +20,7 @@ class Inspiration extends Model
         'sharedby_user_id',
         'album_name',
         'album_href',
-        'quotes_id'
+        'quotes_id',
     ];
 
     /**
@@ -32,4 +33,8 @@ class Inspiration extends Model
         'album_href',
         'quotes_id'
     ];
+
+    public function track() {
+        return $this->hasOne(Track::class);
+    }
 }

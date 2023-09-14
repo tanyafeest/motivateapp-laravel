@@ -32,7 +32,7 @@ class StartIssue extends Command
         $this->info('Making sure you have the GitHub CLI installed...');
         exec('gh --version', $gh);
 
-        if (!str_contains(json_encode($gh), 'gh version')) {
+        if (!str_contains(json_encode($gh, JSON_THROW_ON_ERROR), 'gh version')) {
             $this->error('You must have the GitHub CLI installed in order to use this command. See https://cli.github.com/');
 
             return Command::FAILURE;

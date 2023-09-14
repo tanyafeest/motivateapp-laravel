@@ -11,14 +11,14 @@ use App\Models\Todolist;
 class Dashboard extends Component
 {
     // private variables
-    private $client;
+    private readonly \GuzzleHttp\Client $client;
 
     // public variables
-    public $spotify_id;
-    public $access_token;
+    public $spotifyId;
+    public $accessToken;
     public $playLists;
     public $topItems;
-    public $todolist = [false, false, false, false];
+    public $toDoList = [false, false, false, false];
 
     public function __construct()
     {
@@ -28,45 +28,44 @@ class Dashboard extends Component
     public function mount()
     {
         // get current state of todo list
-        $todolist = Todolist::where('user_id', Auth::user()->id)->first();
-        if($todolist) {
-            $this->todolist[0] = $todolist->message;
-            $this->todolist[1] = $todolist->chat;
-            $this->todolist[2] = $todolist->social;
-            $this->todolist[3] = $todolist->email;
+        $toDoList = Todolist::where('user_id', Auth::user()->id)->first();
+        if($toDoList) {
+            $this->toDoList[0] = $toDoList->message;
+            $this->toDoList[1] = $toDoList->chat;
+            $this->toDoList[2] = $toDoList->social;
+            $this->toDoList[3] = $toDoList->email;
         }
 
         if(session()->has("temp_spotify_id")) {
             try {
-                $this->spotify_id = session("temp_spotify_id");
-                $this->access_token = session("temp_spotify_access_token");
+                $this->spotifyId = session("temp_spotify_id");
+                $this->accessToken = session("temp_spotify_access_token");
 
                 // dd($this->spotify_id, $this->access_token);
                 $headers = [
-                    'Authorization' => 'Bearer ' . $this->access_token,
+                    'Authorization' => 'Bearer ' . $this->accessToken,
                     'Accept' => 'application/json',
                     'Content-Type' => 'application/json'
                 ];
 
                 // get all playlist of user
-                $response = $this->client->get("v1/users/" . $this->spotify_id ."/playlists?offset=0&limit=20", ['headers' => $headers]);
+                $response = $this->client->get("v1/users/" . $this->spotifyId ."/playlists?offset=0&limit=20", ['headers' => $headers]);
 
-                if($stream = $response->getBody()) {
-                    $size = $stream->getSize();
-                    $res = json_decode($stream->read($size));
+                $stream = $response->getBody();
+                $size = $stream->getSize();
+                $res = json_decode($stream->read($size), null, 512, JSON_THROW_ON_ERROR);
 
-                    $this->playLists = $res->items;
-                }
+                $this->playLists = $res->items;
 
                 // get top 10 items of user - default limit = 20, offset = 0, time_range = medium_term(last 6 months)
                 $response = $this->client->get("v1/me/top/artists", ['headers' => $headers]);
 
-                if($stream = $response->getBody()) {
-                    $size = $stream->getSize();
-                    $res = json_decode($stream->read($size));
+                $stream = $response->getBody();
+                $size = $stream->getSize();
+                $res = json_decode($stream->read($size), null, 512, JSON_THROW_ON_ERROR);
 
-                    $this->topItems = $res->items;
-                }
+                $this->topItems = $res->items;
+
             } catch (\Throwable $th) {
                 dd($th);
             }
@@ -75,32 +74,32 @@ class Dashboard extends Component
 
     public function checkTodo($type, $action)
     {
-        $todolist = Todolist::where('user_id', Auth::user()->id)->first();
+        $toDoList = Todolist::where('user_id', Auth::user()->id)->first();
 
-        if(!$todolist) {
-            $todolist = new Todolist;
+        if(!$toDoList) {
+            $toDoList = new Todolist;
 
-            $todolist->user_id = Auth::user()->id;
+            $toDoList->user_id = Auth::user()->id;
         }
         
         // If action is a toggle, the state should be the opposite of the current value.
         // If action is a check, the state should be true 
         switch($type) {
             case 'message': 
-                $todolist->message = $action == 'toggle' ? !$todolist->message : true;
+                $toDoList->message = $action == 'toggle' ? !$toDoList->message : true;
                 break;
             case 'chat': 
-                $this->todolist[1] = $todolist->chat = $action == 'toggle' ? !$todolist->chat : true;
+                $this->toDoList[1] = $toDoList->chat = $action == 'toggle' ? !$toDoList->chat : true;
                 break;
             case 'social': 
-                $this->todolist[2] = $todolist->social = $action == 'toggle' ? !$todolist->social : true;
+                $this->toDoList[2] = $toDoList->social = $action == 'toggle' ? !$toDoList->social : true;
                 break;
             case 'email': 
-                $todolist->email = $action == 'toggle' ? !$todolist->email : true;
+                $toDoList->email = $action == 'toggle' ? !$toDoList->email : true;
                 break;
         }
 
-        $todolist->save();
+        $toDoList->save();
     }
 
     public function render()

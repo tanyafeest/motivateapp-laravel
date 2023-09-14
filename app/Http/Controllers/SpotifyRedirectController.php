@@ -10,11 +10,10 @@ class SpotifyRedirectController
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function __invoke(Request $request)
     {
-        return Socialite::driver('spotify')->scopes(['user-top-read'])->redirect();
+        return Socialite::driver('spotify')->redirect();
     }
 }

@@ -26,13 +26,13 @@ class IpBase {
 
             if($stream = $response->getBody()) {
                 $size = $stream->getSize();
-                $info = json_decode($stream->read($size), true);
+                $info = json_decode((string) $stream->read($size), true, 512, JSON_THROW_ON_ERROR);
                 return $info['data'];
             } else {
-                return null;
+                return new \stdClass();
             }
-        } catch (\Throwable $th) {
-            return null;
+        } catch (\Throwable) {
+            return  new \stdClass();
         }
     }
 }

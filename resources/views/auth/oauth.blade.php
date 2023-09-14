@@ -3,14 +3,14 @@
         <div class="flex flex-col gap-5 pt-20">
             <span class="text-4xl font-bold text-center text-cyan-500">MotiveMob</span>
 
-            @if ($user_requested_inspire)
+            @if ($userRequestedInspire)
             <div class="flex flex-col items-center justify-center text-center">
                 <span class="text-2xl">Ready to inspire</span>
-                <span class="">{{ $user_requested_inspire->name }}</span>
+                <span class="">{{ $userRequestedInspire->name }}</span>
 
                 <img src="/img/636e426c80302.svg" class="w-[90px] h-[90px] my-5" />
 
-                <span>Authenticate your identify so <b>{{ $user_requested_inspire->name }}</b> knows it Came From You!</span>
+                <span>Authenticate your identify so <b>{{ $userRequestedInspire->name }}</b> knows it Came From You!</span>
             </div>
             @endif
 

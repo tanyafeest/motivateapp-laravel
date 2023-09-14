@@ -14,12 +14,12 @@ class OAuthContoller
      */
     public function __invoke(Request $request)
     {
-        $user_requested_inspire = null;
+        $userRequestedInspire = null;
 
         if (session()->has("temp_inspiration_share_link")) {
-            $user_requested_inspire = User::where('share_link', session('temp_inspiration_share_link'))->get()->first();
+            $userRequestedInspire = User::where('share_link', session('temp_inspiration_share_link'))->first();
         }
 
-        return view('auth.oauth', compact('user_requested_inspire'));
+        return view('auth.oauth', compact('userRequestedInspire'));
     }
 }

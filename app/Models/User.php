@@ -12,8 +12,10 @@ use Laravel\Sanctum\HasApiTokens;
 use Dyrynda\Database\Support\NullableFields;
 use App\Models\Inspiration;
 use App\Models\Todolist;
+use App\Models\Setting;
 use Laravel\Cashier\Billable;
 use Carbon\Carbon;
+
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -56,19 +58,19 @@ class User extends Authenticatable
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array
+     * @var array<string>
      */
     protected $hidden = [
         'password',
         'remember_token',
         'two_factor_recovery_codes',
-        'two_factor_secret',
+        'two_factor_secret'
     ];
 
     /**
      * The attributes that should be cast.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
@@ -95,6 +97,14 @@ class User extends Authenticatable
         return $this->hasOne(Todolist::class);
     }
 
+    public function inspirations() {
+        return $this->hasOne(Inspiration::class);
+    }
+
+    public function setting() {
+        return $this->hasOne(Setting::class);
+    }
+
     public function isSubscribed() {
         return $this->subscribed(env('STRIPE_SUBSCRIPTION_PLAN'));
     }
@@ -112,7 +122,7 @@ class User extends Authenticatable
     }
 
     public function getCurrentPeriodEnd() {
-        $timestamp = $this->subscriptions[0]->asStripeSubscription()->current_period_end;
+        $timestamp = $this->subscriptions()->first()->asStripeSubscription()->current_period_end;
 
         return Carbon::createFromTimeStamp($timestamp)->toFormattedDateString();
     }

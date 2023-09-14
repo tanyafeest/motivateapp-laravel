@@ -5,17 +5,17 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\User;
 use App\Actions\Util\Twilio;
-use DateTime;
-use DateInterval;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 
-class TwoStepAuthentication extends Command
+class ConfirmSubscription extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'command:twostepauth';
+    protected $signature = 'command:confirmsubscription';
 
     /**
      * The console command description.
@@ -32,8 +32,8 @@ class TwoStepAuthentication extends Command
     public function handle()
     {
         $twilio = new Twilio();
-        $date = new DateTime(date('Y-m-d H:i:s'));
-        $date = $date->sub(new DateInterval('PT30M'));
+        $date = Carbon::now();
+        $date = $date->sub(CarbonInterval::minutes(30));
 
         $users = User::whereTime('created_at', '<=', $date->format('H:i:s'))->where('is_sent_two_step_auth', false)->get();
 

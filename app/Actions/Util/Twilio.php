@@ -17,7 +17,7 @@ class Twilio {
      * send message to the user
      *
      * @param  String $from, $to, $body
-     * @return 
+     * @return Object
     */
     public function sendSMS($body, $from, $to)
     {
@@ -26,10 +26,9 @@ class Twilio {
                 'body' => $body,
                 'from' => $from
             ]);
-
             return $message->sid;
-        } catch (Exception $e) {
-            return null;
+        } catch (Exception) {
+            return new \stdClass();
         }
     }
 
@@ -45,10 +44,11 @@ class Twilio {
             $res = $this->client->lookups->v1->phoneNumbers($phone)->fetch();
 
             return true;
-        } catch (Exception $e) {
-            if($e->getCode() == 404) {
-                return false;
-            }
+        } catch (Exception) {
+            // if($e->getCode() == 404) {
+            //     return false;
+            // }
+            return false;
         }
     }
 }

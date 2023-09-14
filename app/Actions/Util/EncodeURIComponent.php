@@ -11,7 +11,7 @@ class EncodeURIComponent {
     */
     public function encode($str)
     {
-        $revert = array('%21'=>'!', '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')');
-        return strtr(rawurlencode($str), $revert);
+        $revert = ['%21'=>'!', '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')'];
+        return strtr(rawurlencode((string) $str), $revert);
     }
 }

@@ -38,7 +38,7 @@ class Upgrade extends Component
     }
 
     public function render()
-    {
+    {        
         return view('livewire.upgrade');
     }
 }

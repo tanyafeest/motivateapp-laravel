@@ -7,8 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SharingGuidanceOne;
 use App\Mail\SharingGuidanceAll;
-use DateTime;
-use DateInterval;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 
 class SharingGuidance extends Command
 {
@@ -33,8 +33,8 @@ class SharingGuidance extends Command
      */
     public function handle()
     {
-        $date = new DateTime(date('Y-m-d H:i:s'));
-        $date = $date->sub(new DateInterval('P1D'));
+        $date = Carbon::now();
+        $date = $date->sub(CarbonInterval::day(1));
 
         $users = User::whereTime('created_at', '<=', $date->format('H:i:s'))->where('is_sharing_guidance', false)->get();
         $allUsers = User::all();
@@ -43,7 +43,7 @@ class SharingGuidance extends Command
             // send guidance eamil to this user
             $sharingGuidanceMailData = new \stdClass();
             $sharingGuidanceMailData->name = $user->name;
-            $sharingGuidanceMailData->share_link = $user->shareLink();
+            $sharingGuidanceMailData->share_link = $user->share_link;
 
             Mail::to($user)->send(new SharingGuidanceOne($sharingGuidanceMailData));
             foreach($allUsers as $other) {
@@ -53,7 +53,7 @@ class SharingGuidance extends Command
 
                 $sharingGuidanceAllMailData = new \stdClass();
                 $sharingGuidanceAllMailData->name = $user->name;
-                $sharingGuidanceAllMailData->share_link = $user->shareLink();
+                $sharingGuidanceAllMailData->share_link = $user->share_link;
 
                 Mail::to($other)->send(new SharingGuidanceAll($sharingGuidanceAllMailData));
             }

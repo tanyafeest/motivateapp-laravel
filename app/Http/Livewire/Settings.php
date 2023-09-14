@@ -70,12 +70,12 @@ class Settings extends Component
     // mount
     public function mount()
     {
-        $this->isDaily = Auth::user()->setting->isDaily();
-        $this->isWeekly = Auth::user()->setting->isWeekly();
-        $this->isMonthly = Auth::user()->setting->isMonthly();
-        $this->isNever = Auth::user()->setting->isNever();
+        $this->isDaily = Auth::user()->setting()->isDaily();
+        $this->isWeekly = Auth::user()->setting()->isWeekly();
+        $this->isMonthly = Auth::user()->setting()->isMonthly();
+        $this->isNever = Auth::user()->setting()->isNever();
 
-        $this->currentSMSFrequency = Auth::user()->setting->sms_frequency;
+        $this->currentSMSFrequency = Auth::user()->setting()->sms_frequency;
 
         if($this->spotify->status() == 'CONNECTED') {
             $this->spotifyUserTopSongs = $this->spotify->getTopItems();
@@ -99,6 +99,7 @@ class Settings extends Component
     // watch search song
     public function updatedSearchSong()
     {
+
         // search song
         if(count($this->spotifyUserTopSongs) >= 10) {
 
@@ -164,7 +165,7 @@ class Settings extends Component
     public function selectDuration($type = 'daily')
     {
         // select first option of each duration
-        $setting = Auth::user()->setting;
+        $setting = Auth::user()->setting();
 
         switch($type) {
             case 'daily':
@@ -207,7 +208,7 @@ class Settings extends Component
     // select option
     public function updatedCurrentSMSFrequency()
     {
-        $setting = Auth::user()->setting;
+        $setting = Auth::user()->setting();
         $setting->sms_frequency = $this->currentSMSFrequency;
         $setting->save();
 
@@ -222,8 +223,8 @@ class Settings extends Component
     /**
      * Set auto add songs
      * 
-     * @param
-     * @return
+     * 
+     * @return void
      */
     public function setAutoAddSongs()
     {
@@ -241,13 +242,13 @@ class Settings extends Component
             }
 
             // add songs
-            $inspiration_groups = $user->inspirations
+            $inspirationGroups = $user->inspirations()
                 ->where('is_added_to_playlist', false)
                 ->groupBy('track_id');
             $uris = [];
             
             // --- get uris of songs
-            foreach ($inspiration_groups as $key => $group) {
+            foreach ($inspirationGroups as $key => $group) {
                 $uris[] = $group[0]->track->uri;
             }
 
@@ -259,7 +260,7 @@ class Settings extends Component
 
             // --- if success, set the is_added_to_playlist to TRUE
             if($res) {
-                foreach ($inspiration_groups as $key1 => $group) {
+                foreach ($inspirationGroups as $key1 => $group) {
                     foreach($group as $key2 => $inspiration) {
                         $inspiration->is_added_to_playlist = true;
                         $inspiration->save();
@@ -267,7 +268,7 @@ class Settings extends Component
                 }
 
                 // set is_auto_add_songs to TRUE
-                $setting = Auth::user()->setting;
+                $setting = Auth::user()->setting();
                 $setting->is_auto_add_songs = true;
                 $setting->save();
             } else {

@@ -41,7 +41,7 @@ class Commit extends Command
 
         exec('git add . && git commit --m "' . $message . '"');
 
-        if ($this->confirm('Committed. Do you want to push?', 'yes')) {
+        if ($this->confirm('Committed. Do you want to push?', true)) {
             exec('git push');
         }
 

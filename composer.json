@@ -8,6 +8,7 @@
         "php": "^8.0.2",
         "doctrine/dbal": "^3.5",
         "dyrynda/laravel-nullable-fields": "^4.2",
+        "google/apiclient": "^2.15",
         "guzzlehttp/guzzle": "^7.0",
         "iatstuti/laravel-nullable-fields": "^4.2",
         "laravel/cashier": "^14.3",
@@ -26,7 +27,9 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
+        "nunomaduro/larastan": "^2.6",
         "phpunit/phpunit": "^9.5.10",
+        "rector/rector": "*",
         "spatie/laravel-ignition": "^1.0"
     },
     "autoload": {

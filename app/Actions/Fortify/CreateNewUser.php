@@ -43,7 +43,7 @@ class CreateNewUser implements CreatesNewUsers
             'gender' => $input['gender'],
             'age' => $input['age'],
             'grade_year' => isset($input['current_grade']) ? $calculateGradeYear->calc($input['current_grade']) : null,
-            'sport_id' => isset($input['sport']) ? $input['sport'] : null,
+            'sport_id' => $input['sport'] ?? null,
             'password' => Hash::make($input['password']),
             'share_link' => uniqid()
         ]);

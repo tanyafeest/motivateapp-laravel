@@ -6,9 +6,9 @@ use GuzzleHttp\Client;
 use Exception;
 
 class Spotify {
-    private $client;
-    private $headers;
-    private $status;
+    private readonly \GuzzleHttp\Client $client;
+    private ?array $headers = null;
+    private ?string $status = null;
     private $id;
 
     public function __construct()
@@ -44,7 +44,7 @@ class Spotify {
      * Get user's top items
      * 
      * @param Integer $limit = 10
-     * @param String $offset = 0
+     * @param Integer $offset = 0
      * @param String $time_range = medium_term
      * 
      * @return Array
@@ -56,10 +56,10 @@ class Spotify {
         try {
             $response = $this->client->get($endpoint, ['headers' => $this->headers]);
 
-            if($stream = $response->getBody()) {
-                $size = $stream->getSize();
-                return json_decode($stream->read($size), true);
-            }
+            $stream = $response->getBody();
+            $size = $stream->getSize();
+            return json_decode($stream->read($size), true, 512, JSON_THROW_ON_ERROR);
+            
         } catch (Exception $e) {
             if($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
@@ -91,18 +91,17 @@ class Spotify {
         try {
             $response = $this->client->get($endpoint, ['headers' => $this->headers]);
 
-            if($stream = $response->getBody()) {
-                $size = $stream->getSize();
-                $res = json_decode($stream->read($size), true);
+            $stream = $response->getBody();
+            $size = $stream->getSize();
+            $res = json_decode($stream->read($size), true, 512, JSON_THROW_ON_ERROR);
 
-                return $res['tracks']['items'];
-            }
+            return $res['tracks']['items'];
         } catch (Exception $e) {
             if($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
             }
 
-            return null;
+            return [];
         }
     }
 
@@ -120,16 +119,16 @@ class Spotify {
         try {
             $response = $this->client->get($endpoint, ['headers' => $this->headers]);
 
-            if($stream = $response->getBody()) {
-                $size = $stream->getSize();
-                return json_decode($stream->read($size), true);
-            }
+            $stream = $response->getBody();
+            $size = $stream->getSize();
+
+            return json_decode($stream->read($size), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
             if($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
             }
             
-            return null;
+            return [];
         }
     }
 
@@ -147,16 +146,16 @@ class Spotify {
         try {
             $response = $this->client->get($endpoint, ['headers' => $this->headers]);
 
-            if($stream = $response->getBody()) {
-                $size = $stream->getSize();
-                return json_decode($stream->read($size), true);
-            }
+            $stream = $response->getBody();
+            $size = $stream->getSize();
+            
+            return json_decode($stream->read($size), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
             if($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
             }
             
-            return null;
+            return [];
         }
     }
 
@@ -168,7 +167,7 @@ class Spotify {
      * @param Boolean $public = true
      * @param Boolean $collaborative = false
      * 
-     * @return JSON
+     * @return Array
      */
     public function createNewPlaylist($name = "New Playlist", $description = "New Playlist Description", $public = true, $collaborative = false)
     {
@@ -181,52 +180,50 @@ class Spotify {
         ];
 
         try {
-            $response = $this->client->post($endpoint, ['headers' => $this->headers, 'body' => json_encode($body)]);
+            $response = $this->client->post($endpoint, ['headers' => $this->headers, 'body' => json_encode($body, JSON_THROW_ON_ERROR)]);
 
-            if($stream = $response->getBody()) {
-                $size = $stream->getSize();
-                return json_decode($stream->read($size), true);
-            }
+            $stream = $response->getBody();
+            $size = $stream->getSize();
+
+            return json_decode($stream->read($size), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
             if($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
             }
             
-            return null;
+            return [];
         }
     }
 
     /**
      * Add track to specific playlist
      * 
-     * @param String $playlist_id
+     * @param String $playlistId
      * @param Array $uris
      * @param Integer $position = 0
      * 
-     * @return JSON
+     * @return Array
      */
-    public function addTracksToPlaylist($playlist_id, $uris, $position = 0)
+    public function addTracksToPlaylist($playlistId, $uris, $position = 0)
     {
-        $endpoint = "v1/playlists/" . $playlist_id . "/tracks";
+        $endpoint = "v1/playlists/" . $playlistId . "/tracks";
         $body = [
             "uris" => $uris,
             "position" => $position
         ];
 
         try {
-            $response = $this->client->post($endpoint, ['headers' => $this->headers, 'body' => json_encode($body)]);
+            $response = $this->client->post($endpoint, ['headers' => $this->headers, 'body' => json_encode($body, JSON_THROW_ON_ERROR)]);
 
-            if($stream = $response->getBody()) {
-                $size = $stream->getSize();
-                return json_decode($stream->read($size), true);
-            }
+            $stream = $response->getBody();
+            $size = $stream->getSize();
+            
+            return json_decode($stream->read($size), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
-            dd($e);
             if($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
             }
-            
-            return null;
+            return [];
         }
     }
 }

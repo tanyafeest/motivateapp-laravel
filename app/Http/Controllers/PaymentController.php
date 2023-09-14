@@ -25,6 +25,9 @@ class PaymentController extends Controller
      */
     public function payment()
     {
+        //Return if a non-user ends up inside a controller that requires authentication, etc
+        abort_if(!Auth::user(), 404);
+
         $user = Auth::user();
 
         $intent = $user->createSetupIntent();
@@ -35,10 +38,13 @@ class PaymentController extends Controller
     /**
      * Process the payment
      * 
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function subscription(Request $request)
     {
+        //Return if a non-user ends up inside a controller that requires authentication, etc
+        abort_if(!Auth::user(), 404);
+
         $user = Auth::user();
 
         $paymentMethod = $request->input('payment_method');
@@ -57,10 +63,13 @@ class PaymentController extends Controller
     /**
      * Cancel the subscription
      * 
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public static function cancel()
     {
+        //Return if a non-user ends up inside a controller that requires authentication, etc
+        abort_if(!Auth::user(), 404);
+
         $user = Auth::user();
 
         try {
@@ -68,15 +77,19 @@ class PaymentController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
+        return redirect()->intended(RouteServiceProvider::HOME)->send();
     }
 
     /**
      * Resume the subscription
      * 
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
     public static function resume()
     {
+        //Return if a non-user ends up inside a controller that requires authentication, etc
+        abort_if(!Auth::user(), 404);
+        
         $user = Auth::user();
 
         if($user->isOnGracePeriod()) {
@@ -86,5 +99,6 @@ class PaymentController extends Controller
                 throw $th;
             }
         }
+        return redirect()->intended(RouteServiceProvider::HOME)->send();
     }
 }

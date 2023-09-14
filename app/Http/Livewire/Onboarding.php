@@ -26,7 +26,7 @@ class Onboarding extends Component
     public $randomPotentialQuote = null;
     public $randomDeterminationQuote = null;
     public $randomResilienceQuote = null;
-
+    
     // temporarily quote values
     public $tempQuoteId = null;
     public $tempNewQuote = "";
@@ -42,6 +42,8 @@ class Onboarding extends Component
     public $search = "";
     public $tracks = [];
 
+    public $currentMStep;
+    public $currentStep;
     // constructor
     public function __construct()
     {
@@ -61,15 +63,16 @@ class Onboarding extends Component
         $this->requester = User::where('share_link', $shareLink)->first();
 
         // get random quote values
-        $this->randomConfidenceQuote = Quote::inRandomOrder()->confidence()->first();
-        $this->randomPotentialQuote = Quote::inRandomOrder()->potential()->first();
-        $this->randomDeterminationQuote = Quote::inRandomOrder()->determination()->first();
-        $this->randomResilienceQuote = Quote::inRandomOrder()->resilience()->first();
+        $this->randomConfidenceQuote = Quote::inRandomOrder()->clone()->first();
+        $this->randomPotentialQuote = Quote::inRandomOrder()->clone()->first();
+        $this->randomDeterminationQuote = Quote::inRandomOrder()->clone()->first();
+        $this->randomResilienceQuote = Quote::inRandomOrder()->clone()->first();
     }
 
     // render
     public function render()
     {
+        //Return if a non-user ends up inside a controller that requires authentication, etc
         return view('livewire.onboarding');
     }
 
@@ -81,7 +84,7 @@ class Onboarding extends Component
             return;
         }
         
-        $this->status = $this->spotify->status();
+        $this->spotifyStatus = $this->spotify->status();
 
         // search track
         if($this->spotify->status() == 'CONNECTED') {
@@ -118,7 +121,8 @@ class Onboarding extends Component
     // submit
     public function submit()
     {
-        $this->status = $this->spotify->status();
+       
+        $this->spotifyStatus = $this->spotify->status();
         
         // get track detail from Spotify API
         if($this->spotify->status() == 'CONNECTED') {

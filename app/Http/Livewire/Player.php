@@ -13,6 +13,9 @@ class Player extends Component
     // mount
     public function mount()
     {
+        //Return if a non-user ends up inside a controller that requires authentication, etc
+        abort_if(!Auth::user(), 404);
+
         if(session()->has('temp_current_track')) {
             // if selected song is exist, the player will handle the song
             // get current track's embedable widget
@@ -29,8 +32,8 @@ class Player extends Component
             ];
         } else {
             // if the user did not select any song, the player will handle the first song.
-            if(Auth::user()->inspirations->count()) {
-                $firstTrack = Auth::user()->inspirations[0]->track;
+            if(Auth::user()->inspirations()->count()) {
+                $firstTrack = Auth::user()->inspirations()->first()->track;
                 $this->currentTrack = [
                     "album_img" => $firstTrack->album_img,
                     "artist_img" => $firstTrack->artisit_img,

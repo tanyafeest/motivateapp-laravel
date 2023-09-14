@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
-class PaymentController extends Controller
+class PaymentController
 {
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     /**
      * Display the payment upgrade view.
      *

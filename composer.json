@@ -5,7 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.2.4",
         "doctrine/dbal": "^3.5",
         "dyrynda/laravel-nullable-fields": "^4.2",
         "google/apiclient": "^2.15",
@@ -19,7 +19,8 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
         "socialiteproviders/spotify": "^4.1",
-        "twilio/sdk": "^6.43"
+        "twilio/sdk": "^6.43",
+        "usernotnull/tall-toasts": "^1.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -28,6 +29,7 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "nunomaduro/larastan": "^2.6",
+        "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^9.5.10",
         "rector/rector": "*",
         "spatie/laravel-ignition": "^1.0"

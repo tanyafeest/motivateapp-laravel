@@ -19,27 +19,30 @@ class StripeWebhookController extends CashierController
      * @param  array  $payload
      * @return void
      */
-    // public function handleCustomerCreated(array $payload)
-    // {
-    // }
+    public function handleCustomerCreated(array $payload) : void
+    {
+        return;
+    }
     /**
      * Handle customer subscription created
      *
      * @param  array  $payload
      * @return void
      */
-    // public function handleCustomerSubscriptionCreated(array $payload)
-    // {
-    // }
+    public function handleCustomerSubscriptionCreated(array $payload) : void
+    {
+        return;
+    }
     /**
      * Handle customer subscription deleted
      *
      * @param  array  $payload
      * @return void
      */
-    // public function handleCustomerSubscriptionDeleted(array $payload)
-    // {
-    // }
+    public function handleCustomerSubscriptionDeleted(array $payload) : void
+    {
+        return;
+    }
     /**
      * Handle invoice payment failed
      *
@@ -80,7 +83,7 @@ class StripeWebhookController extends CashierController
         error_log(json_encode($payload, JSON_THROW_ON_ERROR));
         return redirect()->intended(RouteServiceProvider::HOME)->send();
     }
-
+    
     public function handleWebHook(Request $request)
     {
         $payload = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);

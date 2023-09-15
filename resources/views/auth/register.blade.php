@@ -34,11 +34,11 @@
                                     <div class="grid grid-cols-2 gap-4">
                                         
                                     <label class="flex items-center justify-center px-3 py-2 text-sm font-medium text-black bg-white border border-transparent rounded-md cursor-pointer sm:flex-1 focus:outline-none hover:ring-1 hover:ring-offset-2 hover:ring-blue-500 hover:bg-white">
-                                        <input type="radio" name="memory-option" value="4 GB" class="sr-only" aria-labelledby="memory-option-0-label">
+                                        <input type="radio" name="gender" value="true" class="sr-only" aria-labelledby="memory-option-0-label">
                                         <span id="memory-option-0-label" class="">Male</span>
                                     </label>
                                     <label class="flex items-center justify-center px-3 py-2 text-sm font-medium text-black bg-white border border-transparent rounded-md cursor-pointer sm:flex-1 focus:outline-none hover:ring-1 hover:ring-offset-2 hover:ring-blue-500 hover:bg-white">
-                                        <input type="radio" name="memory-option" value="8 GB" class="sr-only" aria-labelledby="memory-option-1-label">
+                                        <input type="radio" name="gender" value="false" class="sr-only" aria-labelledby="memory-option-1-label">
                                         <span id="memory-option-1-label">Female</span>
                                     </label>
                                     </div>

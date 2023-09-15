@@ -13,5 +13,7 @@ export default defineConfig({
                 'app/Http/Livewire/**',
             ],
         }),
+        
     ],
 });
+

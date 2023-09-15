@@ -22,17 +22,17 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {   
         $calculateGradeYear = new CalculateGradYear();
-
         Validator::make($input, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'string', 'regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/i'],
-            'gender' => ['required', 'integer'],
+            'phone' => ['required', 'string', 'regex:/^([0-9\s\-\+\(\)]*)$/'],
+            'gender' => ['required', 'string'],
             'age' => ['required', 'integer', 'max:200'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
+   
 
         return User::create([
             'first_name' => $input['first_name'],
@@ -40,7 +40,7 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['first_name'] . " " . $input['last_name'],
             'email' => $input['email'],
             'phone' => $input['phone'],
-            'gender' => $input['gender'],
+            'gender' => $input['gender'] == 'true',
             'age' => $input['age'],
             'grade_year' => isset($input['current_grade']) ? $calculateGradeYear->calc($input['current_grade']) : null,
             'sport_id' => $input['sport'] ?? null,

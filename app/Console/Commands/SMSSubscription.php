@@ -44,116 +44,26 @@ class SMSSubscription extends Command
                 $sharedByUserName = $latestInspiration->sharedbyUser->name;
                 
                 $sms = $sharedByUserName . ':' . '"' . $latestInspiration->quote->truncate() . '" View at ' . config('app.url') . 'inspiration/card/' . $latestInspiration->id . '. Reply UNSUB to be removed';
-                $matchResult = match ($user->setting()->sms_frequency) {
-                    0 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('l') == 'Monday' && $date->format('H') == '09') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    1 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('l') == 'Monday' && $date->format('H') == '17') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    2 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('l') == 'Tuesday' && $date->format('H') == '09') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    3 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('l') == 'Tuesday' && $date->format('H') == '17') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    4 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('l') == 'Wednesday' && $date->format('H') == '09') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    5 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('l') == 'Wednesday' && $date->format('H') == '17') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    6 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('l') == 'Thursday' && $date->format('H') == '09') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    7 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('l') == 'Thursday' && $date->format('H') == '17') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    8 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('l') == 'Friday' && $date->format('H') == '09') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    9 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('l') == 'Friday' && $date->format('H') == '17') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    10 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('l') == 'Saturday' && $date->format('H') == '09') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    11 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('l') == 'Saturday' && $date->format('H') == '17') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    12 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('l') == 'Sunday' && $date->format('H') == '09') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    13 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('l') == 'Sunday' && $date->format('H') == '17') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    14 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('H') == '09') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    15 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('H') == '17') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    16 => function($sms, $twilio, $userPhone, $date){
-                       if($date->format('H') == '09') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-                    17 => function($sms, $twilio, $userPhone, $firstMondayOfThisMonth, $date){
-                       if($firstMondayOfThisMonth->format('Y-m-d') == $date->format('Y-m-d') && $date->format('H') == '09') {
-                           $twilio->sendSMS($sms, config('app.phone'), $userPhone);
-                       }
-                       return;
-                    } ,
-
+                
+                $matchResult = match($user->setting()->sms_frequency){
+                    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 => match ($date->format('l')) {
+                        'Monday', 'Tuseday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' => match ($date->format('H')) {
+                            '09', '17' =>  $twilio->sendSMS($sms, config('app.phone'), $user->phone),
+                            default => null,
+                        },
+                        default => null,
+                    },
+                    14, 15 => match($date->format('H')){
+                        '09', '17' => $twilio->sendSMS($sms, config('app.phone'), $user->phone),
+                        default => null,
+                    },
+                    16, 17 => match($firstMondayOfThisMonth->format('Y-m-d')){
+                        $date->format('Y-m-d') => match($date->format('H')){
+                            '09', '17' => $twilio->sendSMS($sms, config('app.phone'), $user->phone),
+                            default => null,
+                        },
+                        default => null,
+                    },
                     default => null,
                 };
             }

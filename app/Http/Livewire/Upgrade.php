@@ -3,7 +3,8 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PaymentResumeController;
+use App\Http\Controllers\PaymentCancelController;
 use Illuminate\Support\Facades\Auth;
 class Upgrade extends Component
 {
@@ -18,13 +19,13 @@ class Upgrade extends Component
 
     public function cancel()
     {
-        PaymentController::cancel();
+        new PaymentCancelController();
         $this->updateStatus();
     }
 
     public function resume()
     {
-        PaymentController::resume();
+        new PaymentResumeController();
         $this->updateStatus();
     }
 

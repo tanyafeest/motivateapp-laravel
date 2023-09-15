@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
-class TwilioWebhookController extends Controller
+class TwilioWebhookController
 {
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     /**
      * receive an incoming SMS message
      *

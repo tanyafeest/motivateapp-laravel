@@ -4,6 +4,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InspirationController;
 use App\Http\Controllers\SpotifyCallbackController;
 use App\Http\Controllers\SpotifyRedirectController;
+use App\Http\Controllers\PaymentSubscriptionController;
+use App\Http\Controllers\PaymentCancelController;
+use App\Http\Controllers\PaymentCreateController;
+use App\Http\Controllers\PaymentController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
@@ -22,10 +27,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/inspiration/onboarding', InspirationController::class)->name('inspiration.onboarding');
 
     // stripe
-    Route::get('/upgrade', [App\Http\Controllers\PaymentController::class, 'create'])->name('upgrade');
-    Route::get('/payment', [App\Http\Controllers\PaymentController::class, 'payment'])->name('payment');
-    Route::post('/payment/subscription', [App\Http\Controllers\PaymentController::class, 'subscription'])->name('payment.subscription');
-    Route::post('/payment/cancel', [App\Http\Controllers\PaymentController::class, 'cancel'])->name('payment.subscription.cancel');
+    Route::get('/upgrade',PaymentCreateController::class)->name('upgrade');
+    Route::get('/payment', PaymentController::class)->name('payment');
+    Route::post('/payment/subscription', PaymentSubscriptionController::class)->name('payment.subscription');
+    Route::post('/payment/cancel', PaymentCancelController::class)->name('payment.subscription.cancel');
 
     // TODO: some features might need to restrict by EnsureUserIsSubscribed middleware
     Route::middleware('subscribed')->group(function () {

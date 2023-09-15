@@ -10,6 +10,7 @@ use Laravel\Cashier\Events\WebhookHandled;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Symfony\Component\HttpFoundation\Response;
 
 class StripeWebhookController extends CashierController
 {
@@ -23,32 +24,30 @@ class StripeWebhookController extends CashierController
     {
         return;
     }
-    /**
-     * Handle customer subscription created
-     *
+     /**
+     * Handle customer created
+     *  This function only require return value of Symfony\Component\HttpFoundation\Response
+     * 
      * @param  array  $payload
-     * @return void
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function handleCustomerSubscriptionCreated(array $payload) : void
+    public function handleCustomerSubscriptionCreated(array $payload)
     {
-        return;
+        return new Response('', Response::HTTP_NO_CONTENT);
     }
     /**
-     * Handle customer subscription deleted
-     *
-     * @param  array  $payload
-     * @return void
-     */
-    public function handleCustomerSubscriptionDeleted(array $payload) : void
+    * Handle customer created
+    *  This function only require return value of Symfony\Component\HttpFoundation\Response
+    * 
+    * @param  array  $payload
+    * @return \Symfony\Component\HttpFoundation\Response
+    */
+    public function handleCustomerSubscriptionDeleted(array $payload)
     {
-        return;
+        return new Response('', Response::HTTP_NO_CONTENT);
     }
-    /**
-     * Handle invoice payment failed
-     *
-     * @return void
-     */
-    public function handleInvoicePaymentFailed(array $payload)
+
+    public function handleInvoicePaymentFailed(array $payload) : void
     {
         //Return if a non-user ends up inside a controller that requires authentication, etc
         abort_if(!Auth::user(), 404);

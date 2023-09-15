@@ -9,24 +9,26 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
-class PaymentController
+class PaymentCancelController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    
-    /**
-     * Display the charge view
+    //
+     /**
+     * Process the payment
      * 
-     * @return \Illuminate\View\View
+     * @return void
      */
     public function __invoke()
     {
-        //Return if a non-user ends up inside a controller that requires authentication, etc
-        abort_if(!Auth::user(), 404);
+       //Return if a non-user ends up inside a controller that requires authentication, etc
+       abort_if(!Auth::user(), 404);
 
-        $user = Auth::user();
+       $user = Auth::user();
 
-        $intent = $user->createSetupIntent();
-
-        return view('payment', compact('user', 'intent'));
+       try {
+           $user->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->cancel();
+       } catch (\Throwable $th) {
+           throw $th;
+       }
     }
 }

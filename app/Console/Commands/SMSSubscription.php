@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Actions\Util\Twilio;
 use App\Models\User;
+use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 
 class SMSSubscription extends Command
@@ -36,29 +36,29 @@ class SMSSubscription extends Command
         $firstMondayOfThisMonth = new Carbon('first Monday of this month');
         $date = Carbon::now();
         foreach ($users as $key => $user) {
-            if($user->numberOfQuotes()) {
+            if ($user->numberOfQuotes()) {
                 // send SMS
                 $latestInspiration = $user->inspirations()->last();
 
                 $quote = $latestInspiration->quote->quote;
                 $sharedByUserName = $latestInspiration->sharedbyUser->name;
-                
-                $sms = $sharedByUserName . ':' . '"' . $latestInspiration->quote->truncate() . '" View at ' . config('app.url') . 'inspiration/card/' . $latestInspiration->id . '. Reply UNSUB to be removed';
-                
-                $matchResult = match($user->setting()->sms_frequency){
+
+                $sms = $sharedByUserName.':'.'"'.$latestInspiration->quote->truncate().'" View at '.config('app.url').'inspiration/card/'.$latestInspiration->id.'. Reply UNSUB to be removed';
+
+                $matchResult = match ($user->setting()->sms_frequency) {
                     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 => match ($date->format('l')) {// Sending SMS in morning and evening by day of the week
                         'Monday', 'Tuseday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' => match ($date->format('H')) { // By day
-                            '09', '17' =>  $twilio->sendSMS($sms, config('app.phone'), $user->phone),// Selecting morning and evening
+                            '09', '17' => $twilio->sendSMS($sms, config('app.phone'), $user->phone),// Selecting morning and evening
                             default => null,
                         },
                         default => null,
                     },
-                    14, 15 => match($date->format('H')){//Selecting morning and evening
+                    14, 15 => match ($date->format('H')) {//Selecting morning and evening
                         '09', '17' => $twilio->sendSMS($sms, config('app.phone'), $user->phone),
                         default => null,
                     },
-                    16, 17 => match($firstMondayOfThisMonth->format('Y-m-d')){
-                        $date->format('Y-m-d') => match($date->format('H')){
+                    16, 17 => match ($firstMondayOfThisMonth->format('Y-m-d')) {
+                        $date->format('Y-m-d') => match ($date->format('H')) {
                             '09', '17' => $twilio->sendSMS($sms, config('app.phone'), $user->phone),
                             default => null,
                         },

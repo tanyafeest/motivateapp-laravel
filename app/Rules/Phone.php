@@ -16,6 +16,6 @@ class Phone implements InvokableRule
      */
     public function __invoke($attribute, $value, $fail)
     {
-        
+
     }
 }

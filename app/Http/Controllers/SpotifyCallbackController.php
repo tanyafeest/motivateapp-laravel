@@ -19,6 +19,7 @@ class SpotifyCallbackController
             $user = Socialite::driver('spotify')->user();
             session(['temp_spotify_id' => $user->getId()]);
             session(['temp_spotify_access_token' => $user->token]);
+
             return redirect()->intended(RouteServiceProvider::HOME)->send();
         } catch (\Throwable) {
             return redirect()->intended(RouteServiceProvider::HOME)->send();

@@ -2,29 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
+use Dyrynda\Database\Support\NullableFields;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use Dyrynda\Database\Support\NullableFields;
-use App\Models\Inspiration;
-use App\Models\Todolist;
-use App\Models\Setting;
-use Laravel\Cashier\Billable;
-use Carbon\Carbon;
 
 class User extends Authenticatable
 {
+    use Billable;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
-    use TwoFactorAuthenticatable;
     use NullableFields;
-    use Billable;
+    use TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -42,7 +38,7 @@ class User extends Authenticatable
         'age',
         'grade_year',
         'sport_id',
-        'share_link'
+        'share_link',
     ];
 
     /**
@@ -52,14 +48,14 @@ class User extends Authenticatable
      */
     protected $nullable = [
         'grade_year',
-        'sport_id'
+        'sport_id',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
         'two_factor_recovery_codes',
-        'two_factor_secret'
+        'two_factor_secret',
     ];
 
     /**
@@ -80,43 +76,53 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function numberOfQuotes() {
+    public function numberOfQuotes()
+    {
         return $this->hasMany(Inspiration::class)->where('quotes_id', '!=', null)->count();
     }
 
-    public function numberOfSongs() {
+    public function numberOfSongs()
+    {
         return $this->hasMany(Inspiration::class)->where('album_name', '!=', null)->count();
     }
 
-    public function todolist() {
+    public function todolist()
+    {
         return $this->hasOne(Todolist::class);
     }
 
-    public function inspirations() {
+    public function inspirations()
+    {
         return $this->hasOne(Inspiration::class);
     }
 
-    public function setting() {
+    public function setting()
+    {
         return $this->hasOne(Setting::class);
     }
 
-    public function isSubscribed() {
+    public function isSubscribed()
+    {
         return $this->subscribed(env('STRIPE_SUBSCRIPTION_PLAN'));
     }
 
-    public function isCancelled() {
+    public function isCancelled()
+    {
         return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->canceled();
     }
 
-    public function isOnGracePeriod() {
+    public function isOnGracePeriod()
+    {
         return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->onGracePeriod();
     }
 
-    public function isEnded() {
+    public function isEnded()
+    {
         return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->ended();
     }
 
-    public function getCurrentPeriodEnd() {
+    public function getCurrentPeriodEnd()
+    {
         $timestamp = $this->subscriptions()->first()->asStripeSubscription()->current_period_end;
 
         return Carbon::createFromTimeStamp($timestamp)->toFormattedDateString();

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class OAuthContoller
 {
@@ -16,7 +16,7 @@ class OAuthContoller
     {
         $userRequestedInspire = null;
 
-        if (session()->has("temp_inspiration_share_link")) {
+        if (session()->has('temp_inspiration_share_link')) {
             $userRequestedInspire = User::where('share_link', session('temp_inspiration_share_link'))->first();
         }
 

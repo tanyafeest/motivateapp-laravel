@@ -17,7 +17,7 @@ class Todolist extends Model
         'message',
         'chat',
         'social',
-        'email'
+        'email',
     ];
 
     /**

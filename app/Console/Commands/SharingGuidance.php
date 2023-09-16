@@ -2,13 +2,13 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Models\User;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SharingGuidanceOne;
 use App\Mail\SharingGuidanceAll;
+use App\Mail\SharingGuidanceOne;
+use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class SharingGuidance extends Command
 {
@@ -46,8 +46,8 @@ class SharingGuidance extends Command
             $sharingGuidanceMailData->share_link = $user->share_link;
 
             Mail::to($user)->send(new SharingGuidanceOne($sharingGuidanceMailData));
-            foreach($allUsers as $other) {
-                if($other->id == $user->id) {
+            foreach ($allUsers as $other) {
+                if ($other->id == $user->id) {
                     continue;
                 }
 

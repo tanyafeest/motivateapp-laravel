@@ -2,7 +2,8 @@
 
 namespace App\Actions\Util;
 
-class EncodeURIComponent {
+class EncodeURIComponent
+{
     /*
     *   Encode URI(equivalent of javascripts-encodeURIComponent)
     *
@@ -11,7 +12,8 @@ class EncodeURIComponent {
     */
     public function encode($str)
     {
-        $revert = ['%21'=>'!', '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')'];
+        $revert = ['%21' => '!', '%2A' => '*', '%27' => "'", '%28' => '(', '%29' => ')'];
+
         return strtr(rawurlencode((string) $str), $revert);
     }
 }

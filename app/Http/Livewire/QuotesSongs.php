@@ -7,7 +7,7 @@ use Livewire\Component;
 class QuotesSongs extends Component
 {
     public function render()
-    {      
+    {
         return view('livewire.quotes-songs');
     }
 }

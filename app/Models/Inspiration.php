@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Track;
 
 class Inspiration extends Model
 {
@@ -31,10 +30,11 @@ class Inspiration extends Model
     protected $nullable = [
         'album_name',
         'album_href',
-        'quotes_id'
+        'quotes_id',
     ];
 
-    public function track() {
+    public function track()
+    {
         return $this->hasOne(Track::class);
     }
 }

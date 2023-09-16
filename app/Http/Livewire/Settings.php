@@ -2,43 +2,51 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
+use App\Actions\Util\Spotify;
 use App\Models\Quote;
 use App\Models\Setting;
 use App\Models\Track;
-use App\Actions\Util\Spotify;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class Settings extends Component
 {
     private $spotify = null;
+
     public $spotifyStatus = 'DISCONNECTED';
 
     // search
     public $quoteList = [];
+
     public $songList = [];
-    public $searchQuote = "";
-    public $searchSong = "";
+
+    public $searchQuote = '';
+
+    public $searchSong = '';
 
     // spotify
     public $spotifyUserTopSongs = [
-        'items' => []
+        'items' => [],
     ];
 
     // setting flags
     public $isDaily = false;
+
     public $isWeekly = false;
+
     public $isMonthly = false;
+
     public $isNever = false;
 
     // current sms frequency
     public $currentSMSFrequency = null;
-    
+
     // sms frequency options
     public $dailyOptions = [
         14 => 'Morning',
-        15 => 'Night'
+        15 => 'Night',
     ];
+
     public $weeklyOptions = [
         0 => 'Monday Morning',
         1 => 'Monday Night',
@@ -53,11 +61,12 @@ class Settings extends Component
         10 => 'Saturday Morning',
         11 => 'Saturday Night',
         12 => 'Sunday Morning',
-        13 => 'Sunday Night'
+        13 => 'Sunday Night',
     ];
+
     public $monthlyOptions = [
         16 => 'Morning',
-        17 => 'Night'
+        17 => 'Night',
     ];
 
     // constructor
@@ -77,7 +86,7 @@ class Settings extends Component
 
         $this->currentSMSFrequency = Auth::user()->setting()->sms_frequency;
 
-        if($this->spotify->status() == 'CONNECTED') {
+        if ($this->spotify->status() == 'CONNECTED') {
             $this->spotifyUserTopSongs = $this->spotify->getTopItems();
         }
         $this->spotifyStatus = $this->spotify->status();
@@ -93,7 +102,7 @@ class Settings extends Component
     public function updatedSearchQuote()
     {
         // search quote
-        $this->quoteList = Quote::where('category', 'like', '%' . $this->searchQuote . '%')->orWhere('quote', 'like', '%' . $this->searchQuote . '%')->get();
+        $this->quoteList = Quote::where('category', 'like', '%'.$this->searchQuote.'%')->orWhere('quote', 'like', '%'.$this->searchQuote.'%')->get();
     }
 
     // watch search song
@@ -101,11 +110,11 @@ class Settings extends Component
     {
 
         // search song
-        if(count($this->spotifyUserTopSongs) >= 10) {
+        if (count($this->spotifyUserTopSongs) >= 10) {
 
-        } else {            
+        } else {
             // search track
-            if($this->spotifyStatus == 'CONNECTED') {
+            if ($this->spotifyStatus == 'CONNECTED') {
                 $this->songList = $this->spotify->search($this->searchSong);
             }
             $this->spotifyStatus = $this->spotify->status();
@@ -126,13 +135,13 @@ class Settings extends Component
     // select song as default song
     public function selectSong($key)
     {
-        if($this->spotifyStatus == 'CONNECTED') {
+        if ($this->spotifyStatus == 'CONNECTED') {
             $this->searchSong = $this->songList[$key]['name'];
 
             // update setting
             $setting = Setting::firstWhere('user_id', Auth::user()->id);
 
-            if(Track::where('sid', $this->songList[$key]['id'])->exists()) {
+            if (Track::where('sid', $this->songList[$key]['id'])->exists()) {
                 // this track is already exist in database, so we don't need to add this one to db
                 $setting->track_id = Track::firstWhere('sid', $this->songList[$key]['id'])->id;
             } else {
@@ -167,9 +176,9 @@ class Settings extends Component
         // select first option of each duration
         $setting = Auth::user()->setting();
 
-        switch($type) {
+        switch ($type) {
             case 'daily':
-                if(!Auth::user()->isSubscribed()) {
+                if (! Auth::user()->isSubscribed()) {
                     break;
                 }
                 $setting->sms_frequency = 14; // Daily morning
@@ -188,7 +197,7 @@ class Settings extends Component
                 $this->isNever = false;
                 break;
             case 'monthly':
-                if(!Auth::user()->isSubscribed()) {
+                if (! Auth::user()->isSubscribed()) {
                     break;
                 }
                 $setting->sms_frequency = 16; // Monthly morning
@@ -212,7 +221,7 @@ class Settings extends Component
         $setting->sms_frequency = $this->currentSMSFrequency;
         $setting->save();
 
-        if($this->currentSMSFrequency == 18) {
+        if ($this->currentSMSFrequency == 18) {
             $this->isNever = true;
             $this->isDaily = false;
             $this->isWeekly = false;
@@ -222,21 +231,21 @@ class Settings extends Component
 
     /**
      * Set auto add songs
-     * 
-     * 
+     *
+     *
      * @return void
      */
     public function setAutoAddSongs()
     {
         // We need to add songs to the playlist
-        if($this->spotifyStatus == 'CONNECTED') {
+        if ($this->spotifyStatus == 'CONNECTED') {
             $user = Auth::user();
 
             // If user does not have a playlist, we need to add them to custom playlist(name = "Friends & Family (MotiveMob)", description="The F&F MotiveMob playlist is a group of recommended songs by your own "mob" to help motivate you!")
-            if(!$user->playlist_id) {
+            if (! $user->playlist_id) {
                 // TODO: notification(New playlist named Motivemob will be created on your spotify account.)
-                $playlist = $this->spotify->createNewPlaylist("Friends & Family (MotiveMob)", "The F&F MotiveMob playlist is a group of recommended songs by your own 'mob' to help motivate you!");
-                
+                $playlist = $this->spotify->createNewPlaylist('Friends & Family (MotiveMob)', "The F&F MotiveMob playlist is a group of recommended songs by your own 'mob' to help motivate you!");
+
                 $user->playlist_id = $playlist['id'];
                 $user->save();
             }
@@ -246,22 +255,22 @@ class Settings extends Component
                 ->where('is_added_to_playlist', false)
                 ->groupBy('track_id');
             $uris = [];
-            
+
             // --- get uris of songs
             foreach ($inspirationGroups as $key => $group) {
                 $uris[] = $group[0]->track->uri;
             }
 
-            if(!count($uris)) {
+            if (! count($uris)) {
                 return;
             }
 
             $res = $this->spotify->addTracksToPlaylist(Auth::user()->playlist_id, $uris);
 
             // --- if success, set the is_added_to_playlist to TRUE
-            if($res) {
+            if ($res) {
                 foreach ($inspirationGroups as $key1 => $group) {
-                    foreach($group as $key2 => $inspiration) {
+                    foreach ($group as $key2 => $inspiration) {
                         $inspiration->is_added_to_playlist = true;
                         $inspiration->save();
                     }
@@ -274,7 +283,7 @@ class Settings extends Component
             } else {
                 // TODO: notification
             }
-            
+
         } else {
             // TODO: notification
         }

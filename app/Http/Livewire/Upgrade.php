@@ -2,14 +2,17 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use App\Http\Controllers\PaymentResumeController;
 use App\Http\Controllers\PaymentCancelController;
+use App\Http\Controllers\PaymentResumeController;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
+
 class Upgrade extends Component
 {
     public $isSubscribed;
+
     public $isCancelled;
+
     public $isEnded;
 
     public function mount()
@@ -39,7 +42,7 @@ class Upgrade extends Component
     }
 
     public function render()
-    {        
+    {
         return view('livewire.upgrade');
     }
 }

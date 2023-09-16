@@ -2,13 +2,17 @@
 
 namespace App\Actions\Util;
 
-use GuzzleHttp\Client;
 use Exception;
+use GuzzleHttp\Client;
 
-class Spotify {
+class Spotify
+{
     private readonly \GuzzleHttp\Client $client;
+
     private ?array $headers = null;
+
     private ?string $status = null;
+
     private $id;
 
     public function __construct()
@@ -16,14 +20,14 @@ class Spotify {
         $this->client = new Client(['base_uri' => 'https://api.spotify.com']);
 
         // get spotify id and access token if spotify connected
-        if(session()->has("temp_spotify_id")) {
+        if (session()->has('temp_spotify_id')) {
             $this->headers = [
-                'Authorization' => 'Bearer ' . session("temp_spotify_access_token"),
+                'Authorization' => 'Bearer '.session('temp_spotify_access_token'),
                 'Accept' => 'application/json',
-                'Content-Type' => 'application/json'
+                'Content-Type' => 'application/json',
             ];
 
-            $this->id = session("temp_spotify_id");
+            $this->id = session('temp_spotify_id');
             $this->status = 'CONNECTED';
         } else {
             $this->status = 'DISCONNECTED';
@@ -32,8 +36,8 @@ class Spotify {
 
     /**
      * Get status of spotify
-     * 
-     * @return String 
+     *
+     * @return string
      */
     public function status()
     {
@@ -42,51 +46,50 @@ class Spotify {
 
     /**
      * Get user's top items
-     * 
-     * @param Integer $limit = 10
-     * @param Integer $offset = 0
-     * @param String $time_range = medium_term
-     * 
-     * @return Array
+     *
+     * @param  int  $limit = 10
+     * @param  int  $offset = 0
+     * @param  string  $time_range = medium_term
+     * @return array
      */
     public function getTopItems($limit = 10, $offset = 0, $time_range = 'medium_term')
     {
-        $endpoint = "v1/me/top/tracks?limit=" . $limit . "&offset=" . $offset . "&time_range=" . $time_range;
+        $endpoint = 'v1/me/top/tracks?limit='.$limit.'&offset='.$offset.'&time_range='.$time_range;
 
         try {
             $response = $this->client->get($endpoint, ['headers' => $this->headers]);
 
             $stream = $response->getBody();
             $size = $stream->getSize();
+
             return json_decode($stream->read($size), true, 512, JSON_THROW_ON_ERROR);
-            
+
         } catch (Exception $e) {
-            if($e->getCode() == 401) {
+            if ($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
             }
 
-            if($e->getCode() == 403) {
+            if ($e->getCode() == 403) {
                 $this->status = 'USER_NOT_REGISTERED';
             }
 
             return [
-                'items' => []
+                'items' => [],
             ];
         }
     }
 
     /**
      * Search track
-     * 
-     * @param String $query
-     * @param Integer $limit = 5
-     * @param String $include_external = audio
-     * 
-     * @return Array 
+     *
+     * @param  string  $query
+     * @param  int  $limit = 5
+     * @param  string  $include_external = audio
+     * @return array
      */
     public function search($query, $limit = 5, $include_external = 'audio')
     {
-        $endpoint = "v1/search?query=" . $query . "&type=track&limit=" . $limit . "&include_external=" . $include_external; 
+        $endpoint = 'v1/search?query='.$query.'&type=track&limit='.$limit.'&include_external='.$include_external;
 
         try {
             $response = $this->client->get($endpoint, ['headers' => $this->headers]);
@@ -97,7 +100,7 @@ class Spotify {
 
             return $res['tracks']['items'];
         } catch (Exception $e) {
-            if($e->getCode() == 401) {
+            if ($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
             }
 
@@ -107,14 +110,13 @@ class Spotify {
 
     /**
      * Get track detail
-     * 
-     * @param String $id
-     * 
-     * @return Array
+     *
+     * @param  string  $id
+     * @return array
      */
     public function track($id)
     {
-        $endpoint = "v1/tracks/" . $id;
+        $endpoint = 'v1/tracks/'.$id;
 
         try {
             $response = $this->client->get($endpoint, ['headers' => $this->headers]);
@@ -124,59 +126,57 @@ class Spotify {
 
             return json_decode($stream->read($size), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
-            if($e->getCode() == 401) {
+            if ($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
             }
-            
+
             return [];
         }
     }
 
     /**
      * Get artist detail
-     * 
-     * @param String $id
-     * 
-     * @return Array
+     *
+     * @param  string  $id
+     * @return array
      */
     public function artist($id)
     {
-        $endpoint = "v1/artists/" . $id;
+        $endpoint = 'v1/artists/'.$id;
 
         try {
             $response = $this->client->get($endpoint, ['headers' => $this->headers]);
 
             $stream = $response->getBody();
             $size = $stream->getSize();
-            
+
             return json_decode($stream->read($size), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
-            if($e->getCode() == 401) {
+            if ($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
             }
-            
+
             return [];
         }
     }
 
     /**
      * Create new playlist
-     * 
-     * @param String $name = "New Playlist"
-     * @param String $description = "New Playlist Description"
-     * @param Boolean $public = true
-     * @param Boolean $collaborative = false
-     * 
-     * @return Array
+     *
+     * @param  string  $name = "New Playlist"
+     * @param  string  $description = "New Playlist Description"
+     * @param  bool  $public = true
+     * @param  bool  $collaborative = false
+     * @return array
      */
-    public function createNewPlaylist($name = "New Playlist", $description = "New Playlist Description", $public = true, $collaborative = false)
+    public function createNewPlaylist($name = 'New Playlist', $description = 'New Playlist Description', $public = true, $collaborative = false)
     {
-        $endpoint = "v1/users/" . $this->id . "/playlists";
+        $endpoint = 'v1/users/'.$this->id.'/playlists';
         $body = [
-            "name" => $name,
-            "public" => $public,
-            "collaborative" => $collaborative,
-            "description" => $description
+            'name' => $name,
+            'public' => $public,
+            'collaborative' => $collaborative,
+            'description' => $description,
         ];
 
         try {
@@ -187,29 +187,28 @@ class Spotify {
 
             return json_decode($stream->read($size), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
-            if($e->getCode() == 401) {
+            if ($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
             }
-            
+
             return [];
         }
     }
 
     /**
      * Add track to specific playlist
-     * 
-     * @param String $playlistId
-     * @param Array $uris
-     * @param Integer $position = 0
-     * 
-     * @return Array
+     *
+     * @param  string  $playlistId
+     * @param  array  $uris
+     * @param  int  $position = 0
+     * @return array
      */
     public function addTracksToPlaylist($playlistId, $uris, $position = 0)
     {
-        $endpoint = "v1/playlists/" . $playlistId . "/tracks";
+        $endpoint = 'v1/playlists/'.$playlistId.'/tracks';
         $body = [
-            "uris" => $uris,
-            "position" => $position
+            'uris' => $uris,
+            'position' => $position,
         ];
 
         try {
@@ -217,12 +216,13 @@ class Spotify {
 
             $stream = $response->getBody();
             $size = $stream->getSize();
-            
+
             return json_decode($stream->read($size), true, 512, JSON_THROW_ON_ERROR);
         } catch (Exception $e) {
-            if($e->getCode() == 401) {
+            if ($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
             }
+
             return [];
         }
     }

@@ -2,13 +2,13 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
-
 use App\Actions\Util\Twilio;
+use Illuminate\Contracts\Validation\Rule;
 
 class PhoneValidationRule implements Rule
 {
-    public $twilio = null; 
+    public $twilio = null;
+
     /**
      * Create a new rule instance.
      *

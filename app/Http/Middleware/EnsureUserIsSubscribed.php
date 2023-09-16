@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
-use App\Providers\RouteServiceProvider;
 
 class EnsureUserIsSubscribed
 {
@@ -16,10 +16,10 @@ class EnsureUserIsSubscribed
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->user() && !$request->user()->isSubscribed()) {
+        if ($request->user() && ! $request->user()->isSubscribed()) {
             return redirect()->intended(RouteServiceProvider::UPGRADE)->send();
         }
-    
+
         return $next($request);
     }
 }

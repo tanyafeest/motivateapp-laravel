@@ -2,20 +2,19 @@
 
 namespace App\Http\Livewire;
 
-use Exception;
-use Illuminate\Support\Facades\Auth;
-use App\Providers\RouteServiceProvider;
-use GuzzleHttp\Client;
-use Livewire\Component;
-use App\Models\Quote;
-use App\Models\User;
-use App\Models\Inspiration;
-use App\Models\Track;
 use App\Actions\Util\Spotify;
+use App\Models\Inspiration;
+use App\Models\Quote;
+use App\Models\Track;
+use App\Models\User;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
 class Onboarding extends Component
 {
     private $spotify = null;
+
     public $spotifyStatus = 'DISCONNECTED';
 
     // inspiration requester
@@ -23,27 +22,36 @@ class Onboarding extends Component
 
     // random quote values
     public $randomConfidenceQuote = null;
+
     public $randomPotentialQuote = null;
+
     public $randomDeterminationQuote = null;
+
     public $randomResilienceQuote = null;
-    
+
     // temporarily quote values
     public $tempQuoteId = null;
-    public $tempNewQuote = "";
+
+    public $tempNewQuote = '';
+
     public $tempSong = null;
+
     public $isNewQuote = false;
 
     // spotify
     public $spotifyUserTopSongs = [
-        'items' => []
+        'items' => [],
     ];
 
-    // serach query for 
-    public $search = "";
+    // serach query for
+    public $search = '';
+
     public $tracks = [];
 
     public $currentMStep;
+
     public $currentStep;
+
     // constructor
     public function __construct()
     {
@@ -54,7 +62,7 @@ class Onboarding extends Component
     // mount
     public function mount()
     {
-        if($this->spotify->status() == 'CONNECTED') {
+        if ($this->spotify->status() == 'CONNECTED') {
             $this->spotifyUserTopSongs = $this->spotify->getTopItems();
         }
 
@@ -79,15 +87,16 @@ class Onboarding extends Component
     // watch search
     public function updatedSearch()
     {
-        if(!$this->search) {
+        if (! $this->search) {
             $this->tracks = [];
+
             return;
         }
-        
+
         $this->spotifyStatus = $this->spotify->status();
 
         // search track
-        if($this->spotify->status() == 'CONNECTED') {
+        if ($this->spotify->status() == 'CONNECTED') {
             $this->tracks = $this->spotify->search($this->search);
         }
     }
@@ -121,18 +130,18 @@ class Onboarding extends Component
     // submit
     public function submit()
     {
-       
+
         $this->spotifyStatus = $this->spotify->status();
-        
+
         // get track detail from Spotify API
-        if($this->spotify->status() == 'CONNECTED') {
+        if ($this->spotify->status() == 'CONNECTED') {
             $track = new Track;
             $inspiration = new Inspiration;
 
             // get track detail
             $t = $this->spotify->track($this->tempSong);
 
-            if(Track::where('sid', $this->tempSong)->exists()) {
+            if (Track::where('sid', $this->tempSong)->exists()) {
                 $track = Track::where('sid', $this->tempSong)->first();
             } else {
                 // get artist detail
@@ -150,10 +159,10 @@ class Onboarding extends Component
                 $track->save();
             }
 
-            if($this->isNewQuote) {
+            if ($this->isNewQuote) {
                 // create new quote by the auth
                 $quote = new Quote;
-                $quote->category = "Custom";
+                $quote->category = 'Custom';
                 $quote->quote = $this->tempNewQuote;
                 $quote->author = Auth::user()->name;
 

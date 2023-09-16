@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
-            $table->string("category");
-            $table->string("quote");
-            $table->string("author");
+            $table->string('category');
+            $table->string('quote');
+            $table->string('author');
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('inspiration', function (Blueprint $table) {
-            $table->renameColumn("album_herf", "album_href");
+            $table->renameColumn('album_herf', 'album_href');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('inspiration', function (Blueprint $table) {
-            $table->renameColumn("album_href", "album_herf");
+            $table->renameColumn('album_href', 'album_herf');
         });
     }
 };

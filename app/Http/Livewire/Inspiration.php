@@ -16,6 +16,7 @@ class Inspiration extends Component
     public function handleSetCurrentTrack($id)
     {
         session(['temp_current_track' => $id]);
+
         return redirect()->intended(route('player'));
     }
 }

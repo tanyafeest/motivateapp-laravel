@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
-use App\Providers\RouteServiceProvider;
 
 class EnsureShareLinkExistInSession
 {
@@ -16,10 +16,10 @@ class EnsureShareLinkExistInSession
      */
     public function handle(Request $request, Closure $next)
     {
-        if(session()->has("temp_inspiration_share_link")) {
+        if (session()->has('temp_inspiration_share_link')) {
             return redirect()->intended(RouteServiceProvider::ONBOARDING);
         }
-        
+
         return $next($request);
     }
 }

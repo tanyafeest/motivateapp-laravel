@@ -3,9 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class PaymentTest extends TestCase
@@ -21,7 +18,7 @@ class PaymentTest extends TestCase
 
         $response = $this->post('/login', [
             'email' => $user->email,
-            'password' => "password",
+            'password' => 'password',
         ]);
 
         $this->assertAuthenticated();

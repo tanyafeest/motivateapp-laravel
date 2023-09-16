@@ -2,10 +2,11 @@
 
 namespace App\Actions\Util;
 
-use Twilio\Rest\Client;
 use Exception;
+use Twilio\Rest\Client;
 
-class Twilio {
+class Twilio
+{
     public $client = null;
 
     public function __construct()
@@ -16,16 +17,17 @@ class Twilio {
     /**
      * send message to the user
      *
-     * @param  String $from, $to, $body
-     * @return Object
-    */
+     * @param  string  $from, $to, $body
+     * @return object
+     */
     public function sendSMS($body, $from, $to)
     {
         try {
             $message = $this->client->messages->create($to, [
                 'body' => $body,
-                'from' => $from
+                'from' => $from,
             ]);
+
             return $message->sid;
         } catch (Exception) {
             return new \stdClass();
@@ -35,9 +37,9 @@ class Twilio {
     /**
      * validate phone number
      *
-     * @param  String $phone
-     * @return Boolean $result
-    */
+     * @param  string  $phone
+     * @return bool $result
+     */
     public function validate($phone)
     {
         try {

@@ -29,7 +29,7 @@ class Commit extends Command
 
         $passed = $this->call('test');
 
-        if ((int) $passed > 0 && !$this->confirm('Your test suite is failing. Do you want to continue committing?')) {
+        if ((int) $passed > 0 && ! $this->confirm('Your test suite is failing. Do you want to continue committing?')) {
             return Command::INVALID;
         }
 
@@ -39,7 +39,7 @@ class Commit extends Command
 
         $message = $this->ask('Working tree is dirty. What is your commit message?');
 
-        exec('git add . && git commit --m "' . $message . '"');
+        exec('git add . && git commit --m "'.$message.'"');
 
         if ($this->confirm('Committed. Do you want to push?', true)) {
             exec('git push');

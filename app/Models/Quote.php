@@ -17,6 +17,6 @@ class Quote extends Model
     protected $fillable = [
         'category',
         'quote',
-        'author'
+        'author',
     ];
 }

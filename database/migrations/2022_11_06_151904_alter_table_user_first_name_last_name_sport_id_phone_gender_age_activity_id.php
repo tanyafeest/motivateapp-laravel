@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string("first_name");
-            $table->string("last_name");
+            $table->string("first_name")->nullable();
+            $table->string("last_name")->nullable();
             $table->foreignId("sport_id")->constrained("sports");
             $table->tinyInteger("gender")->default(0); // 0 - man, 1 - woman
-            $table->integer("age");
-            $table->integer("grade_year");
+            $table->integer("age")->default(0);
+            $table->integer("grade_year")->default(0);
         });
     }
 

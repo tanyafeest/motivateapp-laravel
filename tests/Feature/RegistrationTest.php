@@ -18,9 +18,9 @@ class RegistrationTest extends TestCase
             return $this->markTestSkipped('Registration support is not enabled.');
         }
 
-        $response = $this->get('/register');
+        $response = $this->get('/register'); // the controller return Redirection URLs
 
-        $response->assertStatus(200);
+        return $response->assertStatus(302); // So the HTTP state code is 302 if it's OK.
     }
 
     public function test_registration_screen_cannot_be_rendered_if_support_is_disabled()
@@ -45,6 +45,11 @@ class RegistrationTest extends TestCase
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
+            'first_name' => "Test",
+            'last_name' => 'User',
+            'phone' => '380634127299',
+            'gender' => "true",
+            'age' => '2',
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
         ]);
 

@@ -67,5 +67,9 @@ Route::middleware([
         Route::get('/settings', function () {
             return view('settings');
         })->name('settings');
+
+        Route::get('/player', function(){
+            return view('player');
+        })->name('player');
 });
 

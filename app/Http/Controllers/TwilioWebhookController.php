@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 
 class TwilioWebhookController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 
     /**
      * receive an incoming SMS message

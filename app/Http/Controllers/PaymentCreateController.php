@@ -8,7 +8,9 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class PaymentCreateController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 
     //
     /**

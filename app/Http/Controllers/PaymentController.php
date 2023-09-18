@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class PaymentController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 
     /**
      * Display the charge view

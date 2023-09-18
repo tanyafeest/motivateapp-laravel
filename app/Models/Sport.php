@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sport extends Model
 {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -15,6 +17,4 @@ class Sport extends Model
     protected $fillable = [
         'sport',
     ];
-
-    use HasFactory;
 }

@@ -146,7 +146,7 @@ class Settings extends Component
                 $setting->track_id = Track::firstWhere('sid', $this->songList[$key]['id'])->id;
             } else {
                 // if not, we need to add to db
-                $track = new Track;
+                $track = new Track();
 
                 $track->sid = $this->songList[$key]['id'];
                 $track->name = $this->songList[$key]['name']; // track name

@@ -135,8 +135,8 @@ class Onboarding extends Component
 
         // get track detail from Spotify API
         if ($this->spotify->status() == 'CONNECTED') {
-            $track = new Track;
-            $inspiration = new Inspiration;
+            $track = new Track();
+            $inspiration = new Inspiration();
 
             // get track detail
             $t = $this->spotify->track($this->tempSong);
@@ -161,7 +161,7 @@ class Onboarding extends Component
 
             if ($this->isNewQuote) {
                 // create new quote by the auth
-                $quote = new Quote;
+                $quote = new Quote();
                 $quote->category = 'Custom';
                 $quote->quote = $this->tempNewQuote;
                 $quote->author = Auth::user()->name;

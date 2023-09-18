@@ -8,8 +8,8 @@ use App\Http\Controllers\PaymentCreateController;
 use App\Http\Controllers\PaymentSubscriptionController;
 use App\Http\Controllers\SpotifyCallbackController;
 use App\Http\Controllers\SpotifyRedirectController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     // check share link exist in session
@@ -32,18 +32,17 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/payment/subscription', PaymentSubscriptionController::class)->name('payment.subscription');
     Route::post('/payment/cancel', PaymentCancelController::class)->name('payment.subscription.cancel');
 
-    // Process in the background by queue workers  
-    Route::post('/sharingguodeance', function(){
+    // Process in the background by queue workers
+    Route::post('/sharingguodeance', function () {
         Artisan::queue('command:sharingguidance', [
-            '--queue' => 'default'
+            '--queue' => 'default',
         ]);
     });
-    Route::post('/confirmsubscription', function(){
+    Route::post('/confirmsubscription', function () {
         Artisan::queue('command:confirmsubscription', [
-            '--queue' => 'default'
+            '--queue' => 'default',
         ]);
     });
-
 
     // TODO: some features might need to restrict by EnsureUserIsSubscribed middleware
     Route::middleware('subscribed')->group(function () {

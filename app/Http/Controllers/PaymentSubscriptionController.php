@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class PaymentSubscriptionController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
 
     //
     /**

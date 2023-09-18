@@ -81,7 +81,7 @@ class Dashboard extends Component
         $toDoList = Todolist::where('user_id', Auth::user()->id)->first();
 
         if (! $toDoList) {
-            $toDoList = new Todolist;
+            $toDoList = new Todolist();
 
             $toDoList->user_id = Auth::user()->id;
         }

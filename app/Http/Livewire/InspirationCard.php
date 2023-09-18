@@ -81,7 +81,7 @@ class InspirationCard extends Component
                 $user->save();
             }
 
-            $res = $this->spotify->addSongToPlaylist($user->playlist_id, $uris);
+            $res = $this->spotify->addTracksToPlaylist($user->playlist_id, $uris);
             if ($res) {
                 // TODO: success notification
             } else {
@@ -98,8 +98,9 @@ class InspirationCard extends Component
      */
     public function screenshot($id)
     {
+        $browser = new Browsershot();
         $fileName = Auth::user()->name.'.png';
-        Browsershot::url(config('app.url').'screenshot/'.$id)
+        $browser->url(config('app.url').'screenshot/'.$id)
             ->windowSize(1080, 1080)
             ->save(storage_path('app/public').$fileName);
 

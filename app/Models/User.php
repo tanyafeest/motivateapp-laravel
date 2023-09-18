@@ -123,6 +123,7 @@ class User extends Authenticatable
 
     public function getCurrentPeriodEnd()
     {
+        /** @phpstan-ignore-next-line */
         $timestamp = $this->subscriptions()->first()->asStripeSubscription()->current_period_end;
 
         return Carbon::createFromTimeStamp($timestamp)->toFormattedDateString();

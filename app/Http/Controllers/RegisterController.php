@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sport;
-
 class RegisterController
 {
     public $sports = [];
@@ -15,7 +13,7 @@ class RegisterController
             // then redirect oauth
             return redirect('/oauth');
         }
-        $this->sports = Sport::all();
+        $this->sports = config('sports');
 
         return view('auth.register', ['sports' => $this->sports]);
     }

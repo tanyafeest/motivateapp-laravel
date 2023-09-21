@@ -2,11 +2,9 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Http\Livewire\Sidebar;
 use Livewire\Livewire;
+use Tests\TestCase;
 
 class SidebarLivewireTest extends TestCase
 {
@@ -17,6 +15,6 @@ class SidebarLivewireTest extends TestCase
      */
     public function test_example()
     {
-        Livewire::test(Sidebar::class)->assertSee("");
+        Livewire::test(Sidebar::class)->assertSee('');
     }
 }

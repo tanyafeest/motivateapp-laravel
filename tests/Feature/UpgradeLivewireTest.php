@@ -2,13 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Http\Livewire\Upgrade;
-use Livewire\Livewire;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Livewire;
+use Tests\TestCase;
 
 class UpgradeLivewireTest extends TestCase
 {
@@ -21,7 +19,7 @@ class UpgradeLivewireTest extends TestCase
     {
         $user = User::factory()->create();
         Auth::login($user);
-        $this->markTestSkipped("");
+        $this->markTestSkipped('');
         Livewire::test(Upgrade::class)->assertSee('Upgrade');
     }
 }

@@ -27,7 +27,7 @@ class PaymentResumeController
         $user = Auth::user();
 
         try {
-            $user->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->cancel();
+            $user->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->resume();
         } catch (\Throwable $th) {
             throw $th;
         }

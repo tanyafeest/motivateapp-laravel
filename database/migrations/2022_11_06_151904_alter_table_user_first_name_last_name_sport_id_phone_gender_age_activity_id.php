@@ -16,8 +16,8 @@ return new class() extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->foreignId('sport_id')->constrained(Config::get('sports'));
-            $table->tinyInteger('gender')->default(0); // 0 - man, 1 - woman
+            //$table->foreignId('sport_id')->constrained(Config::get('sports'));
+            $table->string('gender')->default(0); // 0 - man, 1 - woman
             $table->integer('age')->default(0);
             $table->integer('grade_year')->default(0);
         });

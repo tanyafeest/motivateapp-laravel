@@ -33,11 +33,11 @@
                         </div>
                         <div class="grid grid-cols-3">
                             <div class="col-span-1">
-                                <x-jet-label class="text-gray-600 lg:text-black" class="invisible" for="expiry" value="{{ __('expiry') }}" />
+                                <x-jet-label class="text-gray-600 lg:text-black" for="expiry" value="{{ __('Expiry') }}" />
                                 <x-jet-input id="expiry" class="block" type="text" name="expiry" :value="old('expiry')" required autofocus autocomplete="expiry" />
                             </div>
                             <div class="col-span-1 col-start-3">
-                                <x-jet-label class="invisible" for="card" value="{{ __('cvc') }}" />
+                                <x-jet-label class="text-gray-600 lg:text-black" for="card" value="{{ __('Cvc') }}" />
                                 <x-jet-input id="cvc" class="block" type="text" name="cvc" :value="old('cvc')" required autofocus autocomplete="cvc" />
                             </div>
                         </div>

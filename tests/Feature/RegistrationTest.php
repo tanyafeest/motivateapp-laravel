@@ -1,59 +1,35 @@
 <?php
 
-namespace Tests\Feature;
-
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Laravel\Fortify\Features;
-use Laravel\Jetstream\Jetstream;
 use Tests\TestCase;
 
 class RegistrationTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase; // If you need to interact with the database
 
-    public function test_registration_screen_can_be_rendered()
+    public function testRedirectToOauthIfSessionDataIsMissing()
     {
-        if (! Features::enabled(Features::registration())) {
-            return $this->markTestSkipped('Registration support is not enabled.');
-        }
-
-        $response = $this->get('/register'); // the controller return Redirection URLs
-
-        return $response->assertStatus(302); // So the HTTP state code is 302 if it's OK.
-    }
-
-    public function test_registration_screen_cannot_be_rendered_if_support_is_disabled()
-    {
-        if (Features::enabled(Features::registration())) {
-            return $this->markTestSkipped('Registration support is enabled.');
-        }
-
+        // Simulate a request to the RegisterController without session data
         $response = $this->get('/register');
 
-        $response->assertStatus(404);
+        // Assert that the response is a redirect response
+        $response->assertRedirect('/oauth');
     }
 
-    public function test_new_users_can_register()
+    public function testViewIsRenderedWithSportsData()
     {
-        if (! Features::enabled(Features::registration())) {
-            return $this->markTestSkipped('Registration support is not enabled.');
-        }
+        // Set session data to simulate a user being authenticated
+        session(['temp_name' => 'John', 'temp_email' => 'john@example.com']);
 
-        $response = $this->post('/register', [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
-            'first_name' => 'Test',
-            'last_name' => 'User',
-            'phone' => '380634127299',
-            'gender' => 'true',
-            'age' => '2',
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature(),
-        ]);
+        // Simulate a request to the RegisterController with session data
+        $response = $this->get('/register');
 
-        $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
+        // Assert that the response is a view response
+        $response->assertViewIs('auth.register');
+
+        // Assert that the view has the 'sports' variable
+        $response->assertViewHas('sports');
+
+        // You can add additional assertions here based on your requirements
     }
 }

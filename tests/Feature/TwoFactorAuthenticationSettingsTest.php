@@ -16,7 +16,7 @@ class TwoFactorAuthenticationSettingsTest extends TestCase
     public function test_two_factor_authentication_can_be_enabled()
     {
         if (! Features::canManageTwoFactorAuthentication()) {
-            return $this->markTestSkipped('Two factor authentication is not enabled.');
+            return $this->markTestSkipped('');
         }
 
         $this->actingAs($user = User::factory()->create());

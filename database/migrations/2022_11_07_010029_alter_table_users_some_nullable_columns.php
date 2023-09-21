@@ -14,7 +14,7 @@ return new class() extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('sport_id')->nullable()->change();
+            // $table->foreignId('sport_id')->nullable()->change();
             $table->integer('grade_year')->nullable()->change();
         });
     }

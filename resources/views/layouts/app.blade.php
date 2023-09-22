@@ -16,8 +16,9 @@
     <body class="h-screen font-sans antialiased">
         <div class="lg:grid lg:overflow-hidden lg:gap-0 h-screen" style="grid-template-columns: 80px 500px 1fr;">
             <!-- Sidebar: hidden on mb -->
-            @livewire('sidebar')
-
+           
+                @livewire('sidebar')
+            
             <!-- Intro: hidden on mb -->
             @if(Request::is('inspiration'))
                 <x-intro-blue />

@@ -15,7 +15,6 @@ class AlbumTest extends TestCase
     {
         Livewire::test(Album::class)
             ->assertSee('Stronger'); // Replace with your component content
-
         // Add more assertions as needed
     }
 

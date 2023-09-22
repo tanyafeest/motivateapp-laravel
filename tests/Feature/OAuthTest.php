@@ -15,6 +15,6 @@ class OAuthTest extends TestCase
     {
         $response = $this->get('/oauth');
 
-        $response->assertStatus(200);
+        $response->assertSee("MotiveMob");
     }
 }

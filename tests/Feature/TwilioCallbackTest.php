@@ -25,7 +25,7 @@ class TwitterCallbackTest extends TestCase
         $response = $this->get('/');
 
         // Assert that the user is redirected to the expected location
-        $response->assertStatus(200);
+        $response->assertSee('Select');
         // Add more assertions as needed
     }
 
@@ -38,7 +38,7 @@ class TwitterCallbackTest extends TestCase
         $response = $this->get('/');
 
         // Assert that the user is redirected to the intended location (HOME)
-        $response->assertStatus(200);
+        $response->assertSee('Select');
 
         // Assert any other expectations based on your controller logic
     }

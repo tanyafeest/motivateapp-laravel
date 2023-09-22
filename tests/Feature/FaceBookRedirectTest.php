@@ -31,5 +31,6 @@ class FaceBookRedirectTest extends TestCase
 
         // Assert that the response redirects to the expected URL
         $response->assertRedirect('/');
+        $response->assertSee('Select');
     }
 }

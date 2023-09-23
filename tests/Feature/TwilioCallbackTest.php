@@ -42,6 +42,4 @@ class TwitterCallbackTest extends TestCase
 
         // Assert any other expectations based on your controller logic
     }
-
-    // Add more test methods for different scenarios (e.g., error cases)
 }

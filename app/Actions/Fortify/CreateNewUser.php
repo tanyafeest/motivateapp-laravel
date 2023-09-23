@@ -38,7 +38,7 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['first_name'].' '.$input['last_name'],
             'email' => $input['email'],
             'phone' => $input['phone'],
-            'gender' => $input['gender'] == 'true',
+            'gender' => $input['gender'],
             'age' => $input['age'],
             'grade_year' => isset($input['current_grade']) ? $calculateGradeYear->calc($input['current_grade']) : null,
             'sport_id' => $input['sport'] ?? null,

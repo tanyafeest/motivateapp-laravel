@@ -42,7 +42,6 @@ class GoogleCallbackTest extends TestCase
         // Assert that the user is redirected to the intended location (HOME)
         $response->assertSee('Select');
 
-
         // Assert any other expectations based on your controller logic
     }
 }

@@ -5,7 +5,7 @@
     </div>
     <div class="col-span-4 text-center text-white {{ $text != 'white' ? 'lg:text-gray-800' : '' }}">
         <p>Account Information</p>
-        <p class="font-semibold">Lisa Smith</p>
+        <p class="font-semibold">{{ Auth::user()->name }} </p>
     </div>
     <div class="col-span-1">
         <a href="#" class="flex items-center justify-center rounded-lg group">

@@ -8,7 +8,7 @@
             <span class="sr-only">Menu</span>
             <img class="w-6" src="{{asset('images/menu.svg')}}" />
         </a>
-        <a href="/upgrade-form" class="flex items-center justify-center rounded-lg  group">
+        <a href="#" class="flex items-center justify-center rounded-lg  group">
             <span class="sr-only">Send</span>
             <img class="w-6" src="{{asset('images/Send.svg')}}" />
         </a>

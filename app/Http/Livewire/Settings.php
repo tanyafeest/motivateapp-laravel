@@ -95,6 +95,8 @@ class Settings extends Component
     // render
     public function render()
     {
+        abort_if(! Auth::user(), 404);
+
         return view('livewire.settings');
     }
 

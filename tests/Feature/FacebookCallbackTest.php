@@ -26,7 +26,7 @@ class FacebookCallbackTest extends TestCase
         $response = $this->get('/');
 
         // Assert that the user is redirected to the expected location
-        $response->assertSee("Select");
+        $response->assertSee('Select');
 
         // Assert any other expectations based on your controller logic
     }
@@ -40,7 +40,7 @@ class FacebookCallbackTest extends TestCase
         $response = $this->get('/');
 
         // Assert that the user is redirected to the intended location (HOME)
-        $response->assertSee("Select");
+        $response->assertSee('Select');
 
         // Assert any other expectations based on your controller logic
     }

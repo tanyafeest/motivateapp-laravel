@@ -35,6 +35,8 @@ class InspirationCard extends Component
      */
     public function render()
     {
+        abort_if(! Auth::user(), 404);
+
         return view('livewire.inspiration-card');
     }
 

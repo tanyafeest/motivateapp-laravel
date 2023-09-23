@@ -66,4 +66,8 @@ return [
         'client_secret' => env('SPOTIFY_CLIENT_SECRET'),
         'redirect' => env('SPOTIFY_REDIRECT_URI'),
     ],
+
+    'stripe' => [
+        'key' => env('STRIPE_KEY'),
+    ],
 ];

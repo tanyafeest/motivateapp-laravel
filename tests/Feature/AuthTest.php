@@ -15,6 +15,6 @@ class AuthTest extends TestCase
     {
         $response = $this->get('/login');
 
-        $response->assertSee('Missed');
+        $response->assertSee('Sign');
     }
 }

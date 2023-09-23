@@ -24,7 +24,7 @@ class RegistrationTest extends TestCase
         // Simulate a request to the RegisterController with session data
         $response = $this->get('/register');
 
-        $response->assertSee("Account");
+        $response->assertSee('Account');
         // You can add additional assertions here based on your requirements
     }
 }

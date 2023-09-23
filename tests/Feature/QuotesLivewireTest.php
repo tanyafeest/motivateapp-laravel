@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Http\Livewire\QuotesSongs;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -15,6 +17,8 @@ class QuotesLivewireTest extends TestCase
      */
     public function test_example()
     {
+        $user = User::factory()->create();
+        Auth::login($user);
         Livewire::test(QuotesSongs::class)->assertSee('Quotes');
     }
 }

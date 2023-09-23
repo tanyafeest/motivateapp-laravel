@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 class PlayerController
 {
     /**
@@ -11,6 +13,8 @@ class PlayerController
      */
     public function index()
     {
+        abort_if(! Auth::user(), 404);
+
         return view('player');
     }
 }

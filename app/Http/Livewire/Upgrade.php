@@ -43,6 +43,8 @@ class Upgrade extends Component
 
     public function render()
     {
+        abort_if(! Auth::user(), 404);
+
         return view('livewire.upgrade');
     }
 }

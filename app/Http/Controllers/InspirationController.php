@@ -10,6 +10,6 @@ class InspirationController
     {
         abort_if(! Auth::user(), 404);
 
-        return view('onboarding');
+        return view('inspiration');
     }
 }

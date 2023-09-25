@@ -11,7 +11,7 @@ class PlayerController
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function __invoke()
     {
         abort_if(! Auth::user(), 404);
 

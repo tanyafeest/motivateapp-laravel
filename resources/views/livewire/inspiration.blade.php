@@ -72,36 +72,38 @@
         <div class="row-start-2 px-8 row-end-9">
             <p class="mt-4 text-2xl font-bold">Past Motivation:</p>
             <div class="grid grid-cols-2 gap-8 mt-8">
-                @foreach (Auth::user()->inspirations as $key => $inspiration)
-                    <div class="p-4 bg-white shadow round-lg" wire:key="inspiration-{{ $key }}">
-                        <table class="table">
-                            <tr>
-                                <td><img src="{{asset('images/Message3.png')}}" alt=""></td>
-                                <td><p class="text-red-500">Quote:</p></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><p>"{{ $inspiration->quote->quote }}"</p></td>
-                            </tr>
-                            <tr>
-                                <td><img src="{{asset('images/song.png')}}" alt=""></td>
-                                <td><p class="text-red-500">Song:</p></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><p><a href="#" wire:click="handleSetCurrentTrack({{ $inspiration->track->id }})">{{ $inspiration->track->name }}</a></p></td>
-                            </tr>
-                            <tr>
-                                <td><img src="{{asset('images/send.png')}}" alt=""></td>
-                                <td><p class="text-red-500">Shared by::</p></td>
-                            </tr>
-                            <tr>
-                                <td><img src="{{asset('images/danielsmith.png')}}" alt=""></td>
-                                <td><p><a href="#">{{ $inspiration->sharedbyUser->name }}</a></p></td>
-                            </tr>
-                        </table>    
-                    </div>
-                @endforeach
+                @if(!(Auth::user()->inspirations == null))
+                    @foreach (Auth::user()->inspirations as $key => $inspiration)
+                        <div class="p-4 bg-white shadow round-lg" wire:key="inspiration-{{ $key }}">
+                            <table class="table">
+                                <tr>
+                                    <td><img src="{{asset('images/Message3.png')}}" alt=""></td>
+                                    <td><p class="text-red-500">Quote:</p></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><p>"{{ $inspiration->quote->quote }}"</p></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="{{asset('images/song.png')}}" alt=""></td>
+                                    <td><p class="text-red-500">Song:</p></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><p><a href="#" wire:click="handleSetCurrentTrack({{ $inspiration->track->id }})">{{ $inspiration->track->name }}</a></p></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="{{asset('images/send.png')}}" alt=""></td>
+                                    <td><p class="text-red-500">Shared by::</p></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="{{asset('images/danielsmith.png')}}" alt=""></td>
+                                    <td><p><a href="#">{{ $inspiration->sharedbyUser->name }}</a></p></td>
+                                </tr>
+                            </table>    
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

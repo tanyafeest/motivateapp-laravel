@@ -78,7 +78,7 @@ class User extends Authenticatable
 
     public function numberOfQuotes()
     {
-        return $this->hasMany(Inspiration::class)->where('quotes_id', '!=', null)->count();
+        return $this->hasMany(Inspiration::class)->where('quote_id', '!=', null)->count();
     }
 
     public function numberOfSongs()

@@ -2,7 +2,7 @@
     <div x-data="{ age: 0 }" id="" class="relative h-screen overflow-scroll text-gray-800" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
         <img class="absolute w-11 h-11 top-6 left-6" src="images/back.svg" alt="">
         <div class="flex justify-end">
-            <img class="h-24" src="images/top-swirl.svg" alt="">
+            <img class="h-24" src="{{ session('temp_avatar') }}" alt="">
         </div>
 
         <x-jet-authentication-card>
@@ -21,6 +21,10 @@
                             <div>
                                 <x-jet-label for="first_name" value="{{ __('First Name') }}" />
                                 <x-jet-input id="first_name" class="block w-full" type="text" name="first_name"  value="{{ session('temp_first_name') }}" readonly required autofocus />
+                            </div>
+
+                            <div style="display:none">
+                                <x-jet-input style="display:none" id="ip_address" class="block w-full" type="text" name="ip_address" readonly required autofocus />
                             </div>
 
                             <div>
@@ -148,3 +152,23 @@
         </x-jet-authentication-card>
     </div>
 </x-guest-layout>
+
+
+
+<script>
+  // Function to update the IP address element
+  function updateIPAddress() {
+    fetch('https://api.ipify.org?format=json')
+      .then((response) => response.json())
+      .then((data) => {
+        const ipAddress = data.ip;
+        document.getElementById('ip_address').value = ipAddress;
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
+  // Call the function to update the IP address on page load
+  window.addEventListener('load', updateIPAddress);
+</script>

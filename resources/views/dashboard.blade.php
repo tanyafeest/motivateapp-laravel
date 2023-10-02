@@ -4,7 +4,7 @@
             @livewire('header-profile')
         </div>
     
-        <div x-data="{ openStep: 1 }" class="overflow-scroll">
+        <div x-data="{ openStep: 2 }" class="overflow-scroll">
             <div class="pb-8 bg-white h-screen lg:h-auto">
                 @livewire('quotes-songs')
             </div>

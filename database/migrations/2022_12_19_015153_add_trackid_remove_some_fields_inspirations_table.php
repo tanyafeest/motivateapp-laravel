@@ -14,8 +14,6 @@ return new class() extends Migration
     public function up()
     {
         Schema::table('inspirations', function (Blueprint $table) {
-            $table->dropColumn('album_name');
-            $table->dropColumn('album_href');
             $table->string('track_id');
         });
     }

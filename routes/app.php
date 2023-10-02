@@ -1,13 +1,8 @@
 <?php
 
-
-
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Route;
-
-//Included Controllers
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\InspirationController;
+use App\Http\Controllers\InspirationOboardingController;
+//Included Controllers
 use App\Http\Controllers\PaymentCancelController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentCreateController;
@@ -15,7 +10,8 @@ use App\Http\Controllers\PaymentSubscriptionController;
 use App\Http\Controllers\SpotifyCallbackController;
 use App\Http\Controllers\SpotifyRedirectController;
 use App\Http\Controllers\TestSubScribedController;
-use App\Http\Controllers\InspirationOboardingController;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
 
@@ -48,8 +44,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     Route::post('/payment/cancel', PaymentCancelController::class)->name('payment.subscription.cancel');
 
-     // Process in the background by queue job
-     Route::post('/sharingguodeance', function () {
+    // Process in the background by queue job
+    Route::post('/sharingguodeance', function () {
         Artisan::queue('command:sharingguidance', [
             '--queue' => 'default',
         ]);

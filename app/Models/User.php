@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Dyrynda\Database\Support\NullableFields;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,7 +13,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Billable;
     use HasApiTokens;
@@ -39,6 +40,10 @@ class User extends Authenticatable
         'grade_year',
         'sport_id',
         'share_link',
+        'ip_address',
+        'country',
+        'zip_codezip_code',
+        'profile_photo_path',
     ];
 
     /**
@@ -98,27 +103,30 @@ class User extends Authenticatable
 
     public function setting()
     {
-        return $this->hasOne(Setting::class);
+        return $this->hasOne(Setting::class, 'user_id', 'id');
     }
 
     public function isSubscribed()
     {
-        return $this->subscribed(env('STRIPE_SUBSCRIPTION_PLAN'));
+        return $this->subscribed(config('services.stripe.subscription_plan'));
     }
 
     public function isCancelled()
     {
-        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->canceled();
+        return config('services.stripe.subscription_plan') != null ?  
+         $this->subscription(config('services.stripe.subscription_plan'))->canceled() : null;
     }
 
     public function isOnGracePeriod()
     {
-        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->onGracePeriod();
+        return config('services.stripe.subscription_plan') != null ?
+         $this->subscription(config('services.stripe.subscription_plan'))->onGracePeriod() : null;
     }
 
     public function isEnded()
     {
-        return $this->subscription(env('STRIPE_SUBSCRIPTION_PLAN'))->ended();
+        return config('services.stripe.subscription_plan') != null ?
+         $this->subscription(config('services.stripe.subscription_plan'))->ended() : null;
     }
 
     public function getCurrentPeriodEnd()
@@ -127,5 +135,10 @@ class User extends Authenticatable
         $timestamp = $this->subscriptions()->first()->asStripeSubscription()->current_period_end;
 
         return Carbon::createFromTimeStamp($timestamp)->toFormattedDateString();
+    }
+
+    public function shareLink()
+    {
+        return env('APP_URL').'/'.'share/'.$this->share_link.'/'.str_replace(' ', '', strtolower($this->name));
     }
 }

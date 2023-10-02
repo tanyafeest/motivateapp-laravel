@@ -79,13 +79,19 @@ class Settings extends Component
     // mount
     public function mount()
     {
-        $this->isDaily = Auth::user()->setting()->isDaily();
-        $this->isWeekly = Auth::user()->setting()->isWeekly();
-        $this->isMonthly = Auth::user()->setting()->isMonthly();
-        $this->isNever = Auth::user()->setting()->isNever();
+        /** @phpstan-ignore-next-line */
+        if (Auth::user()->setting != null) {
+            
+            $this->isDaily = Auth::user()->setting->isDaily();
 
-        $this->currentSMSFrequency = Auth::user()->setting()->sms_frequency;
+            $this->isWeekly = Auth::user()->setting->isWeekly();
 
+            $this->isMonthly = Auth::user()->setting->isMonthly();
+
+            $this->isNever = Auth::user()->setting->isNever();
+            
+            $this->currentSMSFrequency =  Auth::user()->setting->sms_frequency ;
+        }
         if ($this->spotify->status() == 'CONNECTED') {
             $this->spotifyUserTopSongs = $this->spotify->getTopItems();
         }
@@ -175,9 +181,10 @@ class Settings extends Component
     // select duration
     public function selectDuration($type = 'daily')
     {
+        
         // select first option of each duration
         $setting = Auth::user()->setting();
-
+        if(!Auth::user()->isSubscribed()) return;
         switch ($type) {
             case 'daily':
                 if (! Auth::user()->isSubscribed()) {
@@ -219,15 +226,17 @@ class Settings extends Component
     // select option
     public function updatedCurrentSMSFrequency()
     {
-        $setting = Auth::user()->setting();
-        $setting->sms_frequency = $this->currentSMSFrequency;
-        $setting->save();
+        if(Auth::user()->isSubscribed()){
+            $setting = Auth::user()->setting();
+            $setting->sms_frequency = $this->currentSMSFrequency;
+            $setting->save();
 
-        if ($this->currentSMSFrequency == 18) {
-            $this->isNever = true;
-            $this->isDaily = false;
-            $this->isWeekly = false;
-            $this->isMonthly = false;
+            if ($this->currentSMSFrequency == 18) {
+                $this->isNever = true;
+                $this->isDaily = false;
+                $this->isWeekly = false;
+                $this->isMonthly = false;
+            }
         }
     }
 

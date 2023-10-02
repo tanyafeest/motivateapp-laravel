@@ -62,6 +62,7 @@ class Onboarding extends Component
     // mount
     public function mount()
     {
+        $this->currentMStep = 2;
         if ($this->spotify->status() == 'CONNECTED') {
             $this->spotifyUserTopSongs = $this->spotify->getTopItems();
         }

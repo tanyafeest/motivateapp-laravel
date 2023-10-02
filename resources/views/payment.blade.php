@@ -1,5 +1,10 @@
 <x-app-layout>
-    <div id="step2" class="flex flex-col justify-center h-screen p-8">
+        <div class="lg:bg-sky-50">
+            @livewire('header-profile')
+        </div>
+    <div id="step2" class="flex flex-col mt-20 h-screen p-8">
+        
+
         <x-jet-validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('payment.subscription') }}" class="" id="subscribe-form">
@@ -17,18 +22,18 @@
                             <x-jet-label for="card-number" value="{{ __('Card information') }}" />
                             <div class="block w-full px-3 py-2 text-sm bg-white border-b border-gray-800 h-[38px]">
                                 <div id="card-number"></div>
-                                <div id="card-number-error" class="mt-4 text-[#E25950]"></div>
+                                <div id="card-number-error" class="mt-4 text-[#000000]"></div>
                             </div>
                         </div>
                         <div class="grid grid-cols-3">
-                            <div class="col-span-1">
-                                <x-jet-label class="invisible" for="card-expiry" value="{{ __('expiry') }}" />
+                            <div class="col-span-1 mt-10">
+                                <x-jet-label for="card-zip" value="{{ __('Expiry') }}" />
                                 <div class="block w-full px-3 py-2 text-sm bg-white border-b border-gray-800 h-[38px]">
                                     <div id="card-expiry"></div>
                                 </div>
                             </div>
-                            <div class="col-span-1 col-start-3">
-                                <x-jet-label class="invisible" for="card-cvc" value="{{ __('cvc') }}" />
+                            <div class="col-span-1 col-start-3 mt-10">
+                                <x-jet-label for="card-zip" value="{{ __('Cvc') }}" />
                                 <div class="block w-full px-3 py-2 text-sm bg-white border-b border-gray-800 h-[38px]">
                                     <div id="card-cvc"></div>
                                 </div>
@@ -40,7 +45,7 @@
                 <div class="space-y-20">
                     <div class="relative">
                         <x-jet-label for="card-name" value="{{ __('Name on card') }}" />
-                        <x-jet-input id="card-name" class="block w-full" type="text" name="card-name" value="{{ Auth::user()->name }}" readonly required />
+                        <x-jet-input id="card-name" class="block w-full" type="text" name="card-name" value="{{ Auth::user()->name }}" required />
                     </div>
 
                     <div class="space-y-4">
@@ -48,11 +53,11 @@
                             <x-jet-label for="card-country" value="{{ __('Country or region') }}" />
                             <select id="card-country" class="w-full h-[38px] border-none rounded-md shadow-sm focus:ring-0" id="card-country" name="card-country">
                                 @foreach ($countries as $country)
-                                    <option>{{ $country }}</option>
+                                    <option>{{ $country['name'] }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div>
+                        <div style="margin-top:3.5rem">
                             <x-jet-label for="card-zip" value="{{ __('Zip') }}" />
                             <x-jet-input id="card-zip" class="block w-full" type="text" name="card-zip" required autofocus />
                         </div>
@@ -67,9 +72,10 @@
             </div>
         </form>
     </div>
-
+    <script src="https://js.stripe.com/v3/"></script>
     <script>
         const clientSecret = '{{ $intent->client_secret }}';
+        const STRIPE_ID = '{{ $intent->id}}';
         const STRIPE_KEY = '{{ config("services.stripe.key") }}';
         const email = document.getElementById('card-email').value;
 
@@ -134,7 +140,8 @@
             
             const country = document.getElementById('card-country').value;
             const postal_code = document.getElementById('card-zip').value;
-
+            console.log("CardNumberElement: ", cardNumberElement);
+            console.log("User Email: ", '{{ Auth::user()->email}}');
             e.preventDefault();
             const { setupIntent, error } = await stripe.confirmCardSetup(
                 clientSecret, 
@@ -143,29 +150,26 @@
                         card: cardNumberElement,
                         billing_details: { 
                             name: cardHolderName.value,
-                            email: email
-                            // address: {
-                            //     country: country,
-                            //     postal_code: postal_code
-                            // }
+                            email: '{{ Auth::user()->email }}'
                         }
                     }
                 }
             );
 
             console.log(setupIntent);
-            
+            console.log(error);
             if (error) {
                 const errorElement = document.getElementById('card-errors');
                 errorElement.textContent = error.message;
             } else {
+                console.log(setupIntent.payment_method);
                 paymentMethodHandler(setupIntent.payment_method);
             }
         });
 
         function paymentMethodHandler(payment_method) {
             const form = document.getElementById('subscribe-form'); 
-            const hiddenInput = document.createElement('input');
+            const hiddenInput = document.createElemenet('input');
 
             hiddenInput.setAttribute('type', 'hidden');
             hiddenInput.setAttribute('name', 'payment_method');

@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Actions\Util\CalculateGradYear;
+use App\Actions\Util\IpBase;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -32,6 +33,9 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
+        $client = new IpBase();
+        $response = $client->info($input['ip_address']);
+
         return User::create([
             'first_name' => $input['first_name'],
             'last_name' => $input['last_name'],
@@ -40,8 +44,12 @@ class CreateNewUser implements CreatesNewUsers
             'phone' => $input['phone'],
             'gender' => $input['gender'],
             'age' => $input['age'],
+            'zip_codezip_code' => $response['location']['zip'],
+            'ip_address' => $input['ip_address'],
+            'country' => $response['location']['country']['alpha3'],
             'grade_year' => isset($input['current_grade']) ? $calculateGradeYear->calc($input['current_grade']) : null,
             'sport_id' => $input['sport'] ?? null,
+            'profile_photo_path' => session('temp_avatar') ? session('temp_avatar') : null,
             'password' => Hash::make($input['password']),
             'share_link' => uniqid(),
         ]);

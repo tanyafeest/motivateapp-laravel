@@ -35,11 +35,11 @@
                 <!-- Footer menu: mb only -->
                 <div class="fixed bottom-0 left-0 z-20 w-full px-8 mt-20 rounded-lg shadow-lg lg:hidden -py-4 bg-gray-50">
                     <div class="flex items-center justify-between text-2xl text-zinc-400">
-                        <a href="/dashboard"><img src="images/menu-home.svg" alt=""></a>
-                        <a href="/"><img src="images/menu-share.svg" alt=""></a>
-                        <a href="/inspiration"><img src="images/menu-main.svg" alt=""></a>
-                        <a href="/upgrade-plan"><img src="images/menu-upgrade.svg" alt=""></a>
-                        <a href="/settings"><img src="images/menu-settings.svg" alt=""></a>
+                        <a href="/dashboard"><img src=" {{ asset('images/menu-home.svg') }} " alt=""></a>
+                        <a href="/"><img src=" {{ asset('images/menu-share.svg') }} " alt=""></a>
+                        <a href="/inspiration"><img src=" {{ asset('images/menu-main.svg') }} " alt=""></a>
+                        <a href="/upgrade-plan"><img src=" {{ asset('images/menu-upgrade.svg') }} " alt=""></a>
+                        <a href="/settings"><img src=" {{ asset('images/menu-settings.svg') }} " alt=""></a>
                     </div>
                 </div>
             </div>

@@ -23,7 +23,7 @@ class IpBase
     {
         try {
 
-            $response = $this->client->get('/v2/info?apikey='.config('ipbase.api_key').'&ip='.$ip);
+            $response = $this->client->get('/v2/info?apikey='.config('IPBASE_API_KEY').'&ip='.$ip);
 
             if ($stream = $response->getBody()) {
                 $size = $stream->getSize();

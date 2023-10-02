@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
+use GuzzleHttp\Client;
 
 class PaymentController
 {
@@ -24,9 +25,13 @@ class PaymentController
         abort_if(! Auth::user(), 404);
 
         $user = Auth::user();
-
+        
         $intent = $user->createSetupIntent();
+        
+        $client = new Client();
+        $response = $client->get("https://restcountries.com/v2/all");
+        $countries = json_decode($response->getBody(), true);
 
-        return view('payment', compact('user', 'intent'));
+        return view('payment', compact('user', 'intent', 'countries'));
     }
 }

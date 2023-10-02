@@ -32,12 +32,12 @@ class Dashboard extends Component
     public function mount()
     {
         // get current state of todo list
-        $toDoList = Todolist::where('user_id', Auth::user()->id)->first();
-        if ($toDoList) {
-            $this->toDoList[0] = $toDoList->message;
-            $this->toDoList[1] = $toDoList->chat;
-            $this->toDoList[2] = $toDoList->social;
-            $this->toDoList[3] = $toDoList->email;
+        $toDoListData = Todolist::where('user_id', Auth::user()->id)->first();
+        if ($toDoListData) {
+            $this->toDoList[0] = $toDoListData->message;
+            $this->toDoList[1] = $toDoListData->chat;
+            $this->toDoList[2] = $toDoListData->social;
+            $this->toDoList[3] = $toDoListData->email;
         }
 
         if (session()->has('temp_spotify_id')) {
@@ -102,7 +102,6 @@ class Dashboard extends Component
                 $toDoList->email = $action == 'toggle' ? ! $toDoList->email : true;
                 break;
         }
-
         $toDoList->save();
     }
 

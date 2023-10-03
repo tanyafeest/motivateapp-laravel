@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InspirationOboardingController;
+
 //Included Controllers
 use App\Http\Controllers\PaymentCancelController;
 use App\Http\Controllers\PaymentController;
@@ -13,19 +14,19 @@ use App\Http\Controllers\TestSubScribedController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
 
-    // check share link exist in session
-    Route::middleware('sharelink.confirm')->group(function () {
-        // dashboard
-        Route::get('/dashboard', DashboardController::class)->name('dashboard');
-    });
+
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
 
     // TODO: some features might need to restrict by EnsureUserIsSubscribed middleware
     Route::middleware('subscribed')->group(function () {
         Route::get('/test-subscribed', TestSubScribedController::class);
     });
 
+    Route::middleware('sharelink.confirm')->group(function () {
+        // dashboard
+        Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    });
     // social auth
     // --- spotify
     Route::get('/oauth/spotify', SpotifyRedirectController::class)->name('oauth.spotify');

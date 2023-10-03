@@ -28,7 +28,7 @@
             <img class="w-6" src="{{asset('images/Note-3.svg')}}" />
         </a>
 
-        <a href="/player" class="flex items-center justify-center rounded-lg  group">
+        <a href="/inspiration-playlist" class="flex items-center justify-center rounded-lg  group">
             <span class="sr-only">Headphone</span>
             <img class="w-6" src="{{asset('images/Headphone.svg')}}" />
         </a>

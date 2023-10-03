@@ -107,10 +107,10 @@ return [
         'two-factor' => 'two-factor',
     ],
 
-    'time_based_one_time_passwords' => [
-        'enabled' => true,
-        'window' => 4, // This is the number of minutes within which 2FA is required after a successful login.
-    ],
+    // 'time_based_one_time_passwords' => [
+    //     'enabled' => true,
+    //     'window' => 4, // This is the number of minutes within which 2FA is required after a successful login.
+    // ],
 
     /*
     |--------------------------------------------------------------------------

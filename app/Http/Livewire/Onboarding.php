@@ -62,7 +62,7 @@ class Onboarding extends Component
     // mount
     public function mount()
     {
-        $this->currentMStep = 2;
+
         if ($this->spotify->status() == 'CONNECTED') {
             $this->spotifyUserTopSongs = $this->spotify->getTopItems();
         }
@@ -70,7 +70,7 @@ class Onboarding extends Component
         // get requester data by share link
         $shareLink = session('temp_inspiration_share_link');
         $this->requester = User::where('share_link', $shareLink)->first();
-
+        $this->currentMStep = 2;
         // get random quote values
         $this->randomConfidenceQuote = Quote::inRandomOrder()->clone()->first();
         $this->randomPotentialQuote = Quote::inRandomOrder()->clone()->first();
@@ -132,6 +132,7 @@ class Onboarding extends Component
     // submit
     public function submit()
     {
+        abort_if(!Auth::user(), 404);
 
         $this->spotifyStatus = $this->spotify->status();
 
@@ -189,5 +190,9 @@ class Onboarding extends Component
     public function gotoDashboard()
     {
         return redirect()->intended(RouteServiceProvider::HOME);
+    }
+
+    public function NextStepPageNation(){
+        $this->currentMStep <= 6?  $this->currentMStep += 1 : $this->currentMStep = 6;
     }
 }

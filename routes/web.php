@@ -9,6 +9,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\UpgradeFormController;
 use App\Http\Controllers\UpgradePlanController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\InspirationController;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Inspiration;
 use App\Http\Livewire\Onboarding;
@@ -44,7 +45,7 @@ Route::middleware([
 
         Route::get('/dashboard', Dashboard::class);
 
-        Route::get('/inspiration', Inspiration::class)->name('inspiration');
+        Route::get('/inspiration', InspirationController::class)->name('inspiration');
 
         Route::get('/inspiration-playlist', InspirationPlayListController::class)->name('playlist');
 

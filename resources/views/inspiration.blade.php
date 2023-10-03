@@ -1,10 +1,8 @@
 <x-app-layout>
     <div class="flex flex-col h-screen" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), linear-gradient(146.67deg, #7A5CDC 1.12%, #AF55D8 122.75%);">
-        @livewire('header-profile', ['text' => 'white'])
-
         <div class="items-center text-white"> 
             <div class="flex flex-col items-center mt-12 mb-4">
-                <img class="w-[75px]" src="images/adamdriver.png" alt="">
+                <img class="w-[75px]" src=" {{ asset('images/adamdriver.png')}}" alt="">
                 <p class="text-xl font-semibold">Adam Driver</p>
                 <p class="text-xs"><span class="font-light">(Teammate)</span> shared with you:</p>
             </div>
@@ -25,9 +23,9 @@
                         <p class="text-md font-extralight">And they thought you might enjoy listening to: </p>
                         <p class="text-lg">Stronger (Kanye West)</p>
                         <div class="flex mt-4 space-x-4">
-                            <img class="w-12 h-12" src="images/add.png" alt="">
-                            <img class="w-12 h-12" src="images/play.png" alt="">
-                            <img class="w-12 h-12" src="images/spotify1.png" alt="">
+                            <img class="w-12 h-12" src=" {{ asset('images/add.png')}} " alt="">
+                            <img class="w-12 h-12" src=" {{ asset('images/play.png') }}" alt="">
+                            <img class="w-12 h-12" src="{{ asset('images/spotify1.png')}}" alt="">
                         </div>
                     </div>
                 </div>

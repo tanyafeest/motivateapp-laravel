@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div id="" class="relative h-screen overflow-scroll text-gray-800" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
+    <div id="" class="relative h-screen text-gray-800" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
         <img class="absolute w-11 h-11 top-6 left-6" src="images/back.svg" alt="">
         <div class="flex justify-end">
             <img class="h-24" src="images/top-swirl.svg" alt="">

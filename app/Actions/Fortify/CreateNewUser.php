@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use Illuminate\Support\Facades\Http;
+
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -36,7 +38,7 @@ class CreateNewUser implements CreatesNewUsers
         $client = new IpBase();
         $response = $client->info($input['ip_address']);
 
-        return User::create([
+        $newUser = User::create([
             'first_name' => $input['first_name'],
             'last_name' => $input['last_name'],
             'name' => $input['first_name'].' '.$input['last_name'],
@@ -53,5 +55,9 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'share_link' => uniqid(),
         ]);
+
+        $response = Http::post('/sendmail/registereduser');
+
+        return $newUser;
     }
 }

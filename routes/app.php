@@ -13,7 +13,7 @@ use App\Http\Controllers\TestSubScribedController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), ])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session')])->group(function () {
 
     // TODO: some features might need to restrict by EnsureUserIsSubscribed middleware
     Route::middleware('subscribed')->group(function () {

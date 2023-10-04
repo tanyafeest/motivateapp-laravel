@@ -107,11 +107,6 @@ return [
         'two-factor' => 'two-factor',
     ],
 
-    // 'time_based_one_time_passwords' => [
-    //     'enabled' => true,
-    //     'window' => 4, // This is the number of minutes within which 2FA is required after a successful login.
-    // ],
-
     /*
     |--------------------------------------------------------------------------
     | Register View Routes
@@ -139,7 +134,7 @@ return [
     'features' => [
         Features::registration(),
         Features::resetPasswords(),
-        // Features::emailVerification(),
+        //Features::emailVerification(),
         Features::updateProfileInformation(),
         Features::updatePasswords(),
         Features::twoFactorAuthentication([

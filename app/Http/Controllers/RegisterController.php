@@ -13,7 +13,8 @@ class RegisterController
             // then redirect oauth
             return redirect('/oauth');
         }
-        $this->sports = config('sports');
+
+        $this->sports = config('Sports');
 
         return view('auth.register', ['sports' => $this->sports]);
     }

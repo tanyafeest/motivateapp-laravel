@@ -13,9 +13,11 @@ use App\Http\Controllers\OAuthContoller;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TwitterCallbackController;
 use App\Http\Controllers\TwitterRedirectController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
+
     Route::get('/login', AuthController::class)->name('login');
 
     Route::get('/register', RegisterController::class)->name('register');
@@ -42,4 +44,10 @@ Route::middleware('guest')->group(function () {
     // --- Apple
     Route::get('/oauth/apple', AppleRedirectController::class)->name('oauth.apple');
     Route::get('/oauth/apple/callback', AppleCallbackController::class);
+
+    Route::post('/sendmail/registereduser', function () {
+        Artisan::queue('command:sendregistereduser', [
+            '--queue' => 'default',
+        ]);
+    });
 });

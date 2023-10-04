@@ -1,12 +1,12 @@
 <x-guest-layout>
-    <div x-data="{ age: 0 }" id="" class="relative h-screen overflow-scroll text-gray-800" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
+    <div x-data="{ age: 0 }" id="" class="relative h-screen text-gray-800" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
         <img class="absolute w-11 h-11 top-6 left-6" src="images/back.svg" alt="">
         <div class="flex justify-end">
             <img class="h-24" src="{{ session('temp_avatar') }}" alt="">
         </div>
 
         <x-jet-authentication-card>
-            <div class="text-zinc-800">
+            <div class="text-zinc-800 left-10">
                 <p class="">Create Your Account</p>
                 <p class="text-2xl font-semibold">to Get Inspired!</p>
             </div>
@@ -112,9 +112,9 @@
                                 <div>
                                     <x-jet-label for="activity" value="{{ __('Activities') }}" />
                                     <select class="w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="sport" name="sport">
-                                        {{-- @foreach ($sports as $sport)
-                                            <option value="{{ $sport->id }}">{{ $sport->sport }}</option>
-                                        @endforeach --}}
+                                        @foreach ($sports as $sport => $value)
+                                            <option value="{{ $value }}">{{ $sport }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </template>
@@ -138,7 +138,7 @@
                         </div>
                     @endif
 
-                    <div class="flex items-center justify-center mt-4">
+                    <div class="flex  justify-center mt-10">
                         {{-- <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('login') }}">
                             {{ __('Already registered?') }}
                         </a> --}}

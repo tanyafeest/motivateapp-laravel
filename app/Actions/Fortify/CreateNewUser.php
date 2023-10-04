@@ -6,11 +6,10 @@ use App\Actions\Util\CalculateGradYear;
 use App\Actions\Util\IpBase;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
-use Illuminate\Support\Facades\Http;
-
 
 class CreateNewUser implements CreatesNewUsers
 {

@@ -35,10 +35,10 @@ class SendMailUserRegisteration extends Mailable
             to: 'UserName' + session('temp_email'),
             subject: 'Account Created - Quote & Song Inspiration',
             tags : [
-                "Congratulations! You have set up your account at https://motivemob.com",
-                "Email Address:" + session['temp_email'],
-                "Authentication Type: Facebook login",
-                "View Your songs & quotes here: https://motivemob.com/account"
+                'Congratulations! You have set up your account at https://motivemob.com',
+                'Email Address:' + session['temp_email'],
+                'Authentication Type: Facebook login',
+                'View Your songs & quotes here: https://motivemob.com/account',
             ]
         );
     }

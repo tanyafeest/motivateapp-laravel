@@ -2,12 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\SendMailUserRegisteration;
 use App\Models\User;
-use Carbon\Carbon;
-use Carbon\CarbonInterval;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMailUserRegisteration;
 
 class SendRegisteredUser extends Command
 {
@@ -34,6 +32,7 @@ class SendRegisteredUser extends Command
     {
         $user = User::where('email', session('temp_email'))->first();
         Mail::to($user)->send(new SendMailUserRegisteration());
+
         return Command::SUCCESS;
     }
 }

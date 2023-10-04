@@ -132,7 +132,7 @@ class Onboarding extends Component
     // submit
     public function submit()
     {
-        abort_if(!Auth::user(), 404);
+        abort_if(! Auth::user(), 404);
 
         $this->spotifyStatus = $this->spotify->status();
 
@@ -192,7 +192,8 @@ class Onboarding extends Component
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
-    public function NextStepPageNation(){
-        $this->currentMStep <= 6?  $this->currentMStep += 1 : $this->currentMStep = 6;
+    public function NextStepPageNation()
+    {
+        $this->currentMStep <= 6 ? $this->currentMStep += 1 : $this->currentMStep = 6;
     }
 }

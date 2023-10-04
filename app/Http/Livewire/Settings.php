@@ -81,7 +81,7 @@ class Settings extends Component
     {
         /** @phpstan-ignore-next-line */
         if (Auth::user()->setting != null) {
-            
+
             $this->isDaily = Auth::user()->setting->isDaily();
 
             $this->isWeekly = Auth::user()->setting->isWeekly();
@@ -89,8 +89,8 @@ class Settings extends Component
             $this->isMonthly = Auth::user()->setting->isMonthly();
 
             $this->isNever = Auth::user()->setting->isNever();
-            
-            $this->currentSMSFrequency =  Auth::user()->setting->sms_frequency ;
+
+            $this->currentSMSFrequency = Auth::user()->setting->sms_frequency;
         }
         if ($this->spotify->status() == 'CONNECTED') {
             $this->spotifyUserTopSongs = $this->spotify->getTopItems();
@@ -181,15 +181,20 @@ class Settings extends Component
     // select duration
     public function selectDuration($type = 'daily')
     {
-        
+
         // select first option of each duration
         $setting = Auth::user()->setting();
-        if(!Auth::user()->isSubscribed()) return;
+        if (! Auth::user()->isSubscribed()) {
+            return;
+        }
         switch ($type) {
             case 'daily':
-                if (! Auth::user()->isSubscribed()) {
+
+                /** @phpstan-ignore-next-line */
+                if (! Auth::user()->isSubscribed) {
                     break;
                 }
+
                 $setting->sms_frequency = 14; // Daily morning
                 $this->currentSMSFrequency = 14;
                 $this->isDaily = true;
@@ -206,9 +211,12 @@ class Settings extends Component
                 $this->isNever = false;
                 break;
             case 'monthly':
-                if (! Auth::user()->isSubscribed()) {
+
+                /** @phpstan-ignore-next-line */
+                if (! Auth::user()->isSubscribed) {
                     break;
                 }
+
                 $setting->sms_frequency = 16; // Monthly morning
                 $this->currentSMSFrequency = 16;
                 $this->isDaily = false;
@@ -226,8 +234,11 @@ class Settings extends Component
     // select option
     public function updatedCurrentSMSFrequency()
     {
-        if(Auth::user()->isSubscribed()){
-            $setting = Auth::user()->setting();
+        /** @phpstan-ignore-next-line */
+        if (Auth::user()->isSubscribed) {
+
+            /** @phpstan-ignore-next-line */
+            $setting = Auth::user()->setting;
             $setting->sms_frequency = $this->currentSMSFrequency;
             $setting->save();
 

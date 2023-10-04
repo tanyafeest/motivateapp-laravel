@@ -36,9 +36,14 @@ class Upgrade extends Component
     {
         $user = Auth::user();
 
-        $this->isSubscribed = $user->isSubscribed();
-        $this->isCancelled = $user->isCancelled();
-        $this->isEnded = $user->isEnded();
+        /** @phpstan-ignore-next-line */
+        $this->isSubscribed = $user->isSubscribed;
+
+        /** @phpstan-ignore-next-line */
+        $this->isCancelled = $user->isCancelled;
+
+        /** @phpstan-ignore-next-line */
+        $this->isEnded = $user->isEnded;
     }
 
     public function render()

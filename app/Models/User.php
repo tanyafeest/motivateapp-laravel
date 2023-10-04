@@ -113,7 +113,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isCancelled()
     {
-        return config('services.stripe.subscription_plan') != null ?  
+        return config('services.stripe.subscription_plan') != null ?
          $this->subscription(config('services.stripe.subscription_plan'))->canceled() : null;
     }
 

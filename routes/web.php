@@ -1,17 +1,14 @@
 <?php
 
 // Include Controllers
+use App\Http\Controllers\InspirationController;
 use App\Http\Controllers\InspirationPastController;
 use App\Http\Controllers\InspirationPlayListController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\SuccessController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UpgradeFormController;
-use App\Http\Controllers\UpgradePlanController;
-use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\InspirationController;
 use App\Http\Livewire\Dashboard;
-use App\Http\Livewire\Inspiration;
 use App\Http\Livewire\Onboarding;
 use App\Http\Livewire\Settings;
 use App\Http\Livewire\Upgrade;
@@ -41,21 +38,21 @@ Route::get('/test', TestController::class);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified', ])->group(function () {
+])->group(function () {
 
-        Route::get('/dashboard', Dashboard::class);
+    Route::get('/dashboard', Dashboard::class);
 
-        Route::get('/inspiration', InspirationController::class)->name('inspiration');
+    Route::get('/inspiration', InspirationController::class)->name('inspiration');
 
-        Route::get('/inspiration-playlist', InspirationPlayListController::class)->name('playlist');
+    Route::get('/inspiration-playlist', InspirationPlayListController::class)->name('playlist');
 
-        Route::get('/inspiration-past', InspirationPastController::class)->name('motivation');
+    Route::get('/inspiration-past', InspirationPastController::class)->name('motivation');
 
-        Route::get('/upgrade-plan', Upgrade::class)->name('upgrade-plan');
+    Route::get('/upgrade-plan', Upgrade::class)->name('upgrade-plan');
 
-        Route::get('/upgrade-form', UpgradeFormController::class)->name('upgrade-form');
+    Route::get('/upgrade-form', UpgradeFormController::class)->name('upgrade-form');
 
-        Route::get('/settings', Settings::class)->name('settings');
+    Route::get('/settings', Settings::class)->name('settings');
 
-        Route::get('/player', PlayerController::class)->name('player');
-    });
+    Route::get('/player', PlayerController::class)->name('player');
+});

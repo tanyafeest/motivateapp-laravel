@@ -69,9 +69,10 @@ return [
 
     'stripe' => [
         'key' => env('STRIPE_KEY'),
-        'subscription_price' => env('STRIPE_SUBSCRIPTION_PRICE'),
+        'secret' => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
         'subscription_plan' => env('STRIPE_SUBSCRIPTION_PLAN'),
+        'subscription_price' => env('STRIPE_SUBSCRIPTION_PRICE'),
+        'subscription_plan_id' => env('STRIPE_SUBSCRIPTION_PLAN_ID'),
     ],
-
-    'IPBASE_API_KEY' => env('IPBASE_API_KEY'),
 ];

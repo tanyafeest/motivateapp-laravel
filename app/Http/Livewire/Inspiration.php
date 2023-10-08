@@ -10,14 +10,13 @@ class Inspiration extends Component
     // render
     public function render()
     {
-        abort_if(! Auth::user(), 404);
-
         return view('livewire.inspiration');
     }
 
     // set current track id on session
     public function handleSetCurrentTrack($id)
     {
+        abort_if(! Auth::user(), 403);
 
         session(['temp_current_track' => $id]);
 

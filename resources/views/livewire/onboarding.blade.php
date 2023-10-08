@@ -1,257 +1,187 @@
-<div>
-    <!-- splash - mobile only -->
-    <div id="splash" class="hidden h-screen lg:hidden">
-        <img class="h-full cover" src=" {{asset('images/splash.png')}}" alt="">
-        <img class="z-20 lg:hidden absolute top-56 w-[200px] left-[105px]" src="{{ asset('images/mm-logo.png') }}" alt="">
-    </div>
-    
-    <!-- how it works mobile only -->
-    <div id="step1" class="{{ $currentMStep != 1 ? 'lg:hidden' : ''}} bg-sky-300 h-screen relative {{ $currentMStep != 1 ? 'hidden' : '' }}">
-        <img class="z-10 " src=" {{ asset('images/howitworks.png') }} " alt=""> 
-        <img class="z-20 absolute top-24 w-[120px] left-[145px]" src=" {{ asset('images/mm-logo.png') }}" alt="">
-        <x-button.white wire:click="firstMStepSubmit" type="button" class="lg:hidden z-20 absolute bottom-12 w-[200px] left-[100px]">How It Works</x-button.white>
+<div x-data="{ step: 0 }" class="relative">
+    {{-- spotify status --}}
+    <div class="absolute top-0 right-0 p-1 text-sm italic text-red-500">
+        {{ $spotifyStatus }}
     </div>
 
-    <!-- pink (pink & yellow)-->
-    <div id="step2" class="{{ $currentMStep != 2 ? 'hidden' : 'lg:grid' }}  lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
-        <img class="absolute z-10 w-12 lg:hidden top-12 left-[180px]" src=" {{ asset('images/MotiveMobLogo.svg') }}" alt=""> 
-
-        <!-- top section - dk only -->
-        <div class="hidden lg:row-span-1 lg:bg-pink-100 lg:block" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
-            <img class='w-[210px] absolute top-6 left-[300px]' src="{{ asset('images/logo-white.svg') }}" alt="">
+    <div id="step-1" :class="{'flex': step == 0, 'hidden': step != 0}" class="flex-col h-screen row-start-2 gap-10 text-black row-end-9">
+        <div class="flex flex-col gap-8 p-14">
+            <textarea wire:model="tempNewQuote"></textarea>
+            <x-button.red class="w-full" x-on:click="step = 1" wire:click="handleIsNew()">Submit</x-button.red>
         </div>
-        <!-- end -->
-
-        <div class="h-full lg:row-span-2 lg:grid lg:grid-cols-2" style="background: #F390A2;">
-            <!-- mobile only -->
-            <div class="lg:hidden">
-                <img class="absolute top-0 left-0 z-0" src=" {{ asset('images/pink.png') }} " alt="">
-                <p class="absolute top-[65%] left-0 z-20 text-justify p-4">Let your team, friends, and family support your sports success. Have them join your "Mob" to provide you with inspiration through song and word! Use this free app to get motivation from people that care about you. Here's how it works:</p>
-                <div class="absolute bottom-8 left-8"><a href="/register">Skip</a></div>
-                <div class="absolute bottom-8 right-8"><x-button.white wire:click="NextStepPageNation">Next</x-button.white></div>
-            </div>
-            
-            <!-- dk only -->
-            <div id="step2a" class="relative grid hidden h-full grid-rows-3 lg:grid-rows-2 lg:grid lg:h-full lg:grid-span-1 lg:block">
-                <div class="relative z-10" style="background: #F390A2;">
-                    <img class="hidden lg:block lg:w-100 lg:w-80 lg:absolute lg:bottom-0 lg:left-[80px]" src=" {{ asset('images/woman-pink.png') }}" alt="">
-                </div>
-                <div class="" style="background: #F76A83;"> 
-                    <div class="p-4">
-                        <p class="text-justify">Let your team, friends, and family support your sports success. Have them join your "Mob" to provide you with inspiration through song and word! Use this free app to get motivation from people that care about you. Here's how it works:</p>
-                    </div>
-                    <div class="absolute bottom-8 lg:bottom-4 left-4"><a href="/register">Skip</a></div>
-                    <div class="absolute bottom-8 right-8 lg:hidden"><x-button.white wire:click="secondStepSubmit">Next</x-button.white></div>
-                </div>
-            </div>
-            <!-- dk only: this is the yellow half -->
-            <div id="step2b" class="hidden lg:grid-rows-2 lg:grid lg:h-full lg:grid-span-1 lg:block">
-                <div class="relative z-10" style="background: linear-gradient(145.74deg, #EFC03E 2.49%, #BD7308 122.43%);">
-                    <img class="hidden lg:block lg:w-100 lg:w-80 lg:absolute lg:bottom-0 lg:left-[80px]" src=" {{ asset('images/woman1.png') }}" alt="">
-                </div>
-                <div class="p-4" style="background: #E1AA2F;">
-                    <div>
-                        <p class="text-justify">Select your types of motivation - music-based and inspiring quotes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. </p>
-                    </div>
-                    <div class="absolute bottom-8 lg:bottom-4 left-4 lg:hidden"><a href="/register">Skip</a></div>
-                    <div class="absolute bottom-4 right-8"><x-button.white wire:click="NextStepPageNation">Next</x-button.white></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- yellow (yellow & green)-->
-    <div id="step3" class="{{ $currentMStep != 3 ? 'hidden' : 'lg:grid' }}  lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
-        <img class="absolute z-10 w-12 lg:hidden top-12 left-[180px]" src=" {{ asset('images/MotiveMobLogo.svg') }}" alt=""> 
         
-        <!-- top section - dk only -->
-        <div class="hidden lg:row-span-1 lg:bg-yellow-100 lg:block" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
-            <img class='w-[210px] absolute top-6 left-[300px]' src=" {{ asset('images/logo-white.svg') }}" alt="">
-        </div>
-        <!-- end -->
-
-        <div class="h-full lg:row-span-2 lg:grid lg:grid-cols-2" style="background: #F390A2;">
-            <img class="w-[48px] h-[46px] absolute top-4 left-4 cursor-pointer" src=" {{ asset('images/back.svg') }}" alt="" wire:click="back(2)">
-            <!-- mobile only -->
-            <div class="lg:hidden">
-                <img class="absolute top-0 left-0 z-0" src=" {{ asset('images/yellow.png') }} " alt="">
-                <p class="absolute top-[65%] left-0 z-20 text-justify p-4">Let your team, friends, and family support your sports success. Have them join your "Mob" to provide you with inspiration through song and word! Use this free app to get motivation from people that care about you. Here's how it works:</p>
-                <div class="absolute bottom-8 left-8"><a href="/register">Skip</a></div>
-                <div class="absolute bottom-8 right-8"><x-button.white wire:click="NextStepPageNation">Next</x-button.white></div>
+        <div class="flex flex-col gap-4 p-10">
+            <div class="flex flex-col">
+                <p class="text-2xl font-bold">Prefer to pick out a quote for them instead?</p>
+                <p>Write your own above or use one of the recommended quotes below:</p>
             </div>
-            
-            <!-- dk only -->
-            <div id="step3a" class="relative grid hidden h-full grid-rows-3 lg:grid-rows-2 lg:grid lg:h-full lg:grid-span-1 lg:block">
-                <div class="relative z-10" style="background: linear-gradient(145.74deg, #EFC03E 2.49%, #BD7308 122.43%);">
-                    <img class="hidden lg:block lg:w-100 lg:w-80 lg:absolute lg:bottom-0 lg:left-[80px]" src="{{ asset('images/woman1.png') }} " alt="">
-                </div>
-                <div class="p-4" style="background: #E1AA2F;">
-                    <div>
-                        <p class="text-justify">Select your types of motivation - music-based and inspiring quotes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. </p>
+    
+            <div class="grid grid-cols-2 gap-10">
+                <div class="flex flex-col">
+                    <div class="p-3 bg-white">
+                        <p class="text-lg font-semibold truncate whitespace-nowrap">{{ $randomConfidenceQuote === null ? "There is no confidence quote" : $randomConfidenceQuote->quote }}</p>
+                        <p class="text-sm text-gray-500 text-end">-  {{ $randomConfidenceQuote === null ? "None" : $randomConfidenceQuote->author }}</p>
                     </div>
-                    <div class="absolute bottom-8 lg:bottom-4 left-4"><a href="/register">Skip</a></div>
+                    <x-button.red class="w-full" x-on:click="step = 1" wire:click="selectQuote({{ $randomConfidenceQuote === null ? 'null' : $randomConfidenceQuote->id }})">Select Confidence Quote</x-button.red>
                 </div>
-            </div>
-            <!-- dk only: this is the green half -->
-            <div id="step3b" class="hidden lg:grid-rows-2 lg:grid lg:h-full lg:grid-span-1 lg:block">
-                <div class="relative z-10" style="background: linear-gradient(145.71deg, #8CD6D2 2.55%, #25A9A0 122.42%);">
-                    <img class="hidden lg:block lg:w-100 lg:w-80 lg:absolute lg:bottom-0 lg:left-[80px]" src=" {{ asset('images/woman2.png') }} " alt="">
-                </div>
-                <div class="p-4" style="background: #18ADAB;">
-                    <div>
-                        <p class="text-justify">Invite colleagues, friends & family to privately share some inspiration. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. </p>
+    
+                <div class="flex flex-col">
+                    <div class="p-3 bg-white">
+                        <p class="text-lg font-semibold truncate whitespace-nowrap">{{ $randomPotentialQuote === null ? "There is no confidence quote" : $randomPotentialQuote->quote }}</p>
+                        <p class="text-sm text-gray-500 text-end">-  {{ $randomPotentialQuote === null ? "None" : $randomPotentialQuote->author }}</p>
                     </div>
-                    <div class="absolute bottom-4 right-8"><x-button.white wire:click="NextStepPageNation">Next</x-button.white></div>
+                    <x-button.red class="w-full" x-on:click="step = 1" wire:click="selectQuote({{ $randomPotentialQuote === null ? 'null' : $randomPotentialQuote->id }})">Select Potential Quote</x-button.red>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- green (green & blue)-->
-    <div id="step4" class="{{ $currentMStep != 4 ? 'hidden' : 'lg:grid' }}  lg:overflow-hidden lg:grid-rows-3 lg:gap-0 h-screen lg:relative">
-        <img class="w-[48px] h-[46px] absolute top-4 left-4 cursor-pointer" src=" {{ asset('images/back.svg') }} " alt="" wire:click="back(3)">
-        <img class="absolute z-10 w-12 lg:hidden top-12 left-[180px]" src=" {{ asset('images/MotiveMobLogo.svg') }} " alt=""> 
-
-        <!-- top section - dk only -->
-        <div class="hidden lg:row-span-1 lg:bg-yellow-100 lg:block" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), #D9D9D9;">
-            <img class='w-[210px] absolute top-6 left-[300px]' src=" {{ asset('images/logo-white.svg') }} " alt="">
-        </div>
-        <!-- end -->
-
-        <div class="h-full lg:row-span-2 lg:grid lg:grid-cols-2" style="background: #F390A2;">
-            <!-- mobile only -->
-            <div class="lg:hidden">
-                <img class="absolute top-0 left-0 z-0" src=" {{ asset('images/green.png') }} " alt="">
-                <p class="absolute top-[65%] left-0 z-20 text-justify p-4">Invite colleagues, friends & family to privately share some inspiration. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. </p>
-                <div class="absolute bottom-8 left-8"><a href="/register">Skip</a></div>
-                <div class="absolute bottom-8 right-8"><x-button.white wire:click="NextStepPageNation">Next</x-button.white></div>
-            </div>
-            
-            <!-- dk only -->
-            <div id="step3a" class="relative grid hidden h-full grid-rows-3 lg:grid-rows-2 lg:grid lg:h-full lg:grid-span-1 lg:block">
-                <div class="relative z-10" style="background: linear-gradient(145.71deg, #8CD6D2 2.55%, #25A9A0 122.42%);">
-                    <img class="hidden lg:block lg:w-100 lg:w-80 lg:absolute lg:bottom-0 lg:left-[80px]" src=" {{ asset('images/woman2.png') }} " alt="">
-                </div>
-                <div class="p-4" style="background: #18ADAB;">
-                    <div>
-                        <p class="text-justify">Invite colleagues, friends & family to privately share some inspiration. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. </p>
+    
+                <div class="flex flex-col">
+                    <div class="p-3 bg-white">
+                        <p class="text-lg font-semibold truncate whitespace-nowrap">{{ $randomDeterminationQuote === null ? "There is no confidence quote" : $randomDeterminationQuote->quote }}</p>
+                        <p class="text-sm text-gray-500 text-end">-  {{ $randomDeterminationQuote === null ? "None" : $randomDeterminationQuote->author }}</p>
                     </div>
-                    <div class="absolute bottom-8 lg:bottom-4 left-4"><a href="/register">Skip</a></div>
+                    <x-button.red class="w-full" x-on:click="step = 1" wire:click="selectQuote({{ $randomDeterminationQuote === null ? 'null' : $randomDeterminationQuote->id }})">Select Determination Quote</x-button.red>
                 </div>
-            </div>
-            <!-- dk only: this is the blue half -->
-            <div id="step3b" class="hidden lg:grid-rows-2 lg:grid lg:h-full lg:grid-span-1 lg:block">
-                <div class="relative z-10" style="background: linear-gradient(147.46deg, #9FD5F7 -0.08%, #3C91B0 123.02%);">
-                    <img class="hidden lg:block lg:w-100 lg:w-80 lg:absolute lg:bottom-0 lg:left-[80px]" src=" {{ asset('images/woman3.png') }} " alt="">
-                </div>
-                <div class="p-4" style="background: #6CB4D4;">
-                    <div>
-                        <p class="text-justify">Receive weekly text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. Nulla lacus libero, varius et eros sed, convallis viverra enim. </p>
+    
+                <div class="flex flex-col">
+                    <div class="p-3 bg-white">
+                        <p class="text-lg font-semibold truncate whitespace-nowrap">{{ $randomResilienceQuote === null ? "There is no confidence quote" : $randomResilienceQuote->quote }}</p>
+                        <p class="text-sm text-gray-500 text-end">-  {{ $randomResilienceQuote === null ? "None" : $randomResilienceQuote->author }}</p>
                     </div>
-                    <div class="absolute bottom-8 lg:bottom-4 left-4 lg:hidden"><a href="/register">Skip</a></div>
-                    <div class="absolute bottom-4 right-8"><x-button.white wire:click="NextStepPageNation">Next</x-button.white></div>
+                    <x-button.red class="w-full" x-on:click="step = 1" wire:click="selectQuote({{ $randomResilienceQuote === null ? 'null' : $randomResilienceQuote->id }})">Select Resilience Quote</x-button.red>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- blue (not on dk) -->
-    <div id="step5" class=" flex-col {{ $currentMStep != 5 ? 'hidden' : 'flex' }} h-screen {{ $currentMStep != 5 ? 'lg:hidden' : 'flex' }}">
-        <!-- top section - dk only -->
-            <!-- mobile only -->
-            <div class="lg:hidden">
-                <img class="absolute top-0 left-0 z-0" src=" {{ asset('images/blue.png') }} " alt="">
-                <p class="absolute top-[65%] left-0 z-20 text-justify p-4">Invite colleagues, friends & family to privately share some inspiration. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet odio vitae sapien fringilla consectetur vel ac tortor. </p>
-                <div class="absolute bottom-8 left-8"><a href="/register">Skip</a></div>
-                <div class="absolute bottom-8 right-8"><x-button.white wire:click="NextStepPageNation">Next</x-button.white></div>
-            </div>
-            
-            <!-- dk only -->
-            <div class="flex flex-col h-screen" style="background: linear-gradient(146.67deg, #DC735C 1.12%, #A941D9 122.75%), linear-gradient(146.67deg, #7A5CDC 1.12%, #AF55D8 122.75%);">
-                <div class="items-center text-white"> 
-                    <div class="flex flex-col items-center mt-12 mb-4">
-                        <img class="w-[75px]" src=" {{ asset('images/adamdriver.png')}}" alt="">
-                        <p class="text-xl font-semibold">Adam Driver</p>
-                        <p class="text-xs"><span class="font-light">(Teammate)</span> shared with you:</p>
-                    </div>
+    <div id="step-2" :class="{'flex': step == 1, 'hidden': step != 1}" class="flex flex-col h-screen gap-12 p-10">
+        <div class="absolute top-0 left-0 p-1">
+            <x-button.red class="w-full" x-on:click="step = 0">Back</x-button.red>
+        </div>
+        
+        <div class="flex flex-col">
+            <span>{{ Auth::user()->name }}</span>
+            <h1 class="text-3xl font-bold">Now the Music!</h1>
+        </div>
 
-                    <div> 
-                        <div class="flex flex-col w-full p-4 mb-6" style="background: linear-gradient(146.67deg, #be616e 1.12%, #af5495 122.75%), linear-gradient(146.67deg, #be616e 1.12%, #af5495 122.75%);">
-                            <div class="px-4 mx-auto lg:max-w-3xl">
-                                <p class="text-2xl font-semibold text-center">“You have to fight to reach your dream”</p>
-                                <p class="text-right">- Lionel Messi - </p>
-                            </div>
-                        </div> 
-                            
-                        <div class="flex justify-center px-4 mb-8 -mt-12 lg:mb-2">       
-                            <div class="flex justify-center">
-                                <img class="w-[200px]" src="images/stronger.png" alt="">
-                            </div>
-                            <div class="mt-10 ml-4">
-                                <p class="text-md font-extralight">And they thought you might enjoy listening to: </p>
-                                <p class="text-lg">Stronger (Kanye West)</p>
-                                <div class="flex mt-4 space-x-4">
-                                    <img class="w-12 h-12" src=" {{ asset('images/add.png')}} " alt="">
-                                    <img class="w-12 h-12" src=" {{ asset('images/play.png') }}" alt="">
-                                    <img class="w-12 h-12" src="{{ asset('images/spotify1.png')}}" alt="">
-                                </div>
-                            </div>
+        <div>
+            <span class="text-red-500">{{ $requester->name }}</span> is also looking for songs of inspiration. Feel free to share a favorite song or a recommendation of something that motivates you:
+        </div>
+
+        <div class="flex flex-col gap-8">
+            <div class="flex items-center justify-between">
+                <div class="flex flex-col">
+                    <span>Share one of your</span>
+                    <span class="text-2xl font-bold">Favorite Songs</span>
+                </div>
+
+                <div>
+                    @if ($spotifyStatus == 'CONNECTED')
+                        {{-- <span class="text-green-500">Spotify Connected!</span> --}}
+                    @else
+                        <form method="GET" action="{{ route('oauth.spotify', ['redirect_url' => 'inspiration.onboarding']) }}">
+                            <x-button.red class="w-full" wire>Connect Spotify</x-button.red>
+                        </form>
+                    @endif
+                </div>
+            </div>
+
+            @if (isset($spotifyUserTopSongs['total']) && $spotifyUserTopSongs['total'] > 0)
+                <x-button.red class="w-full" x-on:click="step = 2">
+                    Browse {{ $spotifyUserTopSongs['total'] }} available songs
+                </x-button.red>
+            @else
+                <span class="ml-2 text-sm italic">
+                    You don't have any songs. You shoud search specific song below. Or you should connect spotify.
+                </span>
+            @endif
+        </div>
+
+        <div class="flex flex-col gap-8">
+            <div class="flex flex-col">
+                <span>Or, have a specific song in mind?</span>
+                <span class="text-2xl font-bold">Search it below:</span>
+                <div class="text-sm italic">
+                    @if ($tempSong)
+                        selected song: <span class="text-red-500">{{ $search }}</span>    
+                    @else
+                        There is no selected song. Please search your specific song below.
+                    @endif
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-5" x-data="{ open: false }" x-on:click.outside="open = false">
+                <div class="relative flex w-full">
+                    <x-jet-input id="search" class="block w-full" type="text" name="search" placeholder="search your sepcific songs" wire:model.debounce.750ms="search" x-on:focus="open = true" />
+
+                    {{-- search result --}}
+                    <div x-show="open" class="absolute left-0 w-full p-2 mt-1 bg-white top-full" :class="{'block': $wire.search, 'hidden': !$wire.search}">
+                        <div class="flex flex-col gap-1">
+                            @if ($tracks)
+                                @foreach ($tracks as $key => $track)
+                                    <div class="flex justify-between p-2 cursor-pointer hover:bg-gray-100" wire:key="track-{{ $key }}" wire:click="selectSong({{ $key }})" x-on:click="open = false">
+                                        <span>{{ $track['name'] }}</span>
+                                        <span class="text-sm italic">{{ $track['artists'][0]['name'] }}</span>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <x-button.red class="w-full" wire:click="submit" x-on:click="step = 3">Submit</x-button.red>
+            </div>
+        </div>
+    </div>
+
+    <div id="step-3" :class="{'flex': step == 2, 'hidden': step != 2}" class="relative flex flex-col h-screen gap-12 p-10">
+        <div class="absolute top-0 left-0 p-1">
+            <x-button.red class="w-full" x-on:click="step = 1">Back</x-button.red>
+        </div>
+
+        <div class="flex justify-between p-10">
+            <div class="flex flex-col">
+                <span class="text-sm">Below are your</span>
+                <span class="text-3xl font-bold">Top 10 Songs you enjoy</span>
+            </div>
+
+            <div class="text-sm">Pick one to share with <span class="text-red-500">{{ $requester->name }}</span></div>
+        </div>
+
+        {{-- song list --}}
+        <div class="flex flex-col gap-1 p-10 bg-white">
+            @forelse ($spotifyUserTopSongs['items'] as $key => $track)
+                <div class="flex items-center justify-between" wire:key="top-track-{{ $key }}">
+                    <div class="flex items-center gap-5">
+                        <img src="{{ $track['album']['images'][2]['url'] }}" class="w-11 h-100" />
+
+                        <div class="flex flex-col">
+                            <span class="text-xl font-medium">{{ $track['name'] }}</span>
+                            <span class="text-sm text-gray-500">{{ $track['artists'][0]['name'] }}</span>
                         </div>
                     </div>
 
-                    <div class="lg:grid lg:grid-cols-2 px-8 mt-12 lg:mt-16 lg:gap-4 text-center">
-                        <p class="mb-8 text-sm lg:text-left">View your private inspiration page like this one. Lorem ipsum dolor sit amet, consecteture adipiscing elit. </p>
-                        <div class=""><a href="/register"><x-button.white>Register Free Account</x-button.white></a></div>
-                    </div>
-                    <div class="absolute bottom-5 ml-10"><a href="/register">Skip</a></div>
-                    <div class="absolute bottom-4 right-8"><x-button.white wire:click="NextStepPageNation">Back</x-button.white></div>
+                    <x-button.red wire:click="selectTopSongAndSubmit('{{ $track['id'] }}')" x-on:click="step = 3">Select</x-button.red>
                 </div>
-            </div>
-        
+            @empty
+                <span class="italic text-center">There is no data.</span>
+            @endforelse
+        </div>
     </div>
 
-    <!-- purple -->
-    <div id="step6" class="flex flex-col {{ $currentMStep != 6 ? 'hidden' : '' }} {{ $currentStep != 6 ? 'lg:hidden' : 'lg:block' }} items-center h-screen relative lg:grid lg:grid-rows-3" style="background: linear-gradient(146.67deg, #7A5CDC 1.12%, #AF55D8 122.75%); ">
-        <img class="w-[48px] h-[46px] absolute top-4 left-4 cursor-pointer" src=" {{ asset('images/back.svg') }} " alt="" wire:click="back(4)">
-        <img class="w-[48px] h-[46px] mt-10 mb-6 lg:hidden" src=" {{ asset('images/mm-logo1.png') }} " alt="">
-            
-        <div class="flex flex-col items-center mb-6 lg:pt-20">
-            <img class="w-[75px]" src=" {{ asset('images/adamdriver.png') }} " alt="">
-            <p class="text-xl font-semibold">Adam Driver</p>
-            <p class="text-xs"><span class="font-light">(Teammate)</span> shared with you:</p>
-        </div>
-        
-        <div>
-            <div class="flex flex-col w-full p-4 mb-6" style="background: rgb(120,84,202); background: linear-gradient(95deg, rgba(120,84,202,1) 0%, rgba(142,81,200,1) 100%);">
-                <div class="px-4 mx-auto lg:max-w-3xl">
-                    <p class="text-2xl font-semibold text-center">“You have to fight to reach your dream”</p>
-                    <p class="text-right">- Lionel Messi - </p>
-                </div>
-            </div> 
-                
-            <div class="flex justify-center px-4 mb-8 -mt-12 lg:mb-2">       
-                <div class="flex justify-center">
-                    <img class="w-[200px]" src=" {{ asset('images/stronger.png') }} " alt="">
-                </div>
-                <div class="mt-10 ml-4">
-                    <p class="text-md font-extralight">And they thought you might enjoy listening to: </p>
-                    <p class="text-lg">Stronger (Kanye West)</p>
-                    <div class="flex mt-4 space-x-4">
-                        <img class="w-12 h-12" src=" {{ asset('images/add.png') }} " alt="">
-                        <img class="w-12 h-12" src=" {{ asset('images/play.png') }} " alt="">
-                        <img class="w-12 h-12" src=" {{ asset('images/spotify1.png') }} " alt="">
-                    </div>
-                </div>
+    <div id="step-4" :class="{'flex': step == 3, 'hidden': step != 3}" class="relative flex flex-col h-screen gap-12 p-10">
+        <div class="flex flex-col gap-10 p-20">
+            <div class="flex flex-col">
+                <span class="text-sm">{{ Auth::user()->name }}</span>
+                <span class="text-3xl font-bold">Well Done</span>
             </div>
-        </div>
 
-         
-        <div class="flex flex-col items-center w-full h-full px-8 pt-4 mt-8 lg:flex-row lg:h-fit" style="background: #7d52d9;">
-            <p class="mb-8 text-sm text-center text-justify">View your <span class="font-bold">private inspiration page</span> like this one. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <div class="flex flex-col items-center">
-                <a class="px-8 py-2 font-medium text-blue-500 transition duration-150 ease-in-out bg-white rounded-3xl" href="/registration">Register Free Account</a>
-                <p class="mt-4 text-xs text-center text-purple-100 lg:mt-2">Your account is free (forever). You can upgrade for $20/year for additional premium features.</p>
-            </div>
+            <p>
+                Your motivational messaging will be shared with <b>{{ $requester->name }}</b> shortly. 
+
+                Would you like them to return the favor? 
+                Click here to request they do the same for you!
+            </p>
+
+            <x-button.red wire:click="gotoDashboard()">Request from Adam Driver</x-button.red>
         </div>
     </div>
 </div>

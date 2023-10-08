@@ -47,6 +47,8 @@ class InspirationCard extends Component
      * */
     public function handleSetCurrentTrack($id)
     {
+        abort_if(! Auth::user(), 403);
+
         session(['temp_current_track' => $id]);
 
         return redirect()->intended(route('player'));
@@ -59,16 +61,18 @@ class InspirationCard extends Component
      */
     public function addSongToPlaylist($inspirationId)
     {
+        abort_if(! Auth::user(), 403);
+
         $inspiration = Inspiration::find($inspirationId);
 
         // check already added to the playlist
         if ($inspiration->is_added_to_playlist) {
-            // TODO: notification
-            return;
+            return $inspirationId;
         }
 
         $uris = [
-            $inspiration->track()->uri,
+            /** @phpstan-ignore-next-line */
+            $inspiration->track->uri,
         ];
 
         if ($this->spotifyStatus == 'CONNECTED') {
@@ -77,9 +81,9 @@ class InspirationCard extends Component
             // If user does not have a playlist, we need to add them to custom playlist(name = "Friends & Family (MotiveMob)", description="The F&F MotiveMob playlist is a group of recommended songs by your own "mob" to help motivate you!")
             if (! $user->playlist_id) {
                 // TODO: notification(New playlist named Motivemob will be created on your spotify account.)
-                $playList = $this->spotify->createNewPlaylist('Friends & Family (MotiveMob)', "The F&F MotiveMob playlist is a group of recommended songs by your own 'mob' to help motivate you!");
+                $playlist = $this->spotify->createNewPlaylist('Friends & Family (MotiveMob)', "The F&F MotiveMob playlist is a group of recommended songs by your own 'mob' to help motivate you!");
 
-                $user->playlist_id = $playList['id'];
+                $user->playlist_id = $playlist['id'];
                 $user->save();
             }
 
@@ -90,6 +94,7 @@ class InspirationCard extends Component
                 // TODO: failed notification
             }
         }
+
         $this->spotifyStatus = $this->spotify->status();
     }
 
@@ -100,9 +105,11 @@ class InspirationCard extends Component
      */
     public function screenshot($id)
     {
-        $browser = new Browsershot();
+        abort_if(! Auth::user(), 403);
+
         $fileName = Auth::user()->name.'.png';
-        $browser->url(config('app.url').'screenshot/'.$id)
+
+        Browsershot::url(config('app.url').'screenshot/'.$id)
             ->windowSize(1080, 1080)
             ->save(storage_path('app/public').$fileName);
 

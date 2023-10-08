@@ -10,10 +10,14 @@ class SpotifyRedirectController
     /**
      * Handle the incoming request.
      *
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function __invoke(Request $request)
+    public function __invoke($redirect_url)
     {
-        return Socialite::driver('spotify')->redirect();
+        session()->flash('temp_redirect_url', $redirect_url);
+
+        /** @phpstan-ignore-next-line */
+        return Socialite::driver('spotify')->scopes(['user-top-read', 'playlist-modify-public', 'playlist-modify-private'])->redirect();
     }
 }

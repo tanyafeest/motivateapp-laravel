@@ -22,11 +22,6 @@ class Todolist extends Model
         'email',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'message' => 'boolean',
         'chat' => 'boolean',

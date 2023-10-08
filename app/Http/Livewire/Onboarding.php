@@ -13,7 +13,7 @@ use Livewire\Component;
 
 class Onboarding extends Component
 {
-    private $spotify = null;
+    private ?\App\Actions\Util\Spotify $spotify = null;
 
     public $spotifyStatus = 'DISCONNECTED';
 
@@ -48,10 +48,6 @@ class Onboarding extends Component
 
     public $tracks = [];
 
-    public $currentMStep;
-
-    public $currentStep;
-
     // constructor
     public function __construct()
     {
@@ -62,7 +58,6 @@ class Onboarding extends Component
     // mount
     public function mount()
     {
-
         if ($this->spotify->status() == 'CONNECTED') {
             $this->spotifyUserTopSongs = $this->spotify->getTopItems();
         }
@@ -70,25 +65,25 @@ class Onboarding extends Component
         // get requester data by share link
         $shareLink = session('temp_inspiration_share_link');
         $this->requester = User::where('share_link', $shareLink)->first();
-        $this->currentMStep = 2;
+
         // get random quote values
-        $this->randomConfidenceQuote = Quote::inRandomOrder()->clone()->first();
-        $this->randomPotentialQuote = Quote::inRandomOrder()->clone()->first();
-        $this->randomDeterminationQuote = Quote::inRandomOrder()->clone()->first();
-        $this->randomResilienceQuote = Quote::inRandomOrder()->clone()->first();
+        $this->randomConfidenceQuote = Quote::inRandomOrder()->confidence()->first();
+        $this->randomPotentialQuote = Quote::inRandomOrder()->potential()->first();
+        $this->randomDeterminationQuote = Quote::inRandomOrder()->determination()->first();
+        $this->randomResilienceQuote = Quote::inRandomOrder()->resilience()->first();
     }
 
     // render
     public function render()
     {
-        //Return if a non-user ends up inside a controller that requires authentication, etc
-
         return view('livewire.onboarding');
     }
 
     // watch search
     public function updatedSearch()
     {
+        abort_if(! Auth::user(), 403);
+
         if (! $this->search) {
             $this->tracks = [];
 
@@ -106,12 +101,16 @@ class Onboarding extends Component
     // select quote
     public function selectQuote($quoteId = null)
     {
+        abort_if(! Auth::user(), 403);
+
         $this->tempQuoteId = $quoteId;
     }
 
     // select song
     public function selectSong($key)
     {
+        abort_if(! Auth::user(), 403);
+
         $this->tempSong = $this->tracks[$key]['id'];
         $this->search = $this->tracks[$key]['name'];
     }
@@ -119,12 +118,16 @@ class Onboarding extends Component
     // set isNew true
     public function handleIsNew()
     {
+        abort_if(! Auth::user(), 403);
+
         $this->isNewQuote = true;
     }
 
     // select top song and submit
     public function selectTopSongAndSubmit($songId)
     {
+        abort_if(! Auth::user(), 403);
+
         $this->tempSong = $songId;
         $this->submit();
     }
@@ -132,14 +135,14 @@ class Onboarding extends Component
     // submit
     public function submit()
     {
-        abort_if(! Auth::user(), 404);
+        abort_if(! Auth::user(), 403);
 
         $this->spotifyStatus = $this->spotify->status();
 
         // get track detail from Spotify API
         if ($this->spotify->status() == 'CONNECTED') {
-            $track = new Track();
-            $inspiration = new Inspiration();
+            $track = new Track;
+            $inspiration = new Inspiration;
 
             // get track detail
             $t = $this->spotify->track($this->tempSong);
@@ -164,7 +167,7 @@ class Onboarding extends Component
 
             if ($this->isNewQuote) {
                 // create new quote by the auth
-                $quote = new Quote();
+                $quote = new Quote;
                 $quote->category = 'Custom';
                 $quote->quote = $this->tempNewQuote;
                 $quote->author = Auth::user()->name;
@@ -189,11 +192,8 @@ class Onboarding extends Component
     // goto dashboard
     public function gotoDashboard()
     {
-        return redirect()->intended(RouteServiceProvider::HOME);
-    }
+        abort_if(! Auth::user(), 403);
 
-    public function NextStepPageNation()
-    {
-        $this->currentMStep <= 6 ? $this->currentMStep += 1 : $this->currentMStep = 6;
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 }

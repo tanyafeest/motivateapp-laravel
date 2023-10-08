@@ -125,6 +125,7 @@ class Spotify
             $size = $stream->getSize();
 
             return json_decode($stream->read($size), true, 512, JSON_THROW_ON_ERROR);
+
         } catch (Exception $e) {
             if ($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
@@ -151,6 +152,7 @@ class Spotify
             $size = $stream->getSize();
 
             return json_decode($stream->read($size), true, 512, JSON_THROW_ON_ERROR);
+
         } catch (Exception $e) {
             if ($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
@@ -160,15 +162,6 @@ class Spotify
         }
     }
 
-    /**
-     * Create new playlist
-     *
-     * @param  string  $name = "New Playlist"
-     * @param  string  $description = "New Playlist Description"
-     * @param  bool  $public = true
-     * @param  bool  $collaborative = false
-     * @return array
-     */
     public function createNewPlaylist($name = 'New Playlist', $description = 'New Playlist Description', $public = true, $collaborative = false)
     {
         $endpoint = 'v1/users/'.$this->id.'/playlists';
@@ -186,26 +179,19 @@ class Spotify
             $size = $stream->getSize();
 
             return json_decode($stream->read($size), true, 512, JSON_THROW_ON_ERROR);
+
         } catch (Exception $e) {
             if ($e->getCode() == 401) {
                 $this->status = 'TOKEN_EXPIRED';
             }
 
-            return [];
+            return json_decode('', true);
         }
     }
 
-    /**
-     * Add track to specific playlist
-     *
-     * @param  string  $playlistId
-     * @param  array  $uris
-     * @param  int  $position = 0
-     * @return array
-     */
-    public function addTracksToPlaylist($playlistId, $uris, $position = 0)
+    public function addTracksToPlaylist($playlist_id, $uris, $position = 0)
     {
-        $endpoint = 'v1/playlists/'.$playlistId.'/tracks';
+        $endpoint = 'v1/playlists/'.$playlist_id.'/tracks';
         $body = [
             'uris' => $uris,
             'position' => $position,
@@ -223,7 +209,7 @@ class Spotify
                 $this->status = 'TOKEN_EXPIRED';
             }
 
-            return [];
+            return json_decode('', true);
         }
     }
 }

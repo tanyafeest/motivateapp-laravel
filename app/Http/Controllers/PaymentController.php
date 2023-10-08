@@ -2,18 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Client;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
+use CountryState;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController
 {
-    use AuthorizesRequests;
-    use DispatchesJobs;
-    use ValidatesRequests;
-
     /**
      * Display the charge view
      *
@@ -21,16 +14,12 @@ class PaymentController
      */
     public function __invoke()
     {
-        //Return if a non-user ends up inside a controller that requires authentication, etc
         abort_if(! Auth::user(), 404);
 
         $user = Auth::user();
+        $countries = CountryState::getCountries();
 
         $intent = $user->createSetupIntent();
-
-        $client = new Client();
-        $response = $client->get('https://restcountries.com/v2/all');
-        $countries = json_decode($response->getBody(), true);
 
         return view('payment', compact('user', 'intent', 'countries'));
     }

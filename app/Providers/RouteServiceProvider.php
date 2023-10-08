@@ -27,6 +27,8 @@ class RouteServiceProvider extends ServiceProvider
 
     final public const UPGRADE = '/upgrade';
 
+    final public const OAUTH = '/oauth';
+
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      *

@@ -6,7 +6,7 @@
     
     <div id="screenshot" class="items-center text-white">
         <div class="flex flex-col items-center mt-12 mb-4">
-            <img class="w-[75px]" src="{{ asset('images/AdamDriver.png') }}" alt="">
+            <img class="w-[75px]" src={{ asset('images/AdamDriver.png') }} alt="">
             <p class="text-xl font-semibold">{{ $inspiration->sharedbyUser->name }}</p>
             <p class="text-xs"><span class="font-light">(Teammate)</span> shared with you:</p>
         </div>

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Actions\Util\EncodeURIComponent;
 use Carbon\Carbon;
-use Dyrynda\Database\Support\NullableFields;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -19,7 +19,6 @@ class User extends Authenticatable
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
-    use NullableFields;
     use TwoFactorAuthenticatable;
 
     /**
@@ -39,9 +38,6 @@ class User extends Authenticatable
         'grade_year',
         'sport_id',
         'share_link',
-        'ip_address',
-        'country',
-        'zip_codezip_code',
         'profile_photo_path',
     ];
 
@@ -53,6 +49,7 @@ class User extends Authenticatable
     protected $nullable = [
         'grade_year',
         'sport_id',
+        'playlist_id',
     ];
 
     protected $hidden = [
@@ -62,11 +59,6 @@ class User extends Authenticatable
         'two_factor_secret',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -80,64 +72,90 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    // get public share link
+    public function shareLink()
+    {
+        return config('app.url').'/share/'.$this->share_link.'/'.str_replace(' ', '', strtolower((string) $this->name));
+    }
+
+    // get encoded URI of mail
+    public function encodedMail()
+    {
+        $encodeURIComponent = new EncodeURIComponent();
+
+        return 'mailto:?subject='.$encodeURIComponent->encode('Share a song or quote with me, please!').'&body='.$encodeURIComponent->encode('Check out <a href="'.$this->shareLink().'">'.$this->shareLink().'<a/>, where you can recommend a motivational song or inspiring quote for me.');
+    }
+
+    // get number of quotes
     public function numberOfQuotes()
     {
-        return $this->hasMany(Inspiration::class)->where('quote_id', '!=', null)->count();
+        return $this->hasMany(Inspiration::class)
+            ->where('quote_id', '!=', null)
+            ->count();
     }
 
+    // get number of songs
     public function numberOfSongs()
     {
-        return $this->hasMany(Inspiration::class)->where('album_name', '!=', null)->count();
+        return $this->hasMany(Inspiration::class)
+            ->where('track_id', '!=', null)
+            ->count();
     }
 
-    public function todolist()
-    {
-        return $this->hasOne(Todolist::class);
-    }
-
-    public function inspirations()
-    {
-        return $this->hasOne(Inspiration::class);
-    }
-
-    public function setting()
-    {
-        return $this->hasOne(Setting::class, 'user_id', 'id');
-    }
-
+    // check subscription is  done
     public function isSubscribed()
     {
         return $this->subscribed(config('services.stripe.subscription_plan'));
     }
 
-    public function isCancelled()
+    // check subscription is cancelled
+    public function isCanceled()
     {
-        return config('services.stripe.subscription_plan') != null ?
-         $this->subscription(config('services.stripe.subscription_plan'))->canceled() : null;
+        return $this->subscription(config('services.stripe.subscription_plan')) !== null && $this->subscription(config('services.stripe.subscription_plan'))
+            ->canceled();
     }
 
+    // check the user is on grade period
     public function isOnGracePeriod()
     {
-        return config('services.stripe.subscription_plan') != null ?
-         $this->subscription(config('services.stripe.subscription_plan'))->onGracePeriod() : null;
+        return $this->subscription(config('services.stripe.subscription_plan')) !== null && $this->subscription(config('services.stripe.subscription_plan'))
+            ->onGracePeriod();
     }
 
+    // check subscription is ended
     public function isEnded()
     {
-        return config('services.stripe.subscription_plan') != null ?
-         $this->subscription(config('services.stripe.subscription_plan'))->ended() : null;
+        return $this->subscription(config('services.stripe.subscription_plan')) !== null && $this->subscription(config('services.stripe.subscription_plan'))
+            ->ended();
     }
 
+    // get current period end
     public function getCurrentPeriodEnd()
     {
         /** @phpstan-ignore-next-line */
-        $timestamp = $this->subscriptions()->first()->asStripeSubscription()->current_period_end;
+        $timestamp = $this->subscriptions[0]
+            ->asStripeSubscription()
+            ->current_period_end;
 
-        return Carbon::createFromTimeStamp($timestamp)->toFormattedDateString();
+        return Carbon::createFromTimeStamp($timestamp)
+            ->toFormattedDateString();
     }
 
-    public function shareLink()
+    // get todolist of user
+    public function todolist()
     {
-        return env('APP_URL').'/'.'share/'.$this->share_link.'/'.str_replace(' ', '', strtolower($this->name));
+        return $this->hasOne(Todolist::class);
+    }
+
+    // get all inspirations of this user
+    public function inspirations()
+    {
+        return $this->hasMany(Inspiration::class);
+    }
+
+    // get user's setting
+    public function setting()
+    {
+        return $this->hasOne(Setting::class);
     }
 }

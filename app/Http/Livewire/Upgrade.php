@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Controllers\PaymentCancelController;
-use App\Http\Controllers\PaymentResumeController;
+use App\Http\Controllers\PaymentSubScriptionCancelController;
+use App\Http\Controllers\PaymentSubScriptionResumeController;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -11,24 +11,31 @@ class Upgrade extends Component
 {
     public $isSubscribed;
 
-    public $isCancelled;
+    public $isCanceled;
 
     public $isEnded;
 
+    // initialzie state
     public function mount()
     {
         $this->updateStatus();
     }
 
+    // cancel subscription
     public function cancel()
     {
-        new PaymentCancelController();
+        abort_if(! Auth::user(), 403);
+
+        (new PaymentSubScriptionCancelController)->__invoke();
         $this->updateStatus();
     }
 
+    // resume subscription
     public function resume()
     {
-        new PaymentResumeController();
+        abort_if(! Auth::user(), 403);
+
+        (new PaymentSubScriptionResumeController)->__invoke();
         $this->updateStatus();
     }
 
@@ -36,14 +43,10 @@ class Upgrade extends Component
     {
         $user = Auth::user();
 
-        /** @phpstan-ignore-next-line */
-        $this->isSubscribed = $user->isSubscribed;
-
-        /** @phpstan-ignore-next-line */
-        $this->isCancelled = $user->isCancelled;
-
-        /** @phpstan-ignore-next-line */
-        $this->isEnded = $user->isEnded;
+        abort_if(! $user, 403);
+        $this->isSubscribed = $user->isSubscribed();
+        $this->isCanceled = $user->isCanceled();
+        $this->isEnded = $user->isEnded();
     }
 
     public function render()

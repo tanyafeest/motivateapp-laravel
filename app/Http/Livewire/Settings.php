@@ -11,7 +11,7 @@ use Livewire\Component;
 
 class Settings extends Component
 {
-    private $spotify = null;
+    private ?\App\Actions\Util\Spotify $spotify = null;
 
     public $spotifyStatus = 'DISCONNECTED';
 
@@ -80,18 +80,16 @@ class Settings extends Component
     public function mount()
     {
         /** @phpstan-ignore-next-line */
-        if (Auth::user()->setting != null) {
+        $this->isDaily = Auth::user()->setting->isDaily();
+        /** @phpstan-ignore-next-line */
+        $this->isWeekly = Auth::user()->setting->isWeekly();
+        /** @phpstan-ignore-next-line */
+        $this->isMonthly = Auth::user()->setting->isMonthly();
+        /** @phpstan-ignore-next-line */
+        $this->isNever = Auth::user()->setting->isNever();
+        /** @phpstan-ignore-next-line */
+        $this->currentSMSFrequency = Auth::user()->setting->sms_frequency;
 
-            $this->isDaily = Auth::user()->setting->isDaily();
-
-            $this->isWeekly = Auth::user()->setting->isWeekly();
-
-            $this->isMonthly = Auth::user()->setting->isMonthly();
-
-            $this->isNever = Auth::user()->setting->isNever();
-
-            $this->currentSMSFrequency = Auth::user()->setting->sms_frequency;
-        }
         if ($this->spotify->status() == 'CONNECTED') {
             $this->spotifyUserTopSongs = $this->spotify->getTopItems();
         }
@@ -109,6 +107,8 @@ class Settings extends Component
     // watch search quote
     public function updatedSearchQuote()
     {
+        abort_if(! Auth::user(), 403);
+
         // search quote
         $this->quoteList = Quote::where('category', 'like', '%'.$this->searchQuote.'%')->orWhere('quote', 'like', '%'.$this->searchQuote.'%')->get();
     }
@@ -116,6 +116,7 @@ class Settings extends Component
     // watch search song
     public function updatedSearchSong()
     {
+        abort_if(! Auth::user(), 403);
 
         // search song
         if (count($this->spotifyUserTopSongs) >= 10) {
@@ -132,6 +133,8 @@ class Settings extends Component
     // select quote as default quote
     public function selectQuote($key)
     {
+        abort_if(! Auth::user(), 403);
+
         $this->searchQuote = $this->quoteList[$key]['quote'];
 
         // update setting
@@ -143,6 +146,8 @@ class Settings extends Component
     // select song as default song
     public function selectSong($key)
     {
+        abort_if(! Auth::user(), 403);
+
         if ($this->spotifyStatus == 'CONNECTED') {
             $this->searchSong = $this->songList[$key]['name'];
 
@@ -154,7 +159,7 @@ class Settings extends Component
                 $setting->track_id = Track::firstWhere('sid', $this->songList[$key]['id'])->id;
             } else {
                 // if not, we need to add to db
-                $track = new Track();
+                $track = new Track;
 
                 $track->sid = $this->songList[$key]['id'];
                 $track->name = $this->songList[$key]['name']; // track name
@@ -181,20 +186,17 @@ class Settings extends Component
     // select duration
     public function selectDuration($type = 'daily')
     {
+        abort_if(! Auth::user(), 403);
 
         // select first option of each duration
-        $setting = Auth::user()->setting();
-        if (! Auth::user()->isSubscribed()) {
-            return;
-        }
+        /** @phpstan-ignore-next-line */
+        $setting = Auth::user()->setting;
+
         switch ($type) {
             case 'daily':
-
-                /** @phpstan-ignore-next-line */
-                if (! Auth::user()->isSubscribed) {
+                if (! Auth::user()->isSubscribed()) {
                     break;
                 }
-
                 $setting->sms_frequency = 14; // Daily morning
                 $this->currentSMSFrequency = 14;
                 $this->isDaily = true;
@@ -211,12 +213,9 @@ class Settings extends Component
                 $this->isNever = false;
                 break;
             case 'monthly':
-
-                /** @phpstan-ignore-next-line */
-                if (! Auth::user()->isSubscribed) {
+                if (! Auth::user()->isSubscribed()) {
                     break;
                 }
-
                 $setting->sms_frequency = 16; // Monthly morning
                 $this->currentSMSFrequency = 16;
                 $this->isDaily = false;
@@ -234,31 +233,27 @@ class Settings extends Component
     // select option
     public function updatedCurrentSMSFrequency()
     {
+        abort_if(! Auth::user(), 403);
         /** @phpstan-ignore-next-line */
-        if (Auth::user()->isSubscribed) {
+        $setting = Auth::user()->setting;
+        $setting->sms_frequency = $this->currentSMSFrequency;
+        $setting->save();
 
-            /** @phpstan-ignore-next-line */
-            $setting = Auth::user()->setting;
-            $setting->sms_frequency = $this->currentSMSFrequency;
-            $setting->save();
-
-            if ($this->currentSMSFrequency == 18) {
-                $this->isNever = true;
-                $this->isDaily = false;
-                $this->isWeekly = false;
-                $this->isMonthly = false;
-            }
+        if ($this->currentSMSFrequency == 18) {
+            $this->isNever = true;
+            $this->isDaily = false;
+            $this->isWeekly = false;
+            $this->isMonthly = false;
         }
     }
 
     /**
      * Set auto add songs
-     *
-     *
-     * @return void
      */
     public function setAutoAddSongs()
     {
+        abort_if(! Auth::user(), 403);
+
         // We need to add songs to the playlist
         if ($this->spotifyStatus == 'CONNECTED') {
             $user = Auth::user();
@@ -273,13 +268,14 @@ class Settings extends Component
             }
 
             // add songs
-            $inspirationGroups = $user->inspirations()
+            /** @phpstan-ignore-next-line */
+            $inspiration_groups = $user->inspirations
                 ->where('is_added_to_playlist', false)
                 ->groupBy('track_id');
             $uris = [];
 
             // --- get uris of songs
-            foreach ($inspirationGroups as $key => $group) {
+            foreach ($inspiration_groups as $key => $group) {
                 $uris[] = $group[0]->track->uri;
             }
 
@@ -291,7 +287,7 @@ class Settings extends Component
 
             // --- if success, set the is_added_to_playlist to TRUE
             if ($res) {
-                foreach ($inspirationGroups as $key1 => $group) {
+                foreach ($inspiration_groups as $key1 => $group) {
                     foreach ($group as $key2 => $inspiration) {
                         $inspiration->is_added_to_playlist = true;
                         $inspiration->save();
@@ -299,7 +295,8 @@ class Settings extends Component
                 }
 
                 // set is_auto_add_songs to TRUE
-                $setting = Auth::user()->setting();
+                /** @phpstan-ignore-next-line */
+                $setting = Auth::user()->setting;
                 $setting->is_auto_add_songs = true;
                 $setting->save();
             } else {

@@ -2,28 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Auth\RedirectBackWithSpotifyData;
 use App\Providers\RouteServiceProvider;
+use Exception;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
-class SpotifyCallbackController
+class SpotifyCallbackController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function __invoke(Request $request)
     {
         try {
+
             $user = Socialite::driver('spotify')->user();
-            session(['temp_spotify_id' => $user->getId()]);
-            /** @phpstan-ignore-next-line */
-            session(['temp_spotify_access_token' => $user->token]);
+
+            return (new RedirectBackWithSpotifyData())($user);
+
+        } catch (Exception) {
 
             return redirect()->intended(RouteServiceProvider::HOME)->send();
-        } catch (\Throwable) {
-            return redirect()->intended(RouteServiceProvider::HOME)->send();
+
         }
     }
 }

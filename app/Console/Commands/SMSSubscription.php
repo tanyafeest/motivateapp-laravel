@@ -36,9 +36,11 @@ class SMSSubscription extends Command
         $firstMondayOfThisMonth = new Carbon('first Monday of this month');
         $date = Carbon::now();
         foreach ($users as $key => $user) {
+
             if ($user->numberOfQuotes()) {
                 // send SMS
-                $latestInspiration = $user->inspirations()->last();
+                /** @phpstan-ignore-next-line */
+                $latestInspiration = $user->inspirations->last();
 
                 $quote = $latestInspiration->quote->quote;
                 $sharedByUserName = $latestInspiration->sharedbyUser->name;

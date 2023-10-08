@@ -1,3 +1,3 @@
-<div class="h-screen p-8 overflow-hidden bg-gray-50">
+<div class="p-8 bg-neutral-100 overflow-hidden h-screen">
     {{ $slot }}
 </div>

@@ -13,9 +13,6 @@ class Player extends Component
     // mount
     public function mount()
     {
-        //Return if a non-user ends up inside a controller that requires authentication, etc
-        abort_if(! Auth::user(), 404);
-
         if (session()->has('temp_current_track')) {
             // if selected song is exist, the player will handle the song
             // get current track's embedable widget
@@ -32,8 +29,10 @@ class Player extends Component
             ];
         } else {
             // if the user did not select any song, the player will handle the first song.
-            if (Auth::user()->inspirations()->count()) {
-                $firstTrack = Auth::user()->inspirations()->first()->track;
+            /** @phpstan-ignore-next-line */
+            if (Auth::user()->inspirations->count()) {
+                /** @phpstan-ignore-next-line */
+                $firstTrack = Auth::user()->inspirations[0]->track;
                 $this->currentTrack = [
                     'album_img' => $firstTrack->album_img,
                     'artist_img' => $firstTrack->artisit_img,
@@ -52,6 +51,8 @@ class Player extends Component
     // set current track
     public function handleSetCurrentTrack($id)
     {
+        abort_if(! Auth::user(), 403);
+
         $track = Track::find($id);
         $this->currentTrack = [
             'album_img' => $track['album_img'],
@@ -66,6 +67,8 @@ class Player extends Component
 
     public function render()
     {
+        abort_if(! AUth::user(), 404);
+
         return view('livewire.player');
     }
 }

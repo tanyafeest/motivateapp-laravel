@@ -1,4 +1,3 @@
-
 <div class="relative row-start-2 row-end-9" x-data="{ quoteModalOpen: false, songModalOpen: false, upgradeModalOpen: false }">
     {{-- search quote modal --}}
     <div x-cloak x-show="quoteModalOpen" class="absolute z-10 flex flex-col items-center justify-center w-full h-full bg-black/20">
@@ -73,17 +72,15 @@
                         <div class="flex items-center">
                             <span x-show="$wire.isNever">You will never receive any sms notifications.</span>
                             <select x-show="$wire.isDaily" wire:model="currentSMSFrequency" id="schedule" name="schedule" class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                              
                                 @foreach ($dailyOptions as $key => $option)
                                     <option wire:key="d-{{ $key }}" value="{{ $key }}">{{ $option }}</option>
                                 @endforeach
                                 <option wire:key="d-18" value="18">Never</option>
-                                
                             </select>
 
                             <select x-show="$wire.isWeekly" wire:model="currentSMSFrequency" id="schedule" name="schedule" class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                 @foreach ($weeklyOptions as $key => $option)
-                                    <option wire:key="d-{{ $key }}" value="{{ $key }}" {{ ($key != 18 && !Auth::user()->isSubscribed()) ? 'disabled' : '' }} >{{ $option }}</option>
+                                    <option wire:key="d-{{ $key }}" value="{{ $key }}" {{ ($key != 1 && $key != 18 && !Auth::user()->isSubscribed()) ? 'disabled' : '' }}>{{ $option }}</option>
                                 @endforeach
                                 <option wire:key="d-18" value="18">Never</option>
                             </select>

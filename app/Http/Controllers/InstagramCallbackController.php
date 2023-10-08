@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\RegisterCredentials;
+use App\Actions\Auth\RedirectRegisterWithCredentialOrLogin;
 use App\Providers\RouteServiceProvider;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class InstagramCallbackController
@@ -19,15 +18,15 @@ class InstagramCallbackController
     public function __invoke(Request $request)
     {
         try {
-            $data = Socialite::driver('instagram')->user();
 
-            $result = (new RegisterCredentials())($data);
+            $user = Socialite::driver('instagram')->user();
 
-            return $result;
+            return (new RedirectRegisterWithCredentialOrLogin())($user);
+
         } catch (Exception) {
-            abort_if(! Auth::user(), 404);
 
             return redirect()->intended(RouteServiceProvider::HOME)->send();
+
         }
     }
 }

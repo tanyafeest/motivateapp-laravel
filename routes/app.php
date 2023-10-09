@@ -7,7 +7,8 @@ use App\Http\Controllers\InspirationViewController;
 use App\Http\Controllers\OnboardingController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentSubScriptionCancelController;
-use App\Http\Controllers\PaymentSubScriptionController;
+use App\Http\Controllers\PaymentSubscriptionController;
+use App\Http\Controllers\PaymentSubScriptionResumeController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\PymentCreateController;
 use App\Http\Controllers\SpotifyCallbackController;
@@ -54,5 +55,5 @@ Route::middleware([
     // payment apis
     Route::post('/payment/subscription', PaymentSubScriptionController::class)->name('payment.subscription');
     Route::post('/payment/cancel', PaymentSubScriptionCancelController::class)->name('payment.subscription.cancel');
-    Route::post('/payment/resume', PaymentSubScriptionCancelController::class)->name('payment.subscription.resume');
+    Route::post('/payment/resume', PaymentSubScriptionResumeController::class)->name('payment.subscription.resume');
 });

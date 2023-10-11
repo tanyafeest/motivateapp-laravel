@@ -7,6 +7,7 @@ use Exception;
 class RedirectBackWithSpotifyData
 {
     public $user;
+
     public function __invoke($user)
     {
         $this->user = $user;

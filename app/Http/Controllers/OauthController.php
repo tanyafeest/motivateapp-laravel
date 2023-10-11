@@ -17,7 +17,9 @@ class OauthController
         $requestUser = null;
 
         if (session()->has('temp_inspiration_share_link')) {
+
             $requestUser = User::firstWhere('share_link', session('temp_inspiration_share_link'));
+            
         }
 
         return view('registration', compact('requestUser'));

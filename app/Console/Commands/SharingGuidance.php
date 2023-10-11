@@ -5,8 +5,8 @@ namespace App\Console\Commands;
 use App\Mail\SharingGuidanceAll;
 use App\Mail\SharingGuidanceOne;
 use App\Models\User;
-use DateInterval;
-use DateTime;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 
@@ -33,8 +33,8 @@ class SharingGuidance extends Command
      */
     public function handle()
     {
-        $date = new DateTime(date('Y-m-d H:i:s'));
-        $date = $date->sub(new DateInterval('P1D'));
+        $date = Carbon::now();
+        $date = $date->sub(CarbonInterval::day(1));
 
         $users = User::whereTime('created_at', '<=', $date->format('H:i:s'))->where('is_sharing_guidance', false)->get();
         $allUsers = User::all();

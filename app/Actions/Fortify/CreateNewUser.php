@@ -65,31 +65,31 @@ class CreateNewUser implements CreatesNewUsers
 
         // save user data on account sheet
         // TODO: twitter, facebook, instagram public profile url check
-        // $ipInfo = $ipBase->info(Request::ip());
+        $ipInfo = $ipBase->info(Request::ip());
 
-        // $append = [
-        //     Carbon::now()->format('m/d/y'),
-        //     $user->oauth_type,
-        //     session('temp_id'),
-        //     $user->name,
-        //     $user->email,
-        //     $ipInfo['location']['city']['name'],
-        //     $ipInfo['location']['region']['name'],
-        //     $ipInfo['location']['zip'],
-        //     $ipInfo['ip'],
-        // ];
+        $append = [
+            Carbon::now()->format('m/d/y'),
+            $user->oauth_type,
+            session('temp_id'),
+            $user->name,
+            $user->email,
+            $ipInfo['location']['city']['name'],
+            $ipInfo['location']['region']['name'],
+            $ipInfo['location']['zip'],
+            $ipInfo['ip'],
+        ];
 
-        // Sheets::spreadsheet(config('sheets.post_spreadsheet_id'))
-        //     ->sheetById(config('sheets.post_account_sheet_id'))
-        //     ->append([$append]);
+        Sheets::spreadsheet(config('sheets.post_spreadsheet_id'))
+            ->sheetById(config('sheets.post_account_sheet_id'))
+            ->append([$append]);
 
         // send welcome email to the user
-        // $welcomeMailData = new \stdClass();
+        $welcomeMailData = new \stdClass();
 
-        // $welcomeMailData->email = $user->email;
-        // $welcomeMailData->oauthType = $user->oauth_type;
+        $welcomeMailData->email = $user->email;
+        $welcomeMailData->oauthType = $user->oauth_type;
 
-        // Mail::to($user)->send(new Welcome($welcomeMailData));
+        Mail::to($user)->send(new Welcome($welcomeMailData));
 
         return $user;
     }
